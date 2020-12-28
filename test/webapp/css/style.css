@@ -1,0 +1,23 @@
+body {
+    background-color: rgb(91, 114, 122);
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    /* remember to set a width */
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.card:hover 
+{
+    background-color: rgb(169, 193, 238);
+    transform: translatey(-3ch);
+    width:300px !important
+
+}
