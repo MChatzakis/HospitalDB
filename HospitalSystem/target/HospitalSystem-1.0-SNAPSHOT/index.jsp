@@ -22,7 +22,7 @@
                 <div class="login-align  col-lg-6 col-md-8 col-sm-12 col-xs-12  mx-auto " style="height: auto;" ;>
                     <div class="card card-signin text-white " style="background-color: rgb(14, 10, 10); height: 80vh;">
                         <div class="card-body">
-                            <div class="form-label-group col-sm-10 col-md-10 col-lg-10   mt-lg-5 !important  mx-auto"
+                            <div class="form-label-group col-sm-10 col-md-10 col-lg-10   mt-lg-5 !  mx-auto"
                                 id="welcome-form">
                                 <h1 class="card-title mt-5" style=" text-align: left;">Welcome</h1>
                             </div>
