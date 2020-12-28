@@ -17,10 +17,20 @@ import lombok.Data;
 @Data
 public class Coordinator {
    
+    public static int id_num = 1;
+    
     public void addCoordinator(String id, String name, String surname, String address, String email,String phone) throws SQLException{
         DBConnection conn = new DBConnection();
         String insert = "INSERT INTO coordinators VALUES( "
                 + id+","+"\'"+name+"\'"+","+"\'"+surname+"\'"+", "+"\'"+address+"\'"+","+"\'"+email+"\'" +"," +"\'"+ phone+"\'"+");";
+        conn.updateQuery(insert);
+        conn.closeDBConnection();
+    }
+    
+    public void addCoordinatorByID(String name, String surname, String address, String email,String phone) throws SQLException{
+        DBConnection conn = new DBConnection();
+        String insert = "INSERT INTO coordinators VALUES( "
+                + (id_num++) +","+"\'"+name+"\'"+","+"\'"+surname+"\'"+", "+"\'"+address+"\'"+","+"\'"+email+"\'" +"," +"\'"+ phone+"\'"+");";
         conn.updateQuery(insert);
         conn.closeDBConnection();
     }

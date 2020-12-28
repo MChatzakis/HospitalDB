@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package database;
 
 import database.entities.Coordinator;
@@ -10,12 +5,15 @@ import database.entities.Doctor;
 import database.entities.Drug;
 import database.entities.DutyTime;
 import database.entities.Illness;
+import database.entities.Medical;
 import database.entities.Nurse;
+import database.entities.Patient;
 import java.sql.SQLException;
 
 /**
  *
- * @author manos
+ * @author Manos Chatzakis (chatzakis@ics.forth.gr)
+ * @author George Kokolakis (gkokol@ics.forth.gr)
  */
 public class DBDataGenerator {
 
@@ -26,6 +24,7 @@ public class DBDataGenerator {
         insertIllnesses();
         insertDrugs();
         insertDuties();
+        insertPatients();
     }
 
     public void insertDoctors() throws SQLException {
@@ -36,56 +35,107 @@ public class DBDataGenerator {
         insertPulmonologists();
     }
 
-    public void insertNurses() throws SQLException{
+    public void insertNurses() throws SQLException {
         Nurse nurse = new Nurse();
-        nurse.addNurse("5050", "Eva", "Kokolaki","unkw","eva@gmail.com","696969696");
+        nurse.addNurseByID("Eva", "Chamilaki", "Address", "cham@tep.gr", "null");
+        nurse.addNurseByID("Katerina", "Petraki", "Address", "pet@tep.gr", "null");
+        nurse.addNurseByID("Olimpia", "Popa", "Address", "popa@tep.gr", "null");
+        nurse.addNurseByID("Katerina", "Chatzaki", "Address", "katechatz@tep.gr", "null");
+        nurse.addNurseByID("Theodora", "Sampaloy", "Address", "samp@tep.gr", "null");
+
     }
-    
-    public void insertCoordinators() throws SQLException{
+
+    public void insertCoordinators() throws SQLException {
         Coordinator coord = new Coordinator();
-        coord.addCoordinator("6060", "Olimpia", "Popa", "athina","ola.popa@gmail.com","69696969696");
+        coord.addCoordinatorByID("Alvi", "Nikola", "Address", "nikola@tep.gr", "null");
+        coord.addCoordinatorByID("Vasilis", "Plevris", "Address", "plev@tep.gr", "null");
+        coord.addCoordinatorByID("Matthaios", "Iliakis", "Address", "mat@tep.gr", "null");
     }
-    
-    public void insertDrugs() throws SQLException{
+
+    public void insertDrugs() throws SQLException {
         Drug drug = new Drug();
-        drug.addDrug("1", "Depon", "Pill", "500mg", "2");
+        drug.addDrugByID("Vaccine", "Vaccine", "500mg", "1");
+        drug.addDrugByID("Aspirin", "Pill", "500mg", "2");
+        drug.addDrugByID("Bandage", "Applicable", "null", "3");
+        drug.addDrugByID("AllergyCream", "Cream", "100mg", "4");
     }
-    
-    public void insertIllnesses() throws SQLException{
+
+    public void insertIllnesses() throws SQLException {
         Illness ill = new Illness();
-        ill.addIllness("2", "Ponokefalos");
+        ill.addIllnessByID("Covid");
+        ill.addIllnessByID("Flu");
+        ill.addIllnessByID("Bone_Break");
+        ill.addIllnessByID("Allergy");
     }
-    
-    public void insertDuties() throws SQLException{
+
+    public void insertDuties() throws SQLException {
         DutyTime duty = new DutyTime();
-        duty.addDutyTime("1","10/10/2010", "6060");
+        duty.addDutyTime("1", "10/10/2010", "1");
     }
-    
+
     public void insertCardiologists() throws SQLException {
         Doctor doctor = new Doctor();
-        doctor.addDoctor("cardiologists", "8080", "Manos", "Chatzakis", "Patmou19", "chatzakis@ics.forth.gr", "6978640371");
+        doctor.addDoctorByID("cardiologist", "Manos", "Chatzakis", "Address", "chatzakis@tep.gr", "null");
+        doctor.addDoctorByID("cardiologist", "Nikos", "Fanourakis", "Address", "fan@tep.gr", "null");
+        doctor.addDoctorByID("cardiologist", "Giannis", "Mitakis", "Address", "mit@tep.gr", "null");
+        doctor.addDoctorByID("cardiologist", "Mixalis", "Spanakis", "Address", "span@tep.gr", "null");
+        doctor.addDoctorByID("cardiologist", "Manos", "Papadakis", "Address", "pap@tep.gr", "null");
     }
 
     public void insertGynecologists() throws SQLException {
         Doctor doctor = new Doctor();
-        doctor.addDoctor("gynecologists", "8081", "Nikos", "Fanourakis", "Kapoy", "nikos@ics.forth.gr", "69786403111");
+        doctor.addDoctorByID("gynecologist", "Nikos", "Kontonasios", "Address", "konto@tep.gr", "null");
+        doctor.addDoctorByID("gynecologist", "Giwrgos", "Fountakis", "Address", "fount@tep.gr", "null");
+        doctor.addDoctorByID("gynecologist", "Nikos", "Vasilikopoulos", "Address", "vasilik@tep.gr", "null");
     }
 
     public void insertPathologists() throws SQLException {
         Doctor doctor = new Doctor();
-        doctor.addDoctor("pathologists", "8082", "Giwrgos", "Kokolakis", "Kapou10", "giwrgos@ics.forth.gr", "6971110371");
+        doctor.addDoctorByID("pathologist", "Giwrgos", "Kokolakis", "Address", "giwrgos@tep.gr", "null");
+        doctor.addDoctorByID("pathologist", "Drosos", "Drosakis", "Address", "drosos@tep.gr", "null");
+        doctor.addDoctorByID("pathologist", "Nikolas", "Taboukos", "Address", "tab@tep.gr", "null");
+        doctor.addDoctorByID("pathologist", "Lefteris", "Spinthakis", "Address", "spith@tep.gr", "null");
     }
 
     public void insertEndocrinologists() throws SQLException {
         Doctor doctor = new Doctor();
-        doctor.addDoctor("endocrinologists", "8084", "Mirto", "Pagwmenaki", "Kapou18", "mirto@ics.forth.gr", "6978600071");
+        doctor.addDoctorByID("endocrinologist", "Elvira", "Sakoudi", "Address", "sak@tep.gr", "null");
+        doctor.addDoctorByID("endocrinologist", "Dimita", "Xristodoulou", "Address", "xr@tep.gr", "null");
+        doctor.addDoctorByID("endocrinologist", "Effie", "Probona", "Address", "prob@tep.gr", "null");
+        doctor.addDoctorByID("endocrinologist", "Giannis", "Kaziales", "Address", "kaz@tep.gr", "null");
+
     }
 
     public void insertPulmonologists() throws SQLException {
         Doctor doctor = new Doctor();
-        doctor.addDoctor("pulmonologists", "8083", "Giannis", "Mutakis", "Kapoy12", "giannis@ics.forth.gr", "6978644441");
-
+        doctor.addDoctorByID("pulmonologist", "Giannis", "Mutakis", "Address", "giannis@tep.gr", "null");
+        doctor.addDoctorByID("pulmonologist", "Giorgos", "Chatzakis", "Address", "chatzg@tep.gr", "null");
+        doctor.addDoctorByID("pulmonologist", "Paulos", "Iwanidis", "Address", "paulos@tep.gr", "null");
+        doctor.addDoctorByID("pulmonologist", "Giannis", "Tzitzikas", "Address", "tzitzik@tep.gr", "null");
+        doctor.addDoctorByID("pulmonologist", "Giannis", "Marketakis", "Address", "market@tep.gr", "null");
     }
 
-    
+    public void insertMedicals() throws SQLException {
+        Medical med = new Medical();
+        med.addMedicalByID("covid_test", "1", "1", "1", "26/12/2020");
+        med.addMedicalByID("covid_test", "2", "1", "1", "27/12/2020");
+        med.addMedicalByID("xRay_test", "2", "1", "1", "28/12/2020");
+        med.addMedicalByID("xRay_test", "3", "1", "1", "28/12/2020");
+        med.addMedicalByID("blood_test", "1", "1", "1", "28/12/2020");
+    }
+
+    public void insertPatients() throws SQLException {
+        Patient pat = new Patient();
+
+        pat.addPatientByID("Giannis", "Papadakis", "Address", "g@gmail.com", "null", "30", "12121212121", "IKA");
+        pat.addChronicDisease("1", "Asthma");
+
+        pat.addPatientByID("Nikos", "Liontakis", "Address", "g@gmail.com", "null", "30", "12121212121", "IKA");
+        pat.addChronicDisease("2", "Autoanoso");
+
+        pat.addPatientByID("Manos", "Giorgakis", "Address", "giorg@gmail.com", "null", "14", "12121212020", "IKA");
+        pat.addPatientByID("Makis", "Kotsabasis", "Address", "kotsa@gmail.com", "null", "60", "12121219090", "IKA");
+        pat.addPatientByID("Pavlos", "Giannakis", "Address", "ginnn@gmail.com", "null", "11", "12121218989", "IKA");
+
+    }
 }

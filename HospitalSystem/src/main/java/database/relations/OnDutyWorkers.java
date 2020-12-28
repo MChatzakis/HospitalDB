@@ -18,7 +18,7 @@ public class OnDutyWorkers
     public void addWorkerDutyTime(String dutytime_id, String coordinator_id) throws SQLException
     {
         DBConnection conn = new DBConnection();
-        String insert = "INSERT INTO worker_duties( "
+        String insert = "INSERT INTO coodinator_duties( "
                 + dutytime_id + "," + "\'" + coordinator_id + "\'" + " );";
         conn.updateQuery(insert);
         conn.closeDBConnection();
@@ -27,7 +27,7 @@ public class OnDutyWorkers
     public void createTable() throws SQLException
     {
         DBConnection conn = new DBConnection();
-        String createTable = "CREATE TABLE IF NOT EXISTS worker_duties("
+        String createTable = "CREATE TABLE IF NOT EXISTS coordinator_duties("
                 + " dutytime_id int NOT NULL,"
                 + " coordinator_id int NOT NULL,"
                 + " FOREIGN KEY (dutytime_id) REFERENCES dutytime(dutytime_id),"
@@ -40,7 +40,7 @@ public class OnDutyWorkers
     public void dropTable() throws SQLException
     {
         DBConnection conn = new DBConnection();
-        String dropTable = "DROP TABLE IF EXISTS worker_duties";
+        String dropTable = "DROP TABLE IF EXISTS coordinator_duties";
         conn.updateQuery(dropTable);
         conn.closeDBConnection();
     }

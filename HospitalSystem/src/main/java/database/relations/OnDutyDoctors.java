@@ -11,7 +11,7 @@ public class OnDutyDoctors {
 
     public void addDoctorDutyTime(String doctor_id, String duty_id) throws SQLException {
         DBConnection conn = new DBConnection();
-        String insert = "INSERT INTO doctor_duties VALUES( "
+        String insert = "INSERT INTO doctor_duties VALUES("
                 + doctor_id + "," + duty_id + ");";
         conn.updateQuery(insert);
         conn.closeDBConnection();
@@ -22,7 +22,7 @@ public class OnDutyDoctors {
         String createTable = "CREATE TABLE IF NOT EXISTS  doctor_duties("
                 + " doctor_id int NOT NULL,"
                 + " dutytime_id int NOT NULL,"
-               + " FOREIGN KEY(dutytime_id) REFERENCES dutytime(dutytime_id));";
+                + " FOREIGN KEY(dutytime_id) REFERENCES dutytime(dutytime_id));";
         conn.updateQuery(createTable);
         conn.closeDBConnection();
     }

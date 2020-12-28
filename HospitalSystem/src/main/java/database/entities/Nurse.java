@@ -15,6 +15,7 @@ import lombok.Data;
  */
 @Data
 public class Nurse {
+
     /*Attributes*/
     String name;
     String surname;
@@ -22,16 +23,26 @@ public class Nurse {
     String address;
     String phone;
     String id;
+
+    public static int id_num = 1;
     
-    public void addNurse(String id, String name, String surname, String address, String email,String phone) throws SQLException{
+    public void addNurse(String id, String name, String surname, String address, String email, String phone) throws SQLException {
         DBConnection conn = new DBConnection();
         String insert = "INSERT INTO nurses VALUES( "
-                + id+","+"\'"+name+"\'"+","+"\'"+surname+"\'"+", "+"\'"+address+"\'"+","+"\'"+email+"\'" +"," +"\'"+ phone+"\'"+");";
+                + id + "," + "\'" + name + "\'" + "," + "\'" + surname + "\'" + ", " + "\'" + address + "\'" + "," + "\'" + email + "\'" + "," + "\'" + phone + "\'" + ");";
         conn.updateQuery(insert);
         conn.closeDBConnection();
     }
-    
-    public void createTable() throws SQLException{
+
+    public void addNurseByID(String name, String surname, String address, String email, String phone) throws SQLException {
+        DBConnection conn = new DBConnection();
+        String insert = "INSERT INTO nurses VALUES( "
+                +(id_num++)+ "," + "\'" + name + "\'" + "," + "\'" + surname + "\'" + ", " + "\'" + address + "\'" + "," + "\'" + email + "\'" + "," + "\'" + phone + "\'" + ");";
+        conn.updateQuery(insert);
+        conn.closeDBConnection();
+    }
+
+    public void createTable() throws SQLException {
         DBConnection conn = new DBConnection();
         String createTable = "CREATE TABLE IF NOT EXISTS Nurses("
                 + " nurse_id int NOT NULL,"
@@ -44,8 +55,8 @@ public class Nurse {
         conn.updateQuery(createTable);
         conn.closeDBConnection();
     }
-    
-    public void dropTable() throws SQLException{
+
+    public void dropTable() throws SQLException {
         DBConnection conn = new DBConnection();
         String dropTable = "DROP TABLE IF EXISTS Nurses";
         conn.updateQuery(dropTable);

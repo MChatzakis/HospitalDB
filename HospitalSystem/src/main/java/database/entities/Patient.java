@@ -10,8 +10,7 @@ import lombok.Data;
  * @author manos
  */
 @Data
-public class Patient
-{
+public class Patient {
 
     /*Attributes*/
     String name;
@@ -25,17 +24,25 @@ public class Patient
     String insurance;
     ArrayList<String> chronicDiseases = new ArrayList<String>();
 
-    public void addPatient( String id, String name, String surname, String address, String email, String phone ,String age , String amka , String insurance) throws SQLException
-    {
+    public static int id_num = 1;
+    
+    public void addPatient(String id, String name, String surname, String address, String email, String phone, String age, String amka, String insurance) throws SQLException {
         DBConnection conn = new DBConnection();
         String insert = "INSERT INTO patients  VALUES( "
-                + id + "," + "\'" + name + "\'" + "," + "\'" + surname + "\'" + ", " + "\'" + address + "\'" + "," + "\'" + email + "\'" + "," + "\'" + phone + "\'"  +"," +  "\'" + age + "\'" +"," + "\'" + amka + "\'" +"," + "\'" + insurance + "\'"+");";
+                + id + "," + "\'" + name + "\'" + "," + "\'" + surname + "\'" + ", " + "\'" + address + "\'" + "," + "\'" + email + "\'" + "," + "\'" + phone + "\'" + "," + "\'" + age + "\'" + "," + "\'" + amka + "\'" + "," + "\'" + insurance + "\'" + ");";
+        conn.updateQuery(insert);
+        conn.closeDBConnection();
+    }
+    
+    public void addPatientByID(String name, String surname, String address, String email, String phone, String age, String amka, String insurance) throws SQLException {
+        DBConnection conn = new DBConnection();
+        String insert = "INSERT INTO patients  VALUES( "
+                + (id_num++)  + "," + "\'" + name + "\'" + "," + "\'" + surname + "\'" + ", " + "\'" + address + "\'" + "," + "\'" + email + "\'" + "," + "\'" + phone + "\'" + "," + "\'" + age + "\'" + "," + "\'" + amka + "\'" + "," + "\'" + insurance + "\'" + ");";
         conn.updateQuery(insert);
         conn.closeDBConnection();
     }
 
-    public void createTable() throws SQLException
-    {
+    public void createTable() throws SQLException {
         DBConnection conn = new DBConnection();
         String createTable = "CREATE TABLE IF NOT EXISTS patients ("
                 + " patient_id int NOT NULL,"
@@ -52,44 +59,37 @@ public class Patient
         conn.closeDBConnection();
     }
 
-    public void dropTable() throws SQLException
-    {
+    public void dropTable() throws SQLException {
         DBConnection conn = new DBConnection();
-        String dropTable = "DROP TABLE IF EXISTS patients";
+        String dropTable = "DROP TABLE IF EXISTS patients;";
         conn.updateQuery(dropTable);
         conn.closeDBConnection();
     }
-    
-     public void addChronicDisease(String patient_id, String disease) throws SQLException
-    {
+
+    public void addChronicDisease(String patient_id, String disease) throws SQLException {
         DBConnection conn = new DBConnection();
-        String insert = "INSERT INTO chronicdiseases  VALUES( "
-                + patient_id + "," + "\'" + disease + "\'"  + ");";
+        String insert = "INSERT INTO patients_chronic_diseases  VALUES( "
+                + patient_id + "," + "\'" + disease + "\'" + ");";
         conn.updateQuery(insert);
         conn.closeDBConnection();
     }
 
-    public void createTableChronicDiseases() throws SQLException
-    {
+    public void createTableChronicDiseases() throws SQLException {
         DBConnection conn = new DBConnection();
-        String createTable = "CREATE TABLE IF NOT EXISTS chronicdiseases ("
+        String createTable = "CREATE TABLE IF NOT EXISTS patients_chronic_diseases ("
                 + " patient_id int NOT NULL,"
-                + " disease varchar(255) NOT NULL"
+                + " disease varchar(255) NOT NULL,"
                 + " FOREIGN KEY(patient_id) REFERENCES patients(patient_id));";
-                
-     
+
         conn.updateQuery(createTable);
         conn.closeDBConnection();
     }
 
-    public void dropTableChronicDiseases() throws SQLException
-    {
+    public void dropTableChronicDiseases() throws SQLException {
         DBConnection conn = new DBConnection();
-        String dropTable = "DROP TABLE IF EXISTS chronicdiseases";
+        String dropTable = "DROP TABLE IF EXISTS patients_chronic_diseases;";
         conn.updateQuery(dropTable);
         conn.closeDBConnection();
     }
-    
-    
 
 }

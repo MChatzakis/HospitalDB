@@ -14,18 +14,36 @@ import java.sql.SQLException;
  */
 public class Examination {
 
+    public static int id_num = 1;
+    
     public void addReExam(String id, String patient_id, String doctor_id, String drug_id, String illness_id, String visit_id, String medical_id, String date, String reExam, String hosp) throws SQLException {
         DBConnection conn = new DBConnection();
         String insert = "INSERT INTO nurses VALUES( "
-                + id + "," + "\'" + patient_id + "\'" + "," + "\'" + doctor_id + "\'" + ", " + "\'" + drug_id + "\'" + "," + "\'" + illness_id + "\'" + "," + "\'" + visit_id + "\'" + "," + "\'" + medical_id + "\'" + "," + "\'" + date + "\'"+ "," + "\'" + reExam + "\'" + "," + "\'" + hosp + "\'" +");";
+                + id + "," + "\'" + patient_id + "\'" + "," + "\'" + doctor_id + "\'" + ", " + "\'" + drug_id + "\'" + "," + "\'" + illness_id + "\'" + "," + "\'" + visit_id + "\'" + "," + "\'" + medical_id + "\'" + "," + "\'" + date + "\'" + "," + "\'" + reExam + "\'" + "," + "\'" + hosp + "\'" + ");";
         conn.updateQuery(insert);
         conn.closeDBConnection();
     }
     
+    public void addReExamByID(String patient_id, String doctor_id, String drug_id, String illness_id, String visit_id, String medical_id, String date, String reExam, String hosp) throws SQLException {
+        DBConnection conn = new DBConnection();
+        String insert = "INSERT INTO nurses VALUES( "
+                + (id_num++) + "," + "\'" + patient_id + "\'" + "," + "\'" + doctor_id + "\'" + ", " + "\'" + drug_id + "\'" + "," + "\'" + illness_id + "\'" + "," + "\'" + visit_id + "\'" + "," + "\'" + medical_id + "\'" + "," + "\'" + date + "\'" + "," + "\'" + reExam + "\'" + "," + "\'" + hosp + "\'" + ");";
+        conn.updateQuery(insert);
+        conn.closeDBConnection();
+    }
+
     public void addExam(String id, String patient_id, String doctor_id, String drug_id, String illness_id, String visit_id, String medical_id, String date) throws SQLException {
         DBConnection conn = new DBConnection();
         String insert = "INSERT INTO nurses VALUES( "
-                + id + "," + "\'" + patient_id + "\'" + "," + "\'" + doctor_id + "\'" + ", " + "\'" + drug_id + "\'" + "," + "\'" + illness_id + "\'" + "," + "\'" + visit_id + "\'" + "," + "\'" + medical_id + "\'" + "," + "\'" + date + "\'"+ "," + "\'" + "false" + "\'" + "," + "\'" + "false" + "\'" +");";
+                + id + "," + "\'" + patient_id + "\'" + "," + "\'" + doctor_id + "\'" + ", " + "\'" + drug_id + "\'" + "," + "\'" + illness_id + "\'" + "," + "\'" + visit_id + "\'" + "," + "\'" + medical_id + "\'" + "," + "\'" + date + "\'" + "," + "\'" + "false" + "\'" + "," + "\'" + "false" + "\'" + ");";
+        conn.updateQuery(insert);
+        conn.closeDBConnection();
+    }
+    
+    public void addExamByID(String patient_id, String doctor_id, String drug_id, String illness_id, String visit_id, String medical_id, String date) throws SQLException {
+        DBConnection conn = new DBConnection();
+        String insert = "INSERT INTO nurses VALUES( "
+                + (id_num++) + "," + "\'" + patient_id + "\'" + "," + "\'" + doctor_id + "\'" + ", " + "\'" + drug_id + "\'" + "," + "\'" + illness_id + "\'" + "," + "\'" + visit_id + "\'" + "," + "\'" + medical_id + "\'" + "," + "\'" + date + "\'" + "," + "\'" + "false" + "\'" + "," + "\'" + "false" + "\'" + ");";
         conn.updateQuery(insert);
         conn.closeDBConnection();
     }
@@ -43,21 +61,28 @@ public class Examination {
                 + " date varchar(255),"
                 + " is_reExam BOOLEAN,"
                 + " hospitalization BOOLEAN,"
-                + " PRIMARY KEY(exam_id)"
+                + " PRIMARY KEY(exam_id),"
                 + " FOREIGN KEY(patient_id) REFERENCES patients(patient_id),"
-            //    + " FOREIGN KEY(doctor_id) REFERENCES doctors(doctor_id),"
+                + " FOREIGN KEY(doctor_id) REFERENCES doctors(doctor_id),"
                 + " FOREIGN KEY(drug_id) REFERENCES drugs(drug_id),"
                 + " FOREIGN KEY(illness_id) REFERENCES illnesses(illness_id),"
-                + " FOREIGN KEY(visit_id) REFERENCES visits(visit_id),"
-                + " FOREIGN KEY(medical_id) REFERENCES medicals(medical_id));";
-                
+                + " FOREIGN KEY(visit_id) REFERENCES visit(visit_id));";
+        //+ " FOREIGN KEY(medical_id) REFERENCES medicals(medical_id));";
         conn.updateQuery(createTable);
+        conn.closeDBConnection();
+    }
+
+    public void alterTableToAddMedical() throws SQLException {
+        DBConnection conn = new DBConnection();
+        String str = "ALTER TABLE examinations\n"
+                + "ADD FOREIGN KEY (medical_id) REFERENCES medicals(medical_id);";
+        conn.updateQuery(str);
         conn.closeDBConnection();
     }
 
     public void dropTable() throws SQLException {
         DBConnection conn = new DBConnection();
-        String dropTable = "DROP TABLE IF EXISTS examinations";
+        String dropTable = "DROP TABLE IF EXISTS examinations;";
         conn.updateQuery(dropTable);
         conn.closeDBConnection();
     }

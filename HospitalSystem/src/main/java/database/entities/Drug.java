@@ -15,16 +15,26 @@ import lombok.Data;
  */
 @Data
 public class Drug {
-    
-    public void addDrug(String id, String name, String type, String dosage, String illness_id) throws SQLException{
+
+    public static int id_num = 1;
+
+    public void addDrug(String id, String name, String type, String dosage, String illness_id) throws SQLException {
         DBConnection conn = new DBConnection();
         String insert = "INSERT INTO drugs VALUES( "
-                + id+","+"\'"+name+"\'"+","+"\'"+type+"\'"+", "+"\'"+dosage+"\'"+","+illness_id+");";
+                + id + "," + "\'" + name + "\'" + "," + "\'" + type + "\'" + ", " + "\'" + dosage + "\'" + "," + illness_id + ");";
         conn.updateQuery(insert);
         conn.closeDBConnection();
     }
-    
-     public void createTable() throws SQLException{
+
+    public void addDrugByID(String name, String type, String dosage, String illness_id) throws SQLException {
+        DBConnection conn = new DBConnection();
+        String insert = "INSERT INTO drugs VALUES( "
+                + (id_num++) + "," + "\'" + name + "\'" + "," + "\'" + type + "\'" + ", " + "\'" + dosage + "\'" + "," + illness_id + ");";
+        conn.updateQuery(insert);
+        conn.closeDBConnection();
+    }
+
+    public void createTable() throws SQLException {
         DBConnection conn = new DBConnection();
         String createTable = "CREATE TABLE IF NOT EXISTS drugs("
                 + " drug_id int NOT NULL,"
@@ -37,8 +47,8 @@ public class Drug {
         conn.updateQuery(createTable);
         conn.closeDBConnection();
     }
-    
-    public void dropTable() throws SQLException{
+
+    public void dropTable() throws SQLException {
         DBConnection conn = new DBConnection();
         String dropTable = "DROP TABLE IF EXISTS drugs";
         conn.updateQuery(dropTable);

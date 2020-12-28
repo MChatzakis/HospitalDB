@@ -10,10 +10,14 @@ import database.entities.Nurse;
 import database.entities.Doctor;
 import database.entities.Drug;
 import database.entities.DutyTime;
+import database.entities.Examination;
 import database.entities.Illness;
+import database.entities.Medical;
 import database.entities.Patient;
+import database.entities.Visit;
 import database.relations.OnDutyDoctors;
 import database.relations.OnDutyNurses;
+import database.relations.OnDutyWorkers;
 
 import java.sql.SQLException;
 
@@ -23,18 +27,15 @@ import java.sql.SQLException;
  * @author Manos Chatzakis (chatzakis@ics.forth.gr)
  * @author George Kokolakis (gkokol@ics.forth.gr)
  */
-public class DBInitializer
-{
+public class DBInitializer {
 
     DBConnection conn;
 
-    public DBInitializer() throws SQLException
-    {
+    public DBInitializer() throws SQLException {
         conn = new DBConnection("jdbc:mysql://localhost/", "root", "");
     }
 
-    public void buildDB() throws SQLException
-    {
+    public void buildDB() throws SQLException {
         createDB();
         createLogin();
         createDoctors();
@@ -42,72 +43,80 @@ public class DBInitializer
         createDutyTime();
         createMedicStaff();
         createPatients();
+        createVisits();
+        createExaminations();
         conn.closeDBConnection();
     }
 
-    public void createDB() throws SQLException
-    {
+    public void createDB() throws SQLException {
         String create = "CREATE DATABASE IF NOT EXISTS hospital";
         conn = new DBConnection("jdbc:mysql://localhost/", "root", "");
         conn.updateQuery(create);
     }
 
-    public void createLogin() throws SQLException
-    {
+    public void createLogin() throws SQLException {
         Login login = new Login();
         login.createTable();
     }
 
-    public void createDutyTime() throws SQLException
-    {
+    public void createDutyTime() throws SQLException {
         new DutyTime().createTable();
         new OnDutyNurses().createTable();
-
         new OnDutyDoctors().createTable();
-        new OnDutyDoctors().createTable();
-        new OnDutyDoctors().createTable();
-        new OnDutyDoctors().createTable();
-        new OnDutyDoctors().createTable();
-
+        new OnDutyWorkers().createTable();
     }
 
-    public void createPatients() throws SQLException
-    {
-        new Patient().createTable();
+    public void createPatients() throws SQLException {
+        Patient pat = new Patient();
+        pat.createTable();
+        pat.createTableChronicDiseases();
     }
 
-    public void createDoctors() throws SQLException
-    {
+    public void createExaminations() throws SQLException {
+        Medical med = new Medical();
+        Examination exam = new Examination();
+        exam.createTable();
+        med.createTable();
+        /*med.createTable("medicals_covid_Tests");
+        med.createTable("medicals_xRay_Tests");
+        med.createTable("medicals_blood_tests");*/
+        exam.alterTableToAddMedical();
+    }
+
+    public void createDoctors() throws SQLException {
         Doctor doctor = new Doctor();
-        doctor.createTable("endocrinologists");
-        doctor.createTable("gynecologists");
-        doctor.createTable("pathologists");
-        doctor.createTable("pulmonologists");
-        doctor.createTable("cardiologists");
+        doctor.createTable();
+        /*doctor.createTable("doctors_endocrinologists");
+        doctor.createTable("doctors_gynecologists");
+        doctor.createTable("doctors_pathologists");
+        doctor.createTable("doctors_pulmonologists");
+        doctor.createTable("doctors_cardiologists");*/
     }
 
-    public void createMedicStaff() throws SQLException
-    {
+    public void createMedicStaff() throws SQLException {
         new Illness().createTable();
         new Drug().createTable();
     }
 
-    public void createWorkers() throws SQLException
-    {
+    public void createWorkers() throws SQLException {
         new Nurse().createTable();
         new Coordinator().createTable();
     }
 
-    public void dropDB() throws SQLException
-    {
+    public void dropDB() throws SQLException {
         String drop = "DROP DATABASE IF EXISTS hospital;";
         conn = new DBConnection();
         conn.updateQuery(drop);
         conn.closeDBConnection();
     }
 
-    public void dropTable(String table) throws SQLException
-    {
+    public void createVisits() throws SQLException {
+        Visit vis = new Visit();
+        vis.createTable();
+        vis.createTableSymptoms();
+    }
+
+    public void dropTable(String table) throws SQLException {
         conn = new DBConnection();
         String dropTable = "DROP TABLE IF EXISTS " + table + ";";
         conn.updateQuery(dropTable);
