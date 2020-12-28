@@ -27,7 +27,7 @@
                                 <h1 class="card-title mt-5" style=" text-align: left;">Welcome</h1>
                             </div>
                             <div class="form-label-group col-sm-10 col-md-10 col-lg-10 mt-lg-5  mx-auto">
-                                <form method="post" action="http://localhost:8080/HospitalSystem/login" >
+                                <form method="post" action="http://localhost:8080/HospitalSystem/LoginServlet" >
                                     <label for="username" id="username-box">Username</label>
                                     <input type="text" id="username" class="form-control" name ="username"  placeholder="Username">
                                     <label for="password" id="password-box" class="mt-4">Password</label>
