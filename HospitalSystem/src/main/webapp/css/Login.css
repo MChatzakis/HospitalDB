@@ -1,0 +1,50 @@
+body {
+    font-family: sans-serif;
+    font-size: 200%;
+    background-color: #91a3b0;
+}
+
+h1 {
+    text-align: center;
+    font-weight: bold;
+}
+
+#MainLoginDiv{
+    height: 100vh;
+    background-image: url("../img/backround_image2.jpg") !important ;
+}
+
+#MainSignUpDiv{
+    height: 100vh;
+    background-image: url("../img/signup_background.png") !important ;
+}
+
+.card-signin {
+    border-radius: 10%;
+}
+
+.card-body {
+    padding: 0;
+}
+
+.btn {
+    /*background-color: #91a3b0;*/
+   /* background-image: url("backround_image.jpg") !important;*/
+    border: none;
+    font-size: 2.1rem;
+    width: 40%;
+}
+#button-signup
+{
+    background-color: rgb(181, 130, 46);
+}
+#button-login
+{
+   background-image: url("../img/backround_image.jpg") !important;
+
+}
+.MainSignUpDiv
+{
+    background-image: url("../img/signup_background.png"); 
+
+}
