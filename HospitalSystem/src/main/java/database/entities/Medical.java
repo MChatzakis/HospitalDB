@@ -14,7 +14,7 @@ import java.sql.SQLException;
  */
 public class Medical {
 
-    public void addReExam(String type, String id, String re_exam_id, String patient_id, String doctor_id, String nurse_id, String date) throws SQLException {
+    public void addMedical(String type, String id, String re_exam_id, String patient_id, String doctor_id, String nurse_id, String date) throws SQLException {
         DBConnection conn = new DBConnection();
         String insert = "INSERT INTO "+type+" VALUES( "
                 + id + "," + "\'" + re_exam_id + "\'" + "," + "\'" + patient_id + "\'" + ", " + "\'" + doctor_id + "\'" + "," + "\'" + nurse_id + "\'" + "," + "\'" + date + ");";
