@@ -60,6 +60,36 @@ public class Patient
         conn.closeDBConnection();
     }
     
+     public void addChronicDisease(String patient_id, String disease) throws SQLException
+    {
+        DBConnection conn = new DBConnection();
+        String insert = "INSERT INTO chronicdiseases  VALUES( "
+                + patient_id + "," + "\'" + disease + "\'"  + ");";
+        conn.updateQuery(insert);
+        conn.closeDBConnection();
+    }
+
+    public void createTableChronicDiseases() throws SQLException
+    {
+        DBConnection conn = new DBConnection();
+        String createTable = "CREATE TABLE IF NOT EXISTS chronicdiseases ("
+                + " patient_id int NOT NULL,"
+                + " disease varchar(255) NOT NULL"
+                + " FOREIGN KEY(patient_id) REFERENCES patients(patient_id));";
+                
+     
+        conn.updateQuery(createTable);
+        conn.closeDBConnection();
+    }
+
+    public void dropTableChronicDiseases() throws SQLException
+    {
+        DBConnection conn = new DBConnection();
+        String dropTable = "DROP TABLE IF EXISTS chronicdiseases";
+        conn.updateQuery(dropTable);
+        conn.closeDBConnection();
+    }
+    
     
 
 }

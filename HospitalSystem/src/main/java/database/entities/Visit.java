@@ -4,11 +4,76 @@
  * and open the template in the editor.
  */
 package database.entities;
+import database.DBConnection;
+import java.sql.SQLException;
 
 /**
  *
  * @author manos
  */
-public class Visit {
-    
+public class Visit
+{
+
+    public void addVisit(String visit_id, String date, String duty_time_id, String patient_id) throws SQLException
+    {
+        DBConnection conn = new DBConnection();
+        String insert = "INSERT INTO visit VALUES( "
+                + visit_id + "," + "\'" + date + "\'" + "," + "\'" + duty_time_id + "\'" + "," + "\'" + patient_id + "\'" + " );";
+        conn.updateQuery(insert);
+        conn.closeDBConnection();
+    }
+
+    public void createTable() throws SQLException
+    {
+        DBConnection conn = new DBConnection();
+        String createTable = "CREATE TABLE IF NOT EXISTS visit("
+                + " visit_id int NOT NULL,"
+                + " date varchar(255) NOT NULL ,"
+                + " dutytime_id int NOT NULL ,"
+                + " patient_id int NOT NULL , "
+                + " FOREIGN KEY (dutytime_id) REFERENCES dutytime(dutytime_id),"
+                + " FOREIGN KEY (patient_id) REFERENCES patients(patient_id),"
+                + " PRIMARY KEY(visit_id) ) ;";
+
+        conn.updateQuery(createTable);
+        conn.closeDBConnection();
+    }
+
+    public void dropTable() throws SQLException
+    {
+        DBConnection conn = new DBConnection();
+        String dropTable = "DROP TABLE IF EXISTS visit";
+        conn.updateQuery(dropTable);
+        conn.closeDBConnection();
+    }
+
+    public void addSymptom(String visit_id, String symptom) throws SQLException
+    {
+        DBConnection conn = new DBConnection();
+        String insert = "INSERT INTO symptoms VALUES( "
+                + visit_id + "," + "\'" + symptom + "\'" + " );";
+        conn.updateQuery(insert);
+        conn.closeDBConnection();
+    }
+
+    public void createTableSymptoms() throws SQLException
+    {
+        DBConnection conn = new DBConnection();
+        String createTable = "CREATE TABLE IF NOT EXISTS symptoms("
+                + " visit_id int NOT NULL,"
+                + " symptom(255) NOT NULL ,"
+                + " FOREIGN KEY (visit_id) REFERENCES visit(visit_id));";
+
+        conn.updateQuery(createTable);
+        conn.closeDBConnection();
+    }
+
+    public void dropTableSymptoms() throws SQLException
+    {
+        DBConnection conn = new DBConnection();
+        String dropTable = "DROP TABLE IF EXISTS symptoms";
+        conn.updateQuery(dropTable);
+        conn.closeDBConnection();
+    }
+
 }

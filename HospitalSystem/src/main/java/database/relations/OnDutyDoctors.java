@@ -17,13 +17,12 @@ public class OnDutyDoctors {
         conn.closeDBConnection();
     }
 
-    public void createTable(String type) throws SQLException {
+    public void createTable() throws SQLException {
         DBConnection conn = new DBConnection();
-        String createTable = "CREATE TABLE IF NOT EXISTS "+ type + "_duties("
+        String createTable = "CREATE TABLE IF NOT EXISTS  doctor_duties("
                 + " doctor_id int NOT NULL,"
                 + " dutytime_id int NOT NULL,"
-               + " FOREIGN KEY(dutytime_id) REFERENCES dutytime(dutytime_id),"
-              + " FOREIGN KEY(doctor_id) REFERENCES  "+type+"(doctor_id));";
+               + " FOREIGN KEY(dutytime_id) REFERENCES dutytime(dutytime_id));";
         conn.updateQuery(createTable);
         conn.closeDBConnection();
     }

@@ -23,15 +23,18 @@ import java.sql.SQLException;
  * @author Manos Chatzakis (chatzakis@ics.forth.gr)
  * @author George Kokolakis (gkokol@ics.forth.gr)
  */
-public class DBInitializer {
+public class DBInitializer
+{
 
     DBConnection conn;
 
-    public DBInitializer() throws SQLException {
+    public DBInitializer() throws SQLException
+    {
         conn = new DBConnection("jdbc:mysql://localhost/", "root", "");
     }
 
-    public void buildDB() throws SQLException {
+    public void buildDB() throws SQLException
+    {
         createDB();
         createLogin();
         createDoctors();
@@ -42,33 +45,39 @@ public class DBInitializer {
         conn.closeDBConnection();
     }
 
-    public void createDB() throws SQLException {
+    public void createDB() throws SQLException
+    {
         String create = "CREATE DATABASE IF NOT EXISTS hospital";
         conn = new DBConnection("jdbc:mysql://localhost/", "root", "");
         conn.updateQuery(create);
     }
 
-    public void createLogin() throws SQLException {
+    public void createLogin() throws SQLException
+    {
         Login login = new Login();
         login.createTable();
     }
 
-    public void createDutyTime() throws SQLException {
+    public void createDutyTime() throws SQLException
+    {
         new DutyTime().createTable();
         new OnDutyNurses().createTable();
-        
-        new OnDutyDoctors().createTable("endocrinologists");
-        new OnDutyDoctors().createTable("gynecologists");
-        new OnDutyDoctors().createTable("pathologists");
-        new OnDutyDoctors().createTable("pulmonologists");
-        new OnDutyDoctors().createTable("cardiologists");
+
+        new OnDutyDoctors().createTable();
+        new OnDutyDoctors().createTable();
+        new OnDutyDoctors().createTable();
+        new OnDutyDoctors().createTable();
+        new OnDutyDoctors().createTable();
+
     }
 
-     public void createPatients() throws SQLException{
-         new Patient().createTable();
-     }
-    
-    public void createDoctors() throws SQLException {
+    public void createPatients() throws SQLException
+    {
+        new Patient().createTable();
+    }
+
+    public void createDoctors() throws SQLException
+    {
         Doctor doctor = new Doctor();
         doctor.createTable("endocrinologists");
         doctor.createTable("gynecologists");
@@ -77,24 +86,28 @@ public class DBInitializer {
         doctor.createTable("cardiologists");
     }
 
-    public void createMedicStaff() throws SQLException {
+    public void createMedicStaff() throws SQLException
+    {
         new Illness().createTable();
         new Drug().createTable();
     }
 
-    public void createWorkers() throws SQLException {
+    public void createWorkers() throws SQLException
+    {
         new Nurse().createTable();
         new Coordinator().createTable();
     }
 
-    public void dropDB() throws SQLException {
+    public void dropDB() throws SQLException
+    {
         String drop = "DROP DATABASE IF EXISTS hospital;";
         conn = new DBConnection();
         conn.updateQuery(drop);
         conn.closeDBConnection();
     }
 
-    public void dropTable(String table) throws SQLException {
+    public void dropTable(String table) throws SQLException
+    {
         conn = new DBConnection();
         String dropTable = "DROP TABLE IF EXISTS " + table + ";";
         conn.updateQuery(dropTable);
