@@ -16,35 +16,22 @@ import lombok.Data;
 @Data
 public class Illness {
 
-    /*Attributes*/
-    String id;
-    String name;
-
     public static int id_num = 1;
 
-    public void addIllness(String id, String name) throws SQLException {
+    public void addIllness(String name) throws SQLException {
         DBConnection conn = new DBConnection();
         String insert = "INSERT INTO illnesses VALUES( "
-                + id + "," + "\'" + name + "\'" + ");";
+                + (id_num++) + "," + "\'" + name + "\'" + ");";
         conn.updateQuery(insert);
         conn.closeDBConnection();
     }
 
-    public void addIllnessByID(String name) throws SQLException {
-        DBConnection conn = new DBConnection();
-        String insert = "INSERT INTO illnesses VALUES( "
-                +(id_num++) + "," + "\'" + name + "\'" + ");";
-        conn.updateQuery(insert);
-        conn.closeDBConnection();
-    }
-    
     public void createTable() throws SQLException {
         DBConnection conn = new DBConnection();
         String createTable = "CREATE TABLE IF NOT EXISTS illnesses("
                 + " illness_id int NOT NULL,"
                 + " name varchar(255) NOT NULL ,"
                 + "PRIMARY KEY(illness_id) ) ;";
-
         conn.updateQuery(createTable);
         conn.closeDBConnection();
     }

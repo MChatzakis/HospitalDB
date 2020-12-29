@@ -1,13 +1,13 @@
 package database;
 
-import database.entities.Coordinator;
-import database.entities.Doctor;
+import database.entities.users.Coordinator;
+import database.entities.users.Doctor;
 import database.entities.Drug;
 import database.entities.DutyTime;
 import database.entities.Illness;
 import database.entities.Medical;
-import database.entities.Nurse;
-import database.entities.Patient;
+import database.entities.users.Nurse;
+import database.entities.users.Patient;
 import java.sql.SQLException;
 
 /**
@@ -17,7 +17,7 @@ import java.sql.SQLException;
  */
 public class DBDataGenerator {
 
-    public void insertData() throws SQLException {
+    /*public void insertData() throws SQLException {
         insertDoctors();
         insertNurses();
         insertCoordinators();
@@ -137,5 +137,5 @@ public class DBDataGenerator {
         pat.addPatientByID("Makis", "Kotsabasis", "Address", "kotsa@gmail.com", "null", "60", "12121219090", "IKA");
         pat.addPatientByID("Pavlos", "Giannakis", "Address", "ginnn@gmail.com", "null", "11", "12121218989", "IKA");
 
-    }
+    }*/
 }

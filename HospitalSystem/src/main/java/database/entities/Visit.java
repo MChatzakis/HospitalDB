@@ -16,15 +16,7 @@ public class Visit {
 
     public static int id_num = 1;
 
-    public void addVisit(String visit_id, String date, String duty_time_id, String patient_id) throws SQLException {
-        DBConnection conn = new DBConnection();
-        String insert = "INSERT INTO visit VALUES( "
-                + visit_id + "," + "\'" + date + "\'" + "," + "\'" + duty_time_id + "\'" + "," + "\'" + patient_id + "\'" + " );";
-        conn.updateQuery(insert);
-        conn.closeDBConnection();
-    }
-
-    public void addVisitByID(String date, String duty_time_id, String patient_id) throws SQLException {
+    public void addVisit(String date, String duty_time_id, String patient_id) throws SQLException {
         DBConnection conn = new DBConnection();
         String insert = "INSERT INTO visit VALUES( "
                 + (id_num++) + "," + "\'" + date + "\'" + "," + "\'" + duty_time_id + "\'" + "," + "\'" + patient_id + "\'" + " );";

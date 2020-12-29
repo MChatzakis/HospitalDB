@@ -5,15 +5,16 @@
  */
 package database;
 
-import database.entities.Coordinator;
-import database.entities.Nurse;
-import database.entities.Doctor;
+import database.entities.users.User;
+import database.entities.users.Coordinator;
+import database.entities.users.Nurse;
+import database.entities.users.Doctor;
 import database.entities.Drug;
 import database.entities.DutyTime;
 import database.entities.Examination;
 import database.entities.Illness;
 import database.entities.Medical;
-import database.entities.Patient;
+import database.entities.users.Patient;
 import database.entities.Visit;
 import database.relations.OnDutyDoctors;
 import database.relations.OnDutyNurses;
@@ -41,10 +42,10 @@ public class DBInitializer {
         createDoctors();
         createWorkers();
         createDutyTime();
-        createMedicStaff();
+        //createMedicStaff();
         createPatients();
         createVisits();
-        createExaminations();
+        //createExaminations();
         conn.closeDBConnection();
     }
 
@@ -55,7 +56,7 @@ public class DBInitializer {
     }
 
     public void createLogin() throws SQLException {
-        Login login = new Login();
+        User login = new User();
         login.createTable();
     }
 

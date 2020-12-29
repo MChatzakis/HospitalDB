@@ -24,7 +24,7 @@ public class Main {
             init.dropDB();
             init.buildDB();
             
-            dataGenerator.insertData();
+            //dataGenerator.insertData();
      
         } catch (SQLException ex) {
             Logger.getLogger(DBInitializer.class.getName()).log(Level.SEVERE, null, ex);

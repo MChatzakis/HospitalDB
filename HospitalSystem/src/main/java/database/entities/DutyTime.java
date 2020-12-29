@@ -13,18 +13,10 @@ public class DutyTime {
 
     public static int id_num = 1;
 
-    public void addDutyTime(String id, String date, String coordinator_id) throws SQLException {
+    public void addDutyTime(String date, String coordinator_id) throws SQLException {
         DBConnection conn = new DBConnection();
         String insert = "INSERT INTO dutytime VALUES( "
-                + id + "," + "\'" + date + "\'" + "," + coordinator_id + ");";
-        conn.updateQuery(insert);
-        conn.closeDBConnection();
-    }
-    
-    public void addDutyTimeByID(String date, String coordinator_id) throws SQLException {
-        DBConnection conn = new DBConnection();
-        String insert = "INSERT INTO dutytime VALUES( "
-                +(id_num++) + "," + "\'" + date + "\'" + "," + coordinator_id + ");";
+                + (id_num++) + "," + "\'" + date + "\'" + "," + coordinator_id + ");";
         conn.updateQuery(insert);
         conn.closeDBConnection();
     }
