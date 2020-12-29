@@ -32,7 +32,7 @@ public class Drug {
                 + " drug_id int NOT NULL,"
                 + " name varchar(255) NOT NULL,"
                 + " type varchar(255) NOT NULL,"
-                + " dosage varchar(255) NOT NULL ,"
+                + " dosage varchar(255) ,"
                 + " illness_id int,"
                 + "PRIMARY KEY(drug_id),"
                 + "FOREIGN KEY(illness_id) REFERENCES illnesses(illness_id));";

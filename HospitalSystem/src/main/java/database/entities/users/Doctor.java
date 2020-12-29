@@ -19,7 +19,7 @@ public class Doctor {
 
     private String table_name = "doctors";
 
-    public void addDoctor(String username, String password, String name, String surname, String address, String email, String phone, String type) throws SQLException {
+    public void addDoctor(String username, String password, String name, String surname,  String address, String email, String phone, String type) throws SQLException {
         DBConnection conn = new DBConnection();
         User user = new User();
 

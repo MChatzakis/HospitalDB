@@ -18,7 +18,7 @@ public class Nurse {
 
     private String table_name;
 
-    public void addNurseByID(String username, String password, String name, String surname, String address, String email, String phone) throws SQLException {
+    public void addNurse(String username, String password, String name, String surname, String address, String email, String phone) throws SQLException {
         DBConnection conn = new DBConnection();
         User user = new User();
 
