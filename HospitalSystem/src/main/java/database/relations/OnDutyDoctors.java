@@ -22,7 +22,8 @@ public class OnDutyDoctors {
         String createTable = "CREATE TABLE IF NOT EXISTS  doctor_duties("
                 + " doctor_id int NOT NULL,"
                 + " dutytime_id int NOT NULL,"
-                + " FOREIGN KEY(dutytime_id) REFERENCES dutytime(dutytime_id));";
+                + " FOREIGN KEY(dutytime_id) REFERENCES dutytime(dutytime_id),"
+                + " FOREIGN KEY(doctor_id) REFERENCES doctors(doctor_id));";
         conn.updateQuery(createTable);
         conn.closeDBConnection();
     }

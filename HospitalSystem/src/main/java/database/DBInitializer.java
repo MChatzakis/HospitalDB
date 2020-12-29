@@ -9,10 +9,10 @@ import database.entities.users.User;
 import database.entities.users.Coordinator;
 import database.entities.users.Nurse;
 import database.entities.users.Doctor;
-import database.entities.Drug;
+import database.entities.medics.Drug;
 import database.entities.DutyTime;
 import database.entities.Examination;
-import database.entities.Illness;
+import database.entities.medics.Illness;
 import database.entities.Medical;
 import database.entities.users.Patient;
 import database.entities.Visit;
@@ -42,10 +42,10 @@ public class DBInitializer {
         createDoctors();
         createWorkers();
         createDutyTime();
-        //createMedicStaff();
+        createMedicStaff();
         createPatients();
         createVisits();
-        //createExaminations();
+        createExaminations();
         conn.closeDBConnection();
     }
 
@@ -76,7 +76,7 @@ public class DBInitializer {
     public void createExaminations() throws SQLException {
         Medical med = new Medical();
         Examination exam = new Examination();
-        exam.createTable();
+        exam.createTables();
         med.createTable();
         /*med.createTable("medicals_covid_Tests");
         med.createTable("medicals_xRay_Tests");

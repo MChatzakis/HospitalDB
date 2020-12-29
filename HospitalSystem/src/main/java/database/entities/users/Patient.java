@@ -12,14 +12,14 @@ import lombok.Data;
 @Data
 public class Patient {
 
-    public void addPatient(String username, String password, String name, String surname, String address, String email, String phone, String age, String amka, String insurance) throws SQLException {
+    public void addPatient(String username, String password, String name, String surname, String address, String email, String phone, String birth_date, String amka, String at, String insurance) throws SQLException {
         DBConnection conn = new DBConnection();
         User user = new User();
 
         user.addUser(username, password, "patient");
 
         String insert = "INSERT INTO patients  VALUES( "
-                + (User.id_num - 1) + "," + "\'" + name + "\'" + "," + "\'" + surname + "\'" + ", " + "\'" + address + "\'" + "," + "\'" + email + "\'" + "," + "\'" + phone + "\'" + "," + "\'" + age + "\'" + "," + "\'" + amka + "\'" + "," + "\'" + insurance + "\'" + ");";
+                + (User.id_num - 1) + "," + "\'" + name + "\'" + "," + "\'" + surname + "\'" + ", " + "\'" + address + "\'" + "," + "\'" + email + "\'" + "," + "\'" + phone + "\'" + "," + "\'" + birth_date + "\'" + "," + "\'" + amka + "\'" +  "," + "\'" + at + "\'" + "," + "\'" + insurance + "\'" + ");";
         conn.updateQuery(insert);
         conn.closeDBConnection();
     }
@@ -33,11 +33,14 @@ public class Patient {
                 + " address varchar(255) ,"
                 + " email varchar(255),"
                 + " phone varchar(255),"
-                + " age int NOT NULL,"
+                + " birth_date varchar(255),"
                 + " amka varchar(255) NOT NULL,"
+                + " at varchar(255) NOT NULL,"
                 + " insurance varchar(255),"
                 + " PRIMARY KEY(patient_id),"
-                + " FOREIGN KEY(patient_id) REFERENCES users(user_id));";
+                + " FOREIGN KEY(patient_id) REFERENCES users(user_id),"
+                + " UNIQUE(amka),"
+                + " UNIQUE(at));";
         conn.updateQuery(createTable);
         conn.closeDBConnection();
     }

@@ -19,7 +19,7 @@ public class Visit {
     public void addVisit(String date, String duty_time_id, String patient_id) throws SQLException {
         DBConnection conn = new DBConnection();
         String insert = "INSERT INTO visit VALUES( "
-                + (id_num++) + "," + "\'" + date + "\'" + "," + "\'" + duty_time_id + "\'" + "," + "\'" + patient_id + "\'" + " );";
+                + (id_num++) + "," + "\'" + date + "\'" + "," + duty_time_id + "," + patient_id + " );";
         conn.updateQuery(insert);
         conn.closeDBConnection();
     }

@@ -19,14 +19,14 @@ public class Doctor {
 
     private String table_name = "doctors";
 
-    public void addDoctor(String username, String password, String name, String surname,  String address, String email, String phone, String type) throws SQLException {
+    public void addDoctor(String username, String password, String name, String surname,  String address, String email, String phone, String type, String at) throws SQLException {
         DBConnection conn = new DBConnection();
         User user = new User();
 
         user.addUser(username, password, "doctor");
 
         String insert = "INSERT INTO doctors VALUES( "
-                + (User.id_num - 1) + "," + "\'" + name + "\'" + "," + "\'" + surname + "\'" + ", " + "\'" + address + "\'" + "," + "\'" + email + "\'" + "," + "\'" + phone + "\'" + ",\'" + type + "\'" + ");";
+                + (User.id_num - 1) + "," + "\'" + name + "\'" + "," + "\'" + surname + "\'" + ", " + "\'" + address + "\'" + "," + "\'" + email + "\'" + "," + "\'" + phone + "\'" + ",\'" + type + "\'" + ",\'" + at + "\'"+");";
 
         conn.updateQuery(insert);
         conn.closeDBConnection();
@@ -42,6 +42,7 @@ public class Doctor {
                 + " email varchar(255),"
                 + " phone varchar(255),"
                 + " type varchar(255) NOT NULL,"
+                + " at varchar(255),"
                 + "PRIMARY KEY(doctor_id),"
                 + "FOREIGN KEY(doctor_id) REFERENCES users(user_id));";
         conn.updateQuery(createTable);

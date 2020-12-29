@@ -11,21 +11,21 @@ import lombok.Data;
 
 /**
  *
- * @author manos
+ * @author Manos Chatzakis
  */
 @Data
 public class Nurse {
 
     private String table_name;
 
-    public void addNurse(String username, String password, String name, String surname, String address, String email, String phone) throws SQLException {
+    public void addNurse(String username, String password, String name, String surname, String address, String email, String phone, String at) throws SQLException {
         DBConnection conn = new DBConnection();
         User user = new User();
 
         user.addUser(username, password, "nurse");
 
         String insert = "INSERT INTO nurses VALUES( "
-                + (User.id_num - 1) + "," + "\'" + name + "\'" + "," + "\'" + surname + "\'" + ", " + "\'" + address + "\'" + "," + "\'" + email + "\'" + "," + "\'" + phone + "\'" + ");";
+                + (User.id_num - 1) + "," + "\'" + name + "\'" + "," + "\'" + surname + "\'" + ", " + "\'" + address + "\'" + "," + "\'" + email + "\'" + "," + "\'" + phone + "\'" + "," + "\'" + at + "\'" +");";
 
         conn.updateQuery(insert);
         conn.closeDBConnection();
@@ -37,9 +37,10 @@ public class Nurse {
                 + " nurse_id int NOT NULL,"
                 + " name varchar(255) NOT NULL,"
                 + " surname varchar(255) NOT NULL,"
-                + " address varchar(255) ,"
+                + " address varchar(255),"
                 + " email varchar(255),"
                 + " phone varchar(255),"
+                + " at varchar(255),"
                 + " PRIMARY KEY(nurse_id),"
                 + " FOREIGN KEY(nurse_id) REFERENCES users(user_id));";
         conn.updateQuery(createTable);

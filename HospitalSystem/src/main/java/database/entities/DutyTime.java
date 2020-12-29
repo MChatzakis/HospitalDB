@@ -36,7 +36,7 @@ public class DutyTime {
 
     public void dropTable() throws SQLException {
         DBConnection conn = new DBConnection();
-        String dropTable = "DROP TABLE IF EXISTS dutytime";
+        String dropTable = "DROP TABLE IF EXISTS dutytime;";
         conn.updateQuery(dropTable);
         conn.closeDBConnection();
     }

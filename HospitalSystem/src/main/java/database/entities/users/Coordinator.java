@@ -17,7 +17,7 @@ import lombok.Data;
 @Data
 public class Coordinator {
 
-    public void addCoordinator(String username, String password, String name, String surname, String address, String email, String phone) throws SQLException {
+    public void addCoordinator(String username, String password, String name, String surname, String address, String email, String phone, String at) throws SQLException {
         
         DBConnection conn = new DBConnection();
         User user = new User();
@@ -25,7 +25,7 @@ public class Coordinator {
         user.addUser(username, password, "coordinator");
 
         String insert = "INSERT INTO coordinators VALUES( "
-                + (User.id_num - 1) + "," + "\'" + name + "\'" + "," + "\'" + surname + "\'" + ", " + "\'" + address + "\'" + "," + "\'" + email + "\'" + "," + "\'" + phone + "\'" + ");";
+                + (User.id_num - 1) + "," + "\'" + name + "\'" + "," + "\'" + surname + "\'" + ", " + "\'" + address + "\'" + "," + "\'" + email + "\'" + "," + "\'" + phone + "\'" + "," + "\'" + at + "\'" + ");";
         conn.updateQuery(insert);
         conn.closeDBConnection();
     }
@@ -39,6 +39,7 @@ public class Coordinator {
                 + " address varchar(255) ,"
                 + " email varchar(255),"
                 + " phone varchar(255),"
+                + " at varchar(255),"
                 + " PRIMARY KEY(coordinator_id),"
                 + " FOREIGN KEY(coordinator_id) REFERENCES users(user_id));";
         conn.updateQuery(createTable);

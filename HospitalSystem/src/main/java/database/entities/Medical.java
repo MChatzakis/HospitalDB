@@ -10,27 +10,16 @@ import java.sql.SQLException;
 
 /**
  *
- * @author manos
+ * @author Manos Chatzakis
  */
 public class Medical {
 
     public static int id_num = 1;
 
-    public void addMedical(String type, String id, String patient_id, String doctor_id, String nurse_id, String date) throws SQLException {
+    public void addMedical(String type, String exam_id,String patient_id, String doctor_id, String nurse_id, String date) throws SQLException {
         DBConnection conn = new DBConnection();
-        String insert = "INSERT INTO medical VALUES( "
-                + (id) + "," + "\'" + patient_id + "\'" + ", " + "\'" + doctor_id + "\'" + "," + "\'" + nurse_id + "\'" + "," + "\'" + date + ",\'" + type + "\'" + ");";
-        //String insert_m = "INSERT INTO " + type + " VALUES( "
-        //      + id + ");";
-        conn.updateQuery(insert);
-        //conn.updateQuery(insert_m);
-        conn.closeDBConnection();
-    }
-
-    public void addMedicalByID(String type, String patient_id, String doctor_id, String nurse_id, String date) throws SQLException {
-        DBConnection conn = new DBConnection();
-        String insert = "INSERT INTO medical VALUES( "
-                + (id_num++) + "," + "\'" + patient_id + "\'" + ", " + "\'" + doctor_id + "\'" + "," + "\'" + nurse_id + "\'" + "," + "\'" + date + ",\'" + type + "\'" + ");";
+        String insert = "INSERT INTO medicals VALUES( "
+                + (id_num++) + "," +  exam_id + "," +  patient_id + ", " +  doctor_id  + "," +  nurse_id  + "," + "\'" + date + "\'"+  ",\'" + type + "\'" + ");";
 
         conn.updateQuery(insert);
         conn.closeDBConnection();
@@ -40,35 +29,25 @@ public class Medical {
         DBConnection conn = new DBConnection();
         String createTable = "CREATE TABLE IF NOT EXISTS medicals("
                 + " medical_id int NOT NULL,"
-                + " re_exam_id int NOT NULL,"
+                + " exam_id int NOT NULL,"
                 + " patient_id int NOT NULL,"
-                + " doctor_id int  ,"
-                + " nurse_id int ,"
-                + " date varchar(255),"
-                + " type varchar(255),"
+                + " doctor_id int  NOT NULL,"
+                + " nurse_id int  NOT NULL,"
+                + " date varchar(255) NOT NULL,"
+                + " type varchar(255) NOT NULL,"
                 + " PRIMARY KEY(medical_id),"
                 + " FOREIGN KEY(patient_id) REFERENCES patients(patient_id),"
                 + " FOREIGN KEY(nurse_id) REFERENCES nurses(nurse_id),"
                 + " FOREIGN KEY(doctor_id) REFERENCES doctors(doctor_id),"
-                + " FOREIGN KEY(re_exam_id) REFERENCES examinations(exam_id));";
+                + " FOREIGN KEY(exam_id) REFERENCES examinations(exam_id));"; //examinations_inittial(exam_id)
 
-        conn.updateQuery(createTable);
-        conn.closeDBConnection();
-    }
-
-    public void createTable(String type) throws SQLException {
-        DBConnection conn = new DBConnection();
-        String createTable = "CREATE TABLE IF NOT EXISTS " + type + "("
-                + " medical_id int NOT NULL,"
-                + " PRIMARY KEY(medical_id),"
-                + "FOREIGN KEY(medical_id) REFERENCES medicals(medical_id));";
         conn.updateQuery(createTable);
         conn.closeDBConnection();
     }
 
     public void dropTable(String type) throws SQLException {
         DBConnection conn = new DBConnection();
-        String dropTable = "DROP TABLE IF EXISTS " + type;
+        String dropTable = "DROP TABLE IF EXISTS medicals;";
         conn.updateQuery(dropTable);
         conn.closeDBConnection();
     }
