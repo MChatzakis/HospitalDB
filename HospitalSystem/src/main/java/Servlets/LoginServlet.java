@@ -54,6 +54,8 @@ public class LoginServlet extends HttpServlet
         {
             HttpSession session = request.getSession(); //Creating a session
             session.setAttribute("type", type); //setting session attribute
+            session.setAttribute("username", username); //setting session attribute
+
             response.sendRedirect(request.getContextPath() + "/" + type + "Servlet");
         }
 
@@ -86,7 +88,7 @@ public class LoginServlet extends HttpServlet
         {
 
             System.out.println("Correct credentials");
-            System.out.println("logged in with username : "+username);
+            System.out.println("logged in with username : " + username);
 
             return userType;
         }
