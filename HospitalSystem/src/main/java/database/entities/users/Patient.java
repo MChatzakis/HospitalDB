@@ -16,7 +16,7 @@ public class Patient {
         DBConnection conn = new DBConnection();
         User user = new User();
 
-        user.addUser(username, password, "patient");
+        user.addUser(username, password, "Patient");
 
         String insert = "INSERT INTO patients  VALUES( "
                 + (User.id_num - 1) + "," + "\'" + name + "\'" + "," + "\'" + surname + "\'" + ", " + "\'" + address + "\'" + "," + "\'" + email + "\'" + "," + "\'" + phone + "\'" + "," + "\'" + birth_date + "\'" + "," + "\'" + amka + "\'" +  "," + "\'" + at + "\'" + "," + "\'" + insurance + "\'" + ");";

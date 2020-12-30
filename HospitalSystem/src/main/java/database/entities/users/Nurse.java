@@ -22,7 +22,7 @@ public class Nurse {
         DBConnection conn = new DBConnection();
         User user = new User();
 
-        user.addUser(username, password, "nurse");
+        user.addUser(username, password, "Nurse");
 
         String insert = "INSERT INTO nurses VALUES( "
                 + (User.id_num - 1) + "," + "\'" + name + "\'" + "," + "\'" + surname + "\'" + ", " + "\'" + address + "\'" + "," + "\'" + email + "\'" + "," + "\'" + phone + "\'" + "," + "\'" + at + "\'" +");";
