@@ -10,8 +10,9 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Patient Page </title>
-         <% //In case, if Admin session is not set, redirect to Login page
-            if ((request.getSession(false).getAttribute("Patient") == null))
+        <% //In case, if Admin session is not set, redirect to Login page
+            if (((String) request.getSession(false).getAttribute("type") == "patient"))
+
             {
         %>
         <jsp:forward page="/PatientSite.jsp"></jsp:forward>

@@ -53,7 +53,7 @@ public class LoginServlet extends HttpServlet
         else
         {
             HttpSession session = request.getSession(); //Creating a session
-            session.setAttribute(type, username); //setting session attribute
+            session.setAttribute("type", type); //setting session attribute
             response.sendRedirect(request.getContextPath() + "/" + type + "Servlet");
         }
 

@@ -15,7 +15,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Doctor Page</title>
              <% //In case, if Admin session is not set, redirect to Login page
-            if ((request.getSession(false).getAttribute("Doctor") == null))
+            if (((String) request.getSession(false).getAttribute("type") == "Doctor"))
             {
         %>
         <jsp:forward page="/DoctorSite.jsp"></jsp:forward>

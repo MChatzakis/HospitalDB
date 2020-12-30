@@ -11,7 +11,8 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Worker Page</title>
         <% //In case, if Admin session is not set, redirect to Login page
-            if ((request.getSession(false).getAttribute("Worker") == null))
+            if (((String) request.getSession(false).getAttribute("type") == "Worker"))
+
             {
         %>
         <jsp:forward page="/WorkerSite.jsp"></jsp:forward>
