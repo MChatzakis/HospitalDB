@@ -2,18 +2,24 @@ package database;
 
 import database.entities.users.Coordinator;
 import database.entities.users.Doctor;
+
 import database.entities.medics.Drug;
 import database.entities.DutyTime;
 import database.entities.Examination;
 import database.entities.medics.Illness;
 import database.entities.Medical;
 import database.entities.Visit;
+
 import database.entities.users.Nurse;
 import database.entities.users.Patient;
+import database.relations.OnDutyDoctors;
+import database.relations.OnDutyNurses;
+import database.relations.OnDutyWorkers;
+
 import java.sql.SQLException;
 
 /**
- *
+ * 
  * @author Manos Chatzakis (chatzakis@ics.forth.gr)
  * @author George Kokolakis (gkokol@ics.forth.gr)
  */
@@ -31,7 +37,6 @@ public class DBDataGenerator {
         insertInitExams();
         insertMedicals();
         insertReExams();
-
     }
 
     public void insertDoctors() throws SQLException {
@@ -70,7 +75,20 @@ public class DBDataGenerator {
 
     public void insertDuties() throws SQLException {
         DutyTime duty = new DutyTime();
+        OnDutyDoctors duty_doc = new OnDutyDoctors();
+        OnDutyNurses duty_nur = new OnDutyNurses();
+        OnDutyWorkers duty_wor = new OnDutyWorkers();
+        
         duty.addDutyTime("17/12/2020", "7");
+        duty_doc.addDoctorDutyTime("1", "1");
+        duty_doc.addDoctorDutyTime("2", "1");
+        duty_doc.addDoctorDutyTime("3", "1");
+        duty_doc.addDoctorDutyTime("4", "1");
+        
+        duty_nur.addNurseDutyTime("6", "1");
+        
+        duty_wor.addWorkerDutyTime("7","1");
+        
     }
 
     public void insertCardiologists() throws SQLException {

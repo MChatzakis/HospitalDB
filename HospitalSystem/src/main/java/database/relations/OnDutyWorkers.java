@@ -12,35 +12,31 @@ import java.sql.SQLException;
  *
  * @author manos
  */
-public class OnDutyWorkers
-{
+public class OnDutyWorkers {
 
-    public void addWorkerDutyTime(String dutytime_id, String coordinator_id) throws SQLException
-    {
+    public void addWorkerDutyTime(String coordinator_id, String dutytime_id) throws SQLException {
         DBConnection conn = new DBConnection();
-        String insert = "INSERT INTO coodinator_duties( "
-                + dutytime_id + "," + "\'" + coordinator_id + "\'" + " );";
+        String insert = "INSERT INTO coordinator_duties VALUES( "
+                + dutytime_id + "," + coordinator_id + " );";
         conn.updateQuery(insert);
         conn.closeDBConnection();
     }
 
-    public void createTable() throws SQLException
-    {
+    public void createTable() throws SQLException {
         DBConnection conn = new DBConnection();
-        String createTable = "CREATE TABLE IF NOT EXISTS coordinator_duties("
+        String createTable = "CREATE TABLE IF NOT EXISTS coordinator_duties ("
                 + " dutytime_id int NOT NULL,"
                 + " coordinator_id int NOT NULL,"
-                + " FOREIGN KEY (dutytime_id) REFERENCES dutytime(dutytime_id),"
-                + " FOREIGN KEY (coordinator_id) REFERENCES coordinators(coordinator_id));";
+                + " FOREIGN KEY (coordinator_id) REFERENCES coordinators(coordinator_id),"
+                + " FOREIGN KEY (dutytime_id) REFERENCES dutytime(dutytime_id));";
 
         conn.updateQuery(createTable);
         conn.closeDBConnection();
     }
 
-    public void dropTable() throws SQLException
-    {
+    public void dropTable() throws SQLException {
         DBConnection conn = new DBConnection();
-        String dropTable = "DROP TABLE IF EXISTS coordinator_duties";
+        String dropTable = "DROP TABLE IF EXISTS coordinator_duties;";
         conn.updateQuery(dropTable);
         conn.closeDBConnection();
     }

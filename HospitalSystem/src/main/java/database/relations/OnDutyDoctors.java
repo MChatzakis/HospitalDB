@@ -30,7 +30,7 @@ public class OnDutyDoctors {
 
     public void dropTable() throws SQLException {
         DBConnection conn = new DBConnection();
-        String dropTable = "DROP TABLE IF EXISTS doctor_duties";
+        String dropTable = "DROP TABLE IF EXISTS doctor_duties;";
         conn.updateQuery(dropTable);
         conn.closeDBConnection();
     }

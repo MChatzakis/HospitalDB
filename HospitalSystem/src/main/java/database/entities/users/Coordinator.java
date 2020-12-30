@@ -22,7 +22,7 @@ public class Coordinator {
         DBConnection conn = new DBConnection();
         User user = new User();
 
-        user.addUser(username, password, "coordinator");
+        user.addUser(username, password, "Worker");
 
         String insert = "INSERT INTO coordinators VALUES( "
                 + (User.id_num - 1) + "," + "\'" + name + "\'" + "," + "\'" + surname + "\'" + ", " + "\'" + address + "\'" + "," + "\'" + email + "\'" + "," + "\'" + phone + "\'" + "," + "\'" + at + "\'" + ");";
