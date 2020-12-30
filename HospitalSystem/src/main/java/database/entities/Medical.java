@@ -16,7 +16,7 @@ public class Medical {
 
     public static int id_num = 1;
 
-    public void addMedical(String type, String exam_id,String patient_id, String doctor_id, String nurse_id, String date) throws SQLException {
+    public void addMedical(String type, String exam_id,String patient_id, String doctor_id, String nurse_id, String date) throws SQLException, ClassNotFoundException {
         DBConnection conn = new DBConnection();
         String insert = "INSERT INTO medicals VALUES( "
                 + (id_num++) + "," +  exam_id + "," +  patient_id + ", " +  doctor_id  + "," +  nurse_id  + "," + "\'" + date + "\'"+  ",\'" + type + "\'" + ");";
@@ -25,7 +25,7 @@ public class Medical {
         conn.closeDBConnection();
     }
 
-    public void createTable() throws SQLException {
+    public void createTable() throws SQLException , ClassNotFoundException{
         DBConnection conn = new DBConnection();
         String createTable = "CREATE TABLE IF NOT EXISTS medicals("
                 + " medical_id int NOT NULL,"
@@ -45,7 +45,7 @@ public class Medical {
         conn.closeDBConnection();
     }
 
-    public void dropTable(String type) throws SQLException {
+    public void dropTable(String type) throws SQLException , ClassNotFoundException{
         DBConnection conn = new DBConnection();
         String dropTable = "DROP TABLE IF EXISTS medicals;";
         conn.updateQuery(dropTable);

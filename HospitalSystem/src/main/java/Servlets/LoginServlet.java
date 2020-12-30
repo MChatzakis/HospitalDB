@@ -36,41 +36,7 @@ public class LoginServlet extends HttpServlet
         String password = request.getParameter("password");
         try
         {
-            // type = Validate(username, password);
-            String query;
-            String userPassword = null, userId = null, userType = null;
-            ResultSet res = null;
-
-            query = "SELECT password , user_id ,user_type FROM users WHERE username=" + "\'" + username + "\'";
-            DBConnection conn = new DBConnection();
-            res = conn.executeQuery(query);
-            if (res == null)
-            {
-                System.err.println("wrong query idiot");
-                //return null;
-            }
-
-            while (res != null && res.next())
-            {
-                userPassword = res.getString("password");
-                userId = res.getString("user_id");
-                userType = res.getString("user_type");
-
-            }
-            if (password.equals(userPassword))
-            {
-
-                System.out.println("Correct credentials");
-                // return userType;
-                type=userType;
-            }
-            else
-            {
-
-                System.err.println("idiot wrong credentials");
-            }
-            conn.closeDBConnection();
-            // return null;
+            type = Validate(username, password);
 
         }
         catch (Exception e)
@@ -78,11 +44,7 @@ public class LoginServlet extends HttpServlet
             e.printStackTrace();
         }
 
-        System.out.println(
-                "im in");
-
-        if (type
-                == null)
+        if (type == null)
         {
             System.out.println("wrong credentials");
             response.sendRedirect("http://localhost:8080/HospitalSystem/");
@@ -92,13 +54,48 @@ public class LoginServlet extends HttpServlet
         {
             HttpSession session = request.getSession(); //Creating a session
             session.setAttribute(type, username); //setting session attribute
-            response.sendRedirect(request.getContextPath() + "/" + type + "servlet");
+            response.sendRedirect(request.getContextPath() + "/" + type + "Servlet");
         }
-        // Set response content type
+
     }
 
-    String Validate(String username, String password) throws SQLException
+    String Validate(String username, String password) throws SQLException, ClassNotFoundException
     {
+        String query;
+        String userPassword = null, userType = null;
+        int userId;
+        ResultSet res = null;
+
+        query = "SELECT password , user_id ,user_type FROM users WHERE username=" + "\'" + username + "\'";
+        DBConnection conn = new DBConnection();
+        res = conn.executeQuery(query);
+        if (res == null)
+        {
+            System.err.println("wrong query idiot");
+            return null;
+        }
+
+        while (res != null && res.next())
+        {
+            userPassword = res.getString("password");
+            userId = res.getInt("user_id");
+            userType = res.getString("user_type");
+
+        }
+        if (password.equals(userPassword))
+        {
+
+            System.out.println("Correct credentials");
+            System.out.println("logged in with username : "+username);
+
+            return userType;
+        }
+        else
+        {
+
+            System.err.println("idiot wrong credentials");
+        }
+        conn.closeDBConnection();
         return null;
     }
 }

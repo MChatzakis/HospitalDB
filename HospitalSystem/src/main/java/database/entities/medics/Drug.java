@@ -18,7 +18,7 @@ public class Drug {
 
     public static int id_num = 1;
 
-    public void addDrug(String name, String type, String dosage, String illness_id) throws SQLException {
+    public void addDrug(String name, String type, String dosage, String illness_id) throws SQLException, ClassNotFoundException {
         DBConnection conn = new DBConnection();
         String insert = "INSERT INTO drugs VALUES( "
                 + (id_num++) + "," + "\'" + name + "\'" + "," + "\'" + type + "\'" + ", " + "\'" + dosage + "\'" + "," + illness_id + ");";
@@ -26,7 +26,7 @@ public class Drug {
         conn.closeDBConnection();
     }
 
-    public void createTable() throws SQLException {
+    public void createTable() throws SQLException, ClassNotFoundException {
         DBConnection conn = new DBConnection();
         String createTable = "CREATE TABLE IF NOT EXISTS drugs("
                 + " drug_id int NOT NULL,"
@@ -40,7 +40,7 @@ public class Drug {
         conn.closeDBConnection();
     }
 
-    public void dropTable() throws SQLException {
+    public void dropTable() throws SQLException, ClassNotFoundException {
         DBConnection conn = new DBConnection();
         String dropTable = "DROP TABLE IF EXISTS drugs";
         conn.updateQuery(dropTable);

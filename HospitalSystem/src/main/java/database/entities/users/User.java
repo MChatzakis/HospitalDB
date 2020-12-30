@@ -17,7 +17,7 @@ public class User {
     public static int id_num = 1;
     private String table_name = "users";
 
-    public void addUser(String username, String password, String user_type) throws SQLException {
+    public void addUser(String username, String password, String user_type) throws SQLException, ClassNotFoundException {
         DBConnection conn = new DBConnection();
         String insert = "INSERT INTO " + table_name + " VALUES( "
                 + (id_num++) + "," + "\'" + username + "\'" + "," + "\'" + password + "\'" + ", " + "\'" + user_type + "\'" + ");";
@@ -25,7 +25,7 @@ public class User {
         conn.closeDBConnection();
     }
 
-    public void createTable() throws SQLException {
+    public void createTable() throws SQLException, ClassNotFoundException {
         DBConnection conn = new DBConnection();
         String createTable = "CREATE TABLE IF NOT EXISTS " + table_name + "("
                 + " user_id int NOT NULL,"
@@ -39,7 +39,7 @@ public class User {
         conn.closeDBConnection();
     }
 
-    public void dropTable() throws SQLException {
+    public void dropTable() throws SQLException , ClassNotFoundException{
         DBConnection conn = new DBConnection();
         String dropTable = "DROP TABLE IF EXISTS " + table_name + ";";
         conn.updateQuery(dropTable);

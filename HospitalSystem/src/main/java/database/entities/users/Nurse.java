@@ -18,7 +18,7 @@ public class Nurse {
 
     private String table_name;
 
-    public void addNurse(String username, String password, String name, String surname, String address, String email, String phone, String at) throws SQLException {
+    public void addNurse(String username, String password, String name, String surname, String address, String email, String phone, String at) throws SQLException , ClassNotFoundException{
         DBConnection conn = new DBConnection();
         User user = new User();
 
@@ -31,7 +31,7 @@ public class Nurse {
         conn.closeDBConnection();
     }
 
-    public void createTable() throws SQLException {
+    public void createTable() throws SQLException , ClassNotFoundException{
         DBConnection conn = new DBConnection();
         String createTable = "CREATE TABLE IF NOT EXISTS nurses("
                 + " nurse_id int NOT NULL,"
@@ -47,7 +47,7 @@ public class Nurse {
         conn.closeDBConnection();
     }
 
-    public void dropTable() throws SQLException {
+    public void dropTable() throws SQLException, ClassNotFoundException {
         DBConnection conn = new DBConnection();
         String dropTable = "DROP TABLE IF EXISTS nurses";
         conn.updateQuery(dropTable);

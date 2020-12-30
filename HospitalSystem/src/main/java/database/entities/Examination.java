@@ -16,7 +16,7 @@ public class Examination {
 
     public static int id_num = 1;
 
-    public void addInitialExam(String patient_id, String doctor_id, String drug_id, String illness_id, String visit_id, String date) throws SQLException {
+    public void addInitialExam(String patient_id, String doctor_id, String drug_id, String illness_id, String visit_id, String date) throws SQLException , ClassNotFoundException{
         DBConnection conn = new DBConnection();
         addExamination(patient_id, doctor_id, drug_id, illness_id, visit_id, date);
         String insert = "INSERT INTO examinations_initial VALUES( " + (id_num - 1) + ");";
@@ -24,7 +24,7 @@ public class Examination {
         conn.closeDBConnection();
     }
 
-    public void addReExam(String patient_id, String doctor_id, String drug_id, String illness_id, String visit_id, String date, String medical_id, boolean hospi) throws SQLException {
+    public void addReExam(String patient_id, String doctor_id, String drug_id, String illness_id, String visit_id, String date, String medical_id, boolean hospi) throws SQLException, ClassNotFoundException {
         DBConnection conn = new DBConnection();
         String hosp = "false";
         if (hospi) {
@@ -36,7 +36,7 @@ public class Examination {
         conn.closeDBConnection();
     }
 
-    public void addExamination(String patient_id, String doctor_id, String drug_id, String illness_id, String visit_id, String date) throws SQLException {
+    public void addExamination(String patient_id, String doctor_id, String drug_id, String illness_id, String visit_id, String date) throws SQLException , ClassNotFoundException{
         DBConnection conn = new DBConnection();
         String insert = "INSERT INTO examinations VALUES( "
                 + (id_num++) + "," + patient_id + "," + doctor_id + ", " + drug_id + "," + illness_id + "," + visit_id + "," + "\'" + date + "\'" + ");";
@@ -44,13 +44,13 @@ public class Examination {
         conn.closeDBConnection();
     }
 
-    public void createTables() throws SQLException {
+    public void createTables() throws SQLException , ClassNotFoundException{
         createTable();
         createInitExamTable();
         createReExamTable();
     }
 
-    public void createTable() throws SQLException {
+    public void createTable() throws SQLException, ClassNotFoundException {
         DBConnection conn = new DBConnection();
         String createTable = "CREATE TABLE IF NOT EXISTS examinations("
                 + " exam_id int NOT NULL,"
@@ -70,7 +70,7 @@ public class Examination {
         conn.closeDBConnection();
     }
 
-    public void createInitExamTable() throws SQLException {
+    public void createInitExamTable() throws SQLException, ClassNotFoundException {
         DBConnection conn = new DBConnection();
         String createTable = "CREATE TABLE IF NOT EXISTS examinations_initial("
                 + " init_exam_id int NOT NULL,"
@@ -80,7 +80,7 @@ public class Examination {
         conn.closeDBConnection();
     }
 
-    public void createReExamTable() throws SQLException {
+    public void createReExamTable() throws SQLException, ClassNotFoundException {
         DBConnection conn = new DBConnection();
         String createTable = "CREATE TABLE IF NOT EXISTS examinations_retaken("
                 + " re_exam_id int NOT NULL,"
@@ -92,7 +92,7 @@ public class Examination {
         conn.closeDBConnection();
     }
 
-    public void alterTableToAddMedical() throws SQLException {
+    public void alterTableToAddMedical() throws SQLException, ClassNotFoundException {
         DBConnection conn = new DBConnection();
         String str = "ALTER TABLE examinations_retaken "
                 + "ADD FOREIGN KEY (medical_id) REFERENCES medicals(medical_id);";
@@ -100,7 +100,7 @@ public class Examination {
         conn.closeDBConnection();
     }
 
-    public void dropTable() throws SQLException {
+    public void dropTable() throws SQLException , ClassNotFoundException{
         DBConnection conn = new DBConnection();
         String dropTable = "DROP TABLE IF EXISTS examinations;";
         conn.updateQuery(dropTable);

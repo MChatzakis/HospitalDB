@@ -17,7 +17,7 @@ import lombok.Data;
 @Data
 public class Coordinator {
 
-    public void addCoordinator(String username, String password, String name, String surname, String address, String email, String phone, String at) throws SQLException {
+    public void addCoordinator(String username, String password, String name, String surname, String address, String email, String phone, String at) throws SQLException, ClassNotFoundException {
         
         DBConnection conn = new DBConnection();
         User user = new User();
@@ -30,7 +30,7 @@ public class Coordinator {
         conn.closeDBConnection();
     }
 
-    public void createTable() throws SQLException {
+    public void createTable() throws SQLException, ClassNotFoundException {
         DBConnection conn = new DBConnection();
         String createTable = "CREATE TABLE IF NOT EXISTS coordinators("
                 + " coordinator_id int NOT NULL,"
@@ -46,7 +46,7 @@ public class Coordinator {
         conn.closeDBConnection();
     }
 
-    public void dropTable() throws SQLException {
+    public void dropTable() throws SQLException , ClassNotFoundException{
         DBConnection conn = new DBConnection();
         String dropTable = "DROP TABLE IF EXISTS coordinators";
         conn.updateQuery(dropTable);

@@ -16,7 +16,8 @@ import lombok.Data;
  * @author George Kokolakis (gkokol@ics.forth.gr)
  */
 @Data
-public class DBConnection {
+public class DBConnection
+{
 
     private Connection conn;
 
@@ -24,36 +25,48 @@ public class DBConnection {
     private String dbConnectionUsername = "root";
     private String dbConnectionPassword = ""; //I dont know why this does work
 
-    public DBConnection() throws SQLException {
+    public DBConnection() throws SQLException, ClassNotFoundException
+    {
+       
+            Class.forName("com.mysql.jdbc.Driver");
+
+       
         conn = DriverManager.getConnection(dbConnectionURL, dbConnectionUsername, dbConnectionPassword);
     }
 
-    public DBConnection(String URL, String user, String pass) throws SQLException {
+    public DBConnection(String URL, String user, String pass) throws SQLException
+    {
         dbConnectionURL = URL;
         dbConnectionUsername = user;
         dbConnectionPassword = pass;
         conn = DriverManager.getConnection(URL, user, pass);
     }
 
-    public void setDefaultDBConnection() throws SQLException {
+    public void setDefaultDBConnection() throws SQLException
+    {
         setDBConnection(dbConnectionURL, dbConnectionUsername, dbConnectionPassword);
     }
 
-    public void closeDBConnection() throws SQLException {
+    public void closeDBConnection() throws SQLException
+    {
         conn.close();
     }
 
-    public void setDBConnection(String dbConnectionURL, String dbConnectionUsername, String dbConnectionPassword) throws SQLException {
+    public void setDBConnection(String dbConnectionURL, String dbConnectionUsername, String dbConnectionPassword) throws SQLException
+    {
         conn = DriverManager.getConnection(dbConnectionURL, dbConnectionUsername, dbConnectionPassword);
     }
 
-    public ResultSet executeQuery(String query) {
+    public ResultSet executeQuery(String query)
+    {
         PreparedStatement prepStm = null;
         ResultSet resultSet = null;
         Statement stm = null;
 
-        try {
-            if (conn == null) {
+        try
+        {
+            if (conn == null)
+            {
                 setDefaultDBConnection();
             }
 
@@ -65,7 +78,9 @@ public class DBConnection {
             stm.close();
             System.out.println(query);
             //closeDBConnection();
-        } catch (SQLException ex) {
+        }
+        catch (SQLException ex)
+        {
             System.out.println("Attempt to run query: " + query + "failed.");
             ex.printStackTrace();
         }
@@ -73,15 +88,18 @@ public class DBConnection {
         return resultSet;
     }
 
-    public int updateQuery(String query) {
+    public int updateQuery(String query)
+    {
 
         PreparedStatement prepStm = null;
         ResultSet resultSet = null;
         Statement stm = null;
         int ret;
 
-        try {
-            if (conn == null) {
+        try
+        {
+            if (conn == null)
+            {
                 setDefaultDBConnection();
             }
 
@@ -93,7 +111,9 @@ public class DBConnection {
             stm.close();
             System.out.println(query);
             //closeDBConnection();
-        } catch (SQLException ex) {
+        }
+        catch (SQLException ex)
+        {
             System.out.println("Attempt to run query: " + query + "failed.");
             ex.printStackTrace();
             ret = -1;

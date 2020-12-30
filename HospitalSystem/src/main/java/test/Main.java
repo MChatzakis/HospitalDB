@@ -18,7 +18,7 @@ import java.util.logging.Logger;
 public class Main
 {
 
-    public static void main(String[] args) throws SQLException
+    public static void main(String[] args) throws SQLException, ClassNotFoundException
     {
         try
         {
@@ -41,7 +41,7 @@ public class Main
 
     
 
-    public void old() throws SQLException
+    public void old() throws SQLException, ClassNotFoundException
     {
         String query = "SELECT * FROM people;";
         String ins_query = "INSERT INTO people VALUES (3, \"Nikos\"  ,21);";

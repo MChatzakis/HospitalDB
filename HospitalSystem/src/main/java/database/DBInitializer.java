@@ -32,7 +32,7 @@ public class DBInitializer {
         conn = new DBConnection("jdbc:mysql://localhost/", "root", "");
     }
 
-    public void buildDB() throws SQLException {
+    public void buildDB() throws SQLException, ClassNotFoundException {
         createDB();
         createLogin();
         createDoctors();
@@ -51,25 +51,25 @@ public class DBInitializer {
         conn.updateQuery(create);
     }
 
-    public void createLogin() throws SQLException {
+    public void createLogin() throws SQLException, ClassNotFoundException {
         User login = new User();
         login.createTable();
     }
 
-    public void createDutyTime() throws SQLException {
+    public void createDutyTime() throws SQLException, ClassNotFoundException {
         new DutyTime().createTable();
         new OnDutyNurses().createTable();
         new OnDutyDoctors().createTable();
         new OnDutyWorkers().createTable();
     }
 
-    public void createPatients() throws SQLException {
+    public void createPatients() throws SQLException, ClassNotFoundException {
         Patient pat = new Patient();
         pat.createTable();
         pat.createTableChronicDiseases();
     }
 
-    public void createExaminations() throws SQLException {
+    public void createExaminations() throws SQLException, ClassNotFoundException {
         Medical med = new Medical();
         Examination exam = new Examination();
         exam.createTables();
@@ -80,7 +80,7 @@ public class DBInitializer {
         exam.alterTableToAddMedical();
     }
 
-    public void createDoctors() throws SQLException {
+    public void createDoctors() throws SQLException, ClassNotFoundException {
         Doctor doctor = new Doctor();
         doctor.createTable();
         /*doctor.createTable("doctors_endocrinologists");
@@ -90,30 +90,31 @@ public class DBInitializer {
         doctor.createTable("doctors_cardiologists");*/
     }
 
-    public void createMedicStaff() throws SQLException {
+    public void createMedicStaff() throws SQLException, ClassNotFoundException {
         new Illness().createTable();
         new Drug().createTable();
     }
 
-    public void createWorkers() throws SQLException {
+    public void createWorkers() throws SQLException, ClassNotFoundException {
         new Nurse().createTable();
         new Coordinator().createTable();
     }
 
-    public void dropDB() throws SQLException {
+    public void dropDB() throws SQLException, ClassNotFoundException {
         String drop = "DROP DATABASE IF EXISTS hospital;";
         conn = new DBConnection();
+        
         conn.updateQuery(drop);
         conn.closeDBConnection();
     }
 
-    public void createVisits() throws SQLException {
+    public void createVisits() throws SQLException, ClassNotFoundException {
         Visit vis = new Visit();
         vis.createTable();
         vis.createTableSymptoms();
     }
 
-    public void dropTable(String table) throws SQLException {
+    public void dropTable(String table) throws SQLException, ClassNotFoundException {
         conn = new DBConnection();
         String dropTable = "DROP TABLE IF EXISTS " + table + ";";
         conn.updateQuery(dropTable);

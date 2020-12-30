@@ -13,7 +13,7 @@ public class DutyTime {
 
     public static int id_num = 1;
 
-    public void addDutyTime(String date, String coordinator_id) throws SQLException {
+    public void addDutyTime(String date, String coordinator_id) throws SQLException, ClassNotFoundException {
         DBConnection conn = new DBConnection();
         String insert = "INSERT INTO dutytime VALUES( "
                 + (id_num++) + "," + "\'" + date + "\'" + "," + coordinator_id + ");";
@@ -21,7 +21,7 @@ public class DutyTime {
         conn.closeDBConnection();
     }
 
-    public void createTable() throws SQLException {
+    public void createTable() throws SQLException, ClassNotFoundException {
         DBConnection conn = new DBConnection();
         String createTable = "CREATE TABLE IF NOT EXISTS dutytime("
                 + " dutytime_id int NOT NULL,"
@@ -34,7 +34,7 @@ public class DutyTime {
         conn.closeDBConnection();
     }
 
-    public void dropTable() throws SQLException {
+    public void dropTable() throws SQLException , ClassNotFoundException{
         DBConnection conn = new DBConnection();
         String dropTable = "DROP TABLE IF EXISTS dutytime;";
         conn.updateQuery(dropTable);

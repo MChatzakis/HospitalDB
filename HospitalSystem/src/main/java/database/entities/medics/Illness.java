@@ -18,7 +18,7 @@ public class Illness {
 
     public static int id_num = 1;
 
-    public void addIllness(String name) throws SQLException {
+    public void addIllness(String name) throws SQLException , ClassNotFoundException{
         DBConnection conn = new DBConnection();
         String insert = "INSERT INTO illnesses VALUES( "
                 + (id_num++) + "," + "\'" + name + "\'" + ");";
@@ -26,7 +26,7 @@ public class Illness {
         conn.closeDBConnection();
     }
 
-    public void createTable() throws SQLException {
+    public void createTable() throws SQLException, ClassNotFoundException {
         DBConnection conn = new DBConnection();
         String createTable = "CREATE TABLE IF NOT EXISTS illnesses("
                 + " illness_id int NOT NULL,"
@@ -36,7 +36,7 @@ public class Illness {
         conn.closeDBConnection();
     }
 
-    public void dropTable() throws SQLException {
+    public void dropTable() throws SQLException , ClassNotFoundException{
         DBConnection conn = new DBConnection();
         String dropTable = "DROP TABLE IF EXISTS illnesses";
         conn.updateQuery(dropTable);
