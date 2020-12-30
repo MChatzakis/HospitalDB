@@ -3,6 +3,7 @@
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
         <servlet-class>Servlets.LoginServlet</servlet-class>
+        <url-pattern>/Search_proteins</url-pattern>
     </servlet>
     <servlet>
         <servlet-name>DoctorServlet</servlet-name>
@@ -19,6 +20,10 @@
     <servlet>
         <servlet-name>WorkerServlet</servlet-name>
         <servlet-class>Servlets.WorkerServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LogoutServlet</servlet-name>
+        <servlet-class>Servlets.LogoutServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
@@ -39,6 +44,10 @@
     <servlet-mapping>
         <servlet-name>WorkerServlet</servlet-name>
         <url-pattern>/WorkerServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LogoutServlet</servlet-name>
+        <url-pattern>/LogoutServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

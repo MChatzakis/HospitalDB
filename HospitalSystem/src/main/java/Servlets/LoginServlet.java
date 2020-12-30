@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpSession;
 
@@ -23,52 +24,51 @@ import javax.servlet.http.HttpSession;
 public class LoginServlet extends HttpServlet
 {
 
-    public void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+
     {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
-        /*response.setContentType("text/html");
-        PrintWriter printWriter = response.getWriter();
-        printWriter.print("<html>");
-        printWriter.print("<body>");
-        printWriter.print("<p> username :: " + username + "</p>");
-        printWriter.print("<p> password :: " + password + "<    /p>");
-        printWriter.print("</body>");
-        printWriter.print("</html>");
-        printWriter.close();*/
-        //authenticate 
-        //  request.getRequestDispatcher("/doctor.jsp").forward(request, response);
-        /*
-         RequestDispatcher dispatcher = getServletContext()
-      .getRequestDispatcher("/DoctorServlet");
-    dispatcher.forward(request, response);*/
-        
-        String Type = Validate(username, password);
-        
- /*
-        RequestDispatcher rd = request.getRequestDispatcher("doctor.jsp"); 
-        rd.forward(request, response);*/
+        String type = Validate(username, password);
+/*
         if (username.equals("giorgos"))
         {
             HttpSession session = request.getSession(); //Creating a session
             session.setAttribute("Doctor", username); //setting session attribute
             response.sendRedirect(request.getContextPath() + "/DoctorServlet");
-
         }
-        else  if (username.equals("omorfos") )
+        else if (username.equals("omorfos"))
         {
             HttpSession session = request.getSession(); //Creating a session
             session.setAttribute("Patient", username); //setting session attribute
             response.sendRedirect(request.getContextPath() + "/PatientServlet");
         }
+        else
+        {
+            HttpSession session = request.getSession(); //Creating a session
+            session.setAttribute("Nurse", username); //setting session attribute
+            response.sendRedirect(request.getContextPath() + "/NurseServlet");
 
+        }*/
+        if (type == null)
+        {
+            response.sendRedirect("http://localhost:8080/HospitalSystem/");
+        }
+        else
+        {
+            HttpSession session = request.getSession(); //Creating a session
+            session.setAttribute(type, username); //setting session attribute
+            response.sendRedirect(request.getContextPath() + "/"+ type +"servlet");
+        }
         // Set response content type
     }
-    
-    String Validate(String username , String password)
+
+    String Validate(String username, String password)
     {
+        
         return null;
     }
+    
 }

@@ -7,18 +7,18 @@ package Servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.MultipartConfig;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author George
  */
-public class NurseServlet extends HttpServlet
+public class LogoutServlet extends HttpServlet
 {
 
     /**
@@ -30,19 +30,19 @@ public class NurseServlet extends HttpServlet
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        request.getRequestDispatcher("NurseSite.jsp").forward(request, response);
+        HttpSession session = request.getSession(false); //Fetch session object
 
-    }
+        if (session != null) //If session is not null
+        {
+            session.invalidate(); //removes all session attributes bound to the session
 
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+            request.setAttribute("errMessage", "You have logged out successfully");
+            System.out.println("Logged out");
+            response.sendRedirect("http://localhost:8080/HospitalSystem/" );
 
-    {
-        request.getRequestDispatcher("NurseSite.jsp").forward(request, response);
-        
+        }
 
     }
 
