@@ -9,13 +9,37 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <% //In case, if Admin session is not set, redirect to Login page
-            if (((String) request.getSession(false).getAttribute("type") == "Nurse"))
+        <%
+//allow access only if session exists
+            String user = null;
+            if (!(request.getSession(false).getAttribute("type").equals("Nurse")))
 
             {
+                response.sendRedirect("http://localhost:8080/HospitalSystem/");
+
+            }
+            else
+            {
+                user = (String) session.getAttribute("user");
+            }
+            String userName = null;
+            String sessionID = null;
+            Cookie[] cookies = request.getCookies();
+            if (cookies != null)
+            {
+                for (Cookie cookie : cookies)
+                {
+                    if (cookie.getName().equals("user"))
+                    {
+                        userName = cookie.getValue();
+                    }
+                    if (cookie.getName().equals("JSESSIONID"))
+                    {
+                        sessionID = cookie.getValue();
+                    }
+                }
+            }
         %>
-        <jsp:forward page="/NurseSite.jsp"></jsp:forward>
-        <%}%>
     </head>
     <body>
         <h1>Hello World!</h1>
