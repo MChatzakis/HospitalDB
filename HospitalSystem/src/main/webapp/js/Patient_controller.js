@@ -29,11 +29,7 @@ $(document).ready(function () {
 function FillForm() {
  
     formData = "requestID=" + FILL_INFORMATION_ID;
-
-
-
     // HTML file input, chosen by user
-
     var url = "http://localhost:8080/HospitalSystem/PatientServlet"
     
     SendXmlForm(url, formData);
@@ -43,17 +39,21 @@ function FillForm() {
 }
 function CallBackFillForm(data)
 {
-    console.log("data : " + data )
-    $('input[name=fname]').val()
-    $('input[name=surname]').val()
-    $('input[name=username]').val()
-    $('input[name=adress]').val()
-    $('input[name=email]').val()
-    $('input[name=phone]').val()
-    $('input[name=birth_day]').val()
-    $('input[name=amka]').val()
-    $('input[name=at]').val()
-    $('input[name=insurance]').val()
+    //data=JSON.stringify(data);
+   // var data =data.responseText;
+    var data =JSON.parse(data.responseText);
+    //console.log("data : " + Object.values(data))
+    $('input[name=fname]').attr('value',data.name)
+    $('input[name=surname]').attr('value',data.surname)
+    $('input[name=username]').attr('value',data.username)
+    $('input[name=adress]').attr('value',data.address)
+    $('input[name=email]').attr('value',data.email)
+    $('input[name=phone]').attr('value',data.phone)
+    $('input[name=birth_day]').attr('value',data.birth_day)
+    $('input[name=amka]').attr('value',data.amka)
+    $('input[name=at]').attr('value',data.at)
+    $('input[name=insurance]').attr('value',data.insurance)
+    
 }
 
 function SendXmlForm(url, formData) {
@@ -62,8 +62,9 @@ function SendXmlForm(url, formData) {
     request.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             // Typical action to be performed when the document is ready:
-          console.log("lalal : " +request.responseText) ;
-          CallBackFillForm(request.responseText);
+         // console.log("lalal : " +request.responseText) ;
+         //if formdata == FILL_INFORMATION_ID
+          CallBackFillForm(request);
           
         }
     };

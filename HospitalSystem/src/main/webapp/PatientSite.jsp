@@ -18,7 +18,7 @@
 
 
         <title>Patient Page </title>
-        < <%
+        <%
 //allow access only if session exists
             String user = null;
             if (!(request.getSession(false).getAttribute("type").equals("Patient")))
@@ -50,26 +50,29 @@
             }
         %>
 
-    </head>
     <body>
-        <div class="container text-center">
-            <div class="jumbotron col-12">
-                <h1>Hello Patient!</h1>
-                <form method="post" action="http://localhost:8080/HospitalSystem/LogoutServlet">
-                    <input type="submit" class="btn btn-primary btn-md float-right" id="button-login" value="Logout">
-                </form>
+        <div class="container text-center ">
+            <div class="row justify-content-center ">
+
+                <div class="jumbotron col-8 "style="background-color:rgb(20, 75, 165);opacity:0.4;  border-radius: 0px 0px 20px 20px;">
+                    <h1>Hello Patient!</h1>
+                    <form method="post" action="http://localhost:8080/HospitalSystem/LogoutServlet">
+                        <input type="submit" class="btn btn-primary btn-md float-right" style="background-color:#007bff;" id="button-login" value="Logout">
+                    </form>
+                </div>
             </div>
             <div class="row justify-content-between">
 
-                <button type="button" id="doctor_button" class="btn btn-primary"
+                <button type="button" id="information-but" class="btn btn-primary btn-md"
                         onclick="ShowInformation();">Information</button>
-                <button type="button" id="doctor_button" class="btn btn-primary" onclick="ShowMedical();">Medical</button>
-                <button type="button" id="doctor_button" class="btn btn-primary" onclick="ShowClinical();">Clinical
+                <button type="button" id="medical-but" class="btn btn-primary btn-md"
+                        onclick="ShowMedical();">Medical</button>
+                <button type="button" id="clinical-but" class="btn btn-primary" onclick="ShowClinical();">Clinical
                     Medical</button>
-                <button type="button" id="doctor_button" class="btn btn-primary" onclick="ShowVisits();">Visits</button>
+                <button type="button" id="visit-but" class="btn btn-primary btn-md" onclick="ShowVisits();">Visits</button>
             </div>
             <div class=" position-relative">
-                <table class="table-sm  table-dark d-none position-absolute mt-2" style="left:55%" id="clinical">
+                <table class="table-sm  table-dark table-bordered d-none position-absolute mt-2 btn-md" style="left:55% " id="clinical">
                     <tr>
                         <th>Drug</th>
                         <th>Date</th>
@@ -97,7 +100,7 @@
                     </tbody>
                 </table>
 
-                <table class="table-sm  table-dark d-none position-absolute mt-2" style="left:23%" id="medical">
+                <table class="table-sm  table-dark d-none table-bordered position-absolute mt-2" style="left:23%" id="medical">
 
                     <tr>
                         <th>Type</th>
@@ -124,7 +127,7 @@
                     </tbody>
                 </table>
 
-                <table class="table-sm  table-dark d-none position-absolute mt-2" style="left:95%" id="visit">
+                <table class="table-sm  table-dark d-none  table-bordered position-absolute mt-2" style="left:95%" id="visit">
                     <tr>
                         <th>Date</th>
                     </tr>
@@ -143,15 +146,15 @@
 
 
                 <form id="form-id">
-                    <div class="Form-container col-4 d-none justify-content-center" id="form" style="right:13%">
+                    <div class="Form-container col-4 d-none justify-content-center mt-3 table-dark" id="form" style="right:13%">
                         <div class="row">
                             <div class="form-group col ">
                                 <label for="fname">Name</label>
-                                <input type="text" name="fname" class="form-control" id="fname" placeholder="Manos">
+                                <input type="text" name="fname" value="" class="form-control" id="fname" placeholder="">
                             </div>
                             <div class="form-group col">
                                 <label for="surname">Surname</label>
-                                <input type="text" class="form-control" name="surname" placeholder="Chatzakes">
+                                <input type="text" class="form-control" name="surname" placeholder="">
                             </div>
                         </div>
 
@@ -159,49 +162,49 @@
 
                             <div class="form-group col">
                                 <label for="username">Username</label>
-                                <input type="text" class="form-control" name="username" placeholder="Chatzakes">
+                                <input type="text" class="form-control" name="username" placeholder="">
                             </div>
                             <div class="form-group col ">
                                 <label for="address">Address</label>
-                                <input type="text" class="form-control" name="adress" placeholder="Chatzakes">
+                                <input type="text" class="form-control" name="adress" placeholder="">
                             </div>
                         </div>
                         <div class="row">
 
                             <div class="form-group col ">
                                 <label for="email">Email</label>
-                                <input type="text" class="form-control" name="email" placeholder="Chatzakes">
+                                <input type="text" class="form-control" name="email" placeholder="">
                             </div>
                             <div class="form-group col ">
                                 <label for="phone">Phone</label>
-                                <input type="text" class="form-control" name="phone" placeholder="Chatzakes">
+                                <input type="text" class="form-control" name="phone" placeholder="">
                             </div>
                         </div>
                         <div class="row">
 
                             <div class="form-group col ">
                                 <label for="birth_day">Birth_date</label>
-                                <input type="text" class="form-control" name="birth_day" placeholder="Chatzakes"
-                                       value="laal">
+                                <input type="text" class="form-control" name="birth_day" placeholder="" value="">
                             </div>
                             <div class="form-group col">
                                 <label for="amka">Amka</label>
-                                <input type="text" class="form-control" name="amka" placeholder="Chatzakes">
+                                <input type="text" class="form-control" name="amka" placeholder="">
                             </div>
                         </div>
                         <div class="row">
 
                             <div class="form-group  col">
                                 <label for="at">At</label>
-                                <input type="text" class="form-control" name="at" placeholder="Chatzakes">
+                                <input type="text" class="form-control" name="at" placeholder="">
                             </div>
                             <div class="form-group col ">
                                 <label for="insurance">Insurance</label>
-                                <input type="text" class="form-control" name="insurance" placeholder="Chatzakes">
+                                <input type="text" class="form-control" name="insurance" placeholder="">
                             </div>
                         </div>
                         <div>
-                            <input type="submit" value="Submit" id="submitButton" onClick="SaveForm()">
+                            <input type="submit" value="Submit" class="btn btn-primary" id="submitButton"
+                                   onClick="SaveForm()">
                         </div>
                     </div>
                 </form>

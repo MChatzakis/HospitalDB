@@ -1,8 +1,24 @@
 body {
-    background: url("../img/medical.jpg") no-repeat fixed;
+    background: url("../img/medical2.jpg") no-repeat fixed;
     
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+}
+.Form-container
+{
+    box-sizing: border-box;
+    border-radius: 2%;
+    background-color:rgb(58, 56, 56);
+}
+label
+{
+    font-weight: bold;
+    color:rgb(243, 243, 243);
+}
+
+h1{
+   
+    color:rgb(255, 255, 255);
 }
