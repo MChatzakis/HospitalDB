@@ -26,46 +26,105 @@ $(document).ready(function () {
 });
 
 
+function FillMedical() {
+
+    formData = "requestID=" + MEDICAL_ID;
+    // HTML file input, chosen by user
+    var url = "http://localhost:8080/HospitalSystem/PatientServlet"
+
+    SendXmlForm(url, formData, MEDICAL_ID);
+
+}
+function  FillClinical()
+{
+    formData = "requestID=" + Clinical_ID;
+    // HTML file input, chosen by user
+    var url = "http://localhost:8080/HospitalSystem/PatientServlet"
+
+    SendXmlForm(url, formData, Clinical_ID);
+
+}
+function FillVisits() {
+    formData = "requestID=" + VISIT_ID;
+    // HTML file input, chosen by user
+    var url = "http://localhost:8080/HospitalSystem/PatientServlet"
+
+    SendXmlForm(url, formData, VISIT_ID);
+
+}
+
 function FillForm() {
- 
+
     formData = "requestID=" + FILL_INFORMATION_ID;
     // HTML file input, chosen by user
     var url = "http://localhost:8080/HospitalSystem/PatientServlet"
-    
-    SendXmlForm(url, formData);
-    
 
-    
+    SendXmlForm(url, formData, FILL_INFORMATION_ID);
+
+
+
 }
 function CallBackFillForm(data)
-{
-    //data=JSON.stringify(data);
-   // var data =data.responseText;
-    var data =JSON.parse(data.responseText);
-    //console.log("data : " + Object.values(data))
-    $('input[name=fname]').attr('value',data.name)
-    $('input[name=surname]').attr('value',data.surname)
-    $('input[name=username]').attr('value',data.username)
-    $('input[name=adress]').attr('value',data.address)
-    $('input[name=email]').attr('value',data.email)
-    $('input[name=phone]').attr('value',data.phone)
-    $('input[name=birth_day]').attr('value',data.birth_day)
-    $('input[name=amka]').attr('value',data.amka)
-    $('input[name=at]').attr('value',data.at)
-    $('input[name=insurance]').attr('value',data.insurance)
+{    
+    var data = JSON.parse(data.responseText);
+    $('input[name=fname]').attr('value', data.name)
+    $('input[name=surname]').attr('value', data.surname)
+    $('input[name=username]').attr('value', data.username)
+    $('input[name=adress]').attr('value', data.address)
+    $('input[name=email]').attr('value', data.email)
+    $('input[name=phone]').attr('value', data.phone)
+    $('input[name=birth_day]').attr('value', data.birth_day)
+    $('input[name=amka]').attr('value', data.amka)
+    $('input[name=at]').attr('value', data.at)
+    $('input[name=insurance]').attr('value', data.insurance)
+}
+
+function CallBackFillMedical(data) {
+
+}
+function CallBackFillClinical(data) {
+    
+
+}
+function CallBackFillVisits(data) {
     
 }
 
-function SendXmlForm(url, formData) {
+
+
+
+
+
+
+
+
+
+
+
+function SendXmlForm(url, formData, req_id)
+{
 
     var request = new XMLHttpRequest();
     request.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
+        if (this.readyState == 4 && this.status == 200)
+        {
             // Typical action to be performed when the document is ready:
-         // console.log("lalal : " +request.responseText) ;
-         //if formdata == FILL_INFORMATION_ID
-          CallBackFillForm(request);
-          
+            // console.log("lalal : " +request.responseText) ;
+            //if formdata == FILL_INFORMATION_ID
+            if (req_id === FILL_INFORMATION_ID)
+            {
+                CallBackFillForm(request);
+
+            } else if (req_id === MEDICAL_ID)
+            {
+                CallBackFillMedical(request);
+            } else if (req_id === Clinical_ID) {
+                CallBackFillMedical(request)
+            } else
+            {
+                CallBackFillVisits(request);
+            }
+
         }
     };
     request.open("POST", url);
@@ -130,6 +189,9 @@ function SendForm(url, formData, id) {
     //window.location.reload();
 
 }
+
+
+
 
 
 

@@ -7,6 +7,7 @@
 
 
 function SendData() {
+    
     /*var xhttp = new XMLHttpRequest();
      var id = 10;
      let formData = new FormData(); // creates an object, optionally fill from <form>
