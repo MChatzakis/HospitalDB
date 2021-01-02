@@ -25,34 +25,24 @@ import javax.servlet.http.HttpSession;
  *
  * @author George
  */
-public class LoginServlet extends HttpServlet
-{
+public class LoginServlet extends HttpServlet {
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-
-    {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String type = null;
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        try
-        {
+        try {
             type = Validate(username, password);
 
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
-        if (type == null)
-        {
+        if (type == null) {
             System.out.println("wrong credentials");
             response.sendRedirect("http://localhost:8080/HospitalSystem/");
-        }
-
-        else
-        {
+        } else {
             HttpSession session = request.getSession(); //Creating a session
             session.setAttribute("type", type); //setting session attribute
             session.setAttribute("username", username); //setting session attribute
@@ -62,8 +52,7 @@ public class LoginServlet extends HttpServlet
 
     }
 
-    String Validate(String username, String password) throws SQLException, ClassNotFoundException
-    {
+    String Validate(String username, String password) throws SQLException, ClassNotFoundException {
         String query;
         String userPassword = null, userType = null;
         int userId;
@@ -72,29 +61,24 @@ public class LoginServlet extends HttpServlet
         query = "SELECT password , user_id ,user_type FROM users WHERE username=" + "\'" + username + "\'";
         DBConnection conn = new DBConnection();
         res = conn.executeQuery(query);
-        if (res == null)
-        {
+        if (res == null) {
             System.err.println("wrong query idiot");
             return null;
         }
 
-        while (res != null && res.next())
-        {
+        while (res != null && res.next()) {
             userPassword = res.getString("password");
             userId = res.getInt("user_id");
             userType = res.getString("user_type");
 
         }
-        if (password.equals(userPassword))
-        {
+        if (password.equals(userPassword)) {
 
             System.out.println("Correct credentials");
             System.out.println("logged in with username : " + username);
 
             return userType;
-        }
-        else
-        {
+        } else {
 
             System.err.println("idiot wrong credentials");
         }

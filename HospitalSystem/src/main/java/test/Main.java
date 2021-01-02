@@ -15,13 +15,10 @@ import java.util.logging.Logger;
  *
  * @author Manos Chatzakis
  */
-public class Main
-{
+public class Main {
 
-    public static void main(String[] args) throws SQLException, ClassNotFoundException
-    {
-        try
-        {
+    public static void main(String[] args) throws SQLException, ClassNotFoundException {
+        try {
 
             DBInitializer init = new DBInitializer();
             DBDataGenerator dataGenerator = new DBDataGenerator();
@@ -31,18 +28,13 @@ public class Main
 
             dataGenerator.insertData();
 
-        }
-        catch (SQLException ex)
-        {
+        } catch (SQLException ex) {
             Logger.getLogger(DBInitializer.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
 
-    
-
-    public void old() throws SQLException, ClassNotFoundException
-    {
+    public void old() throws SQLException, ClassNotFoundException {
         String query = "SELECT * FROM people;";
         String ins_query = "INSERT INTO people VALUES (3, \"Nikos\"  ,21);";
         String ins_query2 = "INSERT INTO people VALUES (10, \"Vlakas\"  ,25);";
@@ -53,8 +45,7 @@ public class Main
         conn.updateQuery(ins_query2);
         res = conn.executeQuery(query);
 
-        while (res != null && res.next())
-        {
+        while (res != null && res.next()) {
             System.out.println(res.getString("id") + " " + res.getString("name") + " " + res.getString("age"));
         }
 
