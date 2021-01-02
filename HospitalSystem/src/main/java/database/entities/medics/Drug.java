@@ -20,8 +20,12 @@ public class Drug {
 
     public void addDrug(String name, String type, String dosage, String illness_id) throws SQLException, ClassNotFoundException {
         DBConnection conn = new DBConnection();
+        if (!dosage.equals("NULL")) {
+            dosage = "\'" + dosage + "\'";
+        }
+
         String insert = "INSERT INTO drugs VALUES( "
-                + (id_num++) + "," + "\'" + name + "\'" + "," + "\'" + type + "\'" + ", " + "\'" + dosage + "\'" + "," + illness_id + ");";
+                + (id_num++) + "," + "\'" + name + "\'" + "," + "\'" + type + "\'" + ", " +  dosage  + "," + illness_id + ");";
         conn.updateQuery(insert);
         conn.closeDBConnection();
     }
