@@ -28,6 +28,8 @@ public class Main {
 
             dataGenerator.insertData();
 
+            System.out.println(java.time.LocalDate.now()); 
+            
         } catch (SQLException ex) {
             Logger.getLogger(DBInitializer.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -51,4 +53,5 @@ public class Main {
 
         conn.closeDBConnection();
     }
+    
 }
