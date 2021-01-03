@@ -28,7 +28,7 @@ $(document).ready(function () {
 
 function FillMedical() {
 
-    formData = "requestID=" + MEDICAL_ID;
+    formData = "requestID=" + MEDICAL_ID;   //"requestid=2&name="lala"
     // HTML file input, chosen by user
     var url = "http://localhost:8080/HospitalSystem/PatientServlet"
 
@@ -67,16 +67,16 @@ function FillForm() {
 function CallBackFillForm(data)
 {    
     var data = JSON.parse(data.responseText);
-    $('input[name=fname]').attr('value', data.name)
-    $('input[name=surname]').attr('value', data.surname)
-    $('input[name=username]').attr('value', data.username)
-    $('input[name=adress]').attr('value', data.address)
-    $('input[name=email]').attr('value', data.email)
-    $('input[name=phone]').attr('value', data.phone)
-    $('input[name=birth_day]').attr('value', data.birth_day)
-    $('input[name=amka]').attr('value', data.amka)
-    $('input[name=at]').attr('value', data.at)
-    $('input[name=insurance]').attr('value', data.insurance)
+    $('input[name=fname]').attr('value', data.name);
+    $('input[name=surname]').attr('value', data.surname);
+    $('input[name=username]').attr('value', data.username);
+    $('input[name=adress]').attr('value', data.address);
+    $('input[name=email]').attr('value', data.email);
+    $('input[name=phone]').attr('value', data.phone);
+    $('input[name=birth_day]').attr('value', data.birth_day);
+    $('input[name=amka]').attr('value', data.amka);
+    $('input[name=at]').attr('value', data.at);
+    $('input[name=insurance]').attr('value', data.insurance);
 }
 
 function CallBackFillMedical(data) {

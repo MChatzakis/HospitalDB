@@ -13,7 +13,6 @@
         <script src='https://www.google.com/recaptcha/api.js'></script>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Doctor Page</title>
 
         <%
 //allow access only if session exists
@@ -46,6 +45,8 @@
                 }
             }
         %>
+        <title>Doctor <%= userName %></title>
+
     </head>
 
     <body>

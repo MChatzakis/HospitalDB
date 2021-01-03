@@ -17,10 +17,10 @@
         <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
 
 
-        <title>Patient Page </title>
+        <title>Patient</title>
         <%
 //allow access only if session exists
-            String user = null;
+            String username = null;
             if (!(request.getSession(false).getAttribute("type").equals("Patient")))
 
             {
@@ -29,9 +29,9 @@
             }
             else
             {
-                user = (String) session.getAttribute("user");
+                username = (String) session.getAttribute("username");
             }
-            String userName = null;
+            String user = null;
             String sessionID = null;
             Cookie[] cookies = request.getCookies();
             if (cookies != null)
@@ -40,22 +40,20 @@
                 {
                     if (cookie.getName().equals("user"))
                     {
-                        userName = cookie.getValue();
+                        user = cookie.getValue();
                     }
-                    if (cookie.getName().equals("JSESSIONID"))
-                    {
-                        sessionID = cookie.getValue();
-                    }
+
                 }
             }
         %>
+
 
     <body>
         <div class="container text-center ">
             <div class="row justify-content-center ">
 
                 <div class="jumbotron col-8 "style="background-color:rgb(20, 75, 165);opacity:0.4;  border-radius: 0px 0px 20px 20px;">
-                    <h1>Hello Patient!</h1>
+                    <h1>Hello <%= username%></h1>
                     <form method="post" action="http://localhost:8080/HospitalSystem/LogoutServlet">
                         <input type="submit" class="btn btn-primary btn-md float-right" style="background-color:#007bff;" id="button-login" value="Logout">
                     </form>
