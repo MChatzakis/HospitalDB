@@ -5,6 +5,7 @@
  */
 package database.entities;
 
+import commons.Queries;
 import database.DBConnection;
 import java.sql.SQLException;
 
@@ -38,6 +39,7 @@ public class Examination {
 
     public void addExamination(String patient_id, String doctor_id, String drug_id, String illness_id, String visit_id, String date) throws SQLException , ClassNotFoundException{
         DBConnection conn = new DBConnection();
+        id_num = Queries.getMaxTableKey("exam_id", "examinations") + 1;
         String insert = "INSERT INTO examinations VALUES( "
                 + (id_num++) + "," + patient_id + "," + doctor_id + ", " + drug_id + "," + illness_id + "," + visit_id + "," + "\'" + date + "\'" + ");";
         conn.updateQuery(insert);
@@ -59,7 +61,7 @@ public class Examination {
                 + " drug_id int  ,"
                 + " illness_id int ,"
                 + " visit_id int NOT NULL,"
-                + " date varchar(255),"
+                + " date date,"
                 + " PRIMARY KEY(exam_id),"
                 + " FOREIGN KEY(patient_id) REFERENCES patients(patient_id),"
                 + " FOREIGN KEY(doctor_id) REFERENCES doctors(doctor_id),"

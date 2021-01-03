@@ -33,7 +33,7 @@ public class Patient {
                 + " address varchar(255) ,"
                 + " email varchar(255),"
                 + " phone varchar(255),"
-                + " birth_date varchar(255),"
+                + " birth_date date NOT NULL,"
                 + " amka varchar(255) NOT NULL,"
                 + " at varchar(255) NOT NULL,"
                 + " insurance varchar(255),"

@@ -95,8 +95,8 @@ public class DBDataGenerator {
         OnDutyNurses duty_nur = new OnDutyNurses();
         OnDutyWorkers duty_wor = new OnDutyWorkers();
 
-        duty.addDutyTime("01/02/2021", "27");
-        duty.addDutyTime("02/02/2021", "27");
+        duty.addDutyTime("2021-01-01", "27");
+        duty.addDutyTime("2021-01-02", "27");
 
         duty_doc.addDoctorDutyTime("1", "1");
         duty_doc.addDoctorDutyTime("6", "1");
@@ -165,53 +165,53 @@ public class DBDataGenerator {
 
     public void insertPatients() throws SQLException, ClassNotFoundException {
         Patient pat = new Patient();
-        pat.addPatient("nickLen", "len123", "Nikos", "Lenakis", "Hrakleio", "len@gmail.com", "null", "16/11/1990", "12066455", "IK8986", "IKA");
-        pat.addPatient("gPer", "gper123", "Giorgos", "Perakis", "Hrakleio", "per@gmail.com", "null", "12/9/1980", "97046412", "KH6754", "IKA");
-        pat.addPatient("gIwan", "iwannou21", "Giannis", "Iwannou", "Hrakleio", "iwannou@gmail.com", "null", "12/03/1970", "31155415", "UT1213", "IKA");
-        pat.addPatient("pPetr", "pav123", "Pavlos", "Petrakis", "Hrakleio", "petrakis_pav@gmail.com", "null", "02/03/1995", "80048812", "BG7813", "IKA");
-        pat.addPatient("marianth", "marianth1234", "Marianthi", "Panagiotaki", "Hrakleio", "marpanagiot@gmail.com", "null", "05/12/1962", "11641112", "TY4312", "IKA");
+        pat.addPatient("nickLen", "len123", "Nikos", "Lenakis", "Hrakleio", "len@gmail.com", "null", "1990-11-16", "12066455", "IK8986", "IKA");
+        pat.addPatient("gPer", "gper123", "Giorgos", "Perakis", "Hrakleio", "per@gmail.com", "null", "1980-09-12", "97046412", "KH6754", "IKA");
+        pat.addPatient("gIwan", "iwannou21", "Giannis", "Iwannou", "Hrakleio", "iwannou@gmail.com", "null", "1970-03-12", "31155415", "UT1213", "IKA");
+        pat.addPatient("pPetr", "pav123", "Pavlos", "Petrakis", "Hrakleio", "petrakis_pav@gmail.com", "null", "1995-03-02", "80048812", "BG7813", "IKA");
+        pat.addPatient("marianth", "marianth1234", "Marianthi", "Panagiotaki", "Hrakleio", "marpanagiot@gmail.com", "null", "1962-12-05", "11641112", "TY4312", "IKA");
     }
 
     public void insertVisit() throws SQLException, ClassNotFoundException {
         Visit vis = new Visit();
-        vis.addVisit("01/01/2020", "1", "29");
+        vis.addVisit("2021-01-01", "1", "29");
         vis.addSymptom("1", "Fever");
         vis.addSymptom("1", "Cough");
 
-        vis.addVisit("01/01/2020", "1", "30");
+        vis.addVisit("2021-01-01", "1", "30");
         vis.addSymptom("2", "Pain");
         vis.addSymptom("2", "Arm_Movement");
 
-        vis.addVisit("02/01/2020", "2", "31");
+        vis.addVisit("2021-01-02", "2", "31");
         vis.addSymptom("3", "Taste_Lack");
         vis.addSymptom("3", "Fever");
 
     }
 
-    public void insertMedicals() throws SQLException, ClassNotFoundException {
+   /* public void insertMedicals() throws SQLException, ClassNotFoundException {
         Medical med = new Medical();
-        med.addMedical("covid", "1", "29", "15", "20", "01/01/2021");
+        med.addMedical("covid", "1", "29", "15", "20", "2020-01-01");
         med.addMedical("covid", "3", "31", "16", "21", "02/01/2021");
-    }
+    }*/
 
     public void insertExams() throws SQLException, ClassNotFoundException {
         Examination ex = new Examination();
         Medical med = new Medical();
 
-        ex.addInitialExam("29", "15", "null", "null", "1", "01/01/2021");
-        med.addMedical("covid", "1", "29", "15", "20", "01/01/2021");
-        ex.addReExam("29", "15", "1", "1", "1", "01/01/2021", "1", true);
+        ex.addInitialExam("29", "15", "null", "null", "1", "2021-01-01");
+        med.addMedical("covid", "1", "29", "15", "20", "2021-01-01");
+        ex.addReExam("29", "15", "1", "1", "1", "2021-01-01", "1", true);
 
-        ex.addInitialExam("30", "12", "4", "4", "2", "01/01/2021");
+        ex.addInitialExam("30", "12", "4", "4", "2", "2021-01-01");
 
-        ex.addInitialExam("31", "16", "null", "null", "3", "02/01/2021");
-        med.addMedical("covid", "3", "31", "16", "21", "02/01/2021");
-        ex.addReExam("31", "16", "1", "1", "3", "02/01/2021", "1", true);
+        ex.addInitialExam("31", "16", "null", "null", "3", "2021-01-02");
+        med.addMedical("covid", "3", "31", "16", "21", "2021-01-02");
+        ex.addReExam("31", "16", "1", "1", "3", "2021-01-02", "1", true);
     }
 
-    public void insertReExams() throws SQLException, ClassNotFoundException {
+    /*public void insertReExams() throws SQLException, ClassNotFoundException {
         Examination ex = new Examination();
         ex.addReExam("29", "15", "1", "1", "1", "01/01/2021", "1", true);
         ex.addReExam("31", "16", "1", "1", "3", "02/01/2021", "1", true);
-    }
+    }*/
 }

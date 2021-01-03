@@ -1,5 +1,6 @@
 package test;
 
+import commons.Queries;
 import database.DBConnection;
 import database.DBDataGenerator;
 import database.DBInitializer;
@@ -28,7 +29,8 @@ public class Main {
 
             dataGenerator.insertData();
 
-            System.out.println(java.time.LocalDate.now()); 
+            System.out.println(java.time.LocalDate.now() ); 
+            //System.out.println(Queries.getMaxTableKey("user_id", "users"));
             
         } catch (SQLException ex) {
             Logger.getLogger(DBInitializer.class.getName()).log(Level.SEVERE, null, ex);

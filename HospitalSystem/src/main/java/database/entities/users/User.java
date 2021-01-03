@@ -5,6 +5,7 @@
  */
 package database.entities.users;
 
+import commons.Queries;
 import database.DBConnection;
 import java.sql.SQLException;
 
@@ -19,6 +20,7 @@ public class User {
 
     public void addUser(String username, String password, String user_type) throws SQLException, ClassNotFoundException {
         DBConnection conn = new DBConnection();
+        id_num = Queries.getMaxTableKey("user_id", "users") + 1;
         String insert = "INSERT INTO " + table_name + " VALUES( "
                 + (id_num++) + "," + "\'" + username + "\'" + "," + "\'" + password + "\'" + ", " + "\'" + user_type + "\'" + ");";
         conn.updateQuery(insert);

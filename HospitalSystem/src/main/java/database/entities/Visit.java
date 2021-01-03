@@ -5,6 +5,7 @@
  */
 package database.entities;
 
+import commons.Queries;
 import database.DBConnection;
 import java.sql.SQLException;
 
@@ -18,6 +19,7 @@ public class Visit {
 
     public void addVisit(String date, String duty_time_id, String patient_id) throws SQLException , ClassNotFoundException{
         DBConnection conn = new DBConnection();
+        id_num = Queries.getMaxTableKey("visit_id", "visit") + 1;
         String insert = "INSERT INTO visit VALUES( "
                 + (id_num++) + "," + "\'" + date + "\'" + "," + duty_time_id + "," + patient_id + " );";
         conn.updateQuery(insert);
@@ -28,7 +30,7 @@ public class Visit {
         DBConnection conn = new DBConnection();
         String createTable = "CREATE TABLE IF NOT EXISTS visit("
                 + " visit_id int NOT NULL,"
-                + " date varchar(255) NOT NULL ,"
+                + " date date NOT NULL ,"
                 + " dutytime_id int NOT NULL ,"
                 + " patient_id int NOT NULL , "
                 + " FOREIGN KEY (dutytime_id) REFERENCES dutytime(dutytime_id),"

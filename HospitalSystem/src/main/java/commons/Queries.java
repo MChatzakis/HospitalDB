@@ -5,11 +5,37 @@
  */
 package commons;
 
+import database.DBConnection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 /**
  *
  * @author manos
  */
 public class Queries {
+
+    public static int getMaxTableKey(String tableColumn, String tableName) throws SQLException, ClassNotFoundException {
+        String query = "SELECT MAX(" + tableColumn + ") FROM " + tableName + ";";
+        ResultSet res = null;
+        String result = null;
+        int key = 0;
+        DBConnection conn = new DBConnection();
+
+        res = conn.executeQuery(query);
+
+        while (res != null && res.next()) {
+            result = res.getString(1);
+        }
+
+        conn.closeDBConnection();
+
+        if(!(result == null)){
+            key = Integer.parseInt(result);
+        }
+        
+        return key;
+    }
 
     public static String selectInitialPatientExaminations(int id) {
         String query = "SELECT drugs.name AS drug_name, examinations.date, illnesses.name AS illness_name\n"

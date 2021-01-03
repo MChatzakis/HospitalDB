@@ -5,6 +5,7 @@
  */
 package database.entities.medics;
 
+import commons.Queries;
 import database.DBConnection;
 import java.sql.SQLException;
 import lombok.Data;
@@ -20,6 +21,7 @@ public class Illness {
 
     public void addIllness(String name) throws SQLException , ClassNotFoundException{
         DBConnection conn = new DBConnection();
+        id_num = Queries.getMaxTableKey("illness_id", "illnesses") + 1;
         String insert = "INSERT INTO illnesses VALUES( "
                 + (id_num++) + "," + "\'" + name + "\'" + ");";
         conn.updateQuery(insert);

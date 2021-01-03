@@ -5,6 +5,7 @@
  */
 package database.entities.medics;
 
+import commons.Queries;
 import database.DBConnection;
 import java.sql.SQLException;
 import lombok.Data;
@@ -23,7 +24,7 @@ public class Drug {
         if (!dosage.equals("NULL")) {
             dosage = "\'" + dosage + "\'";
         }
-
+        id_num = Queries.getMaxTableKey("drug_id", "drugs") + 1;
         String insert = "INSERT INTO drugs VALUES( "
                 + (id_num++) + "," + "\'" + name + "\'" + "," + "\'" + type + "\'" + ", " +  dosage  + "," + illness_id + ");";
         conn.updateQuery(insert);
