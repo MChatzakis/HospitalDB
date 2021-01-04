@@ -17,35 +17,26 @@
         <%
 //allow access only if session exists
             String user = null;
-            if (!(request.getSession(false).getAttribute("type").equals("Doctor")))
-
-            {
+            if (!(request.getSession(false).getAttribute("type").equals("Doctor"))) {
                 response.sendRedirect("http://localhost:8080/HospitalSystem/");
-
-            }
-            else
-            {
+            } else {
                 user = (String) session.getAttribute("user");
             }
             String userName = null;
             String sessionID = null;
             Cookie[] cookies = request.getCookies();
-            if (cookies != null)
-            {
-                for (Cookie cookie : cookies)
-                {
-                    if (cookie.getName().equals("user"))
-                    {
+            if (cookies != null) {
+                for (Cookie cookie : cookies) {
+                    if (cookie.getName().equals("user")) {
                         userName = cookie.getValue();
                     }
-                    if (cookie.getName().equals("JSESSIONID"))
-                    {
+                    if (cookie.getName().equals("JSESSIONID")) {
                         sessionID = cookie.getValue();
                     }
                 }
             }
         %>
-        <title>Doctor <%= userName %></title>
+        <title>Doctor <%= userName%></title>
 
     </head>
 

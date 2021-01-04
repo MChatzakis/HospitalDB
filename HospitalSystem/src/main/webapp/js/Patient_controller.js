@@ -61,11 +61,9 @@ function FillForm() {
 
     SendXmlForm(url, formData, FILL_INFORMATION_ID);
 
-
-
 }
 function CallBackFillForm(data)
-{    
+{
     var data = JSON.parse(data.responseText);
     $('input[name=fname]').attr('value', data.name);
     $('input[name=surname]').attr('value', data.surname);
@@ -83,11 +81,11 @@ function CallBackFillMedical(data) {
 
 }
 function CallBackFillClinical(data) {
-    
+
 
 }
 function CallBackFillVisits(data) {
-    
+
 }
 
 
