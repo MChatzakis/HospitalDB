@@ -113,6 +113,22 @@ public class Queries {
             + "LEFT JOIN drugs ON examinations.drug_id = drugs.drug_id\n"
             + "LEFT JOIN illnesses ON illnesses.illness_id = drugs.illness_id";
 
+    public static String getDoctorInfoByUsername(String username) {
+        String query = "SELECT  *\n"
+                + "FROM users\n"
+                + "INNER JOIN doctors ON doctors.doctor_id = users.user_id\n"
+                + "WHERE users.user_id = " + " \'" + username + "\' " + ";";
+        return query;
+    }
+
+    public static String getDoctorInfoByID(int docID) {
+        String query = "SELECT  *\n"
+                + "FROM users\n"
+                + "INNER JOIN doctors ON doctors.doctor_id = users.user_id\n"
+                + "WHERE users.user_id = " + docID + ";";
+        return query;
+    }
+
     public static void getAllVisitExaminationInfo(int patientID) {
         String visitQuery = "SELECT DISTINCT visit.date, illnesses.name AS illness, drugs.name AS drug, medicals.type AS medical , examinations_retaken.hospitalization\n"
                 + "FROM visit\n"
@@ -125,7 +141,7 @@ public class Queries {
         String symptomQuery = "SELECT visit_symptoms.symptom\n"
                 + "FROM visit_symptoms\n"
                 + "INNER JOIN visit ON visit_symptoms.visit_id = visit.visit_id\n"
-                + "WHERE visit.patient_id = "+patientID+";";
+                + "WHERE visit.patient_id = " + patientID + ";";
 
     }
 

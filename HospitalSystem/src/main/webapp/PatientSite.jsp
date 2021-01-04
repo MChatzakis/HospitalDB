@@ -19,7 +19,7 @@
 
         <title>Patient</title>
         <%
-//allow access only if session exists
+            //allow access only if session exists
             String username = null;
             if (!(request.getSession(false).getAttribute("type").equals("Patient"))) {
                 response.sendRedirect("http://localhost:8080/HospitalSystem/");
