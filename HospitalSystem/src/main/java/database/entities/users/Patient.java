@@ -16,10 +16,10 @@ public class Patient {
         DBConnection conn = new DBConnection();
         User user = new User();
 
-        user.addUser(username, password, "Patient");
+        user.addUser(username, password, "Patient",email);
 
         String insert = "INSERT INTO patients  VALUES( "
-                + (User.id_num - 1) + "," + "\'" + name + "\'" + "," + "\'" + surname + "\'" + ", " + "\'" + address + "\'" + "," + "\'" + email + "\'" + "," + "\'" + phone + "\'" + "," + "\'" + birth_date + "\'" + "," + "\'" + amka + "\'" +  "," + "\'" + at + "\'" + "," + "\'" + insurance + "\'" + ");";
+                + (User.id_num - 1) + "," + "\'" + name + "\'" + "," + "\'" + surname + "\'" + ", " + "\'" + address + "\'" +  "," + "\'" + phone + "\'" + "," + "\'" + birth_date + "\'" + "," + "\'" + amka + "\'" +  "," + "\'" + at + "\'" + "," + "\'" + insurance + "\'" + ");";
         conn.updateQuery(insert);
         conn.closeDBConnection();
     }
@@ -31,7 +31,6 @@ public class Patient {
                 + " name varchar(255) NOT NULL,"
                 + " surname varchar(255) NOT NULL,"
                 + " address varchar(255) ,"
-                + " email varchar(255),"
                 + " phone varchar(255),"
                 + " birth_date date NOT NULL,"
                 + " amka varchar(255) NOT NULL,"

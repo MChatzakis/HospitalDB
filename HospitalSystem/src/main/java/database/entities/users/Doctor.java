@@ -23,10 +23,10 @@ public class Doctor {
         DBConnection conn = new DBConnection();
         User user = new User();
 
-        user.addUser(username, password, "Doctor");
+        user.addUser(username, password, "Doctor", email);
 
         String insert = "INSERT INTO doctors VALUES( "
-                + (User.id_num - 1) + "," + "\'" + name + "\'" + "," + "\'" + surname + "\'" + ", " + "\'" + address + "\'" + "," + "\'" + email + "\'" + "," + "\'" + phone + "\'" + ",\'" + type + "\'" + ",\'" + at + "\'"+");";
+                + (User.id_num - 1) + "," + "\'" + name + "\'" + "," + "\'" + surname + "\'" + ", " + "\'" + address + "\'" + ","  + "\'" + phone + "\'" + ",\'" + type + "\'" + ",\'" + at + "\'"+");";
 
         conn.updateQuery(insert);
         conn.closeDBConnection();
@@ -39,7 +39,6 @@ public class Doctor {
                 + " name varchar(255) NOT NULL,"
                 + " surname varchar(255) NOT NULL,"
                 + " address varchar(255) ,"
-                + " email varchar(255),"
                 + " phone varchar(255),"
                 + " type varchar(255) NOT NULL,"
                 + " at varchar(255),"

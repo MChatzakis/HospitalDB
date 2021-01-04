@@ -30,10 +30,10 @@ public class Queries {
 
         conn.closeDBConnection();
 
-        if(!(result == null)){
+        if (!(result == null)) {
             key = Integer.parseInt(result);
         }
-        
+
         return key;
     }
 
@@ -96,6 +96,37 @@ public class Queries {
     public static String selectAllWorkers() {
         String query = "SELECT * FROM coordinators";
         return query;
+    }
+
+    public static String q = "SELECT visit.visit_id, visit.date, examinations.exam_id, examinations.drug_id, examinations.illness_id, medicals.type ,examinations_retaken.hospitalization\n"
+            + "FROM visit\n"
+            + "INNER JOIN examinations ON examinations.visit_id = visit.visit_id\n"
+            + "INNER JOIN medicals ON medicals.exam_id = examinations.exam_id\n"
+            + "INNER JOIN examinations_retaken ON medicals.medical_id = examinations_retaken.medical_id";
+
+    public static String getAllPatientExaminationsOfVisits = "SELECT DISTINCT visit.date, illnesses.name, drugs.name, medicals.type , examinations_retaken.hospitalization, examinations.patient_id,patients.name,patients.surname\n"
+            + "FROM visit\n"
+            + "INNER JOIN patients ON patients.patient_id = visit.patient_id\n"
+            + "INNER JOIN examinations ON examinations.visit_id = visit.visit_id\n"
+            + "INNER JOIN medicals ON medicals.exam_id = examinations.exam_id\n"
+            + "INNER JOIN examinations_retaken ON medicals.medical_id = examinations_retaken.medical_id\n"
+            + "LEFT JOIN drugs ON examinations.drug_id = drugs.drug_id\n"
+            + "LEFT JOIN illnesses ON illnesses.illness_id = drugs.illness_id";
+
+    public static void getAllVisitExaminationInfo(int patientID) {
+        String visitQuery = "SELECT DISTINCT visit.date, illnesses.name AS illness, drugs.name AS drug, medicals.type AS medical , examinations_retaken.hospitalization\n"
+                + "FROM visit\n"
+                + "INNER JOIN examinations ON examinations.visit_id = visit.visit_id\n"
+                + "INNER JOIN medicals ON medicals.exam_id = examinations.exam_id\n"
+                + "INNER JOIN examinations_retaken ON medicals.medical_id = examinations_retaken.medical_id\n"
+                + "LEFT JOIN drugs ON examinations.drug_id = drugs.drug_id\n"
+                + "LEFT JOIN illnesses ON illnesses.illness_id = drugs.illness_id\n"
+                + "WHERE visit.patient_id = " + patientID + ";";
+        String symptomQuery = "SELECT visit_symptoms.symptom\n"
+                + "FROM visit_symptoms\n"
+                + "INNER JOIN visit ON visit_symptoms.visit_id = visit.visit_id\n"
+                + "WHERE visit.patient_id = "+patientID+";";
+
     }
 
 }

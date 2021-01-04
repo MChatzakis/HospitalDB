@@ -8,6 +8,7 @@ import database.entities.DutyTime;
 import database.entities.Examination;
 import database.entities.medics.Illness;
 import database.entities.Medical;
+import database.entities.ReExamination;
 import database.entities.Visit;
 
 import database.entities.users.Nurse;
@@ -188,25 +189,27 @@ public class DBDataGenerator {
 
     }
 
-   /* public void insertMedicals() throws SQLException, ClassNotFoundException {
+    /* public void insertMedicals() throws SQLException, ClassNotFoundException {
         Medical med = new Medical();
         med.addMedical("covid", "1", "29", "15", "20", "2020-01-01");
         med.addMedical("covid", "3", "31", "16", "21", "02/01/2021");
     }*/
-
     public void insertExams() throws SQLException, ClassNotFoundException {
         Examination ex = new Examination();
         Medical med = new Medical();
+        ReExamination reEx = new ReExamination();
 
-        ex.addInitialExam("29", "15", "null", "null", "1", "2021-01-01");
-        med.addMedical("covid", "1", "29", "15", "20", "2021-01-01");
-        ex.addReExam("29", "15", "1", "1", "1", "2021-01-01", "1", true);
+        ex.addExamination("29", "15", "1", "1", "1", "2021-01-01");
+        med.addMedical("Covid-19", "1", "29", "15", "20", "2021-01-01");
+        reEx.addReExamination("29", "15", "1", "2021-01-01", "1", true);
 
-        ex.addInitialExam("30", "12", "4", "4", "2", "2021-01-01");
+        ex.addExamination("30", "12", "4", "4", "2", "2021-01-01");
+        med.addMedical("xRay", "2", "30", "1", "21", "2021-01-01");
+        reEx.addReExamination("30", "12", "2", "2021-01-01", "2", true);
 
-        ex.addInitialExam("31", "16", "null", "null", "3", "2021-01-02");
-        med.addMedical("covid", "3", "31", "16", "21", "2021-01-02");
-        ex.addReExam("31", "16", "1", "1", "3", "2021-01-02", "1", true);
+        ex.addExamination("31", "16", "null", "null", "3", "2021-01-02");
+        med.addMedical("Covid-19", "3", "31", "16", "21", "2021-01-02");
+        reEx.addReExamination("31", "16", "3", "2021-01-02", "3", true);
     }
 
     /*public void insertReExams() throws SQLException, ClassNotFoundException {

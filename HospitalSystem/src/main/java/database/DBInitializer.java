@@ -9,6 +9,7 @@ import database.entities.DutyTime;
 import database.entities.Examination;
 import database.entities.medics.Illness;
 import database.entities.Medical;
+import database.entities.ReExamination;
 import database.entities.users.Patient;
 import database.entities.Visit;
 
@@ -72,12 +73,15 @@ public class DBInitializer {
     public void createExaminations() throws SQLException, ClassNotFoundException {
         Medical med = new Medical();
         Examination exam = new Examination();
-        exam.createTables();
+        ReExamination reExam = new ReExamination();
+        //exam.createTables();
+        exam.createTable();
         med.createTable();
         /*med.createTable("medicals_covid_Tests");
         med.createTable("medicals_xRay_Tests");
         med.createTable("medicals_blood_tests");*/
-        exam.alterTableToAddMedical();
+        //exam.alterTableToAddMedical();
+        reExam.createTable();
     }
 
     public void createDoctors() throws SQLException, ClassNotFoundException {

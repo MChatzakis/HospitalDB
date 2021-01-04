@@ -31,6 +31,7 @@ public class Main {
 
             System.out.println(java.time.LocalDate.now() ); 
             //System.out.println(Queries.getMaxTableKey("user_id", "users"));
+            System.out.println(Queries.getAllPatientExaminationsOfVisits);
             
         } catch (SQLException ex) {
             Logger.getLogger(DBInitializer.class.getName()).log(Level.SEVERE, null, ex);

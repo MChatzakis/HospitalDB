@@ -22,10 +22,10 @@ public class Nurse {
         DBConnection conn = new DBConnection();
         User user = new User();
 
-        user.addUser(username, password, "Nurse");
+        user.addUser(username, password, "Nurse", email);
 
         String insert = "INSERT INTO nurses VALUES( "
-                + (User.id_num - 1) + "," + "\'" + name + "\'" + "," + "\'" + surname + "\'" + ", " + "\'" + address + "\'" + "," + "\'" + email + "\'" + "," + "\'" + phone + "\'" + "," + "\'" + at + "\'" +");";
+                + (User.id_num - 1) + "," + "\'" + name + "\'" + "," + "\'" + surname + "\'" + ", " + "\'" + address + "\'" +  "," + "\'" + phone + "\'" + "," + "\'" + at + "\'" +");";
 
         conn.updateQuery(insert);
         conn.closeDBConnection();
@@ -38,7 +38,6 @@ public class Nurse {
                 + " name varchar(255) NOT NULL,"
                 + " surname varchar(255) NOT NULL,"
                 + " address varchar(255),"
-                + " email varchar(255),"
                 + " phone varchar(255),"
                 + " at varchar(255),"
                 + " PRIMARY KEY(nurse_id),"

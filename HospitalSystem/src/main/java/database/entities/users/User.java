@@ -18,11 +18,11 @@ public class User {
     public static int id_num = 1;
     private String table_name = "users";
 
-    public void addUser(String username, String password, String user_type) throws SQLException, ClassNotFoundException {
+    public void addUser(String username, String password, String user_type, String email) throws SQLException, ClassNotFoundException {
         DBConnection conn = new DBConnection();
         id_num = Queries.getMaxTableKey("user_id", "users") + 1;
         String insert = "INSERT INTO " + table_name + " VALUES( "
-                + (id_num++) + "," + "\'" + username + "\'" + "," + "\'" + password + "\'" + ", " + "\'" + user_type + "\'" + ");";
+                + (id_num++) + "," + "\'" + username + "\'" + "," + "\'" + password + "\'" + ", " + "\'" + user_type + "\'," + "\'" + email + "\'"+ ");";
         conn.updateQuery(insert);
         conn.closeDBConnection();
     }
@@ -34,8 +34,10 @@ public class User {
                 + " username varchar(255) NOT NULL,"
                 + " password varchar(255) NOT NULL,"
                 + " user_type varchar(255) NOT NULL,"
+                + " email varchar(255) NOT NULL,"
                 + " PRIMARY KEY(user_id),"
                 + " UNIQUE(password),"
+                + " UNIQUE(email),"
                 + " UNIQUE(username));";
         conn.updateQuery(createTable);
         conn.closeDBConnection();

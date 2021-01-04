@@ -22,10 +22,10 @@ public class Coordinator {
         DBConnection conn = new DBConnection();
         User user = new User();
 
-        user.addUser(username, password, "Worker");
+        user.addUser(username, password, "Worker", email);
 
         String insert = "INSERT INTO coordinators VALUES( "
-                + (User.id_num - 1) + "," + "\'" + name + "\'" + "," + "\'" + surname + "\'" + ", " + "\'" + address + "\'" + "," + "\'" + email + "\'" + "," + "\'" + phone + "\'" + "," + "\'" + at + "\'" + ");";
+                + (User.id_num - 1) + "," + "\'" + name + "\'" + "," + "\'" + surname + "\'" + ", " + "\'" + address + "\'" + ","  + "\'" + phone + "\'" + "," + "\'" + at + "\'" + ");";
         conn.updateQuery(insert);
         conn.closeDBConnection();
     }
@@ -37,7 +37,6 @@ public class Coordinator {
                 + " name varchar(255) NOT NULL,"
                 + " surname varchar(255) NOT NULL,"
                 + " address varchar(255) ,"
-                + " email varchar(255),"
                 + " phone varchar(255),"
                 + " at varchar(255),"
                 + " PRIMARY KEY(coordinator_id),"
