@@ -11,7 +11,7 @@ import java.sql.SQLException;
 
 /**
  *
- * @author manos
+ * @author Manos Chatzakis
  */
 public class Queries {
 

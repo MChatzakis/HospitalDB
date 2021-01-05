@@ -87,7 +87,7 @@ public class PatientServlet extends HttpServlet {
         String query;
         ResultSet res = null;
 
-        query = "SELECT  name, surname, address, email, phone, birth_date, amka, at, insurance FROM patients WHERE patient_id IN"
+        query = "SELECT  name, surname, address, users.email, phone, birth_date, amka, at, insurance FROM patients WHERE patient_id IN"
                 + "( SELECT user_id FROM users WHERE username=" + "\'" + username + "\'" + " );";
         DBConnection conn = new DBConnection();
         res = conn.executeQuery(query);

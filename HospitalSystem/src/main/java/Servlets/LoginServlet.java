@@ -43,6 +43,7 @@ public class LoginServlet extends HttpServlet {
             System.out.println("wrong credentials");
             response.sendRedirect("http://localhost:8080/HospitalSystem/");
         } else {
+            
             HttpSession session = request.getSession(); //Creating a session
             session.setAttribute("type", type); //setting session attribute
             session.setAttribute("username", username); //setting session attribute
