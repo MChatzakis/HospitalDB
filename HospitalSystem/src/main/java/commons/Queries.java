@@ -113,6 +113,14 @@ public class Queries {
             + "LEFT JOIN drugs ON examinations.drug_id = drugs.drug_id\n"
             + "LEFT JOIN illnesses ON illnesses.illness_id = drugs.illness_id";
 
+    public static String getPatientInfoByUsername(String username) {
+        String query = "SELECT  name, surname, address, users.email, phone, birth_date, amka, at, insurance \n"
+                + "FROM patients\n"
+                + "INNER JOIN users ON patients.patient_id = users.user_id\n"
+                + "WHERE users.username = \""+ username+"\";";
+        return query;
+    }
+
     public static String getDoctorInfoByUsername(String username) {
         String query = "SELECT  *\n"
                 + "FROM users\n"

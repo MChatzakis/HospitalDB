@@ -5,6 +5,7 @@
  */
 package Servlets;
 
+import commons.Queries;
 import database.DBConnection;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -84,11 +85,9 @@ public class PatientServlet extends HttpServlet {
 
     JSONObject GetInformations(String username) throws SQLException, ClassNotFoundException {
         JSONObject obj = new JSONObject();
-        String query;
+        String query = Queries.getPatientInfoByUsername(username);
         ResultSet res = null;
-
-        query = "SELECT  name, surname, address, users.email, phone, birth_date, amka, at, insurance FROM patients WHERE patient_id IN"
-                + "( SELECT user_id FROM users WHERE username=" + "\'" + username + "\'" + " );";
+       
         DBConnection conn = new DBConnection();
         res = conn.executeQuery(query);
         if (res == null) {
