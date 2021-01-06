@@ -66,21 +66,24 @@
                 <button type="button" id="visit-but" class="btn btn-primary btn-md" onclick="ShowVisits();">Visits</button>
             </div>
             <div class=" position-relative">
-                
-                <table class="table-sm  table-dark d-none  table-bordered position-absolute mt-2" style="left:95%" id="visit">
+
+                <table class="table-sm  table-dark d-none  table-bordered position-absolute mt-2" style="left: 75%" id="history-table">
                     <tr>
                         <th>Date</th>
+                        <th>Illness</th>
+
+                        <th>Medical</th>
+
+                        <th>drug</th>
+
+                        <th>Hospitalization</th>
+
+                        <th>Symptoms</th>
+
+
                     </tr>
                     <tbody>
-                        <tr>
-                            <td>16/10/2000</td>
-                        </tr>
-                        <tr>
-                            <td>16/10/2000</td>
-                        </tr>
-                        <tr>
-                            <td>16/10/2000</td>
-                        </tr>
+                     
                     </tbody>
                 </table>
 
@@ -105,7 +108,7 @@
                             </div>
                             <div class="form-group col ">
                                 <label for="address">Address</label>
-                                <input type="text" class="form-control" name="adress" placeholder="">
+                                <input type="text" class="form-control" name="address" placeholder="">
                             </div>
                         </div>
                         <div class="row">

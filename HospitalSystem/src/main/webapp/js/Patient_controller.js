@@ -8,6 +8,7 @@
 
 var FILL_HISTORY_ID = 1
 var FILL_INFORMATION_ID = 5
+var UPDATE_FORM_ID=2;
 
 
 //var url = "https://webhook.site/93afe500-82d2-464c-a89e-2d1b318b0140";
@@ -54,7 +55,7 @@ function CallBackFillForm(data)
     $('input[name=fname]').attr('value', data.name);
     $('input[name=surname]').attr('value', data.surname);
     $('input[name=username]').attr('value', data.username);
-    $('input[name=adress]').attr('value', data.address);
+    $('input[name=address]').attr('value', data.address);
     $('input[name=email]').attr('value', data.email);
     $('input[name=phone]').attr('value', data.phone);
     $('input[name=birth_day]').attr('value', data.birth_day);
@@ -65,18 +66,69 @@ function CallBackFillForm(data)
 
 function CallBackFillHistory(data)
 {
+    var obj_symptoms;
+    var symptoms = "";
     var data = JSON.parse(data.responseText);
-    for (var i = 0; i < data.length; i++) {
-        var obj = data[i];
-        console.log(obj.date);
-        console.log(obj.illness);
-        console.log(obj.drug);
-        console.log(obj.medical);
-        console.log(obj.hospitalization);
+    for (var i = 0; i < data[0].length; i++)
+    {
+        var obj = data[0][i];
+        console.log(obj)
+        for (var j = 0; j < data[1].length; j++)
+        {
+            //console.log("j : " + j)
+            obj_symptoms = data[1][j];
+            // console.log(obj_symptoms.visit);
 
-        console.log(obj);
+            if (obj.visit === obj_symptoms.visit)
+            {
+                console.log(obj_symptoms.symptom);
+                if (symptoms === "")
+                {
+                    symptoms += obj_symptoms.symptom
+
+                } else {
+                    symptoms += ", " + obj_symptoms.symptom
+
+                }
+                console.log(symptoms);
+            }
+        }
+        AddRow("history-table", 6, i + 1, obj, symptoms);
+        symptoms = "";
+        //console.log(obj.visit);
+        /*
+         console.log(obj.date);
+         console.log(obj.illness);
+         console.log(obj.drug);
+         console.log(obj.medical);
+         console.log(obj.hospitalization);*/
+
+
     }
+    //console.log(data);
 
+}
+
+function AddRow(id, cells, row, obj, symptoms)
+{
+    console.log("i add row" + row)
+    var table = document.getElementById(id);
+    var row = table.insertRow(row);
+    var i = 0;
+    for (var x in obj)
+    {
+
+        if (x !== "visit") {
+            var cell = row.insertCell(i);
+            cell.innerHTML = obj[x];
+            i++;
+
+        }
+
+
+    }
+    var cell = row.insertCell(i);
+    cell.innerHTML = symptoms;
 }
 
 function SendXmlForm(url, formData, req_id)
@@ -110,12 +162,12 @@ function SendXmlForm(url, formData, req_id)
 
 function SaveForm() {
     var formData = {
-        'requestID': INFORMATION_ID,
+        'requestID': UPDATE_FORM_ID,
         'fname': $('input[name=fname]').val(),
         'surname': $('input[name=surname]').val(),
 
         'username': $('input[name=username]').val(),
-        'adress': $('input[name=adress]').val(),
+        'address': $('input[name=address]').val(),
         'email': $('input[name=email]').val(),
         'phone': $('input[name=phone]').val(),
         'birth_day': $('input[name=birth_day]').val(),
@@ -124,7 +176,10 @@ function SaveForm() {
         'insurance': $('input[name=insurance]').val(),
 
     };
-    // SendForm(url, formData, "#form-id")
+    var url = "http://localhost:8080/HospitalSystem/PatientServlet"
+
+    console.log(formData);
+    SendForm(url, formData, "#form-id")
 }
 
 function SendForm(url, formData, id) {
@@ -132,7 +187,7 @@ function SendForm(url, formData, id) {
     console.log("senddd")
     // process the form
     $(id).submit(function (event) {
-        event.preventDefault();
+        //event.preventDefault();
         // get the form data
         // there are many ways to get this data using jQuery (you can use the class or id also)
         /* var formData = $("form").formSerialize();*/
@@ -167,36 +222,14 @@ function SendForm(url, formData, id) {
 
 
 
-
-
-
-function ShowClinical() {
-    console.log("lalala");
-
-    if ($('#clinical').hasClass('d-none')) {
-        $("#clinical").removeClass('d-none');
-        AddRow("clinical_rows")
-    } else {
-        $("#clinical").addClass('d-none');
-
-    }
-
-}
-
-function HideClinical() {
-    console.log("lalala");
-    $("#clinical").addClass('d-none');
-}
-
-
 function ShowVisits() {
-    console.log("lalala");
+    //console.log("lalala");
 
-    if ($('#visit').hasClass('d-none')) {
-        $("#visit").removeClass('d-none');
+    if ($('#history-table').hasClass('d-none')) {
+        $("#history-table").removeClass('d-none');
 
     } else {
-        $("#visit").addClass('d-none');
+        $("#history-table").addClass('d-none');
 
     }
 
@@ -204,29 +237,11 @@ function ShowVisits() {
 
 
 function HideVisit() {
-    console.log("lalala");
-    $("#medical").addClass('d-none');
+    // console.log("lalala");
+    $("#history-table").addClass('d-none');
 }
 
 
-function ShowMedical() {
-    console.log("lalala");
-
-    if ($('#medical').hasClass('d-none')) {
-        $("#medical").removeClass('d-none');
-
-    } else {
-        $("#medical").addClass('d-none');
-
-    }
-
-}
-
-
-function HideMedical() {
-    console.log("lalala");
-    $("#form").addClass('d-none');
-}
 
 function ShowInformation() {
     console.log("lalala");
@@ -249,13 +264,6 @@ function HideInformation() {
 
 
 
-function AddRow(id) {
-    var table = document.getElementById(id);
-    var row = table.insertRow(0);
-    var cell1 = row.insertCell(0);
-    var cell2 = row.insertCell(1);
-    cell1.innerHTML = "new cell";
-    cell2.innerHTML = "new cell";
-}
+
 
 

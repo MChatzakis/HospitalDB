@@ -33,6 +33,7 @@ public class PatientServlet extends HttpServlet
 {
 
     int HISTORY_ID = 1;
+    int UPDATE_FORM_ID = 2;
     int FILL_INFORMATION_ID = 5;
 
     /**
@@ -63,7 +64,9 @@ public class PatientServlet extends HttpServlet
             throws ServletException, IOException
     {
         JSONObject obj = new JSONObject();
-
+        int id;
+        System.out.println((Integer) request.getSession(false).getAttribute("user_id"));
+        id = (Integer) request.getSession(false).getAttribute("user_id");
         int request_id = Integer.parseInt(request.getParameter("requestID"));
         // System.out.println("request id is  : " + request_id);
         if (request_id == FILL_INFORMATION_ID)
@@ -73,7 +76,7 @@ public class PatientServlet extends HttpServlet
             {
                 PrintWriter out = response.getWriter();
 
-                obj = GetInformations((String) request.getSession(false).getAttribute("username"));
+                obj = GetInformations(id);
                 response.setContentType("application/json");
                 response.setCharacterEncoding("UTF-8");
                 out.print(obj);
@@ -96,9 +99,6 @@ public class PatientServlet extends HttpServlet
             JSONArray array;
             System.out.println("im in history request ");
 
-            int id;
-            System.out.println((Integer) request.getSession(false).getAttribute("user_id"));
-            id = (Integer) request.getSession(false).getAttribute("user_id");
             try
             {
                 PrintWriter out = response.getWriter();
@@ -119,13 +119,65 @@ public class PatientServlet extends HttpServlet
                 Logger.getLogger(PatientServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        else if (request_id == UPDATE_FORM_ID)
+        {
+            String fname = request.getParameter("fname");
+            String surname = request.getParameter("surname");
+            String username = request.getParameter("username");
+            String address = request.getParameter("address");
+            String email = request.getParameter("email");
+            String phone = request.getParameter("phone");
+            String birth_day = request.getParameter("birth_day");
+            String amka = request.getParameter("amka");
+            String at = request.getParameter("at");
+            String insurance = request.getParameter("insurance");
+            System.out.println(fname + " " + surname + " " + username + " " + address + " " + email + " " + phone + " " + birth_day + " "
+                    + " " + amka + " " + at + " " + insurance);
+            try
+            {
+                changeInfo(fname, surname, username, address, email, phone, birth_day, amka, at, insurance, id);
+            }
+            catch (SQLException ex)
+            {
+                Logger.getLogger(PatientServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            catch (ClassNotFoundException ex)
+            {
+                Logger.getLogger(PatientServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
+    void changeInfo(String fname, String surname, String username, String address, String email, String phone, String birth_day,
+            String amka, String at, String insurance, int id) throws SQLException, ClassNotFoundException
+    {
+        DBConnection conn = new DBConnection();
+        String update = "UPDATE  patients "
+                + "SET name=" + "\'" + fname + "\'" + "," + "surname=" + "\'" + surname + "\'" + "," + "address=" + "\'" + address + "\'" + "," + "phone="
+                + "\'" + phone + "\'" + "," + "birth_date=" + "\'" + birth_day + "\'" + "," + "amka=" + "\'" + amka + "\'" + ","
+                + "at=" + "\'" + at + "\'" + "," + "insurance=" + "\'" + insurance + "\'"
+                + "WHERE patient_id=" + id + ";";
+        conn.updateQuery(update);
+        conn.closeDBConnection();
+        conn = new DBConnection();
+        String updateUsers = "UPDATE  users "
+                + "SET username=" + "\'" + username + "\'" + "," + "email=" + "\'" + email + "\'"
+                + "WHERE user_id=" + id + ";";
+        conn.updateQuery(updateUsers);
+        conn.closeDBConnection();
 
     }
 
     JSONArray getMedicalHistory(int id) throws SQLException, ClassNotFoundException
     {
+
         JSONObject obj = new JSONObject();
+        JSONObject objSymptoms = new JSONObject();
+
         JSONArray array = new JSONArray();
+        JSONArray array2 = new JSONArray();
+        JSONArray wholeArray = new JSONArray();
+
         DBConnection conn = new DBConnection();
 
         ResultSet res = null;
@@ -142,7 +194,8 @@ public class PatientServlet extends HttpServlet
         {
             //String visitQuery = "SELECT DISTINCT visit.date, illnesses.name AS illness,
             //drugs.name AS drug, medicals.type AS medical , examinations_retaken.hospitalization\n"
-
+            obj = new JSONObject();
+            obj.put("visit", res.getString("visit_id"));
             obj.put("date", res.getString("date"));
             obj.put("illness", res.getString("illness"));
             obj.put("drug", res.getString("drug"));
@@ -167,26 +220,28 @@ public class PatientServlet extends HttpServlet
         {
             //String visitQuery = "SELECT DISTINCT visit.date, illnesses.name AS illness,
             //drugs.name AS drug, medicals.type AS medical , examinations_retaken.hospitalization\n"
+            objSymptoms = new JSONObject();
+            objSymptoms.put("symptom", res.getString("symptom"));
+            objSymptoms.put("visit", res.getString("visit_id"));
 
-            obj.put("date", res.getString("symptom"));
-            obj.put("illness", res.getString("visit_id"));
-
-            array.put(obj);
+            array2.put(objSymptoms);
         }
         conn.closeDBConnection();
+        wholeArray.put(array);
+        wholeArray.put(array2);
 
-        return array;
+        return wholeArray;
 
     }
 
-    JSONObject GetInformations(String username) throws SQLException, ClassNotFoundException
+    JSONObject GetInformations(int  id) throws SQLException, ClassNotFoundException
     {
         JSONObject obj = new JSONObject();
         ResultSet res = null;
 
         DBConnection conn = new DBConnection();
 
-        String query = Queries.getPatientInfoByUsername(username);
+        String query = Queries.getPatientInfoByID(id);
 
         res = conn.executeQuery(query);
         if (res == null)
@@ -207,8 +262,8 @@ public class PatientServlet extends HttpServlet
             obj.put("amka", res.getString("amka"));
             obj.put("at", res.getString("at"));
             obj.put("insurance", res.getString("insurance"));
+            obj.put("username", res.getString("username"));
         }
-        obj.put("username", username);
 
         conn.closeDBConnection();
         return obj;

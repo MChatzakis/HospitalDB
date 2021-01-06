@@ -65,7 +65,7 @@ public class DoctorServlet extends HttpServlet {
 
             switch (request_id) {
             case 1:
-                obj = getPersonalAndDrugInfo((int) request.getSession(false).getAttribute("user_id"));
+               // obj = getPersonalAndDrugInfo((int) request.getSession(false).getAttribute("user_id"));
                 break;
         
             }
