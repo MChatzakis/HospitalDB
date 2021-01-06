@@ -3,13 +3,11 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link rel="stylesheet" href="css/Doctor.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://www.google.com/recaptcha/api.js"></script>
         <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
         <script type="text/javascript" src="js/Doctor_controller.js"></script>
-        
-        
-        <link rel="stylesheet" href="css/Doctor.css">
         <link
             rel="stylesheet"
             href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
@@ -45,7 +43,11 @@
                 <div class="jumbotron col-8 "style="background-color:rgb(20, 75, 165);opacity:0.7;  border-radius: 0px 0px 20px 20px;">
                     <h1>Hello <%= user%> !</h1>
                     <form method="post" action="http://localhost:8080/HospitalSystem/LogoutServlet">
-                        <input type="submit" class="btn btn-primary btn-md float-bottom" style="background-color:#007bff;" id="button-login" value="Logout">
+                        <input type="submit" class="btn btn-primary btn-md float-right" style="background-color:#007bff;" id="button-login" value="Logout">
+                    </form>
+                    <form method="post" action="http://localhost:8080/HospitalSystem/DoctorServlet">
+                        <input type="submit" class="btn btn-primary btn-md float-left" style="background-color:#007bff;" id="button-refresh" value="Refresh">
+                        <!-- <button onClick="window.location.reload();">Refresh Page</button>-->
                     </form>
                 </div>
             </div>
@@ -61,14 +63,35 @@
                         <th>Address</th>
                         <th>Phone</th> 
                         <th>AT</th> 
-                        <th>Type</th> 
+                        <th>Type</th>
+                        <th>Username</th>
                         <th>Email</th>
                     </tr>
-                </table>           
+                </table>        
             </div>
             <div class="row  justify-content-center " style="margin:5px";>
-                <button  type="button" id="information-but" class="btn btn-primary btn-md" onclick="ShowInformation();">Show Drugs and Illnesses</button>
+                <table style="display: none" id="personalDuties" class="table-sm  table-dark table-bordered" >
+                    <tr>            
+                        <th>Dates of Duty Time</th>
+                    </tr>
+                </table>        
             </div>
+            <div class="row  justify-content-center " style="margin:5px";>
+                <button  type="button" id="drugButton" class="btn btn-primary btn-md" onclick="showDrugs();">Show Drugs and Illnesses</button>
+            </div>
+            <div class="row  justify-content-center " style="margin:5px";>
+                <table style="display: none" id="drugTable" class="table-sm  table-dark table-bordered" >
+                    <tr>
+                        <th>Drug ID</th>
+                        <th>Drug Name</th>
+                        <th>Drug Type</th>
+                        <th>Dosage (mg)</th>
+                        <th>Illness ID</th> 
+                        <th>Illness Name</th> 
+                    </tr>
+                </table>      
+            </div>
+
             <div class="row  justify-content-center " style="margin:5px";>
                 <button  type="button" id="patientsButton" class="btn btn-primary btn-md" onclick="showPatients();">Current Patients</button>
             </div>
@@ -85,7 +108,37 @@
             </div>
 
             <div class="row  justify-content-center " style="margin:5px";>
-                <button  type="button" id="information-but" class="btn btn-primary btn-md" onclick="ShowInformation();">New Examination</button>
+                <button  type="button" id="patientsButton" class="btn btn-primary btn-md" onclick="showExaminations();">Show Examinations</button>
+            </div>
+            <div class="row  justify-content-center " style="margin:5px";>
+                <table style="display: none" id="patientsTable" class="table-sm  table-dark table-bordered" >
+                    <tr>
+                        <th>Name</th>
+                        <th>Surname</th>
+                        <th>ok</th>
+                        <th>ok</th>
+                        <th>suckit</th> 
+                    </tr>
+                </table>           
+            </div>
+
+            <div class="row  justify-content-center " style="margin:5px";>
+                <button  type="button" id="patientsButton" class="btn btn-primary btn-md" onclick="showMedicals();">Show Medicals</button>
+            </div>
+            <div class="row  justify-content-center " style="margin:5px";>
+                <table style="display: none" id="patientsTable" class="table-sm  table-dark table-bordered" >
+                    <tr>
+                        <th>Name</th>
+                        <th>Surname</th>
+                        <th>ok</th>
+                        <th>ok</th>
+                        <th>suckit</th> 
+                    </tr>
+                </table>           
+            </div>
+
+            <div class="row  justify-content-center " style="margin:5px";>
+                <button  type="button" id="information-but" class="btn btn-primary btn-md" onclick="ShowInformation();">Add New Examination</button>
             </div>
             <div class="row  justify-content-center " style="margin:5px";>
                 <table style="display: none" id="personalTable" class="table-sm  table-dark table-bordered" >
@@ -112,9 +165,8 @@
                         <th>Phone</th> 
                     </tr>
                 </table>           
-            </div>
-        </div> 
-
+            </div>  
+        </div>
     </body>
 
     <footer>

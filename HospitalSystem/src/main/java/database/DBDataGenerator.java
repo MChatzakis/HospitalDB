@@ -187,6 +187,9 @@ public class DBDataGenerator {
         vis.addSymptom("3", "Taste_Lack");
         vis.addSymptom("3", "Fever");
 
+        vis.addVisit("2021-01-02", "2", "29");
+        vis.addSymptom("4", "Fever");
+
     }
 
     /* public void insertMedicals() throws SQLException, ClassNotFoundException {
@@ -210,6 +213,10 @@ public class DBDataGenerator {
         ex.addExamination("31", "16", "null", "null", "3", "2021-01-02");
         med.addMedical("Covid-19", "3", "31", "16", "21", "2021-01-02");
         reEx.addReExamination("31", "16", "3", "2021-01-02", "3", true);
+        
+        ex.addExamination("29", "16", "1", "1", "4", "2021-01-02");
+        med.addMedical("Covid-19", "4", "29", "16", "21", "2021-01-02");
+        reEx.addReExamination("29", "16", "4", "2021-01-02", "4", true);
     }
 
     /*public void insertReExams() throws SQLException, ClassNotFoundException {

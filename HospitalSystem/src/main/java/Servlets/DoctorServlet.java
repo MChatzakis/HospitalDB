@@ -84,6 +84,7 @@ public class DoctorServlet extends HttpServlet {
     public JSONObject getInfo(String username) throws SQLException, ClassNotFoundException {
         JSONObject obj = new JSONObject();
         DBConnection conn = new DBConnection();
+        int counter = 0;
 
         ResultSet res = null;
         String infoQuery = Queries.getDoctorInfoByUsername(username);
@@ -112,13 +113,13 @@ public class DoctorServlet extends HttpServlet {
         res = conn.executeQuery(drugsQuery);
 
         while (res != null && res.next()) {
-            obj.put("drug_id", res.getString("drug_id"));
-            obj.put("drug_name", res.getString("drug_name"));
-            obj.put("drug_type", res.getString("drug_type"));
-            obj.put("dosage", res.getString("dosage"));
-            obj.put("illness_id", res.getString("illness_id"));
-            obj.put("illness_name", res.getString("illness_name"));
-
+            obj.put("drug_id"+counter, res.getString("drug_id"));
+            obj.put("drug_name" +counter, res.getString("drug_name"));
+            obj.put("drug_type" +counter, res.getString("drug_type"));
+            obj.put("dosage" + counter, res.getString("dosage"));
+            obj.put("illness_id" +counter, res.getString("illness_id"));
+            obj.put("illness_name" + counter, res.getString("illness_name"));
+            counter++;
         }
 
         conn.closeDBConnection();
