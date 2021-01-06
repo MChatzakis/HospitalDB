@@ -1,0 +1,18 @@
+body {
+    background: url("../img/backround_image2.jpg") no-repeat fixed;
+    
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.footer {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #007bff;
+  color: gray;
+  text-align: center;
+}

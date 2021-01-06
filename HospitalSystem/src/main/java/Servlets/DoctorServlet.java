@@ -26,8 +26,7 @@ import org.json.JSONObject;
  *
  * @author George
  */
-@WebServlet
-@MultipartConfig
+
 public class DoctorServlet extends HttpServlet {
 
     int INFORMATION_ID = 1;
@@ -35,6 +34,8 @@ public class DoctorServlet extends HttpServlet {
     int Clinical_ID = 3;
     int VISIT_ID = 4;
     int FILL_INFORMATION_ID = 5;
+    
+    
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -46,6 +47,7 @@ public class DoctorServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        //System.out.println("hahahahahahaha");
         request.getRequestDispatcher("DoctorSite.jsp").forward(request, response);
     }
 
@@ -62,8 +64,10 @@ public class DoctorServlet extends HttpServlet {
         JSONObject obj = new JSONObject();
         int request_id = Integer.parseInt(request.getParameter("requestID"));
         System.out.println("request id is  : " + request_id);
-        if (request_id == FILL_INFORMATION_ID) {
+        //System.out.println("lalalalalala");
+        if (true){
             try {
+                System.out.println("Got initial request!");
                 obj = getInfo((String) request.getSession(false).getAttribute("username"));
                 PrintWriter out = response.getWriter();
                 response.setContentType("application/json");
