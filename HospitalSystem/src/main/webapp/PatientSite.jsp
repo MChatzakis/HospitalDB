@@ -21,18 +21,24 @@
         <%
             //allow access only if session exists
             String username = null;
-            if (!(request.getSession(false).getAttribute("type").equals("Patient"))) {
+            if (!(request.getSession(false).getAttribute("type").equals("Patient")))
+            {
                 response.sendRedirect("http://localhost:8080/HospitalSystem/");
 
-            } else {
+            }
+            else
+            {
                 username = (String) session.getAttribute("username");
             }
             String user = null;
             String sessionID = null;
             Cookie[] cookies = request.getCookies();
-            if (cookies != null) {
-                for (Cookie cookie : cookies) {
-                    if (cookie.getName().equals("user")) {
+            if (cookies != null)
+            {
+                for (Cookie cookie : cookies)
+                {
+                    if (cookie.getName().equals("user"))
+                    {
                         user = cookie.getValue();
                     }
 
@@ -56,68 +62,11 @@
 
                 <button type="button" id="information-but" class="btn btn-primary btn-md"
                         onclick="ShowInformation();">Information</button>
-                <button type="button" id="medical-but" class="btn btn-primary btn-md"
-                        onclick="ShowMedical();">Medical</button>
-                <button type="button" id="clinical-but" class="btn btn-primary" onclick="ShowClinical();">Clinical
-                    Medical</button>
+
                 <button type="button" id="visit-but" class="btn btn-primary btn-md" onclick="ShowVisits();">Visits</button>
             </div>
             <div class=" position-relative">
-                <table class="table-sm  table-dark table-bordered d-none position-absolute mt-2 btn-md" style="left:55% " id="clinical">
-                    <tr>
-                        <th>Drug</th>
-                        <th>Date</th>
-                        <th>Doctor</th>
-                        <th>Nurse</th>
-                        <th>Ilness</th>
-
-                    </tr>
-                    <tbody id="clinical_rows">
-                        <tr>
-                            <td>george</td>
-                            <td>Kokolakis</td>
-                            <td>omorfos</td>
-                        </tr>
-                        <tr>
-                            <td>eua</td>
-                            <td>xamhlakh</td>
-                            <td>xazoula</td>
-                        </tr>
-                        <tr>
-                            <td>manos</td>
-                            <td>xatzakhs</td>
-                            <td>asxhmos</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <table class="table-sm  table-dark d-none table-bordered position-absolute mt-2" style="left:23%" id="medical">
-
-                    <tr>
-                        <th>Type</th>
-                        <th>Date</th>
-                        <th>Doctor</th>
-                        <th>Nurse</th>
-                    </tr>
-                    <tbody>
-                        <tr>
-                            <td>george</td>
-                            <td>Kokolakis</td>
-                            <td>omorfos</td>
-                        </tr>
-                        <tr>
-                            <td>eua</td>
-                            <td>xamhlakh</td>
-                            <td>xazoula</td>
-                        </tr>
-                        <tr>
-                            <td>manos</td>
-                            <td>xatzakhs</td>
-                            <td>asxhmos</td>
-                        </tr>
-                    </tbody>
-                </table>
-
+                
                 <table class="table-sm  table-dark d-none  table-bordered position-absolute mt-2" style="left:95%" id="visit">
                     <tr>
                         <th>Date</th>

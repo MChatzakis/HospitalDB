@@ -13,9 +13,11 @@ import java.sql.SQLException;
  *
  * @author Manos Chatzakis
  */
-public class Queries {
+public class Queries
+{
 
-    public static int getMaxTableKey(String tableColumn, String tableName) throws SQLException, ClassNotFoundException {
+    public static int getMaxTableKey(String tableColumn, String tableName) throws SQLException, ClassNotFoundException
+    {
         String query = "SELECT MAX(" + tableColumn + ") FROM " + tableName + ";";
         ResultSet res = null;
         String result = null;
@@ -24,20 +26,23 @@ public class Queries {
 
         res = conn.executeQuery(query);
 
-        while (res != null && res.next()) {
+        while (res != null && res.next())
+        {
             result = res.getString(1);
         }
 
         conn.closeDBConnection();
 
-        if (!(result == null)) {
+        if (!(result == null))
+        {
             key = Integer.parseInt(result);
         }
 
         return key;
     }
 
-    public static String selectInitialPatientExaminations(int id) {
+    public static String selectInitialPatientExaminations(int id)
+    {
         String query = "SELECT drugs.name AS drug_name, examinations.date, illnesses.name AS illness_name\n"
                 + "FROM examinations\n"
                 + "LEFT JOIN drugs ON examinations.drug_id=drugs.drug_id\n"
@@ -50,7 +55,8 @@ public class Queries {
         return query;
     }
 
-    public static String selectMedicalsAndReExams(int id) {
+    public static String selectMedicalsAndReExams(int id)
+    {
         String query = "SELECT medicals.date AS medical_date, medicals.type, examinations.date AS re_examination_date, drugs.name AS drug_name, illnesses.name AS illness_name, examinations_retaken.hospitalization\n"
                 + "FROM examinations\n"
                 + "INNER JOIN examinations_retaken ON examinations_retaken.re_exam_id=examinations.exam_id\n"
@@ -61,7 +67,8 @@ public class Queries {
         return query;
     }
 
-    public static String selectPatientsOfDutyTime(int dutytimeID) {
+    public static String selectPatientsOfDutyTime(int dutytimeID)
+    {
         String query = "SELECT patients.patient_id, patients.name, patients.surname, patients.birth_date\n"
                 + "FROM patients\n"
                 + "INNER JOIN visit ON visit.patient_id = patients.patient_id\n"
@@ -70,7 +77,8 @@ public class Queries {
         return query;
     }
 
-    public static String selectDutiesOfDoctor(int doctorID) {
+    public static String selectDutiesOfDoctor(int doctorID)
+    {
         String query = "SELECT dutytime.date\n"
                 + "FROM dutytime\n"
                 + "INNER JOIN doctor_duties ON doctor_duties.dutytime_id = dutytime.dutytime_id\n"
@@ -78,22 +86,26 @@ public class Queries {
         return query;
     }
 
-    public static String selectAllDoctors() {
+    public static String selectAllDoctors()
+    {
         String query = "SELECT * FROM doctors";
         return query;
     }
 
-    public static String selectAllPatients() {
+    public static String selectAllPatients()
+    {
         String query = "SELECT * FROM patients";
         return query;
     }
 
-    public static String selectAllNurses() {
+    public static String selectAllNurses()
+    {
         String query = "SELECT * FROM nurses";
         return query;
     }
 
-    public static String selectAllWorkers() {
+    public static String selectAllWorkers()
+    {
         String query = "SELECT * FROM coordinators";
         return query;
     }
@@ -113,15 +125,17 @@ public class Queries {
             + "LEFT JOIN drugs ON examinations.drug_id = drugs.drug_id\n"
             + "LEFT JOIN illnesses ON illnesses.illness_id = drugs.illness_id";
 
-    public static String getPatientInfoByUsername(String username) {
+    public static String getPatientInfoByUsername(String username)
+    {
         String query = "SELECT  name, surname, address, users.email, phone, birth_date, amka, at, insurance \n"
                 + "FROM patients\n"
                 + "INNER JOIN users ON patients.patient_id = users.user_id\n"
-                + "WHERE users.username = \""+ username+"\";";
+                + "WHERE users.username = " + " \'" + username + "\' " + ";";
         return query;
     }
 
-    public static String getDoctorInfoByUsername(String username) {
+    public static String getDoctorInfoByUsername(String username)
+    {
         String query = "SELECT  *\n"
                 + "FROM users\n"
                 + "INNER JOIN doctors ON doctors.doctor_id = users.user_id\n"
@@ -129,7 +143,8 @@ public class Queries {
         return query;
     }
 
-    public static String getDoctorInfoByID(int docID) {
+    public static String getDoctorInfoByID(int docID)
+    {
         String query = "SELECT  *\n"
                 + "FROM users\n"
                 + "INNER JOIN doctors ON doctors.doctor_id = users.user_id\n"
@@ -137,7 +152,8 @@ public class Queries {
         return query;
     }
 
-    public static void getAllVisitExaminationInfo(int patientID) {
+    public static String getAllVisitExaminationInfo(int patientID)
+    {
         String visitQuery = "SELECT DISTINCT visit.date, illnesses.name AS illness, drugs.name AS drug, medicals.type AS medical , examinations_retaken.hospitalization\n"
                 + "FROM visit\n"
                 + "INNER JOIN examinations ON examinations.visit_id = visit.visit_id\n"
@@ -146,11 +162,17 @@ public class Queries {
                 + "LEFT JOIN drugs ON examinations.drug_id = drugs.drug_id\n"
                 + "LEFT JOIN illnesses ON illnesses.illness_id = drugs.illness_id\n"
                 + "WHERE visit.patient_id = " + patientID + ";";
-        String symptomQuery = "SELECT visit_symptoms.symptom\n"
-                + "FROM visit_symptoms\n"
-                + "INNER JOIN visit ON visit_symptoms.visit_id = visit.visit_id\n"
-                + "WHERE visit.patient_id = " + patientID + ";";
+        return visitQuery;
 
     }
 
+    public static String getAllVisitSymptomsInfo(int patientID)
+    {
+
+        String symptomQuery = "SELECT visit_symptoms.symptom , visit_symptoms.visit_id\n"
+                + "FROM visit_symptoms\n"
+                + "INNER JOIN visit ON visit_symptoms.visit_id = visit.visit_id\n"
+                + "WHERE visit.patient_id = " + patientID + ";";
+        return  symptomQuery;
+    }
 }

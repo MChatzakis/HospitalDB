@@ -26,72 +26,87 @@ import javax.servlet.http.HttpSession;
  *
  * @author George
  */
-public class LoginServlet extends HttpServlet {
+public class LoginServlet extends HttpServlet
+{
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ArrayList<String>ret = new ArrayList<String>();
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    {
+        ArrayList<String> ret = new ArrayList<String>();
         String type = null;
         int userID = -1;
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        try {
+        try
+        {
             ret = Validate(username, password);
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             e.printStackTrace();
         }
 
-        if (ret == null) {
+        if (ret == null)
+        {
             System.out.println("wrong credentials");
             response.sendRedirect("http://localhost:8080/HospitalSystem/");
-        } else {
+        }
+        else
+        {
             type = ret.get(0);
             userID = Integer.parseInt(ret.get(1));
-            
+
             System.out.println("Success: Type user is " + type);
             System.out.println("Success: User ID is " + userID);
             System.out.println("Success: Username is " + username);
-            System.out.println("Success: Password is "+ password) ;
-            
+            System.out.println("Success: Password is " + password);
+
             HttpSession session = request.getSession(); //Creating a session
             session.setAttribute("type", type); //setting session attribute
             session.setAttribute("username", username); //setting session attribute
-            session.setAttribute("user_id", userID);
-            
-            Cookie userName = new Cookie("user", username);
+            session.setAttribute("user_id",userID );//String.valueOf(userID)
+          
+
+            //Cookie userName = new Cookie("user", username);
             response.sendRedirect(request.getContextPath() + "/" + type + "Servlet");
         }
 
     }
 
-    ArrayList<String> Validate(String username, String password) throws SQLException, ClassNotFoundException {
+    ArrayList<String> Validate(String username, String password) throws SQLException, ClassNotFoundException
+    {
         String query;
-        ArrayList<String>values = new ArrayList<String>();
-        String userPassword = null,userType = null;
+        ArrayList<String> values = new ArrayList<String>();
+        String userPassword = null, userType = null;
         int userId = -1;
         ResultSet res = null;
 
         query = "SELECT password , user_id ,user_type FROM users WHERE username=" + "\'" + username + "\'";
         DBConnection conn = new DBConnection();
         res = conn.executeQuery(query);
-        if (res == null) {
+        if (res == null)
+        {
             System.err.println("wrong query idiot");
             return null;
         }
 
-        while (res != null && res.next()) {
+        while (res != null && res.next())
+        {
             userPassword = res.getString("password");
             userId = res.getInt("user_id");
             userType = res.getString("user_type");
         }
-        if (password.equals(userPassword)) {
+        if (password.equals(userPassword))
+        {
 
             System.out.println("Correct credentials");
             System.out.println("logged in with username : " + username);
             values.add(userType);
             values.add(String.valueOf(userId));
             return values;
-        } else {
+        }
+        else
+        {
             System.err.println("idiot wrong credentials");
         }
         conn.closeDBConnection();

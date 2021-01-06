@@ -6,10 +6,7 @@
 
 //defines
 
-var INFORMATION_ID = 1
-var MEDICAL_ID = 2
-var Clinical_ID = 3
-var VISIT_ID = 4
+var FILL_HISTORY_ID = 1
 var FILL_INFORMATION_ID = 5
 
 
@@ -23,35 +20,24 @@ $(document).ready(function () {
 
     FillForm();
 
+    FillHistory();
+
 });
 
 
-function FillMedical() {
 
-    formData = "requestID=" + MEDICAL_ID;   //"requestid=2&name="lala"
-    // HTML file input, chosen by user
+function FillHistory() {
+    //formData = "requestID=" + FILL_HISTORY_ID;
+    formData = "requestID=" + FILL_HISTORY_ID;
+
+
+// HTML file input, chosen by user
     var url = "http://localhost:8080/HospitalSystem/PatientServlet"
 
-    SendXmlForm(url, formData, MEDICAL_ID);
+    SendXmlForm(url, formData, FILL_HISTORY_ID);
 
 }
-function  FillClinical()
-{
-    formData = "requestID=" + Clinical_ID;
-    // HTML file input, chosen by user
-    var url = "http://localhost:8080/HospitalSystem/PatientServlet"
 
-    SendXmlForm(url, formData, Clinical_ID);
-
-}
-function FillVisits() {
-    formData = "requestID=" + VISIT_ID;
-    // HTML file input, chosen by user
-    var url = "http://localhost:8080/HospitalSystem/PatientServlet"
-
-    SendXmlForm(url, formData, VISIT_ID);
-
-}
 
 function FillForm() {
 
@@ -77,34 +63,28 @@ function CallBackFillForm(data)
     $('input[name=insurance]').attr('value', data.insurance);
 }
 
-function CallBackFillMedical(data) {
+function CallBackFillHistory(data)
+{
+    var data = JSON.parse(data.responseText);
+    for (var i = 0; i < data.length; i++) {
+        var obj = data[i];
+        console.log(obj.date);
+        console.log(obj.illness);
+        console.log(obj.drug);
+        console.log(obj.medical);
+        console.log(obj.hospitalization);
+
+        console.log(obj);
+    }
 
 }
-function CallBackFillClinical(data) {
-
-
-}
-function CallBackFillVisits(data) {
-
-}
-
-
-
-
-
-
-
-
-
-
-
 
 function SendXmlForm(url, formData, req_id)
 {
 
     var request = new XMLHttpRequest();
     request.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200)
+        if (this.readyState === 4 && this.status == 200)
         {
             // Typical action to be performed when the document is ready:
             // console.log("lalal : " +request.responseText) ;
@@ -113,15 +93,11 @@ function SendXmlForm(url, formData, req_id)
             {
                 CallBackFillForm(request);
 
-            } else if (req_id === MEDICAL_ID)
-            {
-                CallBackFillMedical(request);
-            } else if (req_id === Clinical_ID) {
-                CallBackFillMedical(request)
-            } else
-            {
-                CallBackFillVisits(request);
+            } else if (req_id === FILL_HISTORY_ID) {
+                CallBackFillHistory(request);
+
             }
+
 
         }
     };
