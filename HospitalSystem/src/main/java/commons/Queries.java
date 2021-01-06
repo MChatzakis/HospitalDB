@@ -139,7 +139,7 @@ public class Queries
         String query = "SELECT  *\n"
                 + "FROM users\n"
                 + "INNER JOIN doctors ON doctors.doctor_id = users.user_id\n"
-                + "WHERE users.user_id = " + " \'" + username + "\' " + ";";
+                + "WHERE users.username = " + " \'" + username + "\' " + ";";
         return query;
     }
 

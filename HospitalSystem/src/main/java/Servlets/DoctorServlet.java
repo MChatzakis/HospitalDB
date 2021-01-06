@@ -26,7 +26,6 @@ import org.json.JSONObject;
  *
  * @author George
  */
-
 public class DoctorServlet extends HttpServlet {
 
     int INFORMATION_ID = 1;
@@ -34,8 +33,6 @@ public class DoctorServlet extends HttpServlet {
     int Clinical_ID = 3;
     int VISIT_ID = 4;
     int FILL_INFORMATION_ID = 5;
-    
-    
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -65,7 +62,7 @@ public class DoctorServlet extends HttpServlet {
         int request_id = Integer.parseInt(request.getParameter("requestID"));
         System.out.println("request id is  : " + request_id);
         //System.out.println("lalalalalala");
-        if (true){
+        if (request_id == 1) {
             try {
                 System.out.println("Got initial request!");
                 obj = getInfo((String) request.getSession(false).getAttribute("username"));
@@ -89,12 +86,15 @@ public class DoctorServlet extends HttpServlet {
         DBConnection conn = new DBConnection();
 
         ResultSet res = null;
-        String query = Queries.getDoctorInfoByUsername(username);
+        String infoQuery = Queries.getDoctorInfoByUsername(username);
+        String drugsQuery = "SELECT drugs.drug_id, drugs.name AS drug_name, drugs.type AS drug_type, drugs.dosage, drugs.illness_id, illnesses.name AS illness_name\n"
+                + "FROM drugs\n"
+                + "INNER JOIN illnesses ON drugs.illness_id = illnesses.illness_id;";
 
-        res = conn.executeQuery(query);
+        res = conn.executeQuery(infoQuery);
 
         if (res == null) {
-            System.err.println("Wrong Username");
+            System.err.println("something went wrong!");
             return null;
         }
 
@@ -107,6 +107,18 @@ public class DoctorServlet extends HttpServlet {
             obj.put("type", res.getString("type"));
             obj.put("username", res.getString("username"));
             obj.put("email", res.getString("email"));
+        }
+
+        res = conn.executeQuery(drugsQuery);
+
+        while (res != null && res.next()) {
+            obj.put("drug_id", res.getString("drug_id"));
+            obj.put("drug_name", res.getString("drug_name"));
+            obj.put("drug_type", res.getString("drug_type"));
+            obj.put("dosage", res.getString("dosage"));
+            obj.put("illness_id", res.getString("illness_id"));
+            obj.put("illness_name", res.getString("illness_name"));
+
         }
 
         conn.closeDBConnection();

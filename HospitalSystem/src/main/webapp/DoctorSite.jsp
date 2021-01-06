@@ -58,9 +58,11 @@
                     <tr>
                         <th>Name</th>
                         <th>Surname</th>
-                        <th>Email</th>
                         <th>Address</th>
                         <th>Phone</th> 
+                        <th>AT</th> 
+                        <th>Type</th> 
+                        <th>Email</th>
                     </tr>
                 </table>           
             </div>
