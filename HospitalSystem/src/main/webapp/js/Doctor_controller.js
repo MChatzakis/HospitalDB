@@ -10,8 +10,7 @@ var url = "http://localhost:8080/HospitalSystem/DoctorServlet";
 
 $(document).ready(function () {
     console.log('Document ready -- Getting the initial information');
-    formData = "requestID=" + GET_PERSONAL_AND_DRUGS;
-    sendXmlForm(url, formData, GET_PERSONAL_AND_DRUGS);
+    sendXmlForm(url, GET_PERSONAL_AND_DRUGS);
 
 });
 
@@ -56,9 +55,9 @@ function showPatients() {
     }
 }
 
-function sendXmlForm(url, formData, req_id) {
+function sendXmlForm(url, formData, reqID) {
     var request = new XMLHttpRequest();
-
+     formData = "requestID=" + reqID;
     request.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 200) {
             if (req_id === GET_PERSONAL_AND_DRUGS) {
