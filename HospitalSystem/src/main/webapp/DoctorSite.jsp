@@ -76,6 +76,7 @@
                     </tr>
                 </table>        
             </div>
+
             <div class="row  justify-content-center " style="margin:5px";>
                 <button  type="button" id="drugButton" class="btn btn-primary btn-md" onclick="showDrugs();">Show Drugs and Illnesses</button>
             </div>
@@ -100,73 +101,111 @@
                     <tr>
                         <th>Name</th>
                         <th>Surname</th>
-                        <th>ok</th>
-                        <th>ok</th>
-                        <th>suckit</th> 
+                        <th>Patient ID</th>
+                        <th>Visit ID</th>
+                        <th>Birth Date</th> 
+                        <th>AMKA</th>
                     </tr>
                 </table>           
             </div>
 
             <div class="row  justify-content-center " style="margin:5px";>
-                <button  type="button" id="patientsButton" class="btn btn-primary btn-md" onclick="showExaminations();">Show Examinations</button>
+                <button  type="button" id="examinationsButton" class="btn btn-primary btn-md" onclick="showExaminations();">Show Current Examinations</button>
             </div>
             <div class="row  justify-content-center " style="margin:5px";>
-                <table style="display: none" id="patientsTable" class="table-sm  table-dark table-bordered" >
+                <table style="display: none" id="examinationsTable" class="table-sm  table-dark table-bordered" >
                     <tr>
-                        <th>Name</th>
-                        <th>Surname</th>
-                        <th>ok</th>
-                        <th>ok</th>
-                        <th>suckit</th> 
+                        <th>Exam ID</th>
+                        <th>Patient ID</th>
+                        <th>Drug ID</th>
+                        <th>Illness ID</th>
+                        <th>Doctor ID</th> 
                     </tr>
                 </table>           
             </div>
 
             <div class="row  justify-content-center " style="margin:5px";>
-                <button  type="button" id="patientsButton" class="btn btn-primary btn-md" onclick="showMedicals();">Show Medicals</button>
+                <button  type="button" id="medicalsButton" class="btn btn-primary btn-md" onclick="showMedicals();">Show Current Medicals</button>
             </div>
             <div class="row  justify-content-center " style="margin:5px";>
-                <table style="display: none" id="patientsTable" class="table-sm  table-dark table-bordered" >
+                <table style="display: none" id="medicalsTable" class="table-sm  table-dark table-bordered" >
                     <tr>
-                        <th>Name</th>
-                        <th>Surname</th>
-                        <th>ok</th>
-                        <th>ok</th>
-                        <th>suckit</th> 
+                        <th>Medical ID</th>
+                        <th>Exam ID</th>
+                        <th>Patient ID</th>
+                        <th>Nurse ID</th>
+                        <th>Doctor ID</th> 
+                        <th>Type</th> 
                     </tr>
                 </table>           
             </div>
 
             <div class="row  justify-content-center " style="margin:5px";>
-                <button  type="button" id="information-but" class="btn btn-primary btn-md" onclick="ShowInformation();">Add New Examination</button>
+                <button  type="button" id="addExaminationButton" class="btn btn-primary btn-md" onclick="showExaminationForm();">Add New Examination</button>
             </div>
             <div class="row  justify-content-center " style="margin:5px";>
-                <table style="display: none" id="personalTable" class="table-sm  table-dark table-bordered" >
-                    <tr>
-                        <th>Name</th>
-                        <th>Surname</th>
-                        <th>Email</th>
-                        <th>Address</th>
-                        <th>Phone</th> 
-                    </tr>
-                </table>           
+                <form  style="display: none" id="examForm" class="row col-6  justify-content-center mt-3 table-dark ">
+                    <div class="row">
+                        <div class="form-group col ">
+                            <label for="visitID">Patient ID</label>
+                            <input type="text" name="visitID" value="" class="form-control" id="visitID" placeholder="">
+                        </div>
+                        <div class="form-group col ">
+                            <label for="visitID">Visit ID</label>
+                            <input type="text" name="visitID" value="" class="form-control" id="visitID" placeholder="">
+                        </div>
+                        <div class="form-group col ">
+                            <label for="visitID">Drug ID</label>
+                            <input type="text" name="visitID" value="" class="form-control" id="visitID" placeholder="">
+                        </div>
+                        <div class="form-group col ">
+                            <label for="visitID">Illness ID</label>
+                            <input type="text" name="visitID" value="" class="form-control" id="visitID" placeholder="">
+                        </div>
+                        <div class="form-group col ">
+                            <label for="visitID">Date</label>
+                            <input type="text" name="visitID" value="" class="form-control" id="visitID" placeholder="">
+                        </div>
+                    </div>
+                    <div>
+                        <input type="submit" value="Add" class="btn btn-primary" id="addExamButton"  onClick="SaveForm()">
+                    </div>
+                </form>
             </div>
 
             <div class="row  justify-content-center " style="margin:5px";>
-                <button  type="button" id="information-but" class="btn btn-primary btn-md" onclick="ShowInformation();">New Re - Examination</button>
+                <button  type="button" id="reExaminationButton" class="btn btn-primary btn-md" onclick=showReExaminationForm();">New Re - Examination</button>
             </div>
             <div class="row  justify-content-center " style="margin:5px";>
-                <table style="display: none" id="personalTable" class="table-sm  table-dark table-bordered" >
-                    <tr>
-                        <th>Name</th>
-                        <th>Surname</th>
-                        <th>Email</th>
-                        <th>Address</th>
-                        <th>Phone</th> 
-                    </tr>
-                </table>           
-            </div>  
-        </div>
+                <form  style="display: none" id="reExaminationForm" class="row col-6  justify-content-center mt-3 table-dark ">
+                    <div class="row">
+                        <div class="form-group col ">
+                            <label for="visitID">Patient ID</label>
+                            <input type="text" name="visitID" value="" class="form-control" id="visitID" placeholder="">
+                        </div>
+                        <div class="form-group col ">
+                            <label for="visitID">Current Visit ID</label>
+                            <input type="text" name="visitID" value="" class="form-control" id="visitID" placeholder="">
+                        </div>
+                        <div class="form-group col ">
+                            <label for="visitID">Drug ID</label>
+                            <input type="text" name="visitID" value="" class="form-control" id="visitID" placeholder="">
+                        </div>
+                        <div class="form-group col ">
+                            <label for="visitID">Illness ID</label>
+                            <input type="text" name="visitID" value="" class="form-control" id="visitID" placeholder="">
+                        </div>
+                        <div class="form-group col ">
+                            <label for="visitID">Date</label>
+                            <input type="text" name="visitID" value="" class="form-control" id="visitID" placeholder="">
+                        </div>
+                    </div>
+                    <div>
+                        <input type="submit" value="Add" class="btn btn-primary" id="addExamButton"  onClick="SaveForm()">
+                    </div>
+                </form>
+            </div>
+
     </body>
 
     <footer>

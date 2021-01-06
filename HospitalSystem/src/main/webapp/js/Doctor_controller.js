@@ -1,9 +1,5 @@
 var GET_PERSONAL_AND_DRUGS = 1;
-var GET_DUTIES = 2;
-var GET_MEDICALS = 3;
-var GET_EXAMINATIONS = 4;
-var GET_RE_EXAMINATIONS = 5;
-var GET_PATIENTS = 6;
+var GET_EXAMS_AND_MEDICALS = 2;
 
 var currentDutyTime = 0;
 var url = "http://localhost:8080/HospitalSystem/DoctorServlet";
@@ -11,7 +7,7 @@ var url = "http://localhost:8080/HospitalSystem/DoctorServlet";
 $(document).ready(function () {
     console.log('Document ready -- Getting the initial information');
     sendXmlForm(url, GET_PERSONAL_AND_DRUGS);
-
+    sendXmlForm(url, GET_EXAMS_AND_MEDICALS);
 });
 
 function showPersonal() {
@@ -55,15 +51,59 @@ function showPatients() {
     }
 }
 
-function sendXmlForm(url, formData, reqID) {
+function showExaminations() {
+    var d = document.getElementById('examinationsButton');
+    var e = document.getElementById('examinationsTable');
+    if (e.style.display === 'none' || e.style.display === '') {
+        e.style.display = 'block';
+        d.innerHTML = 'Hide Current Examinations';
+    } else {
+        e.style.display = 'none';
+        d.innerHTML = 'Show Current Examinations';
+    }
+}
+
+
+function showMedicals() {
+    var d = document.getElementById('medicalsButton');
+    var e = document.getElementById('medicalsTable');
+    if (e.style.display === 'none' || e.style.display === '') {
+        e.style.display = 'block';
+        d.innerHTML = 'Hide Current Medicals';
+    } else {
+        e.style.display = 'none';
+        d.innerHTML = 'Show Current Medicals';
+    }
+}
+
+
+function showExaminationForm() {
+    var d = document.getElementById('addExaminationButton');
+    var e = document.getElementById('examForm');
+    if (e.style.display === 'none' || e.style.display === '') {
+        e.style.display = 'block';
+        d.innerHTML = 'Hide Examination Form';
+    } else {
+        e.style.display = 'none';
+        d.innerHTML = 'Show Examination Form';
+    }
+}
+
+
+function sendXmlForm(url, reqID) {
     var request = new XMLHttpRequest();
-     formData = "requestID=" + reqID;
+    formData = "requestID=" + reqID;
     request.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 200) {
-            if (req_id === GET_PERSONAL_AND_DRUGS) {
+            if (reqID === GET_PERSONAL_AND_DRUGS) {
+                console.log("Filling personal data and medical supplies information");
                 callBackFillPersonalData(request);
                 callBackFillDuties(request);
                 callBackFillDrugsAndIllnesses(request);
+            } else if (reqID === GET_EXAMS_AND_MEDICALS) {
+                console.log("Filling examinationn and medical information");
+                callBackFillExams(request);
+                callBackFillMedicals(request);
             }
         }
     }
@@ -109,5 +149,50 @@ function callBackFillDrugsAndIllnesses(request) {
             cell.innerHTML = data[dataTable[i] + "" + counter];
         }
         counter++;
+    }
+}
+
+function callBackFillExams(request) {
+    var data = JSON.parse(request.responseText);
+    var table = document.getElementById('examinationsTable');
+    var dataTable = ["exam_id", "patient_id", "drug_id", "illness_id", "doctor_id"];
+    var total = data.examsNumber;
+    var counter = 0;
+
+    for (var i = 0; i < total; i++) {
+        row = table.insertRow(i + 1);
+        for (var j = 0; j < 5; j++) {
+            var cell = row.insertCell(j);
+            cell.innerHTML = data[dataTable[j] + "" + i];
+        }
+    }
+}
+
+function callBackFillMedicals(request) {
+    var data = JSON.parse(request.responseText);
+    var table = document.getElementById('medicalsTable');
+    var dataTable = ["m_medical_id", "m_exam_id", "m_patient_id", "m_nurse_id", "m_doctor_id", "m_type"];
+    var total = data.medicalsNumber;
+    var counter = 0;
+    console.log("asasasasasa: " + total);
+    for (var i = 0; i < total; i++) {
+        row = table.insertRow(i + 1);
+        for (var j = 0; j < 6; j++) {
+            var cell = row.insertCell(j);
+            console.log(data[dataTable[j] + "" + i]);
+            cell.innerHTML = data[dataTable[j] + "" + i];
+        }
+    }
+}
+
+function showReExaminationForm() {
+    var d = document.getElementById('addReExaminationButton');
+    var e = document.getElementById('reExaminationForm');
+    if (e.style.display === 'none' || e.style.display === '') {
+        e.style.display = 'block';
+        d.innerHTML = 'Hide Re - Examination Form';
+    } else {
+        e.style.display = 'none';
+        d.innerHTML = 'Show Re - Examination Form';
     }
 }

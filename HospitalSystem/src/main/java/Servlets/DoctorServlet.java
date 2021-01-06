@@ -67,7 +67,9 @@ public class DoctorServlet extends HttpServlet {
             case 1:
                // obj = getPersonalAndDrugInfo((int) request.getSession(false).getAttribute("user_id"));
                 break;
-        
+            case 2:
+                obj = getMedicalAndExaminationInfo((int) request.getSession(false).getAttribute("user_id"));
+                break;
             }
             out.print(obj);
             out.flush();
@@ -75,6 +77,60 @@ public class DoctorServlet extends HttpServlet {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public JSONObject getMedicalAndExaminationInfo(int user_id) throws SQLException, ClassNotFoundException {
+        DBConnection conn = new DBConnection();
+        JSONObject obj = new JSONObject();
+
+        int counter = 0;
+        int currentDutyNumber = 1;
+
+        ResultSet res = null;
+
+        String examinationsQuery = "SELECT examinations.exam_id, examinations.patient_id, examinations.drug_id, examinations.illness_id ,examinations.doctor_id\n"
+                + "FROM patients\n"
+                + "INNER JOIN visit ON visit.patient_id = patients.patient_id\n"
+                + "INNER JOIN examinations ON examinations.visit_id = visit.visit_id\n"
+                + "WHERE visit.dutytime_id = " + currentDutyNumber + ";";
+        String medicalsQuery = "SELECT medicals.medical_id, medicals.exam_id, medicals.patient_id, medicals.nurse_id, medicals.doctor_id,medicals.type\n"
+                + "FROM patients\n"
+                + "INNER JOIN visit ON visit.patient_id = patients.patient_id\n"
+                + "INNER JOIN examinations ON examinations.visit_id = visit.visit_id\n"
+                + "INNER JOIN medicals ON medicals.exam_id = examinations.exam_id\n"
+                + "WHERE visit.dutytime_id =" + currentDutyNumber + ";";
+
+        res = conn.executeQuery(examinationsQuery);
+        counter = 0;
+
+        while (res != null && res.next()) {
+            obj.put("exam_id" + counter, res.getString("exam_id"));
+            obj.put("patient_id" + counter, res.getString("patient_id"));
+            obj.put("drug_id" + counter, res.getString("drug_id"));
+            obj.put("illness_id" + counter, res.getString("illness_id"));
+            obj.put("doctor_id" + counter, res.getString("doctor_id"));
+            counter++;
+        }
+
+        obj.put("examsNumber", counter);
+
+        res = conn.executeQuery(medicalsQuery);
+        counter = 0;
+
+        while (res != null && res.next()) {
+            obj.put("m_medical_id" + counter, res.getString("medical_id"));
+            obj.put("m_exam_id" + counter, res.getString("exam_id"));
+            obj.put("m_patient_id" + counter, res.getString("patient_id"));
+            obj.put("m_nurse_id" + counter, res.getString("nurse_id"));
+            obj.put("m_doctor_id" + counter, res.getString("doctor_id"));
+            obj.put("m_type" + counter, res.getString("type"));
+            counter++;
+        }
+
+        obj.put("medicalsNumber", counter);
+
+        conn.closeDBConnection();
+        return obj;
     }
 
     public JSONObject getPersonalAndDrugInfo(int user_id) throws SQLException, ClassNotFoundException {
@@ -91,7 +147,7 @@ public class DoctorServlet extends HttpServlet {
                 + "FROM dutytime\n"
                 + "INNER JOIN doctor_duties ON dutytime.dutytime_id = doctor_duties.dutytime_id\n"
                 + "WHERE doctor_duties.doctor_id = " + user_id + ";";
-        
+
         res = conn.executeQuery(infoQuery);
 
         if (res == null) {
@@ -129,7 +185,7 @@ public class DoctorServlet extends HttpServlet {
             obj.put("duty" + counter, res.getString("date"));
             counter++;
         }
-        
+
         obj.put("dutytimes", counter);
 
         conn.closeDBConnection();
