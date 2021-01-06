@@ -1,4 +1,4 @@
-var GET_INITIAL_INFO = 1;
+var GET_PERSONAL_AND_DRUGS = 1;
 var GET_DUTIES = 2;
 var GET_MEDICALS = 3;
 var GET_EXAMINATIONS = 4;
@@ -10,9 +10,9 @@ var url = "http://localhost:8080/HospitalSystem/DoctorServlet";
 
 $(document).ready(function () {
     console.log('Document ready -- Getting the initial information');
-    formData = "requestID=" + GET_INITIAL_INFO;
-    sendXmlForm(url, formData, GET_INITIAL_INFO);
-    
+    formData = "requestID=" + GET_PERSONAL_AND_DRUGS;
+    sendXmlForm(url, formData, GET_PERSONAL_AND_DRUGS);
+
 });
 
 function showPersonal() {
@@ -30,14 +30,6 @@ function showPersonal() {
         f.style.display = 'none';
         d.innerHTML = 'Show Personal Info';
     }
-
-    /*if (f.style.display === 'none' || f.style.display === '') {
-        f.style.display = 'block';
-        //d.innerHTML = 'Hide Personal Info';
-    } else {
-        f.style.display = 'none';
-        //d.innerHTML = 'Show Personal Info';
-    }*/
 }
 
 function showDrugs() {
@@ -66,13 +58,13 @@ function showPatients() {
 
 function sendXmlForm(url, formData, req_id) {
     var request = new XMLHttpRequest();
-    console.log('XML');
+
     request.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 200) {
-            console.log('Inside if');
-            if (req_id === GET_INITIAL_INFO) {
-                console.log('Sending XML form for initial tables')
-                CallBackFillInitialTables(request);
+            if (req_id === GET_PERSONAL_AND_DRUGS) {
+                callBackFillPersonalData(request);
+                callBackFillDuties(request);
+                callBackFillDrugsAndIllnesses(request);
             }
         }
     }
@@ -82,10 +74,21 @@ function sendXmlForm(url, formData, req_id) {
     request.send(formData);
 }
 
-function CallBackFillInitialTables(request) {
-    console.log('Inside call back fill');
+function callBackFillDuties(request) {
     var data = JSON.parse(request.responseText);
-    var counter = 0;
+    var table = document.getElementById('personalDuties');
+    var dt = "duty";
+    var total = data.dutytimes;
+    console.log("Times: " + total);
+    for (var i = 0; i < total; i++) {
+        var row = table.insertRow((i + 1));
+        var cell = row.insertCell(0);
+        cell.innerHTML = data[dt + "" + i];
+    }
+}
+
+function callBackFillPersonalData(request) {
+    var data = JSON.parse(request.responseText);
     var table = document.getElementById('personalTable');
     var row = table.insertRow(1);
     var dataTable = [data.name, data.surname, data.address, data.phone, data.at, data.type, data.username, data.email];
@@ -93,8 +96,13 @@ function CallBackFillInitialTables(request) {
         var cell = row.insertCell(i);
         cell.innerHTML = dataTable[i];
     }
-    table = document.getElementById('drugTable');
-    dataTable = ["drug_id", "drug_name", "drug_type", "dosage", "illness_id", "illness_name"];
+}
+
+function callBackFillDrugsAndIllnesses(request) {
+    var data = JSON.parse(request.responseText);
+    var table = document.getElementById('drugTable');
+    var dataTable = ["drug_id", "drug_name", "drug_type", "dosage", "illness_id", "illness_name"];
+    var counter = 0;
     for (var j = 1; j <= 5; j++) {
         row = table.insertRow(j);
         for (var i = 0; i < 6; i++) {

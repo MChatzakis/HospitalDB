@@ -28,11 +28,7 @@ import org.json.JSONObject;
  */
 public class DoctorServlet extends HttpServlet {
 
-    int INFORMATION_ID = 1;
-    int MEDICAL_ID = 2;
-    int Clinical_ID = 3;
-    int VISIT_ID = 4;
-    int FILL_INFORMATION_ID = 5;
+    int DOCTOR_DRUG_INFORMATION = 1;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -61,37 +57,41 @@ public class DoctorServlet extends HttpServlet {
         JSONObject obj = new JSONObject();
         int request_id = Integer.parseInt(request.getParameter("requestID"));
         System.out.println("request id is  : " + request_id);
-        //System.out.println("lalalalalala");
-        if (request_id == 1) {
-            try {
-                System.out.println("Got initial request!");
-                obj = getInfo((String) request.getSession(false).getAttribute("username"));
-                PrintWriter out = response.getWriter();
-                response.setContentType("application/json");
-                response.setCharacterEncoding("UTF-8");
-                out.print(obj);
-                out.flush();
-                System.out.println(obj.toString(0));
+        try {
 
-            } catch (SQLException ex) {
-                Logger.getLogger(PatientServlet.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(PatientServlet.class.getName()).log(Level.SEVERE, null, ex);
+            PrintWriter out = response.getWriter();
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+
+            switch (request_id) {
+            case 1:
+                obj = getPersonalAndDrugInfo((int) request.getSession(false).getAttribute("user_id"));
+                break;
+        
             }
+            out.print(obj);
+            out.flush();
+            System.out.println(obj.toString(0));
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
-    public JSONObject getInfo(String username) throws SQLException, ClassNotFoundException {
+    public JSONObject getPersonalAndDrugInfo(int user_id) throws SQLException, ClassNotFoundException {
         JSONObject obj = new JSONObject();
         DBConnection conn = new DBConnection();
         int counter = 0;
 
         ResultSet res = null;
-        String infoQuery = Queries.getDoctorInfoByUsername(username);
+        String infoQuery = Queries.getDoctorInfoByID(user_id);
         String drugsQuery = "SELECT drugs.drug_id, drugs.name AS drug_name, drugs.type AS drug_type, drugs.dosage, drugs.illness_id, illnesses.name AS illness_name\n"
                 + "FROM drugs\n"
                 + "INNER JOIN illnesses ON drugs.illness_id = illnesses.illness_id;";
-
+        String dutyTimeQuery = "SELECT dutytime.date\n"
+                + "FROM dutytime\n"
+                + "INNER JOIN doctor_duties ON dutytime.dutytime_id = doctor_duties.dutytime_id\n"
+                + "WHERE doctor_duties.doctor_id = " + user_id + ";";
+        
         res = conn.executeQuery(infoQuery);
 
         if (res == null) {
@@ -113,14 +113,24 @@ public class DoctorServlet extends HttpServlet {
         res = conn.executeQuery(drugsQuery);
 
         while (res != null && res.next()) {
-            obj.put("drug_id"+counter, res.getString("drug_id"));
-            obj.put("drug_name" +counter, res.getString("drug_name"));
-            obj.put("drug_type" +counter, res.getString("drug_type"));
+            obj.put("drug_id" + counter, res.getString("drug_id"));
+            obj.put("drug_name" + counter, res.getString("drug_name"));
+            obj.put("drug_type" + counter, res.getString("drug_type"));
             obj.put("dosage" + counter, res.getString("dosage"));
-            obj.put("illness_id" +counter, res.getString("illness_id"));
+            obj.put("illness_id" + counter, res.getString("illness_id"));
             obj.put("illness_name" + counter, res.getString("illness_name"));
             counter++;
         }
+
+        res = conn.executeQuery(dutyTimeQuery);
+        counter = 0;
+
+        while (res != null && res.next()) {
+            obj.put("duty" + counter, res.getString("date"));
+            counter++;
+        }
+        
+        obj.put("dutytimes", counter);
 
         conn.closeDBConnection();
         return obj;
