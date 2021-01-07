@@ -13,15 +13,10 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.MultipartConfig;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -62,7 +57,7 @@ public class DoctorServlet extends HttpServlet {
         int request_id = Integer.parseInt(request.getParameter("requestID"));
 
         System.out.println("request id is  : " + request_id);
-        
+
         try {
 
             PrintWriter out = response.getWriter();
@@ -98,7 +93,7 @@ public class DoctorServlet extends HttpServlet {
                 addNewExamination(doctorID + "", patientID, visitID, drugID, illnessID, date);
                 break;
             case 5:
-                String r_doctorID = doctorID +"";
+                String r_doctorID = doctorID + "";
                 String r_patientID = request.getParameter("patientID");
                 String r_visitID = request.getParameter("visitID");
                 String r_medicalID = request.getParameter("medicalID");
@@ -133,6 +128,12 @@ public class DoctorServlet extends HttpServlet {
                 + "INNER JOIN medicals ON medicals.exam_id = examinations.exam_id\n"
                 + "WHERE visit.dutytime_id =" + currentDutyTime + ";";
 
+        String reExaminationsQuery = "SELECT examinations_retaken.re_exam_id, patients.patient_id, visit.visit_id, examinations_retaken.hospitalization\n"
+                + "FROM patients\n"
+                + "INNER JOIN visit ON visit.patient_id = patients.patient_id\n"
+                + "INNER JOIN examinations_retaken ON examinations_retaken.visit_id = visit.visit_id\n"
+                + "WHERE visit.dutytime_id = " + currentDutyTime + ";";
+
         res = conn.executeQuery(examinationsQuery);
         counter = 0;
 
@@ -161,6 +162,19 @@ public class DoctorServlet extends HttpServlet {
         }
 
         obj.put("medicalsNumber", counter);
+
+        res = conn.executeQuery(reExaminationsQuery);
+        counter = 0;
+
+        while (res != null && res.next()) {
+            obj.put("r_re_exam_id" + counter, res.getString("re_exam_id"));
+            obj.put("r_patient_id" + counter, res.getString("patient_id"));
+            obj.put("r_visit_id" + counter, res.getString("visit_id"));
+            obj.put("r_hospitalization" + counter, res.getString("hospitalization"));
+            counter++;
+        }
+
+        obj.put("reExamsNumber", counter);
 
         conn.closeDBConnection();
         return obj;
@@ -310,8 +324,8 @@ public class DoctorServlet extends HttpServlet {
             hosp = true;
         }
         System.out.println("===========================\n==================");
-        System.out.println(patientID +" "+ doctorID+ " " + visitID +" "+ date+" " + medicalID+" " + hospi);
+        System.out.println(patientID + " " + doctorID + " " + visitID + " " + date + " " + medicalID + " " + hospi);
         System.out.println("===========================\n==================");
-        reEx.addReExamination(patientID, doctorID, visitID,  date, medicalID, hosp);
+        reEx.addReExamination(patientID, doctorID, visitID, date, medicalID, hosp);
     }
 }

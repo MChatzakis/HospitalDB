@@ -145,7 +145,7 @@
             </div>
 
             <div class="row  justify-content-center " style="margin:5px";>
-                <button  type="button" id="reExaminationsButton" class="btn btn-primary btn-md" onclick="showExaminations();">Show Current Re - Examinations</button>
+                <button  type="button" id="reExaminationsButton" class="btn btn-primary btn-md" onclick="showReExaminations();">Show Current Re - Examinations</button>
             </div>
             <div class="row  justify-content-center " style="margin:5px";>
                 <table style="display: none" id="reExaminationsTable" class="table-sm  table-dark table-bordered" >

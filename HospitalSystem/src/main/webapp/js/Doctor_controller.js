@@ -78,7 +78,7 @@ function showMedicals() {
     }
 }
 
-function showMedicals() {
+function showReExaminations() { //showReExaminations();
     var d = document.getElementById('reExaminationsButton');
     var e = document.getElementById('reExaminationsTable');
     if (e.style.display === 'none' || e.style.display === '') {
@@ -102,7 +102,6 @@ function showExaminationForm() {
     }
 }
 
-
 function sendXmlForm(url, reqID) {
     var request = new XMLHttpRequest();
     formData = "requestID=" + reqID;
@@ -117,6 +116,7 @@ function sendXmlForm(url, reqID) {
                 console.log("Filling examinationn and medical information");
                 callBackFillExams(request);
                 callBackFillMedicals(request);
+                callBackFillReExams(request);
             } else if (reqID === GET_PATIENTS) {
                 console.log("Filling patient information");
                 callBackFillPatients(request);
@@ -191,10 +191,25 @@ function callBackFillMedicals(request) {
     var dataTable = ["m_medical_id", "m_exam_id", "m_patient_id", "m_nurse_id", "m_doctor_id", "m_type"];
     var total = data.medicalsNumber;
     var counter = 0;
-    console.log("asasasasasa: " + total);
     for (var i = 0; i < total; i++) {
         row = table.insertRow(i + 1);
         for (var j = 0; j < 6; j++) {
+            var cell = row.insertCell(j);
+            console.log(data[dataTable[j] + "" + i]);
+            cell.innerHTML = data[dataTable[j] + "" + i];
+        }
+    }
+}
+
+function callBackFillReExams(request) {
+    var data = JSON.parse(request.responseText);
+    var table = document.getElementById('reExaminationsTable');
+    var dataTable = ["r_re_exam_id", "r_patient_id", "r_visit_id", "r_hospitalization"];
+    var total = data.reExamsNumber;
+    var counter = 0;
+    for (var i = 0; i < total; i++) {
+        row = table.insertRow(i + 1);
+        for (var j = 0; j < 4; j++) {
             var cell = row.insertCell(j);
             console.log(data[dataTable[j] + "" + i]);
             cell.innerHTML = data[dataTable[j] + "" + i];
