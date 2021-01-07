@@ -108,7 +108,7 @@
                         <th>AMKA</th>
                         <th>Chronic Diseases</th>
                         <th>Current Symptoms</th>
-                       
+
                     </tr>
                 </table>           
             </div>
@@ -143,6 +143,20 @@
                     </tr>
                 </table>           
             </div>
+
+            <div class="row  justify-content-center " style="margin:5px";>
+                <button  type="button" id="reExaminationsButton" class="btn btn-primary btn-md" onclick="showExaminations();">Show Current Re - Examinations</button>
+            </div>
+            <div class="row  justify-content-center " style="margin:5px";>
+                <table style="display: none" id="reExaminationsTable" class="table-sm  table-dark table-bordered" >
+                    <tr>
+                        <th>Re - Exam ID</th>
+                        <th>Patient ID</th>
+                        <th>Medical ID</th>
+                        <th>Hospitalization</th>
+                    </tr>
+                </table>           
+            </div> 
 
             <div class="row  justify-content-center " style="margin:5px";>
                 <button  type="button" id="addExaminationButton" class="btn btn-primary btn-md" onclick="showExaminationForm();">Add New Examination</button>

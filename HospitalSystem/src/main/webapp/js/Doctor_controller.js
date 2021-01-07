@@ -4,7 +4,6 @@ var GET_PATIENTS = 3;
 var ADD_EXAMINATION = 4;
 var ADD_RE_EXAMINATION = 5;
 
-var currentDutyTime = 0;
 var url = "http://localhost:8080/HospitalSystem/DoctorServlet";
 
 $(document).ready(function () {
@@ -67,7 +66,6 @@ function showExaminations() {
     }
 }
 
-
 function showMedicals() {
     var d = document.getElementById('medicalsButton');
     var e = document.getElementById('medicalsTable');
@@ -80,6 +78,17 @@ function showMedicals() {
     }
 }
 
+function showMedicals() {
+    var d = document.getElementById('reExaminationsButton');
+    var e = document.getElementById('reExaminationsTable');
+    if (e.style.display === 'none' || e.style.display === '') {
+        e.style.display = 'block';
+        d.innerHTML = 'Hide Current Re - Examinations';
+    } else {
+        e.style.display = 'none';
+        d.innerHTML = 'Show Current Re - Examinations';
+    }
+}
 
 function showExaminationForm() {
     var d = document.getElementById('addExaminationButton');
@@ -246,8 +255,8 @@ function sendExaminationForm() {
     sendForm(jsonForm, "#examForm");
 }
 
-function sendReExaminationForm(){
-     var jsonForm = {
+function sendReExaminationForm() {
+    var jsonForm = {
         'requestID': ADD_RE_EXAMINATION,
         'patientID': $('input[name=r_patientID]').val(),
         'medicalID': $('input[name=r_medicalID]').val(),
@@ -255,7 +264,7 @@ function sendReExaminationForm(){
         'visitID': $('input[name=r_visitID]').val(),
         'date': $('input[name=r_date]').val()
     };
-    
+
     console.log('Form: ' + jsonForm);
     sendForm(jsonForm, "#reExaminationForm");
 }

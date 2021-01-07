@@ -29,7 +29,6 @@ public class Main {
 
             dataGenerator.insertData();
 
-            System.out.println(java.time.LocalDate.now() ); 
             //System.out.println(Queries.getMaxTableKey("user_id", "users"));
             System.out.println("SELECT visit_symptoms.symptom\n"
                 + "FROM visit_symptoms\n"
