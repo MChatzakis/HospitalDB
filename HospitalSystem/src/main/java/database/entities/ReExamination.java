@@ -7,7 +7,6 @@ package database.entities;
 
 import commons.Queries;
 import database.DBConnection;
-import static database.entities.Examination.id_num;
 import java.sql.SQLException;
 
 /**

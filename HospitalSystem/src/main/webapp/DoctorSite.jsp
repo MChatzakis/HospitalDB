@@ -53,7 +53,7 @@
             </div>
 
             <div class="row  justify-content-center " style="margin:5px";>
-                <button  type="button" id="personalButton" class="btn btn-primary btn-md" onclick="showPersonal();">Personal Information</button>
+                <button  type="button" id="personalButton" class="btn btn-primary btn-md" onclick="showPersonal();">Show Personal Information</button>
             </div>
             <div class="row  justify-content-center " style="margin:5px";>
                 <table style="display: none" id="personalTable" class="table-sm  table-dark table-bordered" >
@@ -151,28 +151,28 @@
                 <form  style="display: none" id="examForm" class="row col-6  justify-content-center mt-3 table-dark ">
                     <div class="row">
                         <div class="form-group col ">
-                            <label for="visitID">PatientID</label>
-                            <input type="text" name="visitID" value="" class="form-control" id="visitID" placeholder="">
+                            <label for="patientID">PatientID</label>
+                            <input type="text" name="patientID" value="" class="form-control" id="patientID" placeholder="">
                         </div>
                         <div class="form-group col ">
                             <label for="visitID">VisitID</label>
                             <input type="text" name="visitID" value="" class="form-control" id="visitID" placeholder="">
                         </div>
                         <div class="form-group col ">
-                            <label for="visitID">DrugID</label>
-                            <input type="text" name="visitID" value="" class="form-control" id="visitID" placeholder="">
+                            <label for="drugID">DrugID</label>
+                            <input type="text" name="drugID" value="" class="form-control" id="drugID" placeholder="">
                         </div>
                         <div class="form-group col ">
-                            <label for="visitID">IllnessID</label>
-                            <input type="text" name="visitID" value="" class="form-control" id="visitID" placeholder="">
+                            <label for="illnessID">IllnessID</label>
+                            <input type="text" name="illnessID" value="" class="form-control" id="illnessID" placeholder="">
                         </div>
                         <div class="form-group col ">
-                            <label for="visitID">Date</label>
-                            <input type="text" name="visitID" value="" class="form-control" id="visitID" placeholder="">
+                            <label for="date">Date</label>
+                            <input type="text" name="date" value="" class="form-control" id="date" placeholder="">
                         </div>
                     </div>
                     <div>
-                        <input type="submit" value="Add" class="btn btn-primary" id="addExamButton"  onClick="SaveForm()">
+                        <input type="submit" value="Add" class="btn btn-primary" id="submitButton"  onClick="sendExaminationForm()">
                     </div>
                 </form>
             </div>
@@ -184,28 +184,28 @@
                 <form  style="display: none" id="reExaminationForm" class="row col-6  justify-content-center mt-3 table-dark ">
                     <div class="row">
                         <div class="form-group col ">
-                            <label for="visitID">PatientID</label>
-                            <input type="text" name="visitID" value="" class="form-control" id="visitID" placeholder="">
+                            <label for="r_patientID">PatientID</label>
+                            <input type="text" name="r_patientID" value="" class="form-control" id="r_patientID" placeholder="">
                         </div>
                         <div class="form-group col ">
-                            <label for="visitID">VisitID</label>
-                            <input type="text" name="visitID" value="" class="form-control" id="visitID" placeholder="">
+                            <label for="r_visitID">VisitID</label>
+                            <input type="text" name="r_visitID" value="" class="form-control" id="r_visitID" placeholder="">
                         </div>
                         <div class="form-group col ">
-                            <label for="visitID">MedicalID</label>
-                            <input type="text" name="visitID" value="" class="form-control" id="visitID" placeholder="">
+                            <label for="r_medicalID">MedicalID</label>
+                            <input type="text" name="r_medicalID" value="" class="form-control" id="r_medicalID" placeholder="">
                         </div>
                         <div class="form-group col ">
-                            <label for="visitID">Hospitalization</label>
-                            <input type="text" name="visitID" value="" class="form-control" id="visitID" placeholder="">
+                            <label for="r_hosp">Hospitalization</label>
+                            <input type="text" name="r_hosp" value="" class="form-control" id="r_hosp" placeholder="">
                         </div>
                         <div class="form-group col ">
-                            <label for="visitID">Date</label>
-                            <input type="text" name="visitID" value="" class="form-control" id="visitID" placeholder="">
+                            <label for="r_date">Date</label>
+                            <input type="text" name="r_date" value="" class="form-control" id="r_date" placeholder="">
                         </div>
                     </div>
                     <div>
-                        <input type="submit" value="Add" class="btn btn-primary" id="addExamButton"  onClick="SaveForm()">
+                        <input type="submit" value="Add" class="btn btn-primary" id="addExamButton"  onClick="sendReExaminationForm()">
                     </div>
                 </form>
             </div>

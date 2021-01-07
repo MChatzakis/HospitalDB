@@ -1,6 +1,8 @@
 var GET_PERSONAL_AND_DRUGS = 1;
 var GET_EXAMS_AND_MEDICALS = 2;
 var GET_PATIENTS = 3;
+var ADD_EXAMINATION = 4;
+var ADD_RE_EXAMINATION = 5;
 
 var currentDutyTime = 0;
 var url = "http://localhost:8080/HospitalSystem/DoctorServlet";
@@ -228,4 +230,47 @@ function showReExaminationForm() {
         e.style.display = 'none';
         d.innerHTML = 'Show Re - Examination Form';
     }
+}
+
+function sendExaminationForm() {
+    var jsonForm = {
+        'requestID': ADD_EXAMINATION,
+        'patientID': $('input[name=patientID]').val(),
+        'visitID': $('input[name=visitID]').val(),
+        'drugID': $('input[name=drugID]').val(),
+        'illnessID': $('input[name=illnessID]').val(),
+        'date': $('input[name=date]').val()
+    };
+
+    console.log('Form: ' + jsonForm);
+    sendForm(jsonForm, "#examForm");
+}
+
+function sendReExaminationForm(){
+     var jsonForm = {
+        'requestID': ADD_RE_EXAMINATION,
+        'patientID': $('input[name=r_patientID]').val(),
+        'medicalID': $('input[name=r_medicalID]').val(),
+        'hosp': $('input[name=r_hosp]').val(),
+        'visitID': $('input[name=r_visitID]').val(),
+        'date': $('input[name=r_date]').val()
+    };
+    
+    console.log('Form: ' + jsonForm);
+    sendForm(jsonForm, "#reExaminationForm");
+}
+
+function sendForm(jsonForm, id) {
+    $(id).submit(function (event) {
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: jsonForm,
+            dataType: 'json',
+            success: function (results) {
+                return results;
+            }}).done(function (data) {
+            console.log(data);
+        });
+    });
 }

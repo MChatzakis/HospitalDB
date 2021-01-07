@@ -1,18 +1,19 @@
 body {
-    background: url("../img/backround_image2.jpg") !important;
-    
+    background:#999;
+    background-attachment: scroll;
+    padding: 20px;  
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
-    background-size: auto;
+    background-size: cover;
 }
 
 .footer {
-  position: static;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  background-color: #007bff;
-  color: gray;
-  text-align: center;
+    position: static;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #007bff;
+    color: gray;
+    text-align: center;
 }

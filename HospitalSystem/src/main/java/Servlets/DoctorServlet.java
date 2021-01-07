@@ -7,6 +7,8 @@ package Servlets;
 
 import commons.Queries;
 import database.DBConnection;
+import database.entities.Examination;
+import database.entities.ReExamination;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
@@ -28,8 +30,6 @@ import org.json.JSONObject;
  * @author George
  */
 public class DoctorServlet extends HttpServlet {
-
-    int DOCTOR_DRUG_INFORMATION = 1;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -56,29 +56,57 @@ public class DoctorServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         JSONObject obj = new JSONObject();
-        int currentDutyTime = 2;
+
+        int currentDutyTime = 2; //get it from database with date..
+        int doctorID = (Integer) request.getSession(false).getAttribute("user_id");
         int request_id = Integer.parseInt(request.getParameter("requestID"));
+
         System.out.println("request id is  : " + request_id);
+        
         try {
 
             PrintWriter out = response.getWriter();
+
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");
 
             switch (request_id) {
             case 1:
-                obj = getPersonalAndDrugInfo((Integer) request.getSession(false).getAttribute("user_id"),currentDutyTime);
+                obj = getPersonalAndDrugInfo(doctorID, currentDutyTime);
+                out.print(obj);
+                out.flush();
+                System.out.println(obj.toString(0));
                 break;
             case 2:
-                obj = getMedicalAndExaminationInfo((Integer) request.getSession(false).getAttribute("user_id"),currentDutyTime);
+                obj = getMedicalAndExaminationInfo(doctorID, currentDutyTime);
+                out.print(obj);
+                out.flush();
+                System.out.println(obj.toString(0));
                 break;
             case 3:
-                obj = getCurrentPatientsInfo((Integer) request.getSession(false).getAttribute("user_id"),currentDutyTime);
+                obj = getCurrentPatientsInfo(doctorID, currentDutyTime);
+                out.print(obj);
+                out.flush();
+                System.out.println(obj.toString(0));
+                break;
+            case 4:
+                String patientID = request.getParameter("patientID");
+                String visitID = request.getParameter("visitID");
+                String drugID = request.getParameter("drugID");
+                String illnessID = request.getParameter("illnessID");
+                String date = request.getParameter("date");
+                addNewExamination(doctorID + "", patientID, visitID, drugID, illnessID, date);
+                break;
+            case 5:
+                String r_doctorID = doctorID +"";
+                String r_patientID = request.getParameter("patientID");
+                String r_visitID = request.getParameter("visitID");
+                String r_medicalID = request.getParameter("medicalID");
+                String hosp = request.getParameter("hosp");
+                String r_date = request.getParameter("date");
+                addNewReExamination(r_patientID, r_doctorID, r_visitID, r_date, r_medicalID, hosp);
                 break;
             }
-            out.print(obj);
-            out.flush();
-            System.out.println(obj.toString(0));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -137,7 +165,7 @@ public class DoctorServlet extends HttpServlet {
         conn.closeDBConnection();
         return obj;
     }
-   
+
     public JSONObject getPersonalAndDrugInfo(int user_id, int currentDutyTime) throws SQLException, ClassNotFoundException {
         JSONObject obj = new JSONObject();
         DBConnection conn = new DBConnection();
@@ -236,16 +264,17 @@ public class DoctorServlet extends HttpServlet {
             }
             patients.put("diseases_counter" + patients_counter, diseases_counter);
             patients.put("diseases_array" + patients_counter, diseases);
-            
+
             res3 = conn.executeQuery(getCurrentPatientSymptoms(Integer.parseInt(res.getString("patient_id")), currentDutyTime));
             JSONArray symptoms = new JSONArray();
             while (res3 != null && res3.next()) {
                 symptoms.put(res3.getString("symptom"));
                 symptoms_counter++;
             }
+            //res3.getMetaData().getColumnCount()
             patients.put("symptoms_counter" + patients_counter, symptoms_counter);
             patients.put("symptoms_array" + patients_counter, symptoms);
-            
+
             patients_counter++;
         }
 
@@ -267,5 +296,22 @@ public class DoctorServlet extends HttpServlet {
                 + "INNER JOIN visit ON visit_symptoms.visit_id = visit.visit_id\n"
                 + "WHERE visit.dutytime_id = " + dutyTimeID + " AND visit.patient_id = " + patientID + ";";
         return query;
+    }
+
+    public void addNewExamination(String doctorID, String patientID, String visitID, String drugID, String illnessID, String date) throws SQLException, ClassNotFoundException {
+        Examination ex = new Examination();
+        ex.addExamination(patientID, doctorID, drugID, illnessID, visitID, date);
+    }
+
+    public void addNewReExamination(String patientID, String doctorID, String visitID, String date, String medicalID, String hospi) throws SQLException, ClassNotFoundException {
+        ReExamination reEx = new ReExamination();
+        boolean hosp = false;
+        if (hospi.equals("1")) {
+            hosp = true;
+        }
+        System.out.println("===========================\n==================");
+        System.out.println(patientID +" "+ doctorID+ " " + visitID +" "+ date+" " + medicalID+" " + hospi);
+        System.out.println("===========================\n==================");
+        reEx.addReExamination(patientID, doctorID, visitID,  date, medicalID, hosp);
     }
 }
