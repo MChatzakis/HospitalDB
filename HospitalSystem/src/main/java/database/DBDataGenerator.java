@@ -36,8 +36,6 @@ public class DBDataGenerator {
         insertPatients();
         insertVisit();
         insertExams();
-        //insertMedicals();
-        //insertReExams();
     }
 
     public void insertDoctors() throws SQLException, ClassNotFoundException {
@@ -96,9 +94,13 @@ public class DBDataGenerator {
         OnDutyNurses duty_nur = new OnDutyNurses();
         OnDutyWorkers duty_wor = new OnDutyWorkers();
 
-        duty.addDutyTime("2021-01-01", "27");
-        duty.addDutyTime("2021-01-02", "27");
+        duty.addDutyTime("2021-01-06", "24");
+        duty.addDutyTime("2021-01-07", "25");
+        duty.addDutyTime("2021-01-08", "26");
+        duty.addDutyTime("2021-01-09", "27");
+        duty.addDutyTime("2021-01-10", "27");
 
+        /*doctors*/
         duty_doc.addDoctorDutyTime("1", "1");
         duty_doc.addDoctorDutyTime("6", "1");
         duty_doc.addDoctorDutyTime("9", "1");
@@ -111,6 +113,25 @@ public class DBDataGenerator {
         duty_doc.addDoctorDutyTime("13", "2");
         duty_doc.addDoctorDutyTime("16", "2");
 
+        duty_doc.addDoctorDutyTime("3", "3");
+        duty_doc.addDoctorDutyTime("8", "3");
+        duty_doc.addDoctorDutyTime("11", "3");
+        duty_doc.addDoctorDutyTime("14", "3");
+        duty_doc.addDoctorDutyTime("17", "3");
+
+        duty_doc.addDoctorDutyTime("1", "4");
+        duty_doc.addDoctorDutyTime("6", "4");
+        duty_doc.addDoctorDutyTime("9", "4");
+        duty_doc.addDoctorDutyTime("12", "4");
+        duty_doc.addDoctorDutyTime("15", "4");
+
+        duty_doc.addDoctorDutyTime("2", "5");
+        duty_doc.addDoctorDutyTime("7", "5");
+        duty_doc.addDoctorDutyTime("10", "5");
+        duty_doc.addDoctorDutyTime("13", "5");
+        duty_doc.addDoctorDutyTime("16", "5");
+
+        /*nurses*/
         duty_nur.addNurseDutyTime("18", "1");
         duty_nur.addNurseDutyTime("19", "1");
         duty_nur.addNurseDutyTime("20", "1");
@@ -119,11 +140,33 @@ public class DBDataGenerator {
         duty_nur.addNurseDutyTime("22", "2");
         duty_nur.addNurseDutyTime("23", "2");
 
-        duty_wor.addWorkerDutyTime("27", "1");
-        duty_wor.addWorkerDutyTime("26", "1");
+        duty_nur.addNurseDutyTime("18", "3");
+        duty_nur.addNurseDutyTime("19", "3");
+        duty_nur.addNurseDutyTime("20", "3");
 
-        duty_wor.addWorkerDutyTime("24", "2");
-        duty_wor.addWorkerDutyTime("25", "2");
+        duty_nur.addNurseDutyTime("21", "4");
+        duty_nur.addNurseDutyTime("22", "4");
+        duty_nur.addNurseDutyTime("23", "4");
+
+        duty_nur.addNurseDutyTime("18", "5");
+        duty_nur.addNurseDutyTime("19", "5");
+        duty_nur.addNurseDutyTime("20", "5");
+
+        /*workers*/
+        duty_wor.addWorkerDutyTime("24", "1");
+        duty_wor.addWorkerDutyTime("25", "1");
+
+        duty_wor.addWorkerDutyTime("26", "2");
+        duty_wor.addWorkerDutyTime("27", "2");
+
+        duty_wor.addWorkerDutyTime("26", "3");
+        duty_wor.addWorkerDutyTime("27", "3");
+
+        duty_wor.addWorkerDutyTime("28", "4");
+        duty_wor.addWorkerDutyTime("24", "4");
+
+        duty_wor.addWorkerDutyTime("25", "5");
+        duty_wor.addWorkerDutyTime("26", "5");
 
     }
 
@@ -167,66 +210,67 @@ public class DBDataGenerator {
     public void insertPatients() throws SQLException, ClassNotFoundException {
         Patient pat = new Patient();
         pat.addPatient("nickLen", "len123", "Nikos", "Lenakis", "Hrakleio", "len@gmail.com", "null", "1990-11-16", "12066455", "IK8986", "IKA");
-        pat.addChronicDisease("29", "Autoimmune");
         pat.addChronicDisease("29", "Asthma");
-        
+        pat.addChronicDisease("29", "Aids");
+
         pat.addPatient("gPer", "gper123", "Giorgos", "Perakis", "Hrakleio", "per@gmail.com", "null", "1980-09-12", "97046412", "KH6754", "IKA");
         pat.addChronicDisease("30", "Osteoporosis");
-        
+        pat.addChronicDisease("30", "Diabetes");
+
         pat.addPatient("gIwan", "iwannou21", "Giannis", "Iwannou", "Hrakleio", "iwannou@gmail.com", "null", "1970-03-12", "31155415", "UT1213", "IKA");
+        pat.addChronicDisease("31", "Arthritis");
+        pat.addChronicDisease("31", "Diabetes");
+
         pat.addPatient("pPetr", "pav123", "Pavlos", "Petrakis", "Hrakleio", "petrakis_pav@gmail.com", "null", "1995-03-02", "80048812", "BG7813", "IKA");
+        pat.addChronicDisease("32", "Obesity");
+        
+
         pat.addPatient("marianth", "marianth1234", "Marianthi", "Panagiotaki", "Hrakleio", "marpanagiot@gmail.com", "null", "1962-12-05", "11641112", "TY4312", "IKA");
+        pat.addChronicDisease("33", "Cystic_Fibrosis");
+        pat.addChronicDisease("33", "Heart_Disease");
+        pat.addChronicDisease("33", "Obesity");
+
     }
 
     public void insertVisit() throws SQLException, ClassNotFoundException {
         Visit vis = new Visit();
-        vis.addVisit("2021-01-01", "1", "29");
+        
+        vis.addVisit("2021-01-06", "1", "29");
         vis.addSymptom("1", "Fever");
         vis.addSymptom("1", "Cough");
+        vis.addSymptom("1", "Sore_Thoat");
 
-        vis.addVisit("2021-01-01", "1", "30");
-        vis.addSymptom("2", "Pain");
-        vis.addSymptom("2", "Arm_Movement");
+        vis.addVisit("2021-01-06", "1", "30");
+        vis.addSymptom("2", "Arm_Pain");
 
-        vis.addVisit("2021-01-02", "2", "31");
+        vis.addVisit("2021-01-06", "1", "31");
         vis.addSymptom("3", "Taste_Lack");
-        vis.addSymptom("3", "Fever");
+        vis.addSymptom("3", "Headache");
 
-        vis.addVisit("2021-01-02", "2", "29");
-        vis.addSymptom("4", "Fever");
+        vis.addVisit("2021-01-07", "2", "29");
+        vis.addSymptom("4", "Heartbeats");
 
     }
 
-    /* public void insertMedicals() throws SQLException, ClassNotFoundException {
-        Medical med = new Medical();
-        med.addMedical("covid", "1", "29", "15", "20", "2020-01-01");
-        med.addMedical("covid", "3", "31", "16", "21", "02/01/2021");
-    }*/
     public void insertExams() throws SQLException, ClassNotFoundException {
         Examination ex = new Examination();
         Medical med = new Medical();
         ReExamination reEx = new ReExamination();
 
-        ex.addExamination("29", "15", "1", "1", "1", "2021-01-01");
-        med.addMedical("Covid-19", "1", "29", "15", "20", "2021-01-01");
-        reEx.addReExamination("29", "15", "1", "2021-01-01", "1", true);
+        ex.addExamination("29", "1", "1", "1", "1", "2021-01-06");
+        med.addMedical("Covid-19", "1", "29", "1", "20", "2021-01-06");
+        reEx.addReExamination("29", "1", "1", "2021-01-01", "1", true);
 
-        ex.addExamination("30", "12", "4", "4", "2", "2021-01-01");
-        med.addMedical("xRay", "2", "30", "1", "21", "2021-01-01");
-        reEx.addReExamination("30", "12", "2", "2021-01-01", "2", true);
+        ex.addExamination("30", "12", "4", "4", "2", "2021-01-06");
+        med.addMedical("xRay", "2", "30", "12", "19", "2021-01-06");
+        reEx.addReExamination("30", "12", "2", "2021-01-06", "2", false);
 
-        ex.addExamination("31", "16", "null", "null", "3", "2021-01-02");
-        med.addMedical("Covid-19", "3", "31", "16", "21", "2021-01-02");
-        reEx.addReExamination("31", "16", "3", "2021-01-02", "3", true);
+        ex.addExamination("31", "15", "null", "null", "3", "2021-01-06");
+        med.addMedical("Covid-19", "3", "31", "15", "18", "2021-01-06");
+        reEx.addReExamination("31", "15", "3", "2021-01-06", "3", true);
 
-        ex.addExamination("29", "16", "1", "1", "4", "2021-01-02");
-        med.addMedical("Covid-19", "4", "29", "16", "21", "2021-01-02");
-        reEx.addReExamination("29", "16", "4", "2021-01-02", "4", true);
+        ex.addExamination("29", "16", "1", "1", "4", "2021-01-07");
+        med.addMedical("Covid-19", "4", "29", "16", "21", "2021-01-07");
+        reEx.addReExamination("29", "16", "4", "2021-01-07", "4", true);
     }
-
-    /*public void insertReExams() throws SQLException, ClassNotFoundException {
-        Examination ex = new Examination();
-        ex.addReExam("29", "15", "1", "1", "1", "01/01/2021", "1", true);
-        ex.addReExam("31", "16", "1", "1", "3", "02/01/2021", "1", true);
-    }*/
 }

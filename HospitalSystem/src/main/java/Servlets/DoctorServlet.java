@@ -137,7 +137,7 @@ public class DoctorServlet extends HttpServlet {
         conn.closeDBConnection();
         return obj;
     }
-
+   
     public JSONObject getPersonalAndDrugInfo(int user_id, int currentDutyTime) throws SQLException, ClassNotFoundException {
         JSONObject obj = new JSONObject();
         DBConnection conn = new DBConnection();
