@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
@@ -55,6 +56,7 @@ public class DoctorServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         JSONObject obj = new JSONObject();
+        int currentDutyTime = 2;
         int request_id = Integer.parseInt(request.getParameter("requestID"));
         System.out.println("request id is  : " + request_id);
         try {
@@ -65,10 +67,13 @@ public class DoctorServlet extends HttpServlet {
 
             switch (request_id) {
             case 1:
-                obj = getPersonalAndDrugInfo((Integer) request.getSession(false).getAttribute("user_id"));
+                obj = getPersonalAndDrugInfo((Integer) request.getSession(false).getAttribute("user_id"),currentDutyTime);
                 break;
             case 2:
-                obj = getMedicalAndExaminationInfo((Integer) request.getSession(false).getAttribute("user_id"));
+                obj = getMedicalAndExaminationInfo((Integer) request.getSession(false).getAttribute("user_id"),currentDutyTime);
+                break;
+            case 3:
+                obj = getCurrentPatientsInfo((Integer) request.getSession(false).getAttribute("user_id"),currentDutyTime);
                 break;
             }
             out.print(obj);
@@ -79,12 +84,11 @@ public class DoctorServlet extends HttpServlet {
         }
     }
 
-    public JSONObject getMedicalAndExaminationInfo(int user_id) throws SQLException, ClassNotFoundException {
+    public JSONObject getMedicalAndExaminationInfo(int user_id, int currentDutyTime) throws SQLException, ClassNotFoundException {
         DBConnection conn = new DBConnection();
         JSONObject obj = new JSONObject();
 
         int counter = 0;
-        int currentDutyNumber = 1;
 
         ResultSet res = null;
 
@@ -92,13 +96,14 @@ public class DoctorServlet extends HttpServlet {
                 + "FROM patients\n"
                 + "INNER JOIN visit ON visit.patient_id = patients.patient_id\n"
                 + "INNER JOIN examinations ON examinations.visit_id = visit.visit_id\n"
-                + "WHERE visit.dutytime_id = " + currentDutyNumber + ";";
+                + "WHERE visit.dutytime_id = " + currentDutyTime + ";";
+
         String medicalsQuery = "SELECT medicals.medical_id, medicals.exam_id, medicals.patient_id, medicals.nurse_id, medicals.doctor_id,medicals.type\n"
                 + "FROM patients\n"
                 + "INNER JOIN visit ON visit.patient_id = patients.patient_id\n"
                 + "INNER JOIN examinations ON examinations.visit_id = visit.visit_id\n"
                 + "INNER JOIN medicals ON medicals.exam_id = examinations.exam_id\n"
-                + "WHERE visit.dutytime_id =" + currentDutyNumber + ";";
+                + "WHERE visit.dutytime_id =" + currentDutyTime + ";";
 
         res = conn.executeQuery(examinationsQuery);
         counter = 0;
@@ -133,7 +138,7 @@ public class DoctorServlet extends HttpServlet {
         return obj;
     }
 
-    public JSONObject getPersonalAndDrugInfo(int user_id) throws SQLException, ClassNotFoundException {
+    public JSONObject getPersonalAndDrugInfo(int user_id, int currentDutyTime) throws SQLException, ClassNotFoundException {
         JSONObject obj = new JSONObject();
         DBConnection conn = new DBConnection();
         int counter = 0;
@@ -192,4 +197,75 @@ public class DoctorServlet extends HttpServlet {
         return obj;
     }
 
+    public JSONObject getCurrentPatientsInfo(int user_id, int currentDutyTime) throws SQLException, ClassNotFoundException {
+        JSONObject patients = new JSONObject();
+
+        String patientsQuery = "SELECT visit.visit_id, visit.date, patients.patient_id, patients.name, patients.surname, patients.birth_date, patients.amka\n"
+                + "FROM patients\n"
+                + "INNER JOIN visit ON visit.patient_id = patients.patient_id\n"
+                + "WHERE visit.dutytime_id = " + currentDutyTime + ";";
+
+        DBConnection conn = new DBConnection();
+        ResultSet res = null;
+        ResultSet res2 = null;
+        ResultSet res3 = null;
+        int patients_counter = 0;
+        int diseases_counter = 0;
+        int symptoms_counter = 0;
+
+        res = conn.executeQuery(patientsQuery);
+
+        while (res != null && res.next()) {
+
+            diseases_counter = 0;
+            symptoms_counter = 0;
+
+            patients.put("visit_id" + patients_counter, res.getString("visit_id"));
+            patients.put("date" + patients_counter, res.getString("date"));
+            patients.put("patient_id" + patients_counter, res.getString("patient_id"));
+            patients.put("name" + patients_counter, res.getString("name"));
+            patients.put("surname" + patients_counter, res.getString("surname"));
+            patients.put("birth_date" + patients_counter, res.getString("birth_date"));
+            patients.put("amka" + patients_counter, res.getString("amka"));
+
+            res2 = conn.executeQuery(getChronicDisOfPatient(Integer.parseInt(res.getString("patient_id"))));
+            JSONArray diseases = new JSONArray();
+            while (res2 != null && res2.next()) {
+                diseases.put(res2.getString("disease"));
+                diseases_counter++;
+            }
+            patients.put("diseases_counter" + patients_counter, diseases_counter);
+            patients.put("diseases_array" + patients_counter, diseases);
+            
+            res3 = conn.executeQuery(getCurrentPatientSymptoms(Integer.parseInt(res.getString("patient_id")), currentDutyTime));
+            JSONArray symptoms = new JSONArray();
+            while (res3 != null && res3.next()) {
+                symptoms.put(res3.getString("symptom"));
+                symptoms_counter++;
+            }
+            patients.put("symptoms_counter" + patients_counter, symptoms_counter);
+            patients.put("symptoms_array" + patients_counter, symptoms);
+            
+            patients_counter++;
+        }
+
+        patients.put("patientsNumber", patients_counter);
+
+        return patients;
+    }
+
+    public String getChronicDisOfPatient(int patientID) {
+        String query = "SELECT patients_chronic_diseases.disease\n"
+                + "FROM patients_chronic_diseases\n"
+                + "WHERE patients_chronic_diseases.patient_id = " + patientID + ";";
+        return query;
+    }
+
+    public String getCurrentPatientSymptoms(int patientID, int dutyTimeID) {
+        String query = "SELECT visit_symptoms.symptom\n"
+                + "FROM visit_symptoms\n"
+                + "INNER JOIN visit ON visit_symptoms.visit_id = visit.visit_id\n"
+                + "WHERE visit.dutytime_id = " + dutyTimeID + " AND visit.patient_id = " + patientID + ";";
+        return query;
+    }
 }

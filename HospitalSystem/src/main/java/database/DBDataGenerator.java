@@ -167,7 +167,12 @@ public class DBDataGenerator {
     public void insertPatients() throws SQLException, ClassNotFoundException {
         Patient pat = new Patient();
         pat.addPatient("nickLen", "len123", "Nikos", "Lenakis", "Hrakleio", "len@gmail.com", "null", "1990-11-16", "12066455", "IK8986", "IKA");
+        pat.addChronicDisease("29", "Autoimmune");
+        pat.addChronicDisease("29", "Asthma");
+        
         pat.addPatient("gPer", "gper123", "Giorgos", "Perakis", "Hrakleio", "per@gmail.com", "null", "1980-09-12", "97046412", "KH6754", "IKA");
+        pat.addChronicDisease("30", "Osteoporosis");
+        
         pat.addPatient("gIwan", "iwannou21", "Giannis", "Iwannou", "Hrakleio", "iwannou@gmail.com", "null", "1970-03-12", "31155415", "UT1213", "IKA");
         pat.addPatient("pPetr", "pav123", "Pavlos", "Petrakis", "Hrakleio", "petrakis_pav@gmail.com", "null", "1995-03-02", "80048812", "BG7813", "IKA");
         pat.addPatient("marianth", "marianth1234", "Marianthi", "Panagiotaki", "Hrakleio", "marpanagiot@gmail.com", "null", "1962-12-05", "11641112", "TY4312", "IKA");
@@ -213,7 +218,7 @@ public class DBDataGenerator {
         ex.addExamination("31", "16", "null", "null", "3", "2021-01-02");
         med.addMedical("Covid-19", "3", "31", "16", "21", "2021-01-02");
         reEx.addReExamination("31", "16", "3", "2021-01-02", "3", true);
-        
+
         ex.addExamination("29", "16", "1", "1", "4", "2021-01-02");
         med.addMedical("Covid-19", "4", "29", "16", "21", "2021-01-02");
         reEx.addReExamination("29", "16", "4", "2021-01-02", "4", true);

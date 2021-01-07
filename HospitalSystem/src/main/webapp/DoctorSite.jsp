@@ -99,12 +99,16 @@
             <div class="row  justify-content-center " style="margin:5px";>
                 <table style="display: none" id="patientsTable" class="table-sm  table-dark table-bordered" >
                     <tr>
-                        <th>Name</th>
-                        <th>Surname</th>
-                        <th>Patient ID</th>
                         <th>Visit ID</th>
-                        <th>Birth Date</th> 
+                        <th>Date</th>
+                        <th>Patient ID</th>
+                        <th>Name</th>
+                        <th>Surname</th> 
+                        <th>Birth Date</th>
                         <th>AMKA</th>
+                        <th>Chronic Diseases</th>
+                        <th>Current Symptoms</th>
+                       
                     </tr>
                 </table>           
             </div>
@@ -147,19 +151,19 @@
                 <form  style="display: none" id="examForm" class="row col-6  justify-content-center mt-3 table-dark ">
                     <div class="row">
                         <div class="form-group col ">
-                            <label for="visitID">Patient ID</label>
+                            <label for="visitID">PatientID</label>
                             <input type="text" name="visitID" value="" class="form-control" id="visitID" placeholder="">
                         </div>
                         <div class="form-group col ">
-                            <label for="visitID">Visit ID</label>
+                            <label for="visitID">VisitID</label>
                             <input type="text" name="visitID" value="" class="form-control" id="visitID" placeholder="">
                         </div>
                         <div class="form-group col ">
-                            <label for="visitID">Drug ID</label>
+                            <label for="visitID">DrugID</label>
                             <input type="text" name="visitID" value="" class="form-control" id="visitID" placeholder="">
                         </div>
                         <div class="form-group col ">
-                            <label for="visitID">Illness ID</label>
+                            <label for="visitID">IllnessID</label>
                             <input type="text" name="visitID" value="" class="form-control" id="visitID" placeholder="">
                         </div>
                         <div class="form-group col ">
@@ -174,25 +178,25 @@
             </div>
 
             <div class="row  justify-content-center " style="margin:5px";>
-                <button  type="button" id="reExaminationButton" class="btn btn-primary btn-md" onclick=showReExaminationForm();">New Re - Examination</button>
+                <button  type="button" id="reExaminationButton" class="btn btn-primary btn-md" onclick="showReExaminationForm();">New Re - Examination</button>
             </div>
             <div class="row  justify-content-center " style="margin:5px";>
                 <form  style="display: none" id="reExaminationForm" class="row col-6  justify-content-center mt-3 table-dark ">
                     <div class="row">
                         <div class="form-group col ">
-                            <label for="visitID">Patient ID</label>
+                            <label for="visitID">PatientID</label>
                             <input type="text" name="visitID" value="" class="form-control" id="visitID" placeholder="">
                         </div>
                         <div class="form-group col ">
-                            <label for="visitID">Current Visit ID</label>
+                            <label for="visitID">VisitID</label>
                             <input type="text" name="visitID" value="" class="form-control" id="visitID" placeholder="">
                         </div>
                         <div class="form-group col ">
-                            <label for="visitID">Drug ID</label>
+                            <label for="visitID">MedicalID</label>
                             <input type="text" name="visitID" value="" class="form-control" id="visitID" placeholder="">
                         </div>
                         <div class="form-group col ">
-                            <label for="visitID">Illness ID</label>
+                            <label for="visitID">Hospitalization</label>
                             <input type="text" name="visitID" value="" class="form-control" id="visitID" placeholder="">
                         </div>
                         <div class="form-group col ">

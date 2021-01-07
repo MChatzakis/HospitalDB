@@ -1,5 +1,6 @@
 var GET_PERSONAL_AND_DRUGS = 1;
 var GET_EXAMS_AND_MEDICALS = 2;
+var GET_PATIENTS = 3;
 
 var currentDutyTime = 0;
 var url = "http://localhost:8080/HospitalSystem/DoctorServlet";
@@ -8,6 +9,7 @@ $(document).ready(function () {
     console.log('Document ready -- Getting the initial information');
     sendXmlForm(url, GET_PERSONAL_AND_DRUGS);
     sendXmlForm(url, GET_EXAMS_AND_MEDICALS);
+    sendXmlForm(url, GET_PATIENTS);
 });
 
 function showPersonal() {
@@ -104,7 +106,11 @@ function sendXmlForm(url, reqID) {
                 console.log("Filling examinationn and medical information");
                 callBackFillExams(request);
                 callBackFillMedicals(request);
+            } else if (reqID === GET_PATIENTS) {
+                console.log("Filling patient information");
+                callBackFillPatients(request);
             }
+
         }
     }
     ;
@@ -181,6 +187,33 @@ function callBackFillMedicals(request) {
             var cell = row.insertCell(j);
             console.log(data[dataTable[j] + "" + i]);
             cell.innerHTML = data[dataTable[j] + "" + i];
+        }
+    }
+}
+
+function callBackFillPatients(request) {
+    var data = JSON.parse(request.responseText);
+    var table = document.getElementById('patientsTable');
+    var dataTable = ["visit_id", "date", "patient_id", "name", "surname", "birth_date", "amka", "diseases_array", "symptoms_array"];
+    var total = data.patientsNumber;
+    var counter = 0;
+    for (var i = 0; i < total; i++) {
+        row = table.insertRow(i + 1);
+        for (var j = 0; j < 9; j++) {
+            var cell = row.insertCell(j);
+            if (j === 7 && data.diseases_counter > 0) {
+                var text = "";
+                for (var k = 0; k < data.diseases_counter; k++) {
+                    text += data[dataTable[j] + "" + i]["disease"] + " ";
+                }
+            } else if (j === 8 && data.symptoms_counter > 0) {
+                var text = "";
+                for (var k = 0; k < data.symptoms_counter; k++) {
+                    text += data[dataTable[j] + "" + i]["symptom"] + " ";
+                }
+            } else {
+                cell.innerHTML = data[dataTable[j] + "" + i];
+            }
         }
     }
 }
