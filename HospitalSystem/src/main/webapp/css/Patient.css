@@ -1,24 +1,78 @@
 body {
     background: url("../img/medical2.jpg") no-repeat fixed;
-    
+
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+}
+
+label
+{
+    font-weight: bold;
+    color:rgb(243, 243, 243);
 }
 .Form-container
 {
     box-sizing: border-box;
     border-radius: 2%;
     background-color:rgb(58, 56, 56);
-}
-label
-{
-    font-weight: bold;
-    color:rgb(243, 243, 243);
-}
-
+}   
 h1{
-   
+
     color:rgb(255, 255, 255);
 }
+
+
+
+
+
+@media (min-width: 576px) {  
+    #diseases-table{
+        left: 45%;
+    }
+    #history-table{
+        left: 73%;
+    }
+    #form
+    {
+        right:14%;
+    }   
+
+}
+
+@media (min-width: 768px) { 
+    #diseases-table{
+        left: 46%;
+    }
+    #history-table{
+        left: 70%;
+    }
+    #form
+    {
+        right:12%;
+    }   
+}
+
+@media (min-width: 992px) {
+    #diseases-table{
+        left: 47.5%;
+    }
+    #history-table{
+        left: 77%;
+    }
+    #form
+    {
+        right:13%;
+    }   
+}
+
+
+/*
+#history-table{
+   left: 75%;
+}
+#form
+{
+   right:13%;
+}*/

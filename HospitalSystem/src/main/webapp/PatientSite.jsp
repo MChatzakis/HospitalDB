@@ -9,12 +9,12 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" href="css/Patient.css">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+        <link href="css/Patient.css" rel="stylesheet" type="text/css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script type="text/javascript" src="js/Patient_controller.js"></script>
         <script src='https://www.google.com/recaptcha/api.js'></script>
         <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 
 
         <title>Patient</title>
@@ -63,11 +63,13 @@
                 <button type="button" id="information-but" class="btn btn-primary btn-md"
                         onclick="ShowInformation();">Information</button>
 
+                <button type="button" id="disease-but" class="btn btn-primary btn-md" onclick="ShowDiseases();">Diseases</button>
                 <button type="button" id="visit-but" class="btn btn-primary btn-md" onclick="ShowVisits();">Visits</button>
+
             </div>
             <div class=" position-relative">
 
-                <table class="table-sm  table-dark d-none  table-bordered position-absolute mt-2" style="left: 75%" id="history-table">
+                <table class="table-sm  table-dark d-none  table-bordered position-absolute mt-2" id="history-table">
                     <tr>
                         <th>Date</th>
                         <th>Illness</th>
@@ -83,13 +85,22 @@
 
                     </tr>
                     <tbody>
-                     
+
+                    </tbody>
+                </table>
+                <table class="table-sm  table-dark d-none  table-bordered position-absolute mt-2 lala"  id="diseases-table">
+                    <tr>
+                        <th>Disease</th>
+
+                    </tr>
+                    <tbody>
+
                     </tbody>
                 </table>
 
 
                 <form id="form-id">
-                    <div class="Form-container col-4 d-none justify-content-center mt-3 table-dark" id="form" style="right:13%">
+                    <div class="Form-container col-4 d-none justify-content-center mt-3 table-dark" id="form" >
                         <div class="row">
                             <div class="form-group col ">
                                 <label for="fname">Name</label>

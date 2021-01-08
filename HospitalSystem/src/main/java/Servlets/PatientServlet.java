@@ -34,6 +34,7 @@ public class PatientServlet extends HttpServlet
 
     int HISTORY_ID = 1;
     int UPDATE_FORM_ID = 2;
+    int FILL_DISEASES_ID = 3;
     int FILL_INFORMATION_ID = 5;
 
     /**
@@ -146,6 +147,58 @@ public class PatientServlet extends HttpServlet
                 Logger.getLogger(PatientServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        else if (request_id == FILL_DISEASES_ID)
+        {
+            try
+            {
+                PrintWriter out = response.getWriter();
+
+                obj = GetDiseases(id);
+                response.setContentType("application/json");
+                response.setCharacterEncoding("UTF-8");
+                out.print(obj);
+                out.flush();
+                System.out.println(obj.toString(0));
+
+            }
+            catch (SQLException ex)
+            {
+                Logger.getLogger(PatientServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            catch (ClassNotFoundException ex)
+            {
+                Logger.getLogger(PatientServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
+    JSONObject GetDiseases(int id) throws SQLException, ClassNotFoundException
+    {
+        JSONObject obj = new JSONObject();
+        DBConnection conn = new DBConnection();
+        
+
+        ResultSet res = null;
+        String query = Queries.getPatientDiseasesByID(id);
+        res = conn.executeQuery(query);
+
+        if (res == null)
+        {
+            System.err.println("Wrong getPatientDiseasesByID querry");
+            return null;
+        }
+        int i=0;
+        while (res != null && res.next())
+        {
+            //String visitQuery = "SELECT DISTINCT visit.date, illnesses.name AS illness,
+            //drugs.name AS drug, medicals.type AS medical , examinations_retaken.hospitalization\n"
+            obj.put("disease"+i, res.getString("disease"));
+            i++;
+            
+        }
+        conn.closeDBConnection();
+        return obj;
+
     }
 
     void changeInfo(String fname, String surname, String username, String address, String email, String phone, String birth_day,
@@ -234,7 +287,7 @@ public class PatientServlet extends HttpServlet
 
     }
 
-    JSONObject GetInformations(int  id) throws SQLException, ClassNotFoundException
+    JSONObject GetInformations(int id) throws SQLException, ClassNotFoundException
     {
         JSONObject obj = new JSONObject();
         ResultSet res = null;

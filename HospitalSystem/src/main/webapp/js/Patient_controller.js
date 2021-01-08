@@ -7,8 +7,9 @@
 //defines
 
 var FILL_HISTORY_ID = 1
+var UPDATE_FORM_ID = 2;
+var FILL_DISEASES_ID = 3;
 var FILL_INFORMATION_ID = 5
-var UPDATE_FORM_ID=2;
 
 
 //var url = "https://webhook.site/93afe500-82d2-464c-a89e-2d1b318b0140";
@@ -20,13 +21,19 @@ var UPDATE_FORM_ID=2;
 $(document).ready(function () {
 
     FillForm();
-
+    FillDisease();
     FillHistory();
 
 });
 
 
+function FillDisease()
+{
+    formData = "requestID=" + FILL_DISEASES_ID;
+    var url = "http://localhost:8080/HospitalSystem/PatientServlet"
+    SendXmlForm(url, formData, FILL_DISEASES_ID);
 
+}
 function FillHistory() {
     //formData = "requestID=" + FILL_HISTORY_ID;
     formData = "requestID=" + FILL_HISTORY_ID;
@@ -47,6 +54,24 @@ function FillForm() {
     var url = "http://localhost:8080/HospitalSystem/PatientServlet"
 
     SendXmlForm(url, formData, FILL_INFORMATION_ID);
+
+}
+function CallBackFillDiseases(data)
+{
+    var data = JSON.parse(data.responseText);
+    var length = Object.keys(data).length;
+    console.log("length : " + length);
+    var table = document.getElementById("diseases-table");
+    var i = 0;
+    for (var x in data)
+    {
+        var row = table.insertRow(i+1);
+
+        var cell = row.insertCell(0);
+        cell.innerHTML = data[x];
+        i++;
+    }
+
 
 }
 function CallBackFillForm(data)
@@ -148,6 +173,10 @@ function SendXmlForm(url, formData, req_id)
             } else if (req_id === FILL_HISTORY_ID) {
                 CallBackFillHistory(request);
 
+            } else if (req_id === FILL_DISEASES_ID)
+            {
+                CallBackFillDiseases(request);
+
             }
 
 
@@ -196,7 +225,8 @@ function SendForm(url, formData, id) {
 
         // process the form
         $.ajax({
-            type: 'POST', // define the type of HTTP verb we want to use (POST for our form)
+            method: "post",
+            type: "post", // define the type of HTTP verb we want to use (POST for our form)
             url: url, // the url where we want to POST
             data: formData, // our data object
             dataType: 'json', // what type of data do we expect back from the server
@@ -236,10 +266,22 @@ function ShowVisits() {
 }
 
 
-function HideVisit() {
-    // console.log("lalala");
-    $("#history-table").addClass('d-none');
+
+function ShowDiseases()
+{
+    //console.log("lalala");
+
+    if ($('#diseases-table').hasClass('d-none')) {
+        $("#diseases-table").removeClass('d-none');
+
+    } else {
+        $("#diseases-table").addClass('d-none');
+
+    }
+
 }
+
+
 
 
 
