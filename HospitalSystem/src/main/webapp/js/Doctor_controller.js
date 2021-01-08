@@ -78,7 +78,7 @@ function showMedicals() {
     }
 }
 
-function showReExaminations() { //showReExaminations();
+function showReExaminations() {
     var d = document.getElementById('reExaminationsButton');
     var e = document.getElementById('reExaminationsTable');
     if (e.style.display === 'none' || e.style.display === '') {
