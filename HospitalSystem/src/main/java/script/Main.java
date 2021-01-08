@@ -1,4 +1,4 @@
-package test;
+package script;
 
 import commons.Queries;
 import database.DBConnection;
