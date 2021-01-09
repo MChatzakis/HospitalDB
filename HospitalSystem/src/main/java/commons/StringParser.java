@@ -7,7 +7,7 @@ package commons;
 
 /**
  *
- * @author manos
+ * @author Manos Chatzakis
  */
 public class StringParser {
 

@@ -11,7 +11,7 @@ import java.sql.SQLException;
 
 /**
  *
- * @author Manos Chatzakis
+ * @author Manos Chatzakis (chatzakis@ics.forth.gr)
  */
 public class ReExamination {
 

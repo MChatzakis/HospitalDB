@@ -10,7 +10,7 @@ import java.sql.SQLException;
 
 /**
  *
- * @author manos
+ * @author Manos Chatzakis (chatzakis@ics.forth.gr)
  */
 public class OnDutyWorkers {
 

@@ -14,7 +14,7 @@ import java.util.logging.Logger;
 /**
  * Testing class
  *
- * @author Manos Chatzakis
+ * @author Manos Chatzakis (chatzakis@ics.forth.gr)
  */
 public class Main {
 

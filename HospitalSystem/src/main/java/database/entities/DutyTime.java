@@ -9,7 +9,7 @@ import lombok.Data;
 
 /**
  *
- * @author manos
+ * @author Manos Chatzakis
  */
 @Data
 public class DutyTime {

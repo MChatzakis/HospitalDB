@@ -12,7 +12,7 @@ import lombok.Data;
 
 /**
  *
- * @author manos
+ * @author Manos Chatzakis (chatzakis@ics.forth.gr)
  */
 @Data
 public class Drug {

@@ -22,7 +22,6 @@ import java.sql.SQLException;
 /**
  *
  * @author Manos Chatzakis (chatzakis@ics.forth.gr)
- * @author George Kokolakis (gkokol@ics.forth.gr)
  */
 public class DBDataGenerator {
 

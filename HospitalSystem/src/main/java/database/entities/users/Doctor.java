@@ -11,8 +11,7 @@ import lombok.Data;
 
 /**
  *
- * @author manos
- * @author george
+ * @author Manos Chatzakis (chatzakis@ics.forth.gr)
  */
 @Data
 public class Doctor {

@@ -1,3 +1,6 @@
+//  @author Manos Chatzakis (chatzakis@ics.forth.gr)
+
+
 var url = "http://localhost:8080/HospitalSystem/WorkerServlet";
 var GET_PERSONAL_AND_DRUGS = 1;
 var GET_CURRENT_PATIENTS = 2;

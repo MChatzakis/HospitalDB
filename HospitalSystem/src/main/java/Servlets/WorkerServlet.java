@@ -31,7 +31,7 @@ import org.json.JSONObject;
 
 /**
  *
- * @author George
+ * @author Manos Chatzakis (chatzakis@ics.forth.gr)
  */
 public class WorkerServlet extends HttpServlet {
 

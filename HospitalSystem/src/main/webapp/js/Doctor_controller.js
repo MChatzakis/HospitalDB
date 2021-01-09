@@ -1,3 +1,6 @@
+// @author Manos Chatzakis (chatzakis@ics.forth.gr)
+
+
 var GET_PERSONAL_AND_DRUGS = 1;
 var GET_EXAMS_AND_MEDICALS = 2;
 var GET_PATIENTS = 3;
