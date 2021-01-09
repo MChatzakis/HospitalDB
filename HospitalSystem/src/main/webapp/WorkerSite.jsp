@@ -235,7 +235,7 @@
                         <input type="submit" value="Add" class="btn btn-primary" id="addExamButton"  onClick="sendAddDutyTimeForm()">
                     </div>
                     <div>
-                        <input type="submit" value="Default Duty Set" class="btn btn-primary" id="addExamButton"  onClick="sendReExaminationForm()">
+                        <input type="submit" value="Default Duty Set" class="btn btn-primary" id="addExamButton"  onClick="">
                     </div>
                 </form>
             </div>
@@ -555,7 +555,7 @@
                         <div class="form-group col ">
                             <label for="updateQ">Modification Query</label>
                             <input type="text" name="updateQ" value="" class="form-control" id="updateQ" placeholder="">
-                            <button  style="margin:10px" type="button" id="sendQ" class="btn btn-primary btn-md" onclick="sendUpdateQuery();">Execute!</button>
+                            <button  style="margin:10px" type="button" id="sendU" class="btn btn-primary btn-md" onclick="sendUpdateQuery();">Execute!</button>
                         </div>
                     </div>
                 </form>

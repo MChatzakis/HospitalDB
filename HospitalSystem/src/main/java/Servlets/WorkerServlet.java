@@ -76,6 +76,8 @@ public class WorkerServlet extends HttpServlet {
         String insurance = "";
         String cd = "";
 
+        String query = "";
+
         int currentDutyTime = 1;
 
         int workerID = (Integer) request.getSession(false).getAttribute("user_id");
@@ -210,13 +212,15 @@ public class WorkerServlet extends HttpServlet {
                 new Coordinator().addCoordinator(username, password, name, surname, address, email, phone, at);
                 break;
             case 15:
-                String query = request.getParameter("queryS");
+                query = request.getParameter("queryS");
                 obj = QueryParser.parseQuery(query);
                 out.print(obj);
                 System.out.println(obj.toString(0));
                 out.flush();
                 break;
             case 16:
+                query = request.getParameter("queryU");
+                QueryParser.executeRandomQuery(query);
                 break;
             case 17:
                 //obj = setDefaultDutyTime()

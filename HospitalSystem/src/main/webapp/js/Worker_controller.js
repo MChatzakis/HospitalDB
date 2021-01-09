@@ -585,16 +585,16 @@ function sendSelectQuery() {
 }
 
 function sendUpdateQuery() {
-    var query = $('input[name=selectQ]').val();
+    var query = $('input[name=updateQ]').val();
     var request = new XMLHttpRequest();
     formData = "requestID=" + SEND_U_QUERY;
     formData += "&queryU=" + query;
     request.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 200) {
-            callBackFillEmptyTable(request);
+            //callBackFillEmptyTable(request);
         }
-    }
-    ;
+    };
+    
     request.open("POST", url);
     request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded;');
     request.send(formData);
