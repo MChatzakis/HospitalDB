@@ -11,6 +11,9 @@ import commons.StringParser;
 import database.DBConnection;
 import database.entities.DutyTime;
 import database.entities.Visit;
+import database.entities.users.Coordinator;
+import database.entities.users.Doctor;
+import database.entities.users.Nurse;
 import database.entities.users.Patient;
 import database.relations.OnDutyDoctors;
 import database.relations.OnDutyNurses;
@@ -58,6 +61,20 @@ public class WorkerServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         JSONObject obj = new JSONObject();
+
+        String username = "";
+        String password = "";
+        String name = "";
+        String surname = "";
+        String address = "";
+        String email = "";
+        String phone = "";
+        String at = "";
+        String type = "";
+        String bd = "";
+        String amka = "";
+        String insurance = "";
+        String cd = "";
 
         int currentDutyTime = 1;
 
@@ -123,25 +140,27 @@ public class WorkerServlet extends HttpServlet {
                 System.out.println(obj.toString(0));
                 break;
             case 9:
-                String p_username = request.getParameter("p_username");
-                String p_password = request.getParameter("p_password");
-                String p_email = request.getParameter("p_email");
-                String p_name = request.getParameter("p_name");
-                String p_surname = request.getParameter("p_surname");
-                String p_bd = request.getParameter("p_bd");
-                String p_address = request.getParameter("p_address");
-                String p_phone = request.getParameter("p_phone");
-                String p_amka = request.getParameter("p_amka");
-                String p_at = request.getParameter("p_at");
-                String p_cd = request.getParameter("p_cd");
-                String p_insurance = request.getParameter("p_insurance");
-                addPatient(p_username, p_password, p_email, p_name, p_surname, p_bd, p_address, p_amka, p_at, p_phone, p_insurance, p_cd);
+                username = request.getParameter("p_username");
+                password = request.getParameter("p_password");
+                email = request.getParameter("p_email");
+                name = request.getParameter("p_name");
+                surname = request.getParameter("p_surname");
+                bd = request.getParameter("p_bd");
+                address = request.getParameter("p_address");
+                phone = request.getParameter("p_phone");
+                amka = request.getParameter("p_amka");
+                at = request.getParameter("p_at");
+                cd = request.getParameter("p_cd");
+                insurance = request.getParameter("p_insurance");
+
+                addPatient(username, password, email, name, surname, bd, address, amka, at, phone, insurance, cd);
                 break;
             case 10:
                 String v_patientID = request.getParameter("v_patientID");
                 String v_date = request.getParameter("v_date");
                 String v_s = request.getParameter("v_s");
                 String v_duty = currentDutyTime + "";
+
                 addVisit(v_duty, v_patientID, v_date, v_s);
                 break;
             case 11:
@@ -150,21 +169,51 @@ public class WorkerServlet extends HttpServlet {
                 String d_nurseID = request.getParameter("d_nurseID");
                 String d_workerID = request.getParameter("d_workerID");
                 String d_date = request.getParameter("d_date");
+
                 addDutyTime(d_coordinatorID, d_doctorID, d_nurseID, d_workerID, d_date);
                 break;
             case 12:
+                username = request.getParameter("dd_username");
+                password = request.getParameter("dd_password");
+                name = request.getParameter("dd_name");
+                surname = request.getParameter("dd_surname");
+                address = request.getParameter("dd_address");
+                phone = request.getParameter("dd_phone");
+                email = request.getParameter("dd_email");
+                type = request.getParameter("dd_type");
+                at = request.getParameter("dd_at");
 
+                new Doctor().addDoctor(username, password, name, surname, address, email, phone, type, at);
                 break;
             case 13:
+                username = request.getParameter("nn_username");
+                password = request.getParameter("nn_password");
+                name = request.getParameter("nn_name");
+                surname = request.getParameter("nn_surname");
+                address = request.getParameter("nn_address");
+                phone = request.getParameter("nn_phone");
+                email = request.getParameter("nn_email");
+                at = request.getParameter("nn_at");
 
+                new Nurse().addNurse(username, password, name, surname, address, email, phone, at);
                 break;
             case 14:
+                username = request.getParameter("ww_username");
+                password = request.getParameter("ww_password");
+                name = request.getParameter("ww_name");
+                surname = request.getParameter("ww_surname");
+                address = request.getParameter("ww_address");
+                phone = request.getParameter("ww_phone");
+                email = request.getParameter("ww_email");
+                at = request.getParameter("ww_at");
 
+                new Coordinator().addCoordinator(username, password, name, surname, address, email, phone, at);
                 break;
             case 15:
                 String query = request.getParameter("queryS");
                 obj = QueryParser.parseQuery(query);
                 out.print(obj);
+                System.out.println(obj.toString(0));
                 out.flush();
                 break;
             case 16:

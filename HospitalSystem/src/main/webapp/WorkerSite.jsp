@@ -395,100 +395,146 @@
 
 
             <div id="staffH" ><h4>Staff Modification</h4></div>
-            
+
             <div class="row  justify-content-center " style="margin:5px";>
                 <button  type="button" id="addDoctorButton" class="btn btn-primary btn-md" onclick="showAddDoctorForm();">Add Doctor</button>
             </div>
             <div class="row  justify-content-center " style="margin:5px";>
-                <form  style="display: none" id="setDutyTimeForm" class="row col-6  justify-content-center mt-3 table-dark ">
+                <form  style="display: none" id="addDoctorForm" class="row col-6  justify-content-center mt-3 table-dark ">
                     <div class="row">
                         <div class="form-group col ">
-                            <label for="add_doctorID">Doctors IDs</label>
-                            <input type="text" name="d_doctorID" value="" size="30" class="form-control" id="d_doctorID" placeholder="">
+                            <label for="dd_username">Username</label>
+                            <input type="text" name="dd_username" value="" size="30" class="form-control" id="dd_username" placeholder="">
                         </div>
                         <div class="form-group col ">
-                            <label for="d_nurseID">Nurse IDs</label>
-                            <input type="text" name="d_nurseID" value="" class="form-control" id="d_nurseID" placeholder="">
+                            <label for="dd_password">Password</label>
+                            <input type="text" name="dd_password" value="" class="form-control" id="dd_password" placeholder="">
                         </div>
                         <div class="form-group col ">
-                            <label for="d_workerID">Worker IDs</label>
-                            <input type="text" name="d_workerID" value="" class="form-control" id="d_workerID" placeholder="">
+                            <label for="dd_name">Name</label>
+                            <input type="text" name="dd_name" value="" class="form-control" id="dd_name" placeholder="">
                         </div>
                         <div class="form-group col ">
-                            <label for="d_date">Duty Time Date</label>
-                            <input type="text" name="d_date" value="" class="form-control" id="d_date" placeholder="">
+                            <label for="dd_surname">Surname</label>
+                            <input type="text" name="dd_surname" value="" class="form-control" id="dd_surname" placeholder="">
+                        </div>
+                        <div class="form-group col ">
+                            <label for="dd_address">Address</label>
+                            <input type="text" name="dd_address" value="" class="form-control" id="dd_address" placeholder="">
+                        </div>
+                        <div class="form-group col ">
+                            <label for="dd_phone">Phone</label>
+                            <input type="text" name="dd_phone" value="" class="form-control" id="dd_phone" placeholder="">
+                        </div>
+                        <div class="form-group col ">
+                            <label for="dd_email">Email</label>
+                            <input type="text" name="dd_email" value="" class="form-control" id="dd_email" placeholder="">
+                        </div>
+                        <div class="form-group col ">
+                            <label for="dd_type">Type</label>
+                            <input type="text" name="dd_type" value="" class="form-control" id="dd_type" placeholder="">
+                        </div>
+                        <div class="form-group col ">
+                            <label for="dd_at">AT</label>
+                            <input type="text" name="dd_at" value="" class="form-control" id="dd_at" placeholder="">
                         </div>
                     </div>
                     <div>
-                        <input type="submit" value="Add" class="btn btn-primary" id="addExamButton"  onClick="sendAddDutyTimeForm()">
+                        <input type="submit" value="Add" class="btn btn-primary" id="addDocButton"  onClick="sendAddDoctorForm()">
                     </div>
-                    <div>
-                        <input type="submit" value="Default Duty Set" class="btn btn-primary" id="addExamButton"  onClick="sendReExaminationForm()">
-                    </div>
-                </form>
-            </div>
-            
-            <div class="row  justify-content-center " style="margin:5px";>
-                <button  type="button" id="addDoctorButton" class="btn btn-primary btn-md" onclick="showAddDoctorForm();">Add Nurse</button>
-            </div>
-            <div class="row  justify-content-center " style="margin:5px";>
-                <form  style="display: none" id="setDutyTimeForm" class="row col-6  justify-content-center mt-3 table-dark ">
-                    <div class="row">
-                        <div class="form-group col ">
-                            <label for="add_doctorID">Doctors IDs</label>
-                            <input type="text" name="d_doctorID" value="" size="30" class="form-control" id="d_doctorID" placeholder="">
-                        </div>
-                        <div class="form-group col ">
-                            <label for="d_nurseID">Nurse IDs</label>
-                            <input type="text" name="d_nurseID" value="" class="form-control" id="d_nurseID" placeholder="">
-                        </div>
-                        <div class="form-group col ">
-                            <label for="d_workerID">Worker IDs</label>
-                            <input type="text" name="d_workerID" value="" class="form-control" id="d_workerID" placeholder="">
-                        </div>
-                        <div class="form-group col ">
-                            <label for="d_date">Duty Time Date</label>
-                            <input type="text" name="d_date" value="" class="form-control" id="d_date" placeholder="">
-                        </div>
-                    </div>
-                    <div>
-                        <input type="submit" value="Add" class="btn btn-primary" id="addExamButton"  onClick="sendAddDutyTimeForm()">
-                    </div>
-                    <div>
-                        <input type="submit" value="Default Duty Set" class="btn btn-primary" id="addExamButton"  onClick="sendReExaminationForm()">
-                    </div>
+
                 </form>
             </div>
 
             <div class="row  justify-content-center " style="margin:5px";>
-                <button  type="button" id="addDoctorButton" class="btn btn-primary btn-md" onclick="showAddDoctorForm();">Add Worker</button>
+                <button  type="button" id="addNurseButton" class="btn btn-primary btn-md" onclick="showAddNurseForm();">Add Nurse</button>
             </div>
             <div class="row  justify-content-center " style="margin:5px";>
-                <form  style="display: none" id="setDutyTimeForm" class="row col-6  justify-content-center mt-3 table-dark ">
+                <form  style="display: none" id="addNurseForm" class="row col-6  justify-content-center mt-3 table-dark ">
                     <div class="row">
                         <div class="form-group col ">
-                            <label for="add_doctorID">Doctors IDs</label>
-                            <input type="text" name="d_doctorID" value="" size="30" class="form-control" id="d_doctorID" placeholder="">
+                            <label for="nn_username">Username</label>
+                            <input type="text" name="nn_username" value="" size="30" class="form-control" id="nn_username" placeholder="">
                         </div>
                         <div class="form-group col ">
-                            <label for="d_nurseID">Nurse IDs</label>
-                            <input type="text" name="d_nurseID" value="" class="form-control" id="d_nurseID" placeholder="">
+                            <label for="nn_password">Password</label>
+                            <input type="text" name="nn_password" value="" class="form-control" id="nn_password" placeholder="">
                         </div>
                         <div class="form-group col ">
-                            <label for="d_workerID">Worker IDs</label>
-                            <input type="text" name="d_workerID" value="" class="form-control" id="d_workerID" placeholder="">
+                            <label for="nn_name">Name</label>
+                            <input type="text" name="nn_name" value="" class="form-control" id="nn_name" placeholder="">
                         </div>
                         <div class="form-group col ">
-                            <label for="d_date">Duty Time Date</label>
-                            <input type="text" name="d_date" value="" class="form-control" id="d_date" placeholder="">
+                            <label for="nn_surname">Surname</label>
+                            <input type="text" name="nn_surname" value="" class="form-control" id="nn_surname" placeholder="">
+                        </div>
+                        <div class="form-group col ">
+                            <label for="nn_address">Address</label>
+                            <input type="text" name="nn_address" value="" class="form-control" id="nn_address" placeholder="">
+                        </div>
+                        <div class="form-group col ">
+                            <label for="nn_phone">Phone</label>
+                            <input type="text" name="nn_phone" value="" class="form-control" id="nn_phone" placeholder="">
+                        </div>
+                        <div class="form-group col ">
+                            <label for="nn_email">Email</label>
+                            <input type="text" name="nn_email" value="" class="form-control" id="nn_email" placeholder="">
+                        </div>
+                        <div class="form-group col ">
+                            <label for="nn_at">AT</label>
+                            <input type="text" name="nn_at" value="" class="form-control" id="nn_at" placeholder="">
                         </div>
                     </div>
                     <div>
-                        <input type="submit" value="Add" class="btn btn-primary" id="addExamButton"  onClick="sendAddDutyTimeForm()">
+                        <input type="submit" value="Add" class="btn btn-primary" id="addNurButton"  onClick="sendAddNurseForm()">
+                    </div>
+
+                </form>
+            </div>
+
+            <div class="row  justify-content-center " style="margin:5px";>
+                <button  type="button" id="addWorkerButton" class="btn btn-primary btn-md" onclick="showAddWorkerForm();">Add Worker</button>
+            </div>
+            <div class="row  justify-content-center " style="margin:5px";>
+                <form  style="display: none" id="addWorkerForm" class="row col-6  justify-content-center mt-3 table-dark ">
+                    <div class="row">
+                        <div class="form-group col ">
+                            <label for="ww_username">Username</label>
+                            <input type="text" name="ww_username" value="" size="30" class="form-control" id="ww_username" placeholder="">
+                        </div>
+                        <div class="form-group col ">
+                            <label for="ww_password">Password</label>
+                            <input type="text" name="ww_password" value="" class="form-control" id="ww_password" placeholder="">
+                        </div>
+                        <div class="form-group col ">
+                            <label for="ww_name">Name</label>
+                            <input type="text" name="ww_name" value="" class="form-control" id="ww_name" placeholder="">
+                        </div>
+                        <div class="form-group col ">
+                            <label for="ww_surname">Surname</label>
+                            <input type="text" name="ww_surname" value="" class="form-control" id="ww_surname" placeholder="">
+                        </div>
+                        <div class="form-group col ">
+                            <label for="ww_address">Address</label>
+                            <input type="text" name="ww_address" value="" class="form-control" id="ww_address" placeholder="">
+                        </div>
+                        <div class="form-group col ">
+                            <label for="ww_phone">Phone</label>
+                            <input type="text" name="ww_phone" value="" class="form-control" id="ww_phone" placeholder="">
+                        </div>
+                        <div class="form-group col ">
+                            <label for="ww_email">Email</label>
+                            <input type="text" name="ww_email" value="" class="form-control" id="ww_email" placeholder="">
+                        </div>
+                        <div class="form-group col ">
+                            <label for="ww_at">AT</label>
+                            <input type="text" name="ww_at" value="" class="form-control" id="ww_at" placeholder="">
+                        </div>
                     </div>
                     <div>
-                        <input type="submit" value="Default Duty Set" class="btn btn-primary" id="addExamButton"  onClick="sendReExaminationForm()">
+                        <input type="submit" value="Add" class="btn btn-primary" id="addWorButton"  onClick="sendAddWorkerForm()">
                     </div>
+
                 </form>
             </div>
 
@@ -504,14 +550,12 @@
                         <div class="form-group col ">
                             <label for="selectQ">Selection Query</label>
                             <input type="text" name="selectQ" value="" class="form-control" id="selectQ" placeholder="">
-                            <button  type="button" id="sendQ" class="btn btn-primary btn-md" onclick="sendSelectQuery();">Show!</button>
-
+                            <button  style="margin:10px" type="button" id="sendQ" class="btn btn-primary btn-md" onclick="sendSelectQuery();">Show!</button>
                         </div>
                         <div class="form-group col ">
                             <label for="updateQ">Modification Query</label>
                             <input type="text" name="updateQ" value="" class="form-control" id="updateQ" placeholder="">
-                            <!--<input type="submit" value="Execute!" class="btn btn-primary" id="addExamButton"  onClick="sendUpdateQuery()">-->
-
+                            <button  style="margin:10px" type="button" id="sendQ" class="btn btn-primary btn-md" onclick="sendUpdateQuery();">Execute!</button>
                         </div>
                     </div>
                 </form>
@@ -519,8 +563,13 @@
             <div class="row  justify-content-center " style="margin:5px";>
                 <table style="display: none" id="emptyTable" class="table-sm  table-dark table-bordered" >
                     <tr>
+
+
                     </tr>
                 </table>      
+            </div>
+            <div class="row  justify-content-center " style="margin:5px";>
+                <button style="display: none" type="button" id="emptyTableButton" class="btn btn-primary btn-md" onclick="hideEmptyTable();">Minimize Result</button>
             </div>
     </body>
 

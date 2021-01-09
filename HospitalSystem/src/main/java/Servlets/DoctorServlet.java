@@ -33,7 +33,6 @@ public class DoctorServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        //System.out.println("hahahahahahaha");
         request.getRequestDispatcher("DoctorSite.jsp").forward(request, response);
     }
 

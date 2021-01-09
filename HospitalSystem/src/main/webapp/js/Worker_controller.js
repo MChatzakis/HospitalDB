@@ -1,5 +1,4 @@
 var url = "http://localhost:8080/HospitalSystem/WorkerServlet";
-
 var GET_PERSONAL_AND_DRUGS = 1;
 var GET_CURRENT_PATIENTS = 2;
 var GET_CURRENT_STUFF = 3;
@@ -8,19 +7,15 @@ var GET_ALL_PATIENTS = 5;
 var GET_ALL_EXAMS = 6;
 var GET_ALL_VISITS = 7;
 var GET_ALL_DUTIES = 8;
-
 var ADD_PATIENT = 9;
 var ADD_VISIT = 10;
 var ADD_DUTY = 11;
 var ADD_DOCTOR = 12;
 var ADD_NURSE = 13;
 var ADD_WORKER = 14;
-
 var SEND_S_QUERY = 15;
 var SEND_U_QUERY = 16;
-
 var GET_S_QUERY_ANSWER = 17;
-
 var query = "empty";
 
 $(document).ready(function () {
@@ -34,16 +29,14 @@ $(document).ready(function () {
     sendXmlForm(url, GET_ALL_VISITS);
     sendXmlForm(url, GET_ALL_DUTIES);
 });
-
 function showPersonal() {
     var d = document.getElementById('personalButton');
     var e = document.getElementById('personalTable');
     var f = document.getElementById('personalDuties');
-
     if (e.style.display === 'none' || e.style.display === '') {
         e.style.display = 'block';
         f.style.display = 'block';
-        d.innerHTML = 'Hide Personal Info';
+        d.innerHTML = 'Hide Your Personal Info';
     } else {
         e.style.display = 'none';
         f.style.display = 'none';
@@ -79,7 +72,7 @@ function showActiveStaff() {
     var e = document.getElementById('activeStaffTable');
     if (e.style.display === 'none' || e.style.display === '') {
         e.style.display = 'block';
-        d.innerHTML = 'Hide Staff';
+        d.innerHTML = 'Hide Active Staff';
     } else {
         e.style.display = 'none';
         d.innerHTML = 'Show Active Staff';
@@ -91,10 +84,10 @@ function showAddPatientForm() {
     var e = document.getElementById('addPatientForm');
     if (e.style.display === 'none' || e.style.display === '') {
         e.style.display = 'block';
-        d.innerHTML = 'Hide Add Patients Form';
+        d.innerHTML = 'Hide Form';
     } else {
         e.style.display = 'none';
-        d.innerHTML = 'Show Add Patients Form';
+        d.innerHTML = 'Add Patient';
     }
 }
 
@@ -103,22 +96,62 @@ function showAddVisitForm() {
     var e = document.getElementById('addVisitForm');
     if (e.style.display === 'none' || e.style.display === '') {
         e.style.display = 'block';
-        d.innerHTML = 'Hide Add Visit Form';
+        d.innerHTML = 'Hide Form';
     } else {
         e.style.display = 'none';
-        d.innerHTML = 'Show Add Visit Form';
+        d.innerHTML = 'Add Visit';
     }
 }
+
+function showAddWorkerForm() {
+    var d = document.getElementById('addWorkerButton');
+    var e = document.getElementById('addWorkerForm');
+    if (e.style.display === 'none' || e.style.display === '') {
+        e.style.display = 'block';
+        d.innerHTML = 'Hide Form';
+    } else {
+        e.style.display = 'none';
+        d.innerHTML = 'Add Worker';
+    }
+}
+
+
+function showAddDoctorForm() {
+    var d = document.getElementById('addDoctorButton');
+    var e = document.getElementById('addDoctorForm');
+    if (e.style.display === 'none' || e.style.display === '') {
+        e.style.display = 'block';
+        d.innerHTML = 'Hide Form';
+    } else {
+        e.style.display = 'none';
+        d.innerHTML = 'Add Doctor';
+    }
+}
+
+
+
+function showAddNurseForm() {
+    var d = document.getElementById('addNurseButton');
+    var e = document.getElementById('addNurseForm');
+    if (e.style.display === 'none' || e.style.display === '') {
+        e.style.display = 'block';
+        d.innerHTML = 'Hide Form';
+    } else {
+        e.style.display = 'none';
+        d.innerHTML = 'Add Nurse';
+    }
+}
+
 
 function showSetDutyTime() {
     var d = document.getElementById('setDutyTimeButton');
     var e = document.getElementById('setDutyTimeForm');
     if (e.style.display === 'none' || e.style.display === '') {
         e.style.display = 'block';
-        d.innerHTML = 'Hide Add Duty Time Form';
+        d.innerHTML = 'Hide Form';
     } else {
         e.style.display = 'none';
-        d.innerHTML = 'Show Add Duty Time Form';
+        d.innerHTML = 'Add Duty Time';
     }
 }
 
@@ -226,7 +259,7 @@ function showDuties() {
         d.innerHTML = 'Hide Duties';
     } else {
         e.style.display = 'none';
-        d.innerHTML = 'Show Re-Duties';
+        d.innerHTML = 'Show Duties';
     }
 }
 
@@ -338,7 +371,6 @@ function callBackFillCurrentStaff(request) {
     var table = document.getElementById('activeStaffTable');
     var dataTable = ["d_doctor_id", "d_name", "d_surname", "d_type"];
     var total = data.doctorsNumber;
-
     for (var i = 0; i < total; i++) {
         row = table.insertRow(i + 1);
         for (var j = 0; j < 4; j++) {
@@ -349,7 +381,6 @@ function callBackFillCurrentStaff(request) {
 
     dataTable = ["n_nurse_id", "n_name", "n_surname", "n_nurse"];
     var total1 = data.nursesNumber;
-
     for (var i = 0; i < total1; i++) {
         row = table.insertRow(total + i + 1);
         for (var j = 0; j < 4; j++) {
@@ -360,7 +391,6 @@ function callBackFillCurrentStaff(request) {
 
     dataTable = ["w_worker_id", "w_name", "w_surname", "w_worker"];
     var total2 = data.workersNumber;
-
     for (var i = 0; i < total2; i++) {
         row = table.insertRow(total + total1 + i + 1);
         for (var j = 0; j < 4; j++) {
@@ -433,7 +463,6 @@ function callBackFillExams(request) {
     var table = document.getElementById('examinationsTable');
     var dataTable = ["exam_id", "patient_id", "doctor_id", "drug_id", "illness_id", "visit_id", "date", "medical_id", "nurse_id", "type", "re_exam_id", "re_doctor_id", "hospi"];
     var total = data.examsNumber;
-
     for (var i = 0; i < total; i++) {
         row = table.insertRow(i + 1);
         for (var j = 0; j < 13; j++) {
@@ -490,7 +519,6 @@ function sendForm(jsonForm, id) {
                 return results;
             }}).done(function (data) {
             console.log(data);
-
         });
     });
 }
@@ -511,7 +539,6 @@ function sendAddPatientForm() {
         'p_insurance': $('input[name=p_insurance]').val(),
         'p_cd': $('input[name=p_cd]').val()
     };
-
     console.log('Form: ' + jsonForm);
     sendForm(jsonForm, "#addPatientForm");
 }
@@ -536,16 +563,16 @@ function sendAddDutyTimeForm() {
         'd_workerID': $('input[name=d_workerID]').val(),
         'd_date': $('input[name=d_date]').val()
     };
-
     console.log('Form: ' + jsonForm);
     sendForm(jsonForm, "#setDutyTimeForm");
 }
 
 function sendSelectQuery() {
-    var query = document.getElementById("selectQ").value;
-    console.log("VAL " + query);
+
+    var query = $('input[name=selectQ]').val();
     var request = new XMLHttpRequest();
-    formData = "requestID=" + SEND_S_QUERY + "queryS=" + query;
+    formData = "requestID=" + SEND_S_QUERY;
+    formData += "&queryS=" + query;
     request.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 200) {
             callBackFillEmptyTable(request);
@@ -557,28 +584,101 @@ function sendSelectQuery() {
     request.send(formData);
 }
 
+
 function callBackFillEmptyTable(request) {
     var data = JSON.parse(request.responseText);
     var table = document.getElementById('emptyTable');
-    total = data.totalRows;
+    table.innerHTML = "";
+    total = data.totalRows + 1;
+    console.log("totalll:" + total);
     for (var i = 0; i < total; i++) {
         row = table.insertRow(i);
-        for (var j = 0; j < data.totalColumns; j++) {
-            if (j === 0) {
+        console.log("hwoqidhs: " + data.totalCols);
+        for (var j = 0; j < data.totalCols; j++) {
+            if (i === 0) {
                 var cell = row.insertCell(j);
-                cell.innerHTML = data[0][j];
+                cell.innerHTML = data["ColumnNames"][j];
+            } else {
+                var cell = row.insertCell(j);
+                cell.innerHTML = data[data["ColumnNames"][j] + (i - 1)];
+
             }
+
         }
     }
 
+    console.log(request.responseText);
     var e = document.getElementById('emptyTable');
-    if (e.style.display === 'none' || e.style.display === '') {
-        e.style.display = 'block';
-    } else {
-        e.style.display = 'none';
-    }
+    var d = document.getElementById('emptyTableButton');
+
+    e.style.display = 'block';
+    d.style.display = 'block';
+    /*if (e.style.display === 'none' || e.style.display === '') {
+     } else {
+     e.style.display = 'none';
+     }*/
 }
 
+function hideEmptyTable() {
+    var e = document.getElementById('emptyTable');
+    var d = document.getElementById('emptyTableButton');
+    e.style.display = 'none';
+    d.style.display = 'none';
+
+    /*if (e.style.display === 'none' || e.style.display === '') {
+     e.style.display = 'block';
+     } else {
+     }*/
+}
+
+function sendAddDoctorForm() {
+    var jsonForm = {
+        'requestID': ADD_DOCTOR,
+        'dd_username': $('input[name=dd_username]').val(),
+        'dd_password': $('input[name=dd_password]').val(),
+        'dd_name': $('input[name=dd_name]').val(),
+        'dd_surname': $('input[name=dd_surname]').val(),
+        'dd_address': $('input[name=dd_address]').val(),
+        'dd_phone': $('input[name=dd_phone]').val(),
+        'dd_email': $('input[name=dd_email]').val(),
+        'dd_type': $('input[name=dd_type]').val(),
+        'dd_at': $('input[name=dd_at]').val(),
+    };
+    console.log('Form: ' + jsonForm);
+    sendForm(jsonForm, "#addDoctorForm");
+}
+
+function sendAddNurseForm() {
+    var jsonForm = {
+        'requestID': ADD_NURSE,
+        'nn_username': $('input[name=nn_username]').val(),
+        'nn_password': $('input[name=nn_password]').val(),
+        'nn_name': $('input[name=nn_name]').val(),
+        'nn_surname': $('input[name=nn_surname]').val(),
+        'nn_address': $('input[name=nn_address]').val(),
+        'nn_phone': $('input[name=nn_phone]').val(),
+        'nn_email': $('input[name=nn_email]').val(),
+        'nn_at': $('input[name=nn_at]').val(),
+    };
+    console.log('Form: ' + jsonForm);
+    sendForm(jsonForm, "#addNurseForm");
+}
+
+function sendAddWorkerForm() {
+    var jsonForm = {
+        'requestID': ADD_WORKER,
+        'ww_username': $('input[name=ww_username]').val(),
+        'ww_password': $('input[name=ww_password]').val(),
+        'ww_name': $('input[name=ww_name]').val(),
+        'ww_surname': $('input[name=ww_surname]').val(),
+        'ww_address': $('input[name=ww_address]').val(),
+        'ww_phone': $('input[name=ww_phone]').val(),
+        'ww_email': $('input[name=ww_email]').val(),
+        'ww_at': $('input[name=ww_at]').val(),
+    };
+    console.log('Form: ' + jsonForm);
+    sendForm(jsonForm, "#addWorkerForm");
+}
 
 
 
