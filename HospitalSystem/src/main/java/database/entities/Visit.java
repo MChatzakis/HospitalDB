@@ -17,13 +17,14 @@ public class Visit {
 
     public static int id_num = 1;
 
-    public void addVisit(String date, String duty_time_id, String patient_id) throws SQLException , ClassNotFoundException{
+    public int addVisit(String date, String duty_time_id, String patient_id) throws SQLException , ClassNotFoundException{
         DBConnection conn = new DBConnection();
         id_num = Queries.getMaxTableKey("visit_id", "visit") + 1;
         String insert = "INSERT INTO visit VALUES( "
                 + (id_num++) + "," + "\'" + date + "\'" + "," + duty_time_id + "," + patient_id + " );";
         conn.updateQuery(insert);
         conn.closeDBConnection();
+        return id_num -1;
     }
 
     public void createTable() throws SQLException, ClassNotFoundException {

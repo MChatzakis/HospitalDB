@@ -12,7 +12,7 @@ import lombok.Data;
 @Data
 public class Patient {
 
-    public void addPatient(String username, String password, String name, String surname, String address, String email, String phone, String birth_date, String amka, String at, String insurance) throws SQLException, ClassNotFoundException {
+    public int addPatient(String username, String password, String name, String surname, String address, String email, String phone, String birth_date, String amka, String at, String insurance) throws SQLException, ClassNotFoundException {
         DBConnection conn = new DBConnection();
         User user = new User();
 
@@ -22,6 +22,7 @@ public class Patient {
                 + (User.id_num - 1) + "," + "\'" + name + "\'" + "," + "\'" + surname + "\'" + ", " + "\'" + address + "\'" +  "," + "\'" + phone + "\'" + "," + "\'" + birth_date + "\'" + "," + "\'" + amka + "\'" +  "," + "\'" + at + "\'" + "," + "\'" + insurance + "\'" + ");";
         conn.updateQuery(insert);
         conn.closeDBConnection();
+        return User.id_num - 1;
     }
 
     public void createTable() throws SQLException , ClassNotFoundException{

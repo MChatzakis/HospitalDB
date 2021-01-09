@@ -3,6 +3,7 @@ var GET_EXAMS_AND_MEDICALS = 2;
 var GET_PATIENTS = 3;
 var ADD_EXAMINATION = 4;
 var ADD_RE_EXAMINATION = 5;
+var MODIFY_EXAMINATION = 6;
 
 var url = "http://localhost:8080/HospitalSystem/DoctorServlet";
 
@@ -51,6 +52,18 @@ function showPatients() {
     } else {
         e.style.display = 'none';
         d.innerHTML = 'Show Current Patients';
+    }
+}
+
+function showModifyExaminationForm() {
+    var d = document.getElementById('modifyExaminationButton');
+    var e = document.getElementById('modifyExamForm');
+    if (e.style.display === 'none' || e.style.display === '') {
+        e.style.display = 'block';
+        d.innerHTML = 'Hide Form';
+    } else {
+        e.style.display = 'none';
+        d.innerHTML = 'Modify Examination';
     }
 }
 
@@ -282,6 +295,18 @@ function sendReExaminationForm() {
 
     console.log('Form: ' + jsonForm);
     sendForm(jsonForm, "#reExaminationForm");
+}
+
+function sendModifyExaminationForm() {
+    var jsonForm = {
+        'requestID': MODIFY_EXAMINATION,
+        'mm_examID': $('input[name=mm_examID]').val(),
+        'mm_drugID': $('input[name=mm_drugID]').val(),
+        'mm_illnessID': $('input[name=mm_illnessID]').val(),
+    };
+
+    console.log('Form: ' + jsonForm);
+    sendForm(jsonForm, "#modifyExamForm");
 }
 
 function sendForm(jsonForm, id) {

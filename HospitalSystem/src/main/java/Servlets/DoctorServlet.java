@@ -1,12 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Servlets;
 
+import commons.JavaDate;
 import commons.Queries;
 import database.DBConnection;
+import database.entities.DutyTime;
 import database.entities.Examination;
 import database.entities.ReExamination;
 import java.io.IOException;
@@ -22,7 +19,7 @@ import org.json.JSONObject;
 
 /**
  *
- * @author George
+ * @author Manos Chatzakis
  */
 public class DoctorServlet extends HttpServlet {
 
@@ -64,6 +61,7 @@ public class DoctorServlet extends HttpServlet {
 
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");
+            //currentDutyTime = new DutyTime().getDutyIDFromDate(JavaDate.getDefaultDate());
 
             switch (request_id) {
             case 1:
@@ -100,6 +98,12 @@ public class DoctorServlet extends HttpServlet {
                 String hosp = request.getParameter("hosp");
                 String r_date = request.getParameter("date");
                 addNewReExamination(r_patientID, r_doctorID, r_visitID, r_date, r_medicalID, hosp);
+                break;
+            case 6:
+                String mm_drugID = request.getParameter("mm_drugID");
+                String mm_illnessID = request.getParameter("mm_illnessID");
+                String mm_examID = request.getParameter("mm_examID");
+                new Examination().modifyExamination(mm_examID, mm_drugID,mm_illnessID);
                 break;
             }
         } catch (Exception e) {

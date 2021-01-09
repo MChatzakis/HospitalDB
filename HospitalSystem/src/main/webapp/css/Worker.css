@@ -4,8 +4,6 @@ body {
     background-attachment: fixed;
 }
 
-.main { padding: 0px 12px; margin: 12px 8px 40px 8px; min-height: 420; } 
-
 .footer {        
     font-family:Arial;     
     font-size:13px;     
@@ -16,12 +14,40 @@ body {
     background: #007bff;     
     color: #fff;     
     text-align: right;     
-    height:26px;        }
+    height:26px;        
+}
 
-.footer_contents {
+.sidenav {
+    height: 100%;
+    width: 160px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #110;
+    overflow-x: hidden;
+    padding-top: 20px;
+}
 
-    height:24px; 
-    width: 1000px; 
-    margin:auto;
+.sidenav a {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 20px;
+    color: #818181;
+    display: block;
+}
 
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+
+.main {
+    margin-left: 160px; /* Same as the width of the sidenav */
+    font-size: 28px; /* Increased text to enable scrolling */
+    padding: 0px 10px;
+}
+
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
 }

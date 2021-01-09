@@ -192,6 +192,31 @@
             </div>
 
             <div class="row  justify-content-center " style="margin:5px";>
+                <button  type="button" id="modifyExaminationButton" class="btn btn-primary btn-md" onclick="showModifyExaminationForm();">Modify Examination</button>
+            </div>
+            <div class="row  justify-content-center " style="margin:5px";>
+                <form  style="display: none" id="modifyExamForm" class="row col-6  justify-content-center mt-3 table-dark ">
+                    <div class="row">
+                        <div class="form-group col ">
+                            <label for="mm_examID">ExamID</label>
+                            <input type="text" name="mm_examID" value="" class="form-control" id="mm_examID" placeholder="">
+                        </div>
+                        <div class="form-group col ">
+                            <label for="mm_drugID">DrugID</label>
+                            <input type="text" name="mm_drugID" value="" class="form-control" id="mm_drugID" placeholder="">
+                        </div>
+                        <div class="form-group col ">
+                            <label for="mm_illnessID">IllnessID</label>
+                            <input type="text" name="mm_illnessID" value="" class="form-control" id="mm_illnessID" placeholder="">
+                        </div>
+                    </div>
+                    <div>
+                        <input type="submit" value="Add" class="btn btn-primary" id="submitButton"  onClick="sendModifyExaminationForm()">
+                    </div>
+                </form>
+            </div>
+
+            <div class="row  justify-content-center " style="margin:5px";>
                 <button  type="button" id="reExaminationButton" class="btn btn-primary btn-md" onclick="showReExaminationForm();">New Re - Examination</button>
             </div>
             <div class="row  justify-content-center " style="margin:5px";>
