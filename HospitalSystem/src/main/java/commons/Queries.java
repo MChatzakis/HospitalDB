@@ -134,7 +134,7 @@ public class Queries
         return query;
     }
 
-    public static String getDoctorInfoByUsername(String username)
+     public static String getDoctorInfoByUsername(String username)
     {
         String query = "SELECT  *\n"
                 + "FROM users\n"
@@ -149,6 +149,15 @@ public class Queries
                 + "FROM users\n"
                 + "INNER JOIN doctors ON doctors.doctor_id = users.user_id\n"
                 + "WHERE users.user_id = " + docID + ";";
+        return query;
+    }
+
+    public static String getNurseInfoByID(int id)
+    {
+           String query = "SELECT  *\n"
+                + "FROM users\n"
+                + "INNER JOIN nurses ON nurses.nurse_id = users.user_id\n"
+                + "WHERE users.user_id = " + id + ";";
         return query;
     }
 

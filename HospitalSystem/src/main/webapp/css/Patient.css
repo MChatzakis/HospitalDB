@@ -66,6 +66,18 @@ h1{
         right:13%;
     }   
 }
+@media (min-width: 1200px){
+    #diseases-table{
+        left: 49%;
+    }
+    #history-table{
+        left: 77%;
+    }
+    #form
+    {
+        right:13%;
+    }   
+}
 
 
 /*

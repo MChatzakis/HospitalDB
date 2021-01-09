@@ -76,9 +76,9 @@
 
                         <th>Medical</th>
 
-                        <th>drug</th>
-
                         <th>Hospitalization</th>
+
+                        <th>drug</th>
 
                         <th>Symptoms</th>
 
