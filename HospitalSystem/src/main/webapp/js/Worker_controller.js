@@ -18,8 +18,7 @@ var ADD_NURSE = 13;
 var ADD_WORKER = 14;
 var SEND_S_QUERY = 15;
 var SEND_U_QUERY = 16;
-var GET_S_QUERY_ANSWER = 17;
-var query = "empty";
+var ADD_DEFAULT_DUTY = 17;
 
 $(document).ready(function () {
     console.log('Document ready -- Getting the initial information');
@@ -564,6 +563,15 @@ function sendAddDutyTimeForm() {
         'd_doctorID': $('input[name=d_doctorID]').val(),
         'd_nurseID': $('input[name=d_nurseID]').val(),
         'd_workerID': $('input[name=d_workerID]').val(),
+        'd_date': $('input[name=d_date]').val()
+    };
+    console.log('Form: ' + jsonForm);
+    sendForm(jsonForm, "#setDutyTimeForm");
+}
+
+function sendDefaultDutyTimeForm() {
+    var jsonForm = {
+        'requestID': ADD_DEFAULT_DUTY,
         'd_date': $('input[name=d_date]').val()
     };
     console.log('Form: ' + jsonForm);

@@ -232,10 +232,10 @@
                         </div>
                     </div>
                     <div>
-                        <input type="submit" value="Add" class="btn btn-primary" id="addExamButton"  onClick="sendAddDutyTimeForm()">
+                        <input style="margin:5px" type="submit" value="Add" class="btn btn-primary" id="addDut"  onClick="sendAddDutyTimeForm()">
                     </div>
                     <div>
-                        <input type="submit" value="Default Duty Set" class="btn btn-primary" id="addExamButton"  onClick="">
+                        <input style="margin:5px" type="submit" value="Default" class="btn btn-primary" id="addDefDuty"  onClick="sendDefaultDutyTimeForm()">
                     </div>
                 </form>
             </div>

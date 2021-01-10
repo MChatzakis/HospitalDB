@@ -7,6 +7,7 @@ package Servlets;
 
 import commons.JavaDate;
 import commons.QueryParser;
+import commons.RandomGenerator;
 import commons.StringParser;
 import database.DBConnection;
 import database.entities.DutyTime;
@@ -22,6 +23,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collections;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -223,7 +226,9 @@ public class WorkerServlet extends HttpServlet {
                 QueryParser.executeRandomQuery(query);
                 break;
             case 17:
-                //obj = setDefaultDutyTime()
+                String wID = workerID + "";
+                String date = request.getParameter("d_date");
+                setRandomDuty(date, wID);
                 break;
             }
         } catch (Exception e) {
@@ -739,6 +744,64 @@ public class WorkerServlet extends HttpServlet {
                 + "FROM coordinator_duties\n"
                 + "WHERE coordinator_duties.dutytime_id = " + dutyTimeID + ";";
         return query;
+    }
+
+    public int setRandomDuty(String date, String coordinatorID) throws SQLException, ClassNotFoundException {
+
+        Doctor doc = new Doctor();
+
+        ArrayList<String> cardIDs = doc.getIDsOfDoctors("cardiologist");
+        Collections.shuffle(cardIDs);
+
+        ArrayList<String> endIDs = doc.getIDsOfDoctors("pathologist");
+        Collections.shuffle(endIDs);
+
+        ArrayList<String> orthIDs = doc.getIDsOfDoctors("endocrinologist");
+        Collections.shuffle(orthIDs);
+
+        ArrayList<String> pathIDs = doc.getIDsOfDoctors("orthopedic");
+        Collections.shuffle(pathIDs);
+
+        ArrayList<String> endoIDs = doc.getIDsOfDoctors("pulmonologist");;
+        Collections.shuffle(endoIDs);
+
+        ArrayList<String> nurseIDs = new Nurse().getIDsOfNurses();
+        ArrayList<String> workerIDs = new Coordinator().getIDsOfWorker();
+
+        String cardID = cardIDs.get(RandomGenerator.getRandomNumber(0, cardIDs.size() - 1));
+        String endID = endIDs.get(RandomGenerator.getRandomNumber(0, endIDs.size() - 1));;
+        String orthID = orthIDs.get(RandomGenerator.getRandomNumber(0, orthIDs.size() - 1));;
+        String pathID = pathIDs.get(RandomGenerator.getRandomNumber(0, pathIDs.size() - 1));;
+        String endoID = endoIDs.get(RandomGenerator.getRandomNumber(0, endoIDs.size() - 1));;
+
+        String nurseID = "";
+        String workerID = "";
+
+        DutyTime dt = new DutyTime();
+        OnDutyDoctors dd = new OnDutyDoctors();
+        OnDutyNurses dn = new OnDutyNurses();
+        OnDutyWorkers dw = new OnDutyWorkers();
+
+        int dutyTimeID = dt.addDutyTime(date, coordinatorID);
+        String strDutyID = dutyTimeID + "";
+
+        dd.addDoctorDutyTime(cardID, strDutyID);
+        dd.addDoctorDutyTime(endID, strDutyID);
+        dd.addDoctorDutyTime(orthID, strDutyID);
+        dd.addDoctorDutyTime(pathID, strDutyID);
+        dd.addDoctorDutyTime(endoID, strDutyID);
+
+        Collections.shuffle(nurseIDs);
+        for (int j = 0; j < 3; j++) {
+            dn.addNurseDutyTime(nurseIDs.get(j), strDutyID);
+        }
+
+        Collections.shuffle(workerIDs);
+        for (int j = 0; j < 2; j++) {
+            dw.addWorkerDutyTime(workerIDs.get(j), strDutyID);
+        }
+
+        return dutyTimeID;
     }
 
 }

@@ -70,16 +70,19 @@ public class Doctor {
         ArrayList<String> IDs = new ArrayList<String>();
         String query = "SELECT doctors.doctor_id\n"
                 + "FROM doctors\n"
-                + "WHERE doctors.type = \" " + type + "\"";
+                + "WHERE doctors.type = \"" + type + "\"";
         DBConnection conn = new DBConnection();
         ResultSet res = null;
         res = conn.executeQuery(query);
-
         while (res != null && res.next()) {
             IDs.add(res.getString("doctor_id"));
         }
-
+        
         return IDs;
     }
 
+    public static void main(String [] args) throws SQLException, ClassNotFoundException{
+        System.out.println((new Doctor().getIDsOfDoctors("cardiologist").toString()));
+    }
+    
 }

@@ -69,4 +69,8 @@ public class Nurse {
 
         return IDs;
     }
+    
+    public static void main(String [] args) throws SQLException, ClassNotFoundException{
+        System.out.println((new Nurse().getIDsOfNurses()).toString());
+    }
 }
