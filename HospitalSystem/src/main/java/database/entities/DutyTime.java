@@ -3,8 +3,12 @@ package database.entities;
 import commons.JavaDate;
 import commons.Queries;
 import database.DBConnection;
+import database.entities.users.Coordinator;
+import database.entities.users.Doctor;
+import database.entities.users.Nurse;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import lombok.Data;
 
 /**
@@ -61,6 +65,20 @@ public class DutyTime {
         }
 
         return id;
+    }
+
+    public int getRandomDuty(String date) throws SQLException, ClassNotFoundException {
+        int dutyTimeID = getDutyIDFromDate(date);
+        Doctor doc = new Doctor();
+        ArrayList<String>cardIDs = doc.getIDsOfDoctors("cardiologist");
+        ArrayList<String>endIDs = doc.getIDsOfDoctors("pathologist");
+        ArrayList<String>orthIDs = doc.getIDsOfDoctors("endocrinologist");
+        ArrayList<String>pathIDs = doc.getIDsOfDoctors("orthopedic");
+        ArrayList<String>endoIDs = doc.getIDsOfDoctors("pulmonologist");;
+        ArrayList<String>nurseIDs = new Nurse().getIDsOfNurses();
+        ArrayList<String>workerIDs = new Coordinator().getIDsOfWorker();
+        
+        return dutyTimeID;
     }
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
