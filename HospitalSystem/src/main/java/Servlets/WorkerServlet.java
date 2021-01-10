@@ -84,7 +84,7 @@ public class WorkerServlet extends HttpServlet
 
         String query = "";
 
-        int currentDutyTime = 1;
+        int currentDutyTime = 20;
 
         int workerID = (Integer) request.getSession(false).getAttribute("user_id");
         int request_id = Integer.parseInt(request.getParameter("requestID"));

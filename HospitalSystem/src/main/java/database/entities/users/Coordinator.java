@@ -64,7 +64,7 @@ public class Coordinator {
         while (res != null && res.next()) {
             IDs.add(res.getString("coordinator_id"));
         }
-
+        conn.closeDBConnection();
         return IDs;
     }
 }

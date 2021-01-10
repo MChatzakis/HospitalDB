@@ -78,6 +78,7 @@ public class Doctor {
             IDs.add(res.getString("doctor_id"));
         }
         
+        conn.closeDBConnection();
         return IDs;
     }
 

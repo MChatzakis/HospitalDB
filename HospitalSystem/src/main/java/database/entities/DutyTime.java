@@ -53,7 +53,7 @@ public class DutyTime {
 
     public int getDutyIDFromDate(String date) throws SQLException, ClassNotFoundException {
         DBConnection conn = new DBConnection();
-        int id = 0;
+        int id = -1; //
         String query = "SELECT dutytime.dutytime_id\n"
                 + "FROM dutytime\n"
                 + "WHERE DATE(date) = " + "\'" + date + "\'" + ";";

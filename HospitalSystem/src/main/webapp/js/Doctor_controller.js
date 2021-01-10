@@ -305,7 +305,7 @@ function callBackFillPatients(request) {
 }
 
 function showReExaminationForm() {
-    var d = document.getElementById('addReExaminationButton');
+    var d = document.getElementById('reExaminationButton');
     var e = document.getElementById('reExaminationForm');
     if (e.style.display === 'none' || e.style.display === '') {
         e.style.display = 'block';

@@ -5,8 +5,10 @@
  */
 package Servlets;
 
+import commons.JavaDate;
 import commons.Queries;
 import database.DBConnection;
+import database.entities.DutyTime;
 import database.entities.Examination;
 import database.entities.Medical;
 import java.io.IOException;
@@ -26,8 +28,7 @@ import org.json.JSONObject;
  *
  * @author George
  */
-public class NurseServlet extends HttpServlet
-{
+public class NurseServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,11 +40,10 @@ public class NurseServlet extends HttpServlet
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-    {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         JSONObject obj = new JSONObject();
 
-        int currentDutyTime = 2; //get it from database with date..
+        int currentDutyTime = 20; //get it from database with date..
         int nurseID = (Integer) request.getSession(false).getAttribute("user_id");
         int request_id = Integer.parseInt(request.getParameter("requestID"));
 
@@ -53,65 +53,59 @@ public class NurseServlet extends HttpServlet
 
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
-        try
-        {
-            switch (request_id)
-            {
-                case 1:
-                    String from = request.getParameter("from");
-                    String to = request.getParameter("to");
+        try {
+            //currentDutyTime = new DutyTime().getDutyIDFromDate(JavaDate.getDefaultDate());
 
-                    obj = getPersonalAndDrugInfo(nurseID, currentDutyTime, from, to);
-                    out.print(obj);
-                    out.flush();
-                    System.out.println(obj.toString(0));
-                    break;
-                case 2:
-                    obj = getMedicalAndExaminationInfo(nurseID, currentDutyTime);
-                    out.print(obj);
-                    out.flush();
-                    System.out.println(obj.toString(0));
-                    break;
-                case 3:
-                    obj = getCurrentPatientsInfo(nurseID, currentDutyTime);
-                    out.print(obj);
-                    out.flush();
-                    System.out.println(obj.toString(0));
-                    break;
-                case 4:
-                    String type = request.getParameter("type");
-                    String examID = request.getParameter("examID");
-                    String patientID = request.getParameter("patientID");
-                    String doctorID = request.getParameter("doctorID");
-                    String date = request.getParameter("date");
-                    System.out.println("im adding a new medical");
-                    addNewMedical(type, examID, patientID, doctorID, nurseID, date);
-                    break;
+            switch (request_id) {
+            case 1:
+                String from = request.getParameter("from");
+                String to = request.getParameter("to");
+
+                obj = getPersonalAndDrugInfo(nurseID, currentDutyTime, from, to);
+                out.print(obj);
+                out.flush();
+                System.out.println(obj.toString(0));
+                break;
+            case 2:
+                obj = getMedicalAndExaminationInfo(nurseID, currentDutyTime);
+                out.print(obj);
+                out.flush();
+                System.out.println(obj.toString(0));
+                break;
+            case 3:
+                obj = getCurrentPatientsInfo(nurseID, currentDutyTime);
+                out.print(obj);
+                out.flush();
+                System.out.println(obj.toString(0));
+                break;
+            case 4:
+                String type = request.getParameter("type");
+                String examID = request.getParameter("examID");
+                String patientID = request.getParameter("patientID");
+                String doctorID = request.getParameter("doctorID");
+                String date = request.getParameter("date");
+                System.out.println("im adding a new medical");
+                addNewMedical(type, examID, patientID, doctorID, nurseID, date);
+                break;
             }
 
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-
-    {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getRequestDispatcher("NurseSite.jsp").forward(request, response);
 
     }
 
-    public void addNewMedical(String type, String examID, String patientID, String doctorID, int nurseID, String date) throws SQLException, ClassNotFoundException
-    {
+    public void addNewMedical(String type, String examID, String patientID, String doctorID, int nurseID, String date) throws SQLException, ClassNotFoundException {
         Medical med = new Medical();
         med.addMedical(type, examID, patientID, doctorID, String.valueOf(nurseID), date);
     }
 
-    public JSONObject getMedicalAndExaminationInfo(int user_id, int currentDutyTime) throws SQLException, ClassNotFoundException
-    {
+    public JSONObject getMedicalAndExaminationInfo(int user_id, int currentDutyTime) throws SQLException, ClassNotFoundException {
         DBConnection conn = new DBConnection();
         JSONObject obj = new JSONObject();
 
@@ -135,8 +129,7 @@ public class NurseServlet extends HttpServlet
         res = conn.executeQuery(examinationsQuery);
         counter = 0;
 
-        while (res != null && res.next())
-        {
+        while (res != null && res.next()) {
             obj.put("exam_id" + counter, res.getString("exam_id"));
             obj.put("patient_id" + counter, res.getString("patient_id"));
             obj.put("drug_id" + counter, res.getString("drug_id"));
@@ -150,8 +143,7 @@ public class NurseServlet extends HttpServlet
         res = conn.executeQuery(medicalsQuery);
         counter = 0;
 
-        while (res != null && res.next())
-        {
+        while (res != null && res.next()) {
             obj.put("m_medical_id" + counter, res.getString("medical_id"));
             obj.put("m_exam_id" + counter, res.getString("exam_id"));
             obj.put("m_patient_id" + counter, res.getString("patient_id"));
@@ -168,8 +160,7 @@ public class NurseServlet extends HttpServlet
         return obj;
     }
 
-    public JSONObject getCurrentPatientsInfo(int user_id, int currentDutyTime) throws SQLException, ClassNotFoundException
-    {
+    public JSONObject getCurrentPatientsInfo(int user_id, int currentDutyTime) throws SQLException, ClassNotFoundException {
         JSONObject patients = new JSONObject();
 
         String patientsQuery = "SELECT visit.visit_id, visit.date, patients.patient_id, patients.name, patients.surname, patients.birth_date, patients.amka\n"
@@ -187,8 +178,7 @@ public class NurseServlet extends HttpServlet
 
         res = conn.executeQuery(patientsQuery);
 
-        while (res != null && res.next())
-        {
+        while (res != null && res.next()) {
 
             diseases_counter = 0;
             symptoms_counter = 0;
@@ -203,8 +193,7 @@ public class NurseServlet extends HttpServlet
 
             res2 = conn.executeQuery(getChronicDisOfPatient(Integer.parseInt(res.getString("patient_id"))));
             JSONArray diseases = new JSONArray();
-            while (res2 != null && res2.next())
-            {
+            while (res2 != null && res2.next()) {
                 diseases.put(res2.getString("disease"));
                 diseases_counter++;
             }
@@ -213,8 +202,7 @@ public class NurseServlet extends HttpServlet
 
             res3 = conn.executeQuery(getCurrentPatientSymptoms(Integer.parseInt(res.getString("patient_id")), currentDutyTime));
             JSONArray symptoms = new JSONArray();
-            while (res3 != null && res3.next())
-            {
+            while (res3 != null && res3.next()) {
                 symptoms.put(res3.getString("symptom"));
                 symptoms_counter++;
             }
@@ -230,16 +218,14 @@ public class NurseServlet extends HttpServlet
         return patients;
     }
 
-    public String getChronicDisOfPatient(int patientID)
-    {
+    public String getChronicDisOfPatient(int patientID) {
         String query = "SELECT patients_chronic_diseases.disease\n"
                 + "FROM patients_chronic_diseases\n"
                 + "WHERE patients_chronic_diseases.patient_id = " + patientID + ";";
         return query;
     }
 
-    public String getCurrentPatientSymptoms(int patientID, int dutyTimeID)
-    {
+    public String getCurrentPatientSymptoms(int patientID, int dutyTimeID) {
         String query = "SELECT visit_symptoms.symptom\n"
                 + "FROM visit_symptoms\n"
                 + "INNER JOIN visit ON visit_symptoms.visit_id = visit.visit_id\n"
@@ -247,27 +233,23 @@ public class NurseServlet extends HttpServlet
         return query;
     }
 
-    public JSONObject getPersonalAndDrugInfo(int user_id, int currentDutyTime, String from, String to) throws SQLException, ClassNotFoundException
-    {
+    public JSONObject getPersonalAndDrugInfo(int user_id, int currentDutyTime, String from, String to) throws SQLException, ClassNotFoundException {
         JSONObject obj = new JSONObject();
         DBConnection conn = new DBConnection();
         int counter = 0;
         System.out.println("from : " + from);
-        System.out.println("to :" + to );
+        System.out.println("to :" + to);
 
         ResultSet res = null;
         String infoQuery = Queries.getNurseInfoByID(user_id);
         String dutyTimeQuery;
-        if (from != null && to != null)
-        {
+        if (from != null && to != null) {
             dutyTimeQuery = "SELECT dutytime.date\n"
                     + "FROM dutytime\n"
                     + "INNER JOIN nurse_duties ON dutytime.dutytime_id = nurse_duties.dutytime_id\n"
                     + "WHERE nurse_duties.nurse_id = " + user_id + " AND dutytime.date BETWEEN ("
                     + "\'" + from + "\'" + ") AND (" + "\'" + to + "\'" + ");";
-        }
-        else
-        {
+        } else {
             dutyTimeQuery = "SELECT dutytime.date\n"
                     + "FROM dutytime\n"
                     + "INNER JOIN nurse_duties ON dutytime.dutytime_id = nurse_duties.dutytime_id\n"
@@ -277,14 +259,12 @@ public class NurseServlet extends HttpServlet
 
         res = conn.executeQuery(infoQuery);
 
-        if (res == null)
-        {
+        if (res == null) {
             System.err.println("something went wrong!");
             return null;
         }
 
-        while (res != null && res.next())
-        {
+        while (res != null && res.next()) {
             obj.put("name", res.getString("name"));
             obj.put("surname", res.getString("surname"));
             obj.put("address", res.getString("address"));
@@ -298,8 +278,7 @@ public class NurseServlet extends HttpServlet
         res = conn.executeQuery(dutyTimeQuery);
         counter = 0;
 
-        while (res != null && res.next())
-        {
+        while (res != null && res.next()) {
             obj.put("duty" + counter, res.getString("date"));
             counter++;
         }

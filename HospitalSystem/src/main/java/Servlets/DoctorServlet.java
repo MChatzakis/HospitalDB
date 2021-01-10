@@ -21,8 +21,7 @@ import org.json.JSONObject;
  *
  * @author Manos Chatzakis
  */
-public class DoctorServlet extends HttpServlet
-{
+public class DoctorServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,8 +32,7 @@ public class DoctorServlet extends HttpServlet
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-    {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getRequestDispatcher("DoctorSite.jsp").forward(request, response);
     }
 
@@ -47,81 +45,76 @@ public class DoctorServlet extends HttpServlet
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-    {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         JSONObject obj = new JSONObject();
 
-        int currentDutyTime = 2; //get it from database with date..
+        int currentDutyTime = 20; //get it from database with date..
         int doctorID = (Integer) request.getSession(false).getAttribute("user_id");
         int request_id = Integer.parseInt(request.getParameter("requestID"));
 
         System.out.println("request id is  : " + request_id);
 
-        try
-        {
+        try {
 
             PrintWriter out = response.getWriter();
 
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");
+            
             //currentDutyTime = new DutyTime().getDutyIDFromDate(JavaDate.getDefaultDate());
+         
+            switch (request_id) {
+            case 1:
+                String from = request.getParameter("from");
+                String to = request.getParameter("to");
 
-            switch (request_id)
-            {
-                case 1:
-                    String from = request.getParameter("from");
-                    String to = request.getParameter("to");
-
-                    obj = getPersonalAndDrugInfo(doctorID, currentDutyTime, from, to);
-                    out.print(obj);
-                    out.flush();
-                    System.out.println(obj.toString(0));
-                    break;
-                case 2:
-                    obj = getMedicalAndExaminationInfo(doctorID, currentDutyTime);
-                    out.print(obj);
-                    out.flush();
-                    System.out.println(obj.toString(0));
-                    break;
-                case 3:
-                    obj = getCurrentPatientsInfo(doctorID, currentDutyTime);
-                    out.print(obj);
-                    out.flush();
-                    System.out.println(obj.toString(0));
-                    break;
-                case 4:
-                    String patientID = request.getParameter("patientID");
-                    String visitID = request.getParameter("visitID");
-                    String drugID = request.getParameter("drugID");
-                    String illnessID = request.getParameter("illnessID");
-                    String date = request.getParameter("date");
-                    addNewExamination(doctorID + "", patientID, visitID, drugID, illnessID, date);
-                    break;
-                case 5:
-                    String r_doctorID = doctorID + "";
-                    String r_patientID = request.getParameter("patientID");
-                    String r_visitID = request.getParameter("visitID");
-                    String r_medicalID = request.getParameter("medicalID");
-                    String hosp = request.getParameter("hosp");
-                    String r_date = request.getParameter("date");
-                    addNewReExamination(r_patientID, r_doctorID, r_visitID, r_date, r_medicalID, hosp);
-                    break;
-                case 6:
-                    String mm_drugID = request.getParameter("mm_drugID");
-                    String mm_illnessID = request.getParameter("mm_illnessID");
-                    String mm_examID = request.getParameter("mm_examID");
-                    new Examination().modifyExamination(mm_examID, mm_drugID, mm_illnessID);
-                    break;
+                obj = getPersonalAndDrugInfo(doctorID, currentDutyTime, from, to);
+                out.print(obj);
+                out.flush();
+                System.out.println(obj.toString(0));
+                break;
+            case 2:
+                obj = getMedicalAndExaminationInfo(doctorID, currentDutyTime);
+                out.print(obj);
+                out.flush();
+                System.out.println(obj.toString(0));
+                break;
+            case 3:
+                obj = getCurrentPatientsInfo(doctorID, currentDutyTime);
+                out.print(obj);
+                out.flush();
+                System.out.println(obj.toString(0));
+                break;
+            case 4:
+                String patientID = request.getParameter("patientID");
+                String visitID = request.getParameter("visitID");
+                String drugID = request.getParameter("drugID");
+                String illnessID = request.getParameter("illnessID");
+                String date = request.getParameter("date");
+                addNewExamination(doctorID + "", patientID, visitID, drugID, illnessID, date);
+                break;
+            case 5:
+                String r_doctorID = doctorID + "";
+                String r_patientID = request.getParameter("patientID");
+                String r_visitID = request.getParameter("visitID");
+                String r_medicalID = request.getParameter("medicalID");
+                String hosp = request.getParameter("hosp");
+                String r_date = request.getParameter("date");
+                addNewReExamination(r_patientID, r_doctorID, r_visitID, r_date, r_medicalID, hosp);
+                break;
+            case 6:
+                String mm_drugID = request.getParameter("mm_drugID");
+                String mm_illnessID = request.getParameter("mm_illnessID");
+                String mm_examID = request.getParameter("mm_examID");
+                new Examination().modifyExamination(mm_examID, mm_drugID, mm_illnessID);
+                break;
             }
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public JSONObject getMedicalAndExaminationInfo(int user_id, int currentDutyTime) throws SQLException, ClassNotFoundException
-    {
+    public JSONObject getMedicalAndExaminationInfo(int user_id, int currentDutyTime) throws SQLException, ClassNotFoundException {
         DBConnection conn = new DBConnection();
         JSONObject obj = new JSONObject();
 
@@ -151,8 +144,7 @@ public class DoctorServlet extends HttpServlet
         res = conn.executeQuery(examinationsQuery);
         counter = 0;
 
-        while (res != null && res.next())
-        {
+        while (res != null && res.next()) {
             obj.put("exam_id" + counter, res.getString("exam_id"));
             obj.put("patient_id" + counter, res.getString("patient_id"));
             obj.put("drug_id" + counter, res.getString("drug_id"));
@@ -166,8 +158,7 @@ public class DoctorServlet extends HttpServlet
         res = conn.executeQuery(medicalsQuery);
         counter = 0;
 
-        while (res != null && res.next())
-        {
+        while (res != null && res.next()) {
             obj.put("m_medical_id" + counter, res.getString("medical_id"));
             obj.put("m_exam_id" + counter, res.getString("exam_id"));
             obj.put("m_patient_id" + counter, res.getString("patient_id"));
@@ -182,8 +173,7 @@ public class DoctorServlet extends HttpServlet
         res = conn.executeQuery(reExaminationsQuery);
         counter = 0;
 
-        while (res != null && res.next())
-        {
+        while (res != null && res.next()) {
             obj.put("r_re_exam_id" + counter, res.getString("re_exam_id"));
             obj.put("r_patient_id" + counter, res.getString("patient_id"));
             obj.put("r_visit_id" + counter, res.getString("visit_id"));
@@ -197,8 +187,7 @@ public class DoctorServlet extends HttpServlet
         return obj;
     }
 
-    public JSONObject getPersonalAndDrugInfo(int user_id, int currentDutyTime, String from, String to) throws SQLException, ClassNotFoundException
-    {
+    public JSONObject getPersonalAndDrugInfo(int user_id, int currentDutyTime, String from, String to) throws SQLException, ClassNotFoundException {
         JSONObject obj = new JSONObject();
         DBConnection conn = new DBConnection();
         int counter = 0;
@@ -209,16 +198,13 @@ public class DoctorServlet extends HttpServlet
         String drugsQuery = "SELECT drugs.drug_id, drugs.name AS drug_name, drugs.type AS drug_type, drugs.dosage, drugs.illness_id, illnesses.name AS illness_name\n"
                 + "FROM drugs\n"
                 + "INNER JOIN illnesses ON drugs.illness_id = illnesses.illness_id;";
-        if (from != null && to != null)
-        {
+        if (from != null && to != null) {
             dutyTimeQuery = "SELECT dutytime.date\n"
                     + "FROM dutytime\n"
                     + "INNER JOIN doctor_duties ON dutytime.dutytime_id = doctor_duties.dutytime_id\n"
                     + "WHERE doctor_duties.doctor_id = " + user_id + " AND dutytime.date BETWEEN ("
                     + "\'" + from + "\'" + ") AND (" + "\'" + to + "\'" + ");";
-        }
-        else
-        {
+        } else {
             dutyTimeQuery = "SELECT dutytime.date\n"
                     + "FROM dutytime\n"
                     + "INNER JOIN doctor_duties ON dutytime.dutytime_id = doctor_duties.dutytime_id\n"
@@ -228,14 +214,12 @@ public class DoctorServlet extends HttpServlet
 
         res = conn.executeQuery(infoQuery);
 
-        if (res == null)
-        {
+        if (res == null) {
             System.err.println("something went wrong!");
             return null;
         }
 
-        while (res != null && res.next())
-        {
+        while (res != null && res.next()) {
             obj.put("name", res.getString("name"));
             obj.put("surname", res.getString("surname"));
             obj.put("address", res.getString("address"));
@@ -248,8 +232,7 @@ public class DoctorServlet extends HttpServlet
 
         res = conn.executeQuery(drugsQuery);
 
-        while (res != null && res.next())
-        {
+        while (res != null && res.next()) {
             obj.put("drug_id" + counter, res.getString("drug_id"));
             obj.put("drug_name" + counter, res.getString("drug_name"));
             obj.put("drug_type" + counter, res.getString("drug_type"));
@@ -262,8 +245,7 @@ public class DoctorServlet extends HttpServlet
         res = conn.executeQuery(dutyTimeQuery);
         counter = 0;
 
-        while (res != null && res.next())
-        {
+        while (res != null && res.next()) {
             obj.put("duty" + counter, res.getString("date"));
             counter++;
         }
@@ -274,8 +256,7 @@ public class DoctorServlet extends HttpServlet
         return obj;
     }
 
-    public JSONObject getCurrentPatientsInfo(int user_id, int currentDutyTime) throws SQLException, ClassNotFoundException
-    {
+    public JSONObject getCurrentPatientsInfo(int user_id, int currentDutyTime) throws SQLException, ClassNotFoundException {
         JSONObject patients = new JSONObject();
 
         String patientsQuery = "SELECT visit.visit_id, visit.date, patients.patient_id, patients.name, patients.surname, patients.birth_date, patients.amka\n"
@@ -293,8 +274,7 @@ public class DoctorServlet extends HttpServlet
 
         res = conn.executeQuery(patientsQuery);
 
-        while (res != null && res.next())
-        {
+        while (res != null && res.next()) {
 
             diseases_counter = 0;
             symptoms_counter = 0;
@@ -309,8 +289,7 @@ public class DoctorServlet extends HttpServlet
 
             res2 = conn.executeQuery(getChronicDisOfPatient(Integer.parseInt(res.getString("patient_id"))));
             JSONArray diseases = new JSONArray();
-            while (res2 != null && res2.next())
-            {
+            while (res2 != null && res2.next()) {
                 diseases.put(res2.getString("disease"));
                 diseases_counter++;
             }
@@ -319,8 +298,7 @@ public class DoctorServlet extends HttpServlet
 
             res3 = conn.executeQuery(getCurrentPatientSymptoms(Integer.parseInt(res.getString("patient_id")), currentDutyTime));
             JSONArray symptoms = new JSONArray();
-            while (res3 != null && res3.next())
-            {
+            while (res3 != null && res3.next()) {
                 symptoms.put(res3.getString("symptom"));
                 symptoms_counter++;
             }
@@ -332,20 +310,18 @@ public class DoctorServlet extends HttpServlet
         }
 
         patients.put("patientsNumber", patients_counter);
-
+        conn.closeDBConnection();
         return patients;
     }
 
-    public String getChronicDisOfPatient(int patientID)
-    {
+    public String getChronicDisOfPatient(int patientID) {
         String query = "SELECT patients_chronic_diseases.disease\n"
                 + "FROM patients_chronic_diseases\n"
                 + "WHERE patients_chronic_diseases.patient_id = " + patientID + ";";
         return query;
     }
 
-    public String getCurrentPatientSymptoms(int patientID, int dutyTimeID)
-    {
+    public String getCurrentPatientSymptoms(int patientID, int dutyTimeID) {
         String query = "SELECT visit_symptoms.symptom\n"
                 + "FROM visit_symptoms\n"
                 + "INNER JOIN visit ON visit_symptoms.visit_id = visit.visit_id\n"
@@ -353,18 +329,15 @@ public class DoctorServlet extends HttpServlet
         return query;
     }
 
-    public void addNewExamination(String doctorID, String patientID, String visitID, String drugID, String illnessID, String date) throws SQLException, ClassNotFoundException
-    {
+    public void addNewExamination(String doctorID, String patientID, String visitID, String drugID, String illnessID, String date) throws SQLException, ClassNotFoundException {
         Examination ex = new Examination();
         ex.addExamination(patientID, doctorID, drugID, illnessID, visitID, date);
     }
 
-    public void addNewReExamination(String patientID, String doctorID, String visitID, String date, String medicalID, String hospi) throws SQLException, ClassNotFoundException
-    {
+    public void addNewReExamination(String patientID, String doctorID, String visitID, String date, String medicalID, String hospi) throws SQLException, ClassNotFoundException {
         ReExamination reEx = new ReExamination();
         boolean hosp = false;
-        if (hospi.equals("1"))
-        {
+        if (hospi.equals("1")) {
             hosp = true;
         }
         System.out.println("===========================\n==================");

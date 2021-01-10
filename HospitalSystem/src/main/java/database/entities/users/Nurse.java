@@ -67,6 +67,7 @@ public class Nurse {
             IDs.add(res.getString("nurse_id"));
         }
 
+        conn.closeDBConnection();
         return IDs;
     }
     
