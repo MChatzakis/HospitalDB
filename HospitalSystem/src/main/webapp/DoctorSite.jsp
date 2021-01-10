@@ -7,6 +7,9 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://www.google.com/recaptcha/api.js"></script>
         <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
         <script type="text/javascript" src="js/Doctor_controller.js"></script>
         <link
             rel="stylesheet"
@@ -58,6 +61,7 @@
                 </div>
             </div>
 
+
             <div class="row  justify-content-center " style="margin:5px";>
                 <button  type="button" id="personalButton" class="btn btn-primary btn-md" onclick="showPersonal();">Show Personal Information</button>
             </div>
@@ -74,6 +78,10 @@
                         <th>Email</th>
                     </tr>
                 </table>        
+            </div>
+            <div class="row  justify-content-center " style="margin:5px";>
+
+                <input type="text"id="daterange"class="col-3"style="text-align: center;display: none"name="daterange" value=" " />
             </div>
             <div class="row  justify-content-center " style="margin:5px";>
                 <table style="display: none" id="personalDuties" class="table-sm  table-dark table-bordered" >
@@ -192,7 +200,7 @@
                         </div>
                     </div>
                     <div>
-                        <input type="submit" value="Add" class="btn btn-primary" id="submitButton"  onClick="sendExaminationForm()">
+                        <input type="submit" value="Add" class="btn btn-primary" id="submitButton-2"  onClick="sendExaminationForm()">
                     </div>
                 </form>
             </div>

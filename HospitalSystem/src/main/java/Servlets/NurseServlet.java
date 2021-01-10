@@ -58,7 +58,10 @@ public class NurseServlet extends HttpServlet
             switch (request_id)
             {
                 case 1:
-                    obj = getPersonalAndDrugInfo(nurseID, currentDutyTime);
+                    String from = request.getParameter("from");
+                    String to = request.getParameter("to");
+
+                    obj = getPersonalAndDrugInfo(nurseID, currentDutyTime, from, to);
                     out.print(obj);
                     out.flush();
                     System.out.println(obj.toString(0));
@@ -101,7 +104,7 @@ public class NurseServlet extends HttpServlet
 
     }
 
-    public void addNewMedical(String type, String examID,String patientID, String doctorID, int nurseID,String date) throws SQLException, ClassNotFoundException
+    public void addNewMedical(String type, String examID, String patientID, String doctorID, int nurseID, String date) throws SQLException, ClassNotFoundException
     {
         Medical med = new Medical();
         med.addMedical(type, examID, patientID, doctorID, String.valueOf(nurseID), date);
@@ -244,19 +247,33 @@ public class NurseServlet extends HttpServlet
         return query;
     }
 
-    public JSONObject getPersonalAndDrugInfo(int user_id, int currentDutyTime) throws SQLException, ClassNotFoundException
+    public JSONObject getPersonalAndDrugInfo(int user_id, int currentDutyTime, String from, String to) throws SQLException, ClassNotFoundException
     {
         JSONObject obj = new JSONObject();
         DBConnection conn = new DBConnection();
         int counter = 0;
+        System.out.println("from : " + from);
+        System.out.println("to :" + to );
 
         ResultSet res = null;
         String infoQuery = Queries.getNurseInfoByID(user_id);
+        String dutyTimeQuery;
+        if (from != null && to != null)
+        {
+            dutyTimeQuery = "SELECT dutytime.date\n"
+                    + "FROM dutytime\n"
+                    + "INNER JOIN nurse_duties ON dutytime.dutytime_id = nurse_duties.dutytime_id\n"
+                    + "WHERE nurse_duties.nurse_id = " + user_id + " AND dutytime.date BETWEEN ("
+                    + "\'" + from + "\'" + ") AND (" + "\'" + to + "\'" + ");";
+        }
+        else
+        {
+            dutyTimeQuery = "SELECT dutytime.date\n"
+                    + "FROM dutytime\n"
+                    + "INNER JOIN nurse_duties ON dutytime.dutytime_id = nurse_duties.dutytime_id\n"
+                    + "WHERE nurse_duties.nurse_id = " + user_id + ";";
 
-        String dutyTimeQuery = "SELECT dutytime.date\n"
-                + "FROM dutytime\n"
-                + "INNER JOIN nurse_duties ON dutytime.dutytime_id = nurse_duties.dutytime_id\n"
-                + "WHERE nurse_duties.nurse_id = " + user_id + ";";
+        }
 
         res = conn.executeQuery(infoQuery);
 

@@ -9,8 +9,10 @@
 <html>
     <link rel="stylesheet" href="css/Doctor.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://www.google.com/recaptcha/api.js"></script>
     <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
     <script type="text/javascript" src="js/Nurse_controller.js"></script>
     <link
         rel="stylesheet"
@@ -82,7 +84,13 @@
                 </table>        
             </div>
             <div class="row  justify-content-center " style="margin:5px";>
-                <table style="display: none" id="personalDuties" class="table-sm  table-dark table-bordered" >
+
+                <input type="text"id="daterange"class="col-3"style="text-align: center;display: none"name="daterange" value=" " />
+            </div>
+
+            <div class="row  justify-content-center " style="margin:5px";>
+
+                <table style="display: none" id="personalDuties" class="table-sm table-dark table-bordered" >
                     <tr>            
                         <th>Dates of Duty Time</th>
                     </tr>
@@ -166,7 +174,7 @@
                             <label for="doctor-id">DoctorID</label>
                             <input type="text" name="doctor-id" value="" class="form-control" id="doctor-id" placeholder="">
                         </div>
-                      
+
                         <div class="form-group col ">
                             <label for="date">Date</label>
                             <input type="text" name="date" value="" class="form-control" id="date" placeholder="">

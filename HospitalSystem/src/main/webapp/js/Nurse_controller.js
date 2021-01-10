@@ -12,11 +12,34 @@ var ADD_MEDICAL_EXAMINATION = 4;
 
 var url = "http://localhost:8080/HospitalSystem/NurseServlet";
 
+
+var flag = 0;
 $(document).ready(function () {
-    console.log('Document ready -- Getting the initial information');
-    sendXmlForm(url, GET_PERSONAL_AND_DUTIES);
-    sendXmlForm(url, GET_EXAMS_AND_MEDICALS);
-    sendXmlForm(url, GET_PATIENTS);
+
+    $('input[name="daterange"]').daterangepicker({
+    }, function (start, end, label) {
+        console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+        var from = start.format('YYYY-MM-DD');
+        var to = end.format('YYYY-MM-DD');
+        formData = "requestID=" + GET_PERSONAL_AND_DUTIES;
+        formData += "&from=" + from;
+        formData += "&to=" + to;
+        flag = 1;
+        sendXmlForm(url, GET_PERSONAL_AND_DUTIES, formData);
+
+    });
+
+    formData = "requestID=" + GET_PERSONAL_AND_DUTIES;
+
+    sendXmlForm(url, GET_PERSONAL_AND_DUTIES, formData);
+
+    formData = "requestID=" + GET_EXAMS_AND_MEDICALS;
+
+    sendXmlForm(url, GET_EXAMS_AND_MEDICALS, formData);
+
+    formData = "requestID=" + GET_PATIENTS;
+
+    sendXmlForm(url, GET_PATIENTS, formData);
 });
 
 function showPersonal() {
@@ -25,13 +48,19 @@ function showPersonal() {
     var e = document.getElementById('personalTable');
     var f = document.getElementById('personalDuties');
 
+    var g = document.getElementById('daterange');
+
     if (e.style.display === 'none' || e.style.display === '') {
         e.style.display = 'block';
         f.style.display = 'block';
+        g.style.display = 'block';
+
         d.innerHTML = 'Hide Personal Info';
     } else {
         e.style.display = 'none';
         f.style.display = 'none';
+        g.style.display = 'none';
+
         d.innerHTML = 'Show Personal Info';
     }
 }
@@ -88,14 +117,18 @@ function showExaminationForm() {
     }
 }
 
-function sendXmlForm(url, reqID) {
+function sendXmlForm(url, reqID, formData) {
     var request = new XMLHttpRequest();
-    formData = "requestID=" + reqID;
     request.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 200) {
             if (reqID === GET_PERSONAL_AND_DUTIES) {
                 console.log("Filling personal data and medical supplies information");
-                callBackFillPersonalData(request);
+                if (flag == 0)
+                {
+                    callBackFillPersonalData(request);
+
+                }
+
                 callBackFillDuties(request);
             } else if (reqID === GET_EXAMS_AND_MEDICALS) {
                 console.log("Filling examinationn and medical information");
@@ -115,6 +148,15 @@ function sendXmlForm(url, reqID) {
 }
 
 function callBackFillDuties(request) {
+    var table = document.getElementById('personalDuties');
+    var rowCount = table.rows.length;
+    var rowToBeDeleted = rowCount;
+    console.log("rows to delete : " + rowToBeDeleted);
+    for (var i = 0; i < rowCount - 1; i++)
+    {
+        table.deleteRow(rowToBeDeleted - 1);
+        rowToBeDeleted--;
+    }
     var data = JSON.parse(request.responseText);
     var table = document.getElementById('personalDuties');
     var dt = "duty";
@@ -127,7 +169,8 @@ function callBackFillDuties(request) {
     }
 }
 
-function callBackFillPersonalData(request) {
+function callBackFillPersonalData(request)
+{
     var data = JSON.parse(request.responseText);
     var table = document.getElementById('personalTable');
     var row = table.insertRow(1);
@@ -136,6 +179,7 @@ function callBackFillPersonalData(request) {
         var cell = row.insertCell(i);
         cell.innerHTML = dataTable[i];
     }
+
 }
 
 

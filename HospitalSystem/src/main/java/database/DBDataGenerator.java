@@ -48,20 +48,20 @@ public class DBDataGenerator {
     public void insertNurses() throws SQLException, ClassNotFoundException {
         Nurse nurse = new Nurse();
         nurse.addNurse("evach", "evach123", "Eva", "Chamilaki", "Hrakleio", "ch@tep.gr", "+30- 69-055-5170", "AT1010");
-        nurse.addNurse("effieProb", "effie123", "Effie", "Probona", "Hrakleio", "eff@tep.gr", "null", "KA9955");
-        nurse.addNurse("dimiTsichl", "dimiTsichl123", "Dimitra", "Tsichla", "Hrakleio", "tsichla@tep.gr", "null", "IU9976");
-        nurse.addNurse("olipopa", "olipopa123", "Olimpia", "Popa", "Hrakleio", "popa@tep.gr", "null", "GH4213");
-        nurse.addNurse("nikimark", "nikimark123", "Niki", "Markatou", "Hrakleio", "nikimark@tep.gr", "null", "BC8976");
-        nurse.addNurse("mariass", "maris123", "Maria", "Papadak", "Hrakleio", "marpapadaki@tep.gr", "null", "IO9921");
+        nurse.addNurse("effieProb", "effie123", "Effie", "Probona", "Hrakleio", "eff@tep.gr", "+30- 69-055-5170", "KA9955");
+        nurse.addNurse("dimiTsichl", "dimiTsichl123", "Dimitra", "Tsichla", "Hrakleio", "tsichla@tep.gr", "+30- 69-055-5171", "IU9976");
+        nurse.addNurse("olipopa", "olipopa123", "Olimpia", "Popa", "Hrakleio", "popa@tep.gr", "+30- 69-055-5172", "GH4213");
+        nurse.addNurse("nikimark", "nikimark123", "Niki", "Markatou", "Hrakleio", "nikimark@tep.gr", "+30- 69-055-5173", "BC8976");
+        nurse.addNurse("mariass", "maris123", "Maria", "Papadak", "Hrakleio", "marpapadaki@tep.gr", "+30- 69-055-5174", "IO9921");
     }
 
     public void insertCoordinators() throws SQLException, ClassNotFoundException {
         Coordinator coord = new Coordinator();
-        coord.addCoordinator("alvin", "alvin123", "Alvi", "Nikola", "Hrakleio", "alvi@tep.gr", "null", "AN6768");
-        coord.addCoordinator("billp", "billp123", "Vasilis", "Plevris", "Hrakleio", "billplevr@tep.gr", "null", "SD5524");
-        coord.addCoordinator("katePetr", "katerinapetr123", "Katerina", "Petraki", "Hrakleio", "petrKate@tep.gr", "null", "AS7765");
-        coord.addCoordinator("matDamon", "matt123", "Mathaios", "Iliakis", "Hrakleio", "mattdamon@tep.gr", "null", "XD4323");
-        coord.addCoordinator("thanosStamp", "thanos123", "Thanos", "Staboulos", "Hrakleio", "stabthanos@tep.gr", "null", "VB6243");
+        coord.addCoordinator("alvin", "alvin123", "Alvi", "Nikola", "Hrakleio", "alvi@tep.gr", "+30- 69-055-5175", "AN6768");
+        coord.addCoordinator("billp", "billp123", "Vasilis", "Plevris", "Hrakleio", "billplevr@tep.gr", "+30- 69-055-5174", "SD5524");
+        coord.addCoordinator("katePetr", "katerinapetr123", "Katerina", "Petraki", "Hrakleio", "petrKate@tep.gr", "+30- 69-055-5176", "AS7765");
+        coord.addCoordinator("matDamon", "matt123", "Mathaios", "Iliakis", "Hrakleio", "mattdamon@tep.gr", "+30- 69-055-5177", "XD4323");
+        coord.addCoordinator("thanosStamp", "thanos123", "Thanos", "Staboulos", "Hrakleio", "stabthanos@tep.gr", "+30- 69-055-5178", "VB6243");
     }
 
     public void insertDrugs() throws SQLException, ClassNotFoundException {
@@ -171,60 +171,60 @@ public class DBDataGenerator {
 
     public void insertCardiologists() throws SQLException, ClassNotFoundException {
         Doctor doctor = new Doctor();
-        doctor.addDoctor("chatz", "manos123", "Manos", "Chatzakis", "Hrakleio", "chatzakis@tep.gr", "null", "cardiologist", "AT5555");
-        doctor.addDoctor("gchatz", "gio123", "George", "Chatzakis", "Hrakleio", "chatzakis_george@tep.gr", "null", "cardiologist", "AT1019");
-        doctor.addDoctor("kourl", "kourl123", "Marilena", "Kourletaki", "Hrakleio", "kourl@tep.gr", "null", "cardiologist", "AT2029");
-        doctor.addDoctor("katechatz", "kate123", "Katerina", "Chatzaki", "Hrakleio", "kate_ch@tep.gr", "null", "cardiologist", "UT7465");
-        doctor.addDoctor("vasilBorb", "borbant3322", "Vasilis", "Borbantonakis", "Hrakleio", "billBorb@tep.gr", "null", "cardiologist", "UT5612");
+        doctor.addDoctor("chatz", "manos123", "Manos", "Chatzakis", "Hrakleio", "chatzakis@tep.gr", "+30- 69-055-5179", "cardiologist", "AT5555");
+        doctor.addDoctor("gchatz", "gio123", "George", "Chatzakis", "Hrakleio", "chatzakis_george@tep.gr", "+30- 69-055-5180", "cardiologist", "AT1019");
+        doctor.addDoctor("kourl", "kourl123", "Marilena", "Kourletaki", "Hrakleio", "kourl@tep.gr", "+30- 69-055-5181", "cardiologist", "AT2029");
+        doctor.addDoctor("katechatz", "kate123", "Katerina", "Chatzaki", "Hrakleio", "kate_ch@tep.gr", "+30- 69-055-5182", "cardiologist", "UT7465");
+        doctor.addDoctor("vasilBorb", "borbant3322", "Vasilis", "Borbantonakis", "Hrakleio", "billBorb@tep.gr", "+30- 69-055-5183", "cardiologist", "UT5612");
     }
 
     public void insertOrthopedics() throws SQLException, ClassNotFoundException {
         Doctor doctor = new Doctor();
-        doctor.addDoctor("georgegk", "george123", "George", "Kokolakis", "Hrakleio", "kokol@tep.gr", "null", "orthopedic", "KL3409");
-        doctor.addDoctor("nikoltab", "nikolas321", "Nikolas", "Taboukos", "Hrakleio", "tabouk@tep.gr", "null", "orthopedic", "PI9987");
-        doctor.addDoctor("leutSpinth", "leut123", "Leuteris", "Spinthakis", "Hrakleio", "efraim@tep.gr", "null", "orthopedic", "K75367");
+        doctor.addDoctor("georgegk", "george123", "George", "Kokolakis", "Hrakleio", "kokol@tep.gr", "+30- 69-055-5184", "orthopedic", "KL3409");
+        doctor.addDoctor("nikoltab", "nikolas321", "Nikolas", "Taboukos", "Hrakleio", "tabouk@tep.gr", "+30- 69-055-5185", "orthopedic", "PI9987");
+        doctor.addDoctor("leutSpinth", "leut123", "Leuteris", "Spinthakis", "Hrakleio", "efraim@tep.gr", "+30- 69-055-5186", "orthopedic", "K75367");
     }
 
     public void insertPathologists() throws SQLException, ClassNotFoundException {
         Doctor doctor = new Doctor();
-        doctor.addDoctor("drosos", "drosos123", "Drosos", "Drosakis", "Hrakleio", "drosos@tep.gr", "null", "pathologist", "AE2359");
-        doctor.addDoctor("houst", "hustu123", "Giorgos", "Houstoulakis", "Hrakleio", "just@tep.gr", "null", "pathologist", "FL9012");
-        doctor.addDoctor("dimitra", "dimitra123", "Dimitra", "Hristodoulou", "Hrakleio", "dimi@tep.gr", "null", "pathologist", "GH7162");
+        doctor.addDoctor("drosos", "drosos123", "Drosos", "Drosakis", "Hrakleio", "drosos@tep.gr", "+30- 69-055-5187", "pathologist", "AE2359");
+        doctor.addDoctor("houst", "hustu123", "Giorgos", "Houstoulakis", "Hrakleio", "just@tep.gr", "+30- 69-055-5188", "pathologist", "FL9012");
+        doctor.addDoctor("dimitra", "dimitra123", "Dimitra", "Hristodoulou", "Hrakleio", "dimi@tep.gr", "+30- 69-055-5189", "pathologist", "GH7162");
     }
 
     public void insertEndocrinologists() throws SQLException, ClassNotFoundException {
         Doctor doctor = new Doctor();
-        doctor.addDoctor("elvis", "elvis123", "Elvira", "Sakoudi", "Hrakleio", "sak@tep.gr", "null", "endocrinologist", "MN8866");
-        doctor.addDoctor("nikosFan", "nikfan123", "Nikos", "Fanourakis", "Hrakleio", "fanou@tep.gr", "null", "endocrinologist", "PT9911");
-        doctor.addDoctor("konto16", "konto@11", "Nikos", "Kontonasios", "Hrakleio", "konto@tep.gr", "null", "endocrinologist", "MN6543");
+        doctor.addDoctor("elvis", "elvis123", "Elvira", "Sakoudi", "Hrakleio", "sak@tep.gr", "+30- 69-055-5190", "endocrinologist", "MN8866");
+        doctor.addDoctor("nikosFan", "nikfan123", "Nikos", "Fanourakis", "Hrakleio", "fanou@tep.gr", "+30- 69-055-5191", "endocrinologist", "PT9911");
+        doctor.addDoctor("konto16", "konto@11", "Nikos", "Kontonasios", "Hrakleio", "konto@tep.gr", "+30- 69-055-5192", "endocrinologist", "MN6543");
     }
 
     public void insertPulmonologists() throws SQLException, ClassNotFoundException {
         Doctor doctor = new Doctor();
-        doctor.addDoctor("gfou", "gfou123", "Giorgos", "Fountakis", "Hrakleio", "fount@tep.gr", "null", "pulmonologist", "UT4629");
-        doctor.addDoctor("vasilias", "vasilik33", "Nikos", "Vasilikopoulos", "Hrakleio", "vasilik@tep.gr", "null", "pulmonologist", "GF9078");
-        doctor.addDoctor("gmallis", "mall123", "Giorgos", "Mallis", "Hrakleio", "mallis@tep.gr", "null", "pulmonologist", "TR5423");
+        doctor.addDoctor("gfou", "gfou123", "Giorgos", "Fountakis", "Hrakleio", "fount@tep.gr", "+30- 69-055-5193", "pulmonologist", "UT4629");
+        doctor.addDoctor("vasilias", "vasilik33", "Nikos", "Vasilikopoulos", "Hrakleio", "vasilik@tep.gr", "+30- 69-055-5194", "pulmonologist", "GF9078");
+        doctor.addDoctor("gmallis", "mall123", "Giorgos", "Mallis", "Hrakleio", "mallis@tep.gr", "+30- 69-055-5195", "pulmonologist", "TR5423");
     }
 
     public void insertPatients() throws SQLException, ClassNotFoundException {
         Patient pat = new Patient();
-        pat.addPatient("nickLen", "len123", "Nikos", "Lenakis", "Hrakleio", "len@gmail.com", "null", "1990-11-16", "12066455", "IK8986", "IKA");
+        pat.addPatient("nickLen", "len123", "Nikos", "Lenakis", "Hrakleio", "len@gmail.com", "+30- 69-055-5196", "1990-11-16", "12066455", "IK8986", "IKA");
         pat.addChronicDisease("29", "Asthma");
         pat.addChronicDisease("29", "Aids");
 
-        pat.addPatient("gPer", "gper123", "Giorgos", "Perakis", "Hrakleio", "per@gmail.com", "null", "1980-09-12", "97046412", "KH6754", "IKA");
+        pat.addPatient("gPer", "gper123", "Giorgos", "Perakis", "Hrakleio", "per@gmail.com", "+30- 69-055-5197", "1980-09-12", "97046412", "KH6754", "IKA");
         pat.addChronicDisease("30", "Osteoporosis");
         pat.addChronicDisease("30", "Diabetes");
 
-        pat.addPatient("gIwan", "iwannou21", "Giannis", "Iwannou", "Hrakleio", "iwannou@gmail.com", "null", "1970-03-12", "31155415", "UT1213", "IKA");
+        pat.addPatient("gIwan", "iwannou21", "Giannis", "Iwannou", "Hrakleio", "iwannou@gmail.com", "+30- 69-055-5198", "1970-03-12", "31155415", "UT1213", "IKA");
         pat.addChronicDisease("31", "Arthritis");
         pat.addChronicDisease("31", "Diabetes");
 
-        pat.addPatient("pPetr", "pav123", "Pavlos", "Petrakis", "Hrakleio", "petrakis_pav@gmail.com", "null", "1995-03-02", "80048812", "BG7813", "IKA");
+        pat.addPatient("pPetr", "pav123", "Pavlos", "Petrakis", "Hrakleio", "petrakis_pav@gmail.com", "+30- 69-055-5199", "1995-03-02", "80048812", "BG7813", "IKA");
         pat.addChronicDisease("32", "Obesity");
         
 
-        pat.addPatient("marianth", "marianth1234", "Marianthi", "Panagiotaki", "Hrakleio", "marpanagiot@gmail.com", "null", "1962-12-05", "11641112", "TY4312", "IKA");
+        pat.addPatient("marianth", "marianth1234", "Marianthi", "Panagiotaki", "Hrakleio", "marpanagiot@gmail.com", "+30- 69-013-1210", "1962-12-05", "11641112", "TY4312", "IKA");
         pat.addChronicDisease("33", "Cystic_Fibrosis");
         pat.addChronicDisease("33", "Heart_Disease");
         pat.addChronicDisease("33", "Obesity");
