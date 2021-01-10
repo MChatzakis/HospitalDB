@@ -6,6 +6,10 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://www.google.com/recaptcha/api.js"></script>
         <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
         <script type="text/javascript" src="js/Worker_controller.js"></script>
         <link
             rel="stylesheet"
@@ -15,20 +19,27 @@
 
         <% //allow access only if session exists 
             String user = null;
-            if (!(request.getSession(false).getAttribute("type").equals("Worker"))) {
+            if (!(request.getSession(false).getAttribute("type").equals("Worker")))
+            {
                 response.sendRedirect("http://localhost:8080/HospitalSystem/");
-            } else {
+            }
+            else
+            {
                 user = (String) session.getAttribute("username");
             }
             String userName = null;
             String sessionID = null;
             Cookie[] cookies = request.getCookies();
-            if (cookies != null) {
-                for (Cookie cookie : cookies) {
-                    if (cookie.getName().equals("user")) {
+            if (cookies != null)
+            {
+                for (Cookie cookie : cookies)
+                {
+                    if (cookie.getName().equals("user"))
+                    {
                         userName = cookie.getValue();
                     }
-                    if (cookie.getName().equals("JSESSIONID")) {
+                    if (cookie.getName().equals("JSESSIONID"))
+                    {
                         sessionID = cookie.getValue();
                     }
                 }
@@ -78,6 +89,10 @@
                 </table>        
             </div>
             <div class="row  justify-content-center " style="margin:5px";>
+
+                <input type="text"id="daterange"class="col-3"style="text-align: center;display: none"name="daterange" value=" " />
+            </div>
+            <div class="row  justify-content-center " style="margin:5px";>
                 <table style="display: none" id="personalDuties" class="table-sm  table-dark table-bordered" >
                     <tr>            
                         <th>Dates of Duty Time</th>
@@ -125,18 +140,18 @@
                 <button  type="button" id="addPatientButton" class="btn btn-primary btn-md" onclick="showAddPatientForm();">Add Patient</button>
             </div>
             <div class="row  justify-content-center " style="margin:5px";>
-                <form  style="display: none" id="addPatientForm" class="row  justify-content-center mt-10 table-dark ">
+                <form  style="display: none" id="addPatientForm" class="row  col-8 justify-content-center mt-10 table-dark ">
                     <div class="row">
-                        <div class="form-group col " class="col-xs-2">
+                        <div class="form-group col-3 " class="col-xs-2">
                             <label for="p_username">Username</label>
                             <input type="text" name="p_username" value="username" size="50" class="form-control" id="p_username" placeholder="">
                         </div>
-                        <div class="form-group col ">
+                        <div class="form-group  col-3 ">
                             <label for="p_password">Password</label>
                             <input type="text" name="p_password" value="password" size="30" class="form-control" id="p_password" placeholder="">
                         </div>
                         <br><br>
-                        <div class="form-group col ">
+                        <div class="form-group  col-3 ">
                             <label for="p_email">Email</label>
                             <input type="text" name="p_email" value="example@dom.com" size="30" class="form-control" id="p_email" placeholder="">
                         </div>
@@ -144,35 +159,35 @@
                             <label for="p_name">Name</label>
                             <input type="text" name="p_name" value="Name" size="30" class="form-control" id="p_name" placeholder="">
                         </div>
-                        <div class="form-group col ">
+                        <div class="form-group col-3 ">
                             <label for="p_surname">Surname</label>
                             <input type="text" name="p_surname" value="Surname" size="30" class="form-control" id="p_surname" placeholder="">
                         </div>
-                        <div class="form-group col ">
+                        <div class="form-group col-3 ">
                             <label for="p_bd">Birth Date</label>
                             <input type="text" name="p_bd" value="yyyy-mm-dd" size="30" class="form-control" id="p_bd" placeholder="">
                         </div>
-                        <div class="form-group col ">
+                        <div class="form-group col-3 ">
                             <label for="p_phone">Phone</label>
                             <input type="text" name="p_phone" value="+3069...." size="30" class="form-control" id="p_phone" placeholder="">
                         </div>
-                        <div class="form-group col ">
+                        <div class="form-group col-3 ">
                             <label for="p_address">Address</label>
                             <input type="text" name="p_address" value="City" size="30" class="form-control" id="p_address" placeholder="">
                         </div>
-                        <div class="form-group col ">
+                        <div class="form-group col-3 ">
                             <label for="p_amka">AMKA</label>
                             <input type="text" name="p_amka" value="000000000000" size="30" class="form-control" id="p_amka" placeholder="">
                         </div>
-                        <div class="form-group col ">
+                        <div class="form-group col-3 ">
                             <label for="p_at">AT</label>
                             <input type="text" name="p_at" value="AT 0000 0000" size="30" class="form-control" id="p_at" placeholder="">
                         </div>
-                        <div class="form-group col ">
+                        <div class="form-group col-3 ">
                             <label for="p_insurance">Insurance</label>
                             <input type="text" name="p_insurance" value="IKA,IKY" size="30" class="form-control" id="p_insurance" placeholder="">
                         </div>
-                        <div class="form-group col ">
+                        <div class="form-group col-3 ">
                             <label for="p_cd">Chronic Diseases</label>
                             <input type="text" name="p_cd" value="Asthma, Obesity..." size="30" class="form-control" id="p_cd" placeholder="">
                         </div>
@@ -212,21 +227,21 @@
                 <button  type="button" id="setDutyTimeButton" class="btn btn-primary btn-md" onclick="showSetDutyTime();">Set Duty Time</button>
             </div>
             <div class="row  justify-content-center " style="margin:5px";>
-                <form  style="display: none" id="setDutyTimeForm" class="row col-6  justify-content-center mt-3 table-dark ">
+                <form  style="display: none" id="setDutyTimeForm" class="row col-12  justify-content-center mt-3 table-dark ">
                     <div class="row">
-                        <div class="form-group col ">
+                        <div class="form-group col-3 ">
                             <label for="d_doctorID">Doctors IDs</label>
                             <input type="text" name="d_doctorID" value="" class="form-control" id="d_doctorID" placeholder="">
                         </div>
-                        <div class="form-group col ">
+                        <div class="form-group col-3 ">
                             <label for="d_nurseID">Nurse IDs</label>
                             <input type="text" name="d_nurseID" value="" class="form-control" id="d_nurseID" placeholder="">
                         </div>
-                        <div class="form-group col ">
+                        <div class="form-group col-3 ">
                             <label for="d_workerID">Worker IDs</label>
                             <input type="text" name="d_workerID" value="" class="form-control" id="d_workerID" placeholder="">
                         </div>
-                        <div class="form-group col ">
+                        <div class="form-group col-3 ">
                             <label for="d_date">Duty Time Date</label>
                             <input type="text" name="d_date" value="" class="form-control" id="d_date" placeholder="">
                         </div>
@@ -400,7 +415,7 @@
                 <button  type="button" id="addDoctorButton" class="btn btn-primary btn-md" onclick="showAddDoctorForm();">Add Doctor</button>
             </div>
             <div class="row  justify-content-center " style="margin:5px";>
-                <form  style="display: none" id="addDoctorForm" class="row col-6  justify-content-center mt-3 table-dark ">
+                <form  style="display: none" id="addDoctorForm" class="row col-12  justify-content-center mt-3 table-dark ">
                     <div class="row">
                         <div class="form-group col ">
                             <label for="dd_username">Username</label>
@@ -450,37 +465,37 @@
                 <button  type="button" id="addNurseButton" class="btn btn-primary btn-md" onclick="showAddNurseForm();">Add Nurse</button>
             </div>
             <div class="row  justify-content-center " style="margin:5px";>
-                <form  style="display: none" id="addNurseForm" class="row col-6  justify-content-center mt-3 table-dark ">
+                <form  style="display: none" id="addNurseForm" class="row col-8  justify-content-center mt-3 table-dark ">
                     <div class="row">
-                        <div class="form-group col ">
+                        <div class="form-group col-3 ">
                             <label for="nn_username">Username</label>
                             <input type="text" name="nn_username" value="" size="30" class="form-control" id="nn_username" placeholder="">
                         </div>
-                        <div class="form-group col ">
+                        <div class="form-group  col-3 ">
                             <label for="nn_password">Password</label>
                             <input type="text" name="nn_password" value="" class="form-control" id="nn_password" placeholder="">
                         </div>
-                        <div class="form-group col ">
+                        <div class="form-group  col-3 ">
                             <label for="nn_name">Name</label>
                             <input type="text" name="nn_name" value="" class="form-control" id="nn_name" placeholder="">
                         </div>
-                        <div class="form-group col ">
+                        <div class="form-group  col-3 ">
                             <label for="nn_surname">Surname</label>
                             <input type="text" name="nn_surname" value="" class="form-control" id="nn_surname" placeholder="">
                         </div>
-                        <div class="form-group col ">
+                        <div class="form-group  col-3 ">
                             <label for="nn_address">Address</label>
                             <input type="text" name="nn_address" value="" class="form-control" id="nn_address" placeholder="">
                         </div>
-                        <div class="form-group col ">
+                        <div class="form-group  col-3 ">
                             <label for="nn_phone">Phone</label>
                             <input type="text" name="nn_phone" value="" class="form-control" id="nn_phone" placeholder="">
                         </div>
-                        <div class="form-group col ">
+                        <div class="form-group  col-3 ">
                             <label for="nn_email">Email</label>
                             <input type="text" name="nn_email" value="" class="form-control" id="nn_email" placeholder="">
                         </div>
-                        <div class="form-group col ">
+                        <div class="form-group  col-3 ">
                             <label for="nn_at">AT</label>
                             <input type="text" name="nn_at" value="" class="form-control" id="nn_at" placeholder="">
                         </div>
@@ -496,37 +511,37 @@
                 <button  type="button" id="addWorkerButton" class="btn btn-primary btn-md" onclick="showAddWorkerForm();">Add Worker</button>
             </div>
             <div class="row  justify-content-center " style="margin:5px";>
-                <form  style="display: none" id="addWorkerForm" class="row col-6  justify-content-center mt-3 table-dark ">
+                <form  style="display: none" id="addWorkerForm" class="row col-8  justify-content-center mt-3 table-dark ">
                     <div class="row">
-                        <div class="form-group col ">
+                        <div class="form-group  col-3 ">
                             <label for="ww_username">Username</label>
                             <input type="text" name="ww_username" value="" size="30" class="form-control" id="ww_username" placeholder="">
                         </div>
-                        <div class="form-group col ">
+                        <div class="form-group  col-3 ">
                             <label for="ww_password">Password</label>
                             <input type="text" name="ww_password" value="" class="form-control" id="ww_password" placeholder="">
                         </div>
-                        <div class="form-group col ">
+                        <div class="form-group  col-3 ">
                             <label for="ww_name">Name</label>
                             <input type="text" name="ww_name" value="" class="form-control" id="ww_name" placeholder="">
                         </div>
-                        <div class="form-group col ">
+                        <div class="form-group  col-3 ">
                             <label for="ww_surname">Surname</label>
                             <input type="text" name="ww_surname" value="" class="form-control" id="ww_surname" placeholder="">
                         </div>
-                        <div class="form-group col ">
+                        <div class="form-group  col-3 ">
                             <label for="ww_address">Address</label>
                             <input type="text" name="ww_address" value="" class="form-control" id="ww_address" placeholder="">
                         </div>
-                        <div class="form-group col ">
+                        <div class="form-group  col-3 ">
                             <label for="ww_phone">Phone</label>
                             <input type="text" name="ww_phone" value="" class="form-control" id="ww_phone" placeholder="">
                         </div>
-                        <div class="form-group col ">
+                        <div class="form-group  col-3 ">
                             <label for="ww_email">Email</label>
                             <input type="text" name="ww_email" value="" class="form-control" id="ww_email" placeholder="">
                         </div>
-                        <div class="form-group col ">
+                        <div class="form-group  col-3 ">
                             <label for="ww_at">AT</label>
                             <input type="text" name="ww_at" value="" class="form-control" id="ww_at" placeholder="">
                         </div>

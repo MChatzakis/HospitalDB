@@ -48,7 +48,7 @@
     </head>
 
     <body>
-        <div class="container text-center ">
+        <div class="container-fluid text-center ">
             <div class="row justify-content-center ">
                 <div class="jumbotron col-8 "style="background-color:rgb(20, 75, 165);opacity:0.7;  border-radius: 0px 0px 20px 20px;">
                     <h1>Hello <%= user%> !</h1>
@@ -176,7 +176,7 @@
                 <button  type="button" id="addExaminationButton" class="btn btn-primary btn-md" onclick="showExaminationForm();">Add New Examination</button>
             </div>
             <div class="row  justify-content-center " style="margin:5px";>
-                <form  style="display: none" id="examForm" class="row col-6  justify-content-center mt-3 table-dark ">
+                <form  style="display: none" id="examForm" class="row col-10  justify-content-center mt-3 table-dark ">
                     <div class="row">
                         <div class="form-group col ">
                             <label for="patientID">PatientID</label>
@@ -209,7 +209,7 @@
                 <button  type="button" id="modifyExaminationButton" class="btn btn-primary btn-md" onclick="showModifyExaminationForm();">Modify Examination</button>
             </div>
             <div class="row  justify-content-center " style="margin:5px";>
-                <form  style="display: none" id="modifyExamForm" class="row col-6  justify-content-center mt-3 table-dark ">
+                <form  style="display: none" id="modifyExamForm" class="row col-10  justify-content-center mt-3 table-dark ">
                     <div class="row">
                         <div class="form-group col ">
                             <label for="mm_examID">ExamID</label>
@@ -234,7 +234,7 @@
                 <button  type="button" id="reExaminationButton" class="btn btn-primary btn-md" onclick="showReExaminationForm();">New Re - Examination</button>
             </div>
             <div class="row  justify-content-center " style="margin:5px";>
-                <form  style="display: none" id="reExaminationForm" class="row col-6  justify-content-center mt-3 table-dark ">
+                <form  style="display: none" id="reExaminationForm" class="row col-10  justify-content-center mt-3 table-dark ">
                     <div class="row">
                         <div class="form-group col ">
                             <label for="r_patientID">PatientID</label>
@@ -263,13 +263,9 @@
                 </form>
             </div>
 
-    </body>
-
-    <footer>
-        <div class="footer" style="background-color:rgb(20, 75, 165);opacity:0.7;  border-radius: 0px 0px 20px 20px;">
-            <p>2021, Manos Chatzakis, George Kokolakis, All Rights Reserved</p>
-            <p>Computer Science Department, University of Crete</p>
         </div>
-    </footer>
+        <div class="footer mt-5">All Rights Reserved &copy; George Kokolakis , Manos Chatzakes</div>
+
+    </body>
 
 </html>

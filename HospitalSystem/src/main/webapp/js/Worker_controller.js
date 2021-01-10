@@ -20,28 +20,67 @@ var SEND_S_QUERY = 15;
 var SEND_U_QUERY = 16;
 var ADD_DEFAULT_DUTY = 17;
 
+var flag = 0;
+
 $(document).ready(function () {
-    console.log('Document ready -- Getting the initial information');
-    sendXmlForm(url, GET_PERSONAL_AND_DRUGS);
-    sendXmlForm(url, GET_CURRENT_PATIENTS);
-    sendXmlForm(url, GET_CURRENT_STUFF);
-    sendXmlForm(url, GET_DOCTORS_NURSES_WORKERS);
-    sendXmlForm(url, GET_ALL_PATIENTS);
-    sendXmlForm(url, GET_ALL_EXAMS);
-    sendXmlForm(url, GET_ALL_VISITS);
-    sendXmlForm(url, GET_ALL_DUTIES);
+    $('input[name="daterange"]').daterangepicker({
+    }, function (start, end, label) {
+        console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+        var from = start.format('YYYY-MM-DD');
+        var to = end.format('YYYY-MM-DD');
+        formData = "requestID=" + GET_PERSONAL_AND_DRUGS;
+        formData += "&from=" + from;
+        formData += "&to=" + to;
+        flag = 1;
+        sendXmlForm(url, GET_PERSONAL_AND_DRUGS, formData);
+
+    });
+    formData = "requestID=" + GET_PERSONAL_AND_DRUGS;
+    sendXmlForm(url, GET_PERSONAL_AND_DRUGS, formData);
+
+    formData = "requestID=" + GET_CURRENT_PATIENTS;
+    sendXmlForm(url, GET_CURRENT_PATIENTS, formData);
+
+    formData = "requestID=" + GET_CURRENT_STUFF;
+
+    sendXmlForm(url, GET_CURRENT_STUFF, formData);
+
+    formData = "requestID=" + GET_DOCTORS_NURSES_WORKERS;
+
+    sendXmlForm(url, GET_DOCTORS_NURSES_WORKERS, formData);
+
+    formData = "requestID=" + GET_ALL_PATIENTS;
+
+    sendXmlForm(url, GET_ALL_PATIENTS, formData);
+
+    formData = "requestID=" + GET_ALL_EXAMS;
+
+    sendXmlForm(url, GET_ALL_EXAMS, formData);
+
+    formData = "requestID=" + GET_ALL_VISITS;
+
+    sendXmlForm(url, GET_ALL_VISITS, formData);
+    formData = "requestID=" + GET_ALL_DUTIES;
+
+    sendXmlForm(url, GET_ALL_DUTIES, formData);
 });
 function showPersonal() {
     var d = document.getElementById('personalButton');
     var e = document.getElementById('personalTable');
     var f = document.getElementById('personalDuties');
+    var g = document.getElementById('daterange');
+
     if (e.style.display === 'none' || e.style.display === '') {
         e.style.display = 'block';
         f.style.display = 'block';
+        g.style.display = 'block';
+
         d.innerHTML = 'Hide Your Personal Info';
     } else {
         e.style.display = 'none';
         f.style.display = 'none';
+        g.style.display = 'none';
+
         d.innerHTML = 'Show Personal Info';
     }
 }
@@ -289,16 +328,20 @@ function showQueryForm() {
     }
 }
 
-function sendXmlForm(url, reqID) {
+function sendXmlForm(url, reqID, formData) {
     var request = new XMLHttpRequest();
-    formData = "requestID=" + reqID;
     request.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 200) {
             if (reqID === GET_PERSONAL_AND_DRUGS) {
                 console.log("Filling personal data and medical supplies information");
-                callBackFillPersonalData(request);
+                if (flag == 0)
+                {
+                    callBackFillPersonalData(request);
+                    callBackFillDrugsAndIllnesses(request);
+
+                }
+
                 callBackFillPersonalDuties(request);
-                callBackFillDrugsAndIllnesses(request);
             } else if (reqID === GET_CURRENT_PATIENTS) {
                 callBackFillPatients(request);
             } else if (reqID === GET_CURRENT_STUFF) {
@@ -344,6 +387,14 @@ function callBackFillDrugsAndIllnesses(request) {
 function callBackFillPersonalDuties(request) {
     var data = JSON.parse(request.responseText);
     var table = document.getElementById('personalDuties');
+    var rowCount = table.rows.length;
+    var rowToBeDeleted = rowCount;
+    console.log("rows to delete : " + rowToBeDeleted);
+    for (var i = 0; i < rowCount - 1; i++)
+    {
+        table.deleteRow(rowToBeDeleted - 1);
+        rowToBeDeleted--;
+    }
     var dt = "duty";
     var total = data.dutytimes;
     console.log("Times: " + total);
@@ -605,7 +656,7 @@ function sendUpdateQuery() {
             //callBackFillEmptyTable(request);
         }
     };
-    
+
     request.open("POST", url);
     request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded;');
     request.send(formData);

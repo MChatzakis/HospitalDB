@@ -1,27 +1,38 @@
-body {
+html ,body {
     background-image:  url("../img/backround_image2.jpg");
     background-repeat: no-repeat;
     background-attachment: fixed;
+    height: 100%;
+    width: 100%;
+    margin: 0;
 }
-
+.container{
+height: 96%;
+}
 .main { padding: 0px 12px; margin: 12px 8px 40px 8px; min-height: 420; } 
 
-.footer {        
-    font-family:Arial;     
-    font-size:13px;     
-    position: fixed;     
-    bottom: 0pt;    
-    left:0pt;    
-    width: 98%;    
-    background: #007bff;     
-    color: #fff;     
-    text-align: right;     
-    height:26px;        }
+.footer {      
+    text-align: left;
+    /* font-family:Arial;     
+     font-size:13px;     
+     position: fixed;     
+     bottom: 0pt;    
+     left:0pt;    
+     width: 98%;    
+     background: #007bff;     
+     color: #fff;     
+     text-align: right;
+     height:26px;  */ 
+    /*position:absolute;
+    bottom:0;*/
 
+
+}
+/*
 .footer_contents {
 
     height:24px; 
     width: 1000px; 
     margin:auto;
 
-}
+}*/
