@@ -19,16 +19,17 @@ import lombok.Data;
 @Data
 public class DutyTime {
 
-    public static int id_num = 1;
+    //public static int id_num = 1;
 
     public int addDutyTime(String date, String coordinator_id) throws SQLException, ClassNotFoundException {
+        int id_num = 0;
         DBConnection conn = new DBConnection();
         id_num = Queries.getMaxTableKey("dutytime_id", "dutytime") + 1;
         String insert = "INSERT INTO dutytime VALUES( "
-                + (id_num++) + "," + "\'" + date + "\'" + "," + coordinator_id + ");";
+                + (id_num) + "," + "\'" + date + "\'" + "," + coordinator_id + ");";
         conn.updateQuery(insert);
         conn.closeDBConnection();
-        return id_num - 1;
+        return id_num;
     }
 
     public void createTable() throws SQLException, ClassNotFoundException {

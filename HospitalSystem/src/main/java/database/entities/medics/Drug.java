@@ -17,9 +17,10 @@ import lombok.Data;
 @Data
 public class Drug {
 
-    public static int id_num = 1;
+    //public static int id_num = 1;
 
-    public void addDrug(String name, String type, String dosage, String illness_id) throws SQLException, ClassNotFoundException {
+    public int addDrug(String name, String type, String dosage, String illness_id) throws SQLException, ClassNotFoundException {
+        int id_num = 0;
         DBConnection conn = new DBConnection();
         if (!dosage.equals("NULL")) {
             dosage = "\'" + dosage + "\'";
@@ -29,6 +30,7 @@ public class Drug {
                 + (id_num++) + "," + "\'" + name + "\'" + "," + "\'" + type + "\'" + ", " +  dosage  + "," + illness_id + ");";
         conn.updateQuery(insert);
         conn.closeDBConnection();
+        return id_num;
     }
 
     public void createTable() throws SQLException, ClassNotFoundException {

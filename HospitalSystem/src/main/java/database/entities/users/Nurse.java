@@ -20,17 +20,21 @@ public class Nurse {
 
     private String table_name;
 
-    public void addNurse(String username, String password, String name, String surname, String address, String email, String phone, String at) throws SQLException, ClassNotFoundException {
+    public int addNurse(String username, String password, String name, String surname, String address, String email, String phone, String at) throws SQLException, ClassNotFoundException {
+        int id;
+        
         DBConnection conn = new DBConnection();
         User user = new User();
 
-        user.addUser(username, password, "Nurse", email);
+        id = user.addUser(username, password, "Nurse", email);
 
         String insert = "INSERT INTO nurses VALUES( "
-                + (User.id_num - 1) + "," + "\'" + name + "\'" + "," + "\'" + surname + "\'" + ", " + "\'" + address + "\'" + "," + "\'" + phone + "\'" + "," + "\'" + at + "\'" + ");";
+                + (id) + "," + "\'" + name + "\'" + "," + "\'" + surname + "\'" + ", " + "\'" + address + "\'" + "," + "\'" + phone + "\'" + "," + "\'" + at + "\'" + ");";
 
         conn.updateQuery(insert);
         conn.closeDBConnection();
+        
+        return id;
     }
 
     public void createTable() throws SQLException, ClassNotFoundException {

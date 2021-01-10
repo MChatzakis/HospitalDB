@@ -13,16 +13,19 @@ import lombok.Data;
 public class Patient {
 
     public int addPatient(String username, String password, String name, String surname, String address, String email, String phone, String birth_date, String amka, String at, String insurance) throws SQLException, ClassNotFoundException {
+        int id = 0;
+        
         DBConnection conn = new DBConnection();
         User user = new User();
 
-        user.addUser(username, password, "Patient",email);
+        id = user.addUser(username, password, "Patient",email);
 
         String insert = "INSERT INTO patients  VALUES( "
-                + (User.id_num - 1) + "," + "\'" + name + "\'" + "," + "\'" + surname + "\'" + ", " + "\'" + address + "\'" +  "," + "\'" + phone + "\'" + "," + "\'" + birth_date + "\'" + "," + "\'" + amka + "\'" +  "," + "\'" + at + "\'" + "," + "\'" + insurance + "\'" + ");";
+                + (id) + "," + "\'" + name + "\'" + "," + "\'" + surname + "\'" + ", " + "\'" + address + "\'" +  "," + "\'" + phone + "\'" + "," + "\'" + birth_date + "\'" + "," + "\'" + amka + "\'" +  "," + "\'" + at + "\'" + "," + "\'" + insurance + "\'" + ");";
         conn.updateQuery(insert);
         conn.closeDBConnection();
-        return User.id_num - 1;
+        
+        return id;
     }
 
     public void createTable() throws SQLException , ClassNotFoundException{

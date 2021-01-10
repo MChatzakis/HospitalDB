@@ -19,17 +19,20 @@ import lombok.Data;
 @Data
 public class Coordinator {
 
-    public void addCoordinator(String username, String password, String name, String surname, String address, String email, String phone, String at) throws SQLException, ClassNotFoundException {
-
+    public int addCoordinator(String username, String password, String name, String surname, String address, String email, String phone, String at) throws SQLException, ClassNotFoundException {
+        int id = 0;
+        
         DBConnection conn = new DBConnection();
         User user = new User();
 
-        user.addUser(username, password, "Worker", email);
+        id = user.addUser(username, password, "Worker", email);
 
         String insert = "INSERT INTO coordinators VALUES( "
-                + (User.id_num - 1) + "," + "\'" + name + "\'" + "," + "\'" + surname + "\'" + ", " + "\'" + address + "\'" + "," + "\'" + phone + "\'" + "," + "\'" + at + "\'" + ");";
+                + (id) + "," + "\'" + name + "\'" + "," + "\'" + surname + "\'" + ", " + "\'" + address + "\'" + "," + "\'" + phone + "\'" + "," + "\'" + at + "\'" + ");";
         conn.updateQuery(insert);
         conn.closeDBConnection();
+        
+        return id;
     }
 
     public void createTable() throws SQLException, ClassNotFoundException {

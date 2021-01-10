@@ -17,15 +17,17 @@ import lombok.Data;
 @Data
 public class Illness {
 
-    public static int id_num = 1;
+    //public static int id_num = 1;
 
-    public void addIllness(String name) throws SQLException , ClassNotFoundException{
+    public int addIllness(String name) throws SQLException , ClassNotFoundException{
+        int id_num = 0;
         DBConnection conn = new DBConnection();
         id_num = Queries.getMaxTableKey("illness_id", "illnesses") + 1;
         String insert = "INSERT INTO illnesses VALUES( "
                 + (id_num++) + "," + "\'" + name + "\'" + ");";
         conn.updateQuery(insert);
         conn.closeDBConnection();
+        return id_num;
     }
 
     public void createTable() throws SQLException, ClassNotFoundException {

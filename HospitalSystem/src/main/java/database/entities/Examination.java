@@ -15,15 +15,15 @@ import java.sql.SQLException;
  */
 public class Examination {
 
-    public static int id_num = 1;
-
-    public void addExamination(String patient_id, String doctor_id, String drug_id, String illness_id, String visit_id, String date) throws SQLException, ClassNotFoundException {
+    public int addExamination(String patient_id, String doctor_id, String drug_id, String illness_id, String visit_id, String date) throws SQLException, ClassNotFoundException {
+        int id_num = 0;
         DBConnection conn = new DBConnection();
         id_num = Queries.getMaxTableKey("exam_id", "examinations") + 1;
         String insert = "INSERT INTO examinations VALUES( "
-                + (id_num++) + "," + patient_id + "," + doctor_id + ", " + drug_id + "," + illness_id + "," + visit_id + "," + "\'" + date + "\'" + ");";
+                + (id_num) + "," + patient_id + "," + doctor_id + ", " + drug_id + "," + illness_id + "," + visit_id + "," + "\'" + date + "\'" + ");";
         conn.updateQuery(insert);
         conn.closeDBConnection();
+        return id_num;
     }
 
     public void modifyExamination(String exam_id, String drug_id, String illness_id) throws SQLException, ClassNotFoundException {

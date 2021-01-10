@@ -15,16 +15,18 @@ import java.sql.SQLException;
  */
 public class Medical {
 
-    public static int id_num = 1;
+    //public static int id_num = 1;
 
-    public void addMedical(String type, String exam_id,String patient_id, String doctor_id, String nurse_id, String date) throws SQLException, ClassNotFoundException {
+    public int addMedical(String type, String exam_id,String patient_id, String doctor_id, String nurse_id, String date) throws SQLException, ClassNotFoundException {
+        int id_num = 0;
         DBConnection conn = new DBConnection();
         id_num = Queries.getMaxTableKey("medical_id", "medicals") + 1;
         String insert = "INSERT INTO medicals VALUES( "
-                + (id_num++) + "," +  exam_id + "," +  patient_id + ", " +  doctor_id  + "," +  nurse_id  + "," + "\'" + date + "\'"+  ",\'" + type + "\'" + ");";
+                + (id_num) + "," +  exam_id + "," +  patient_id + ", " +  doctor_id  + "," +  nurse_id  + "," + "\'" + date + "\'"+  ",\'" + type + "\'" + ");";
 
         conn.updateQuery(insert);
         conn.closeDBConnection();
+        return id_num;
     }
 
     public void createTable() throws SQLException , ClassNotFoundException{

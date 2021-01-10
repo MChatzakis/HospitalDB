@@ -15,16 +15,18 @@ import java.sql.SQLException;
  */
 public class User {
 
-    public static int id_num = 1;
+    //private int id_num = 1;
     private String table_name = "users";
 
-    public void addUser(String username, String password, String user_type, String email) throws SQLException, ClassNotFoundException {
+    public int addUser(String username, String password, String user_type, String email) throws SQLException, ClassNotFoundException {
         DBConnection conn = new DBConnection();
+        int id_num = 0;
         id_num = Queries.getMaxTableKey("user_id", "users") + 1;
         String insert = "INSERT INTO " + table_name + " VALUES( "
-                + (id_num++) + "," + "\'" + username + "\'" + "," + "\'" + password + "\'" + ", " + "\'" + user_type + "\'," + "\'" + email + "\'"+ ");";
+                + (id_num) + "," + "\'" + username + "\'" + "," + "\'" + password + "\'" + ", " + "\'" + user_type + "\'," + "\'" + email + "\'" + ");";
         conn.updateQuery(insert);
         conn.closeDBConnection();
+        return id_num;
     }
 
     public void createTable() throws SQLException, ClassNotFoundException {
@@ -43,7 +45,7 @@ public class User {
         conn.closeDBConnection();
     }
 
-    public void dropTable() throws SQLException , ClassNotFoundException{
+    public void dropTable() throws SQLException, ClassNotFoundException {
         DBConnection conn = new DBConnection();
         String dropTable = "DROP TABLE IF EXISTS " + table_name + ";";
         conn.updateQuery(dropTable);
