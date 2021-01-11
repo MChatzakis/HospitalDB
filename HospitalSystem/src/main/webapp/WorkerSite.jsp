@@ -19,27 +19,20 @@
 
         <% //allow access only if session exists 
             String user = null;
-            if (!(request.getSession(false).getAttribute("type").equals("Worker")))
-            {
+            if (!(request.getSession(false).getAttribute("type").equals("Worker"))) {
                 response.sendRedirect("http://localhost:8080/HospitalSystem/");
-            }
-            else
-            {
+            } else {
                 user = (String) session.getAttribute("username");
             }
             String userName = null;
             String sessionID = null;
             Cookie[] cookies = request.getCookies();
-            if (cookies != null)
-            {
-                for (Cookie cookie : cookies)
-                {
-                    if (cookie.getName().equals("user"))
-                    {
+            if (cookies != null) {
+                for (Cookie cookie : cookies) {
+                    if (cookie.getName().equals("user")) {
                         userName = cookie.getValue();
                     }
-                    if (cookie.getName().equals("JSESSIONID"))
-                    {
+                    if (cookie.getName().equals("JSESSIONID")) {
                         sessionID = cookie.getValue();
                     }
                 }
@@ -210,7 +203,7 @@
                         </div>
                         <div class="form-group col ">
                             <label for="v_date">Date</label>
-                            <input type="text" name="v_date" value="" class="form-control" id="v_date" placeholder="">
+                            <input type="date" name="v_date" value="" class="form-control" id="v_date" placeholder="">
                         </div>
                         <div class="form-group col ">
                             <label for="v_s">Symptoms</label>
@@ -243,7 +236,7 @@
                         </div>
                         <div class="form-group col-3 ">
                             <label for="d_date">Duty Time Date</label>
-                            <input type="text" name="d_date" value="" class="form-control" id="d_date" placeholder="">
+                            <input type="date" data-date="" data-date-format="DD MMMM YYYY" name="d_date" value="" class="form-control" id="d_date" placeholder="">
                         </div>
                     </div>
                     <div>

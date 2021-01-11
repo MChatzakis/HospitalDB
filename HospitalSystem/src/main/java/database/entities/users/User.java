@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package database.entities.users;
 
 import commons.Queries;
@@ -10,12 +5,12 @@ import database.DBConnection;
 import java.sql.SQLException;
 
 /**
+ * Class representation of "user" entity.
  *
  * @author Manos Chatzakis (chatzakis@ics.forth.gr)
  */
 public class User {
 
-    //private int id_num = 1;
     private String table_name = "users";
 
     public int addUser(String username, String password, String user_type, String email) throws SQLException, ClassNotFoundException {
@@ -33,10 +28,10 @@ public class User {
         DBConnection conn = new DBConnection();
         String createTable = "CREATE TABLE IF NOT EXISTS " + table_name + "("
                 + " user_id int NOT NULL,"
-                + " username varchar(255) NOT NULL,"
-                + " password varchar(255) NOT NULL,"
-                + " user_type varchar(255) NOT NULL,"
-                + " email varchar(255) NOT NULL,"
+                + " username varchar(100) NOT NULL,"
+                + " password varchar(100) NOT NULL,"
+                + " user_type varchar(100) NOT NULL,"
+                + " email varchar(100) NOT NULL,"
                 + " PRIMARY KEY(user_id),"
                 + " UNIQUE(password),"
                 + " UNIQUE(email),"

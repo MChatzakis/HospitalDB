@@ -60,9 +60,9 @@ public class DoctorServlet extends HttpServlet {
 
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");
-            
-            //currentDutyTime = new DutyTime().getDutyIDFromDate(JavaDate.getDefaultDate());
-         
+
+            currentDutyTime = new DutyTime().getDutyIDFromDate(JavaDate.getDefaultDate());
+
             switch (request_id) {
             case 1:
                 String from = request.getParameter("from");
@@ -86,8 +86,11 @@ public class DoctorServlet extends HttpServlet {
                 System.out.println(obj.toString(0));
                 break;
             case 4:
-                String patientID = request.getParameter("patientID");
+                //String patientID = request.getParameter("patientID");
                 String visitID = request.getParameter("visitID");
+                
+                String patientID = getPatientIDFromVisitID(visitID);
+                
                 String drugID = request.getParameter("drugID");
                 String illnessID = request.getParameter("illnessID");
                 String date = request.getParameter("date");
@@ -95,8 +98,9 @@ public class DoctorServlet extends HttpServlet {
                 break;
             case 5:
                 String r_doctorID = doctorID + "";
-                String r_patientID = request.getParameter("patientID");
                 String r_visitID = request.getParameter("visitID");
+                String r_patientID = getPatientIDFromVisitID(r_visitID);//request.getParameter("patientID");
+                //String r_patientID = request.getParameter("patientID");
                 String r_medicalID = request.getParameter("medicalID");
                 String hosp = request.getParameter("hosp");
                 String r_date = request.getParameter("date");
@@ -112,6 +116,24 @@ public class DoctorServlet extends HttpServlet {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public String getPatientIDFromVisitID(String visitID) throws SQLException, ClassNotFoundException {
+        String query = "SELECT visit.patient_id\n"
+                + "FROM visit\n"
+                + "WHERE visit.visit_id = " + visitID + ";";
+        DBConnection conn = new DBConnection();
+        String patientID = "";
+        ResultSet res = null;
+        
+        res = conn.executeQuery(query);
+        
+        while(res!=null &&res.next()){
+            patientID = res.getString("patient_id");
+        }
+        
+        conn.closeDBConnection();
+        return patientID;
     }
 
     public JSONObject getMedicalAndExaminationInfo(int user_id, int currentDutyTime) throws SQLException, ClassNotFoundException {

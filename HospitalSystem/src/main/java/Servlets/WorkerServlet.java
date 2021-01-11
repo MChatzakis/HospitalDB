@@ -95,7 +95,7 @@ public class WorkerServlet extends HttpServlet
         {
 
             PrintWriter out = response.getWriter();
-            //currentDutyTime = new DutyTime().getDutyIDFromDate(JavaDate.getDefaultDate());
+            currentDutyTime = new DutyTime().getDutyIDFromDate(JavaDate.getDefaultDate());
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");
 

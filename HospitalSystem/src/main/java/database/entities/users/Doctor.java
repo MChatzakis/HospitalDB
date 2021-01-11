@@ -40,13 +40,15 @@ public class Doctor {
         DBConnection conn = new DBConnection();
         String createTable = "CREATE TABLE IF NOT EXISTS " + table_name + "("
                 + " doctor_id int NOT NULL,"
-                + " name varchar(255) NOT NULL,"
-                + " surname varchar(255) NOT NULL,"
-                + " address varchar(255) ,"
-                + " phone varchar(255),"
-                + " type varchar(255) NOT NULL,"
-                + " at varchar(255),"
+                + " name varchar(100) NOT NULL,"
+                + " surname varchar(100) NOT NULL,"
+                + " address varchar(100) NOT NULL,"
+                + " phone varchar(100) NOT NULL,"
+                + " type varchar(100) NOT NULL,"
+                + " at varchar(100) NOT NULL,"
                 + "PRIMARY KEY(doctor_id),"
+                + "UNIQUE(at),"
+                + "UNIQUE(phone),"
                 + "FOREIGN KEY(doctor_id) REFERENCES users(user_id));";
         conn.updateQuery(createTable);
         conn.closeDBConnection();

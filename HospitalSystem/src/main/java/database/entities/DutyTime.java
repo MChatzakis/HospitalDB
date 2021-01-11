@@ -19,8 +19,6 @@ import lombok.Data;
 @Data
 public class DutyTime {
 
-    //public static int id_num = 1;
-
     public int addDutyTime(String date, String coordinator_id) throws SQLException, ClassNotFoundException {
         int id_num = 0;
         DBConnection conn = new DBConnection();
@@ -39,6 +37,7 @@ public class DutyTime {
                 + " date date NOT NULL,"
                 + " coordinator_id int,"
                 + "PRIMARY KEY(dutytime_id) ,"
+                + "UNIQUE(date) ,"
                 + "FOREIGN KEY (coordinator_id) REFERENCES coordinators(coordinator_id)); ";
 
         conn.updateQuery(createTable);

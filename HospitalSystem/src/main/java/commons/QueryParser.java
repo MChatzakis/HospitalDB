@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package commons;
 
 import database.DBConnection;
@@ -13,8 +8,9 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
+ * This class is used for executing random queries from the interface.
  *
- * @author Manos Chatzakis
+ * @author Manos Chatzakis (chatzakis@ics.forth.gr)
  */
 public class QueryParser {
 
@@ -57,10 +53,5 @@ public class QueryParser {
     public static void executeRandomQuery(String query) throws SQLException, ClassNotFoundException {
         DBConnection conn = new DBConnection();
         conn.updateQuery(query);
-    }
-
-    public static void main(String[] args) throws Exception {
-        System.out.println(parseQuery("SELECT * FROM patients").toString());
-
     }
 }

@@ -8,19 +8,16 @@ package commons;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
+ * This class offers methods for creating pseudo-random integers withing given
+ * range.
  *
- * @author manos
+ * @author Manos Chatzakis (chatzakis@ics.forth.gr)
  */
 public class RandomGenerator {
 
     public static int getRandomNumber(int min, int max) {
-
         int randomNum = ThreadLocalRandom.current().nextInt(min, max + 1);
         return randomNum;
-
     }
 
-    public static void main(String[] args) {
-        System.out.println(getRandomNumber(0,10));
-    }
 }

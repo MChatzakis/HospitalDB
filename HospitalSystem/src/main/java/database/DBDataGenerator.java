@@ -48,7 +48,7 @@ public class DBDataGenerator {
     public void insertNurses() throws SQLException, ClassNotFoundException {
         Nurse nurse = new Nurse();
         nurse.addNurse("evach", "evach123", "Eva", "Chamilaki", "Hrakleio", "ch@tep.gr", "+30- 69-055-5170", "AT1010");
-        nurse.addNurse("effieProb", "effie123", "Effie", "Probona", "Hrakleio", "eff@tep.gr", "+30- 69-055-5170", "KA9955");
+        nurse.addNurse("effieProb", "effie123", "Effie", "Probona", "Hrakleio", "eff@tep.gr", "+30- 69-155-5170", "KA9955");
         nurse.addNurse("dimiTsichl", "dimiTsichl123", "Dimitra", "Tsichla", "Hrakleio", "tsichla@tep.gr", "+30- 69-055-5171", "IU9976");
         nurse.addNurse("olipopa", "olipopa123", "Olimpia", "Popa", "Hrakleio", "popa@tep.gr", "+30- 69-055-5172", "GH4213");
         nurse.addNurse("nikimark", "nikimark123", "Niki", "Markatou", "Hrakleio", "nikimark@tep.gr", "+30- 69-055-5173", "BC8976");
@@ -222,54 +222,76 @@ public class DBDataGenerator {
 
         pat.addPatient("pPetr", "pav123", "Pavlos", "Petrakis", "Hrakleio", "petrakis_pav@gmail.com", "+30- 69-055-5199", "1995-03-02", "80048812", "BG7813", "IKA");
         pat.addChronicDisease("32", "Obesity");
-        
 
         pat.addPatient("marianth", "marianth1234", "Marianthi", "Panagiotaki", "Hrakleio", "marpanagiot@gmail.com", "+30- 69-013-1210", "1962-12-05", "11641112", "TY4312", "IKA");
-        pat.addChronicDisease("33", "Cystic_Fibrosis");
-        pat.addChronicDisease("33", "Heart_Disease");
+        pat.addChronicDisease("33", "CysticFibrosis");
+        pat.addChronicDisease("33", "HeartDisease");
         pat.addChronicDisease("33", "Obesity");
 
     }
 
     public void insertVisit() throws SQLException, ClassNotFoundException {
+
         Visit vis = new Visit();
-        
+
         vis.addVisit("2021-01-06", "1", "29");
         vis.addSymptom("1", "Fever");
         vis.addSymptom("1", "Cough");
-        vis.addSymptom("1", "Sore_Thoat");
+        vis.addSymptom("1", "Sorethroat");
 
         vis.addVisit("2021-01-06", "1", "30");
-        vis.addSymptom("2", "Arm_Pain");
+        vis.addSymptom("2", "Armpain");
 
-        vis.addVisit("2021-01-06", "1", "31");
-        vis.addSymptom("3", "Taste_Lack");
+        vis.addVisit("2021-01-07", "2", "31");
+        vis.addSymptom("3", "Tastelack");
         vis.addSymptom("3", "Headache");
 
-        vis.addVisit("2021-01-07", "2", "29");
+        vis.addVisit("2021-01-08", "3", "32");
         vis.addSymptom("4", "Heartbeats");
+
+        vis.addVisit("2021-01-09", "4", "33");
+        vis.addSymptom("5", "Fever");
+
+        vis.addVisit("2021-01-10", "5", "30");
+        vis.addSymptom("5", "Cough");
+
+        vis.addVisit("2021-01-10", "5", "32");
+        vis.addSymptom("6", "Heartbeats");
 
     }
 
     public void insertExams() throws SQLException, ClassNotFoundException {
+
         Examination ex = new Examination();
         Medical med = new Medical();
         ReExamination reEx = new ReExamination();
 
         ex.addExamination("29", "1", "1", "1", "1", "2021-01-06");
         med.addMedical("Covid-19", "1", "29", "1", "20", "2021-01-06");
-        reEx.addReExamination("29", "1", "1", "2021-01-01", "1", true);
+        reEx.addReExamination("29", "1", "1", "2021-01-06", "1", false);
 
-        ex.addExamination("30", "12", "4", "4", "2", "2021-01-06");
-        med.addMedical("xRay", "2", "30", "12", "19", "2021-01-06");
-        reEx.addReExamination("30", "12", "2", "2021-01-06", "2", false);
+        ex.addExamination("30", "1", "4", "4", "2", "2021-01-06");
+        med.addMedical("xRay", "2", "30", "1", "19", "2021-01-06");
+        reEx.addReExamination("30", "1", "2", "2021-01-06", "2", false);
 
-        ex.addExamination("31", "15", "null", "null", "3", "2021-01-06");
-        med.addMedical("Covid-19", "3", "31", "15", "18", "2021-01-06");
-        reEx.addReExamination("31", "15", "3", "2021-01-06", "3", true);
+        ex.addExamination("31", "2", "null", "null", "3", "2021-01-07");
+        med.addMedical("Covid-19", "3", "31", "2", "21", "2021-01-07");
+        reEx.addReExamination("31", "2", "3", "2021-01-07", "3", false);
 
-        ex.addExamination("29", "16", "1", "1", "4", "2021-01-07");
-        med.addMedical("Covid-19", "4", "29", "16", "21", "2021-01-07");
-        reEx.addReExamination("29", "16", "4", "2021-01-07", "4", true);
+        ex.addExamination("32", "3", "3", "3", "4", "2021-01-08");
+        med.addMedical("Βlood-Test", "4", "32", "3", "18", "2021-01-08");
+        reEx.addReExamination("32", "3", "4", "2021-01-08", "4", false);
+
+        ex.addExamination("33", "4", "1", "1", "5", "2021-01-09");
+        med.addMedical("Covid-19", "5", "33", "4", "21", "2021-01-09");
+        reEx.addReExamination("33", "4", "5", "2021-01-09", "5", false);
+
+        ex.addExamination("30", "5", "1", "1", "6", "2021-01-10");
+        med.addMedical("Covid-19", "6", "30", "5", "19", "2021-01-10");
+        reEx.addReExamination("30", "5", "6", "2021-01-10", "6", true);
+
+        ex.addExamination("32", "5", "5", "5", "7", "2021-01-10");
+        med.addMedical("Blood-Test", "7", "32", "5", "20", "2021-01-10");
+        reEx.addReExamination("32", "5", "7", "2021-01-10", "7", true);
     }
 }

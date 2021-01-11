@@ -25,7 +25,6 @@ public class ReExamination {
         if (hospi) {
             hosp = "true";
         }
-        //String insert = "INSERT INTO examinations_retaken VALUES( " + (id_num) + "," + hosp + "," + medical_id + ");";
         String insert = "INSERT INTO examinations_retaken VALUES( "
                 + (id_num) + "," + patient_id + "," + doctor_id + "," + visit_id + "," + "\'" + date + "\'" +"," + hosp +"," + medical_id + ");";
         conn.updateQuery(insert);
@@ -40,7 +39,7 @@ public class ReExamination {
                 + " patient_id int NOT NULL,"
                 + " doctor_id int NOT NULL,"
                 + " visit_id int NOT NULL,"
-                + " date date,"
+                + " date date NOT NULL,"
                 + " hospitalization boolean NOT NULL,"
                 + " medical_id int NOT NULL,"
                 + " PRIMARY KEY(re_exam_id),"

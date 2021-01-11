@@ -1,14 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package database.relations;
 
 import database.DBConnection;
 import java.sql.SQLException;
 
 /**
+ * Class representation of "onDutyWorkers" relationship.
  *
  * @author Manos Chatzakis (chatzakis@ics.forth.gr)
  */
@@ -29,7 +25,6 @@ public class OnDutyWorkers {
                 + " coordinator_id int NOT NULL,"
                 + " FOREIGN KEY (coordinator_id) REFERENCES coordinators(coordinator_id),"
                 + " FOREIGN KEY (dutytime_id) REFERENCES dutytime(dutytime_id));";
-
         conn.updateQuery(createTable);
         conn.closeDBConnection();
     }

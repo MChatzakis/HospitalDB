@@ -41,12 +41,14 @@ public class Nurse {
         DBConnection conn = new DBConnection();
         String createTable = "CREATE TABLE IF NOT EXISTS nurses("
                 + " nurse_id int NOT NULL,"
-                + " name varchar(255) NOT NULL,"
-                + " surname varchar(255) NOT NULL,"
-                + " address varchar(255),"
-                + " phone varchar(255),"
-                + " at varchar(255),"
+                + " name varchar(100) NOT NULL,"
+                + " surname varchar(100) NOT NULL,"
+                + " address varchar(100) NOT NULL,"
+                + " phone varchar(100) NOT NULL,"
+                + " at varchar(100) NOT NULL,"
                 + " PRIMARY KEY(nurse_id),"
+                + " UNIQUE(phone),"
+                + " UNIQUE(at),"
                 + " FOREIGN KEY(nurse_id) REFERENCES users(user_id));";
         conn.updateQuery(createTable);
         conn.closeDBConnection();

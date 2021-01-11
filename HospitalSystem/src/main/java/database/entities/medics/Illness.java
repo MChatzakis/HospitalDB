@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package database.entities.medics;
 
 import commons.Queries;
@@ -24,7 +19,7 @@ public class Illness {
         DBConnection conn = new DBConnection();
         id_num = Queries.getMaxTableKey("illness_id", "illnesses") + 1;
         String insert = "INSERT INTO illnesses VALUES( "
-                + (id_num++) + "," + "\'" + name + "\'" + ");";
+                + (id_num) + "," + "\'" + name + "\'" + ");";
         conn.updateQuery(insert);
         conn.closeDBConnection();
         return id_num;
@@ -34,7 +29,7 @@ public class Illness {
         DBConnection conn = new DBConnection();
         String createTable = "CREATE TABLE IF NOT EXISTS illnesses("
                 + " illness_id int NOT NULL,"
-                + " name varchar(255) NOT NULL ,"
+                + " name varchar(100) NOT NULL ,"
                 + "PRIMARY KEY(illness_id) ) ;";
         conn.updateQuery(createTable);
         conn.closeDBConnection();

@@ -20,7 +20,7 @@ import database.relations.OnDutyWorkers;
 import java.sql.SQLException;
 
 /**
- * Class to create the database and insert the tables needed.
+ * This class creates the database and the tables needed.
  *
  * @author Manos Chatzakis (chatzakis@ics.forth.gr)
  * @author George Kokolakis (gkokol@ics.forth.gr)
@@ -43,6 +43,7 @@ public class DBInitializer {
         createPatients();
         createVisits();
         createExaminations();
+
         conn.closeDBConnection();
     }
 
@@ -74,24 +75,14 @@ public class DBInitializer {
         Medical med = new Medical();
         Examination exam = new Examination();
         ReExamination reExam = new ReExamination();
-        //exam.createTables();
         exam.createTable();
         med.createTable();
-        /*med.createTable("medicals_covid_Tests");
-        med.createTable("medicals_xRay_Tests");
-        med.createTable("medicals_blood_tests");*/
-        //exam.alterTableToAddMedical();
         reExam.createTable();
     }
 
     public void createDoctors() throws SQLException, ClassNotFoundException {
         Doctor doctor = new Doctor();
         doctor.createTable();
-        /*doctor.createTable("doctors_endocrinologists");
-        doctor.createTable("doctors_gynecologists");
-        doctor.createTable("doctors_pathologists");
-        doctor.createTable("doctors_pulmonologists");
-        doctor.createTable("doctors_cardiologists");*/
     }
 
     public void createMedicStaff() throws SQLException, ClassNotFoundException {
@@ -107,7 +98,6 @@ public class DBInitializer {
     public void dropDB() throws SQLException, ClassNotFoundException {
         String drop = "DROP DATABASE IF EXISTS hospital;";
         conn = new DBConnection();
-        
         conn.updateQuery(drop);
         conn.closeDBConnection();
     }

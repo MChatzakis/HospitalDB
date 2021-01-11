@@ -10,7 +10,7 @@ import java.sql.Statement;
 import lombok.Data;
 
 /**
- * Class for MySQL connection and query execution methods.
+ * Class for MySQL Database connection and query execution methods.
  *
  * @author Manos Chatzakis (chatzakis@ics.forth.gr)
  * @author George Kokolakis (gkokol@ics.forth.gr)

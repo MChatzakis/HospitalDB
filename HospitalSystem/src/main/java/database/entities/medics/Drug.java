@@ -27,7 +27,7 @@ public class Drug {
         }
         id_num = Queries.getMaxTableKey("drug_id", "drugs") + 1;
         String insert = "INSERT INTO drugs VALUES( "
-                + (id_num++) + "," + "\'" + name + "\'" + "," + "\'" + type + "\'" + ", " +  dosage  + "," + illness_id + ");";
+                + (id_num) + "," + "\'" + name + "\'" + "," + "\'" + type + "\'" + ", " +  dosage  + "," + illness_id + ");";
         conn.updateQuery(insert);
         conn.closeDBConnection();
         return id_num;
@@ -37,11 +37,12 @@ public class Drug {
         DBConnection conn = new DBConnection();
         String createTable = "CREATE TABLE IF NOT EXISTS drugs("
                 + " drug_id int NOT NULL,"
-                + " name varchar(255) NOT NULL,"
-                + " type varchar(255) NOT NULL,"
-                + " dosage varchar(255) ,"
-                + " illness_id int,"
+                + " name varchar(100) NOT NULL,"
+                + " type varchar(100) NOT NULL,"
+                + " dosage varchar(100) ,"
+                + " illness_id int NOT NULL,"
                 + "PRIMARY KEY(drug_id),"
+                + "UNIQUE(name),"
                 + "FOREIGN KEY(illness_id) REFERENCES illnesses(illness_id));";
         conn.updateQuery(createTable);
         conn.closeDBConnection();

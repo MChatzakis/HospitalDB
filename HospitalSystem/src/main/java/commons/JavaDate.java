@@ -5,13 +5,9 @@
  */
 package commons;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 /**
- *
- * @author Manos Chatzakis
+ * Class to get the date for SQL table entries. 
+ * @author Manos Chatzakis (chatzakis@ics.forth.gr)
  */
 public class JavaDate {
 
@@ -19,7 +15,4 @@ public class JavaDate {
         return java.time.LocalDate.now().toString();
     }
     
-    public static void main(String[] args) {
-        System.out.println(getDefaultDate());
-    }
 }

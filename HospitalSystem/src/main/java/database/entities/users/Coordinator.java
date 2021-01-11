@@ -39,12 +39,14 @@ public class Coordinator {
         DBConnection conn = new DBConnection();
         String createTable = "CREATE TABLE IF NOT EXISTS coordinators("
                 + " coordinator_id int NOT NULL,"
-                + " name varchar(255) NOT NULL,"
-                + " surname varchar(255) NOT NULL,"
-                + " address varchar(255) ,"
-                + " phone varchar(255),"
-                + " at varchar(255),"
+                + " name varchar(100) NOT NULL,"
+                + " surname varchar(100) NOT NULL,"
+                + " address varchar(100) ,"
+                + " phone varchar(100),"
+                + " at varchar(100),"
                 + " PRIMARY KEY(coordinator_id),"
+                + " UNIQUE(phone),"
+                + " UNIQUE(at),"
                 + " FOREIGN KEY(coordinator_id) REFERENCES users(user_id));";
         conn.updateQuery(createTable);
         conn.closeDBConnection();

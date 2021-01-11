@@ -54,7 +54,7 @@ public class NurseServlet extends HttpServlet {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         try {
-            //currentDutyTime = new DutyTime().getDutyIDFromDate(JavaDate.getDefaultDate());
+            currentDutyTime = new DutyTime().getDutyIDFromDate(JavaDate.getDefaultDate());
 
             switch (request_id) {
             case 1:

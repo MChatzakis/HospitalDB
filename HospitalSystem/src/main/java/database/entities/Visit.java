@@ -37,7 +37,7 @@ public class Visit {
                 + " patient_id int NOT NULL , "
                 + " FOREIGN KEY (dutytime_id) REFERENCES dutytime(dutytime_id),"
                 + " FOREIGN KEY (patient_id) REFERENCES patients(patient_id),"
-                + " PRIMARY KEY(visit_id) ) ;";
+                + " PRIMARY KEY(visit_id));";
 
         conn.updateQuery(createTable);
         conn.closeDBConnection();

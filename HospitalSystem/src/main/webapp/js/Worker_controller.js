@@ -63,6 +63,9 @@ $(document).ready(function () {
     formData = "requestID=" + GET_ALL_DUTIES;
 
     sendXmlForm(url, GET_ALL_DUTIES, formData);
+    
+    document.getElementById('v_date').valueAsDate = new Date();
+
 });
 function showPersonal() {
     var d = document.getElementById('personalButton');

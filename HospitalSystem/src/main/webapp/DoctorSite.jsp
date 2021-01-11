@@ -160,10 +160,10 @@
             <div class="row  justify-content-center " style="margin:5px";>
                 <form  style="display: none" id="examForm" class="row col-10  justify-content-center mt-3 table-dark ">
                     <div class="row">
-                        <div class="form-group col ">
+                        <!--<div class="form-group col ">
                             <label for="patientID">PatientID</label>
                             <input type="text" name="patientID" value="" class="form-control" id="patientID" placeholder="">
-                        </div>
+                        </div>-->
                         <div class="form-group col ">
                             <label for="visitID">VisitID</label>
                             <input type="text" name="visitID" value="" class="form-control" id="visitID" placeholder="">
@@ -178,7 +178,7 @@
                         </div>
                         <div class="form-group col ">
                             <label for="date">Date</label>
-                            <input type="text" name="date" value="" class="form-control" id="date" placeholder="">
+                            <input type="date" data-date="" data-date-format="DD MMMM YYYY" name="date" value="" class="form-control" id="date" placeholder="">
                         </div>
                     </div>
                     <div>
@@ -218,10 +218,10 @@
             <div class="row  justify-content-center " style="margin:5px";>
                 <form  style="display: none" id="reExaminationForm" class="row col-10  justify-content-center mt-3 table-dark ">
                     <div class="row">
-                        <div class="form-group col ">
+                        <!--<div class="form-group col ">
                             <label for="r_patientID">PatientID</label>
                             <input type="text" name="r_patientID" value="" class="form-control" id="r_patientID" placeholder="">
-                        </div>
+                        </div>-->
                         <div class="form-group col ">
                             <label for="r_visitID">VisitID</label>
                             <input type="text" name="r_visitID" value="" class="form-control" id="r_visitID" placeholder="">
@@ -236,7 +236,7 @@
                         </div>
                         <div class="form-group col ">
                             <label for="r_date">Date</label>
-                            <input type="text" name="r_date" value="" class="form-control" id="r_date" placeholder="">
+                            <input type="date" data-date="" data-date-format="DD MMMM YYYY" name="r_date" value="" class="form-control" id="r_date" placeholder="">
                         </div>
                     </div>
                     <div>
@@ -245,7 +245,7 @@
                 </form>
             </div>
 
-            <div class="footer mt-5">All Rights Reserved &copy; George Kokolakis , Manos Chatzakes</div>
+            <!--<div class="footer mt-5">All Rights Reserved &copy; George Kokolakis , Manos Chatzakes</div>-->
         </div>
 
     </body>

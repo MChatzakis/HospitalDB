@@ -1,17 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package commons;
 
 /**
+ * Class offering string parsing methods.
  *
- * @author Manos Chatzakis
+ * @author Manos Chatzakis (chatzakis@ics.forth.gr)
  */
 public class StringParser {
 
-    public static String [] parseString(String input, String delimeter) {
+    public static String[] parseString(String input, String delimeter) {
         String[] out = input.split(delimeter);
         return out;
     }

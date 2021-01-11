@@ -51,7 +51,7 @@ public class Examination {
                 + " drug_id int  ,"
                 + " illness_id int ,"
                 + " visit_id int NOT NULL,"
-                + " date date,"
+                + " date date  NOT NULL,"
                 + " PRIMARY KEY(exam_id),"
                 + " FOREIGN KEY(patient_id) REFERENCES patients(patient_id),"
                 + " FOREIGN KEY(doctor_id) REFERENCES doctors(doctor_id),"
