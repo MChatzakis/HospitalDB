@@ -64,7 +64,7 @@ public class DutyTime {
         while (res != null && res.next()) {
             id = Integer.parseInt(res.getString("dutytime_id"));
         }
-
+        conn.closeDBConnection();
         return id;
     }
 

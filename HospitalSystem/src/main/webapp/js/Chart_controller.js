@@ -23,10 +23,10 @@ $(document).ready(function () {
     google.charts.load('current', {'packages': ['corechart']});
 
     google.setOnLoadCallback(function () {
-        GetDailyDutyStats();
-        GetMonthlyDutyStats();
-
-    });
+     GetDailyDutyStats();
+     GetMonthlyDutyStats();
+     
+     });
     GetCovidReport();
 });
 
