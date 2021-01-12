@@ -19,20 +19,27 @@
 
         <% //allow access only if session exists 
             String user = null;
-            if (!(request.getSession(false).getAttribute("type").equals("Worker"))) {
+            if (!(request.getSession(false).getAttribute("type").equals("Worker")))
+            {
                 response.sendRedirect("http://localhost:8080/HospitalSystem/");
-            } else {
+            }
+            else
+            {
                 user = (String) session.getAttribute("username");
             }
             String userName = null;
             String sessionID = null;
             Cookie[] cookies = request.getCookies();
-            if (cookies != null) {
-                for (Cookie cookie : cookies) {
-                    if (cookie.getName().equals("user")) {
+            if (cookies != null)
+            {
+                for (Cookie cookie : cookies)
+                {
+                    if (cookie.getName().equals("user"))
+                    {
                         userName = cookie.getValue();
                     }
-                    if (cookie.getName().equals("JSESSIONID")) {
+                    if (cookie.getName().equals("JSESSIONID"))
+                    {
                         sessionID = cookie.getValue();
                     }
                 }
@@ -58,8 +65,8 @@
                     <form method="post" action="http://localhost:8080/HospitalSystem/LogoutServlet">
                         <input type="submit" class="btn btn-primary btn-md float-right" style="background-color:#007bff;" id="button-login" value="Logout">
                     </form>
-                    <form method="post" action="http://localhost:8080/HospitalSystem/DoctorServlet">
-                        <input type="submit" class="btn btn-primary btn-md float-left" style="background-color:#007bff;" id="button-refresh" value="Refresh">
+                    <form method="GET" action="http://localhost:8080/HospitalSystem/Statistics">
+                        <input type="submit" class="btn btn-primary btn-md float-left" style="background-color:#007bff;" id="statistics-but" value="Statistics">
                     </form>
                 </div>
             </div>

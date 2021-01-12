@@ -43,10 +43,10 @@ h1{
 
 @media (min-width: 768px) { 
     #diseases-table{
-        left: 46%;
+        left: 48%;
     }
     #history-table{
-        left: 70%;
+        left: 68%;
     }
     #form
     {
@@ -56,10 +56,10 @@ h1{
 
 @media (min-width: 992px) {
     #diseases-table{
-        left: 47.5%;
+        left: 49%;
     }
     #history-table{
-        left: 77%;
+        left: 74%;
     }
     #form
     {

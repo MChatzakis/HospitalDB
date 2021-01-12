@@ -74,9 +74,9 @@
                         <th>Date</th>
                         <th>Illness</th>
 
-                        <th>Medical</th>
-
                         <th>Hospitalization</th>
+
+                        <th>Medical</th>
 
                         <th>drug</th>
 

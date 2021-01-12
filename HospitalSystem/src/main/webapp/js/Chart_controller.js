@@ -20,10 +20,14 @@ var url = "http://localhost:8080/HospitalSystem/Statistics";
 
 
 $(document).ready(function () {
+    google.charts.load('current', {'packages': ['corechart']});
 
-    // GetDailyDutyStats();
+    google.setOnLoadCallback(function () {
+        GetDailyDutyStats();
+        GetMonthlyDutyStats();
+
+    });
     GetCovidReport();
-
 });
 
 function GetCovidReport()
@@ -85,7 +89,7 @@ function sendXmlForm(url, formData, reqID)
         {
             if (reqID === MONTHLY_DUTY_STATS)
             {
-              //  console.log("returned from month")
+                //  console.log("returned from month")
                 CallBackMonthlyDutyStats(request);
                 CallBackMonthlyDrugStats(request);
                 CallBackMonthlyIllnessStats(request);
@@ -143,7 +147,6 @@ function  CallBackCovidReport(request)
 
 
 }
-google.charts.load('current', {'packages': ['corechart']});
 
 /*
  function CallBackMonthlyDutyStats(data)
@@ -172,10 +175,10 @@ function CallBackDailyyDutyStats(resp)
 
     if (array !== undefined)
     {
-        console.log("incidents and examinations "+array[0])
+        console.log("incidents and examinations " + array[0])
         var values = resp.response;
         //   console.log(values)
-        data.addColumn('string', 'Month');
+        data.addColumn('string', 'Day');
         //  data.addColumn('number', 'drugs');
         data.addColumn('number', 'incidents');
         // data.addColumn('number', 'diseases');
@@ -206,7 +209,7 @@ function CallBackDailyyDutyStats(resp)
 
 function   CallBackDailyyDrugStats(resp)
 {
-  //  console.log("lala")
+    //  console.log("lala")
     // Some raw data (not necessarily accurate)
     var data = new google.visualization.DataTable();
 
@@ -219,7 +222,7 @@ function   CallBackDailyyDrugStats(resp)
 
     if (array !== undefined)
     {
-        console.log("drugs " +array[1])
+        console.log("drugs " + array[1])
         var values = resp.response;
         data.addColumn('string', 'day');
         //  data.addColumn('number', 'disease1');
@@ -240,7 +243,7 @@ function   CallBackDailyyDrugStats(resp)
             vAxis: {title: ''},
             hAxis: {title: 'Day'},
             seriesType: 'bars',
-            colors: ['7D086D', 'FF0000', '0000F5', '1B7C4C'],
+            colors: ['#e6194B', '#f58231', '#3cb44b', '#911eb4', '#f032e6'],
             bar: {groupWidth: "100%"},
 
             series: {5: {type: 'line'}},
@@ -253,7 +256,7 @@ function   CallBackDailyyDrugStats(resp)
 }
 function CallBackDailyyIllnessStats(resp)
 {
-   // console.log("lala")
+    // console.log("lala")
     // Some raw data (not necessarily accurate)
     var data = new google.visualization.DataTable();
 
@@ -266,7 +269,7 @@ function CallBackDailyyIllnessStats(resp)
 
     if (array !== undefined)
     {
-        console.log("Diseases "+ array[2])
+        console.log("Diseases " + array[2])
         var values = resp.response;
         //   console.log(values)
         data.addColumn('string', 'day');
@@ -288,7 +291,8 @@ function CallBackDailyyIllnessStats(resp)
             vAxis: {title: ''},
             hAxis: {title: 'Day'},
             seriesType: 'bars',
-            colors: ['7D086D', 'FF0000', '0000F5', '1B7C4C'],
+            colors: ['#e6194B', '#f58231', '#3cb44b', '#911eb4', '#f032e6'],
+
             bar: {groupWidth: "100%"},
 
             series: {5: {type: 'line'}},
@@ -302,7 +306,7 @@ function CallBackDailyyIllnessStats(resp)
 
 function CallBackMonthlyDutyStats(resp)
 {
-   
+
     var data = new google.visualization.DataTable();
 
     if (resp !== undefined)
@@ -314,7 +318,7 @@ function CallBackMonthlyDutyStats(resp)
 
     if (array !== undefined)
     {
-       // console.log(array[0])
+        // console.log(array[0])
         var values = resp.response;
         //   console.log(values)
         data.addColumn('string', 'Month');
@@ -349,7 +353,7 @@ function CallBackMonthlyDutyStats(resp)
 
 function CallBackMonthlyDrugStats(resp)
 {
-   // console.log("lala")
+    // console.log("lala")
     // Some raw data (not necessarily accurate)
     var data = new google.visualization.DataTable();
 
@@ -362,7 +366,7 @@ function CallBackMonthlyDrugStats(resp)
 
     if (array !== undefined)
     {
-       // console.log(array[1])
+        // console.log(array[1])
         temp2 = resp.response;
         var values = resp.response;
         //   console.log(values)
@@ -390,7 +394,8 @@ function CallBackMonthlyDrugStats(resp)
             vAxis: {title: ''},
             hAxis: {title: 'Month'},
             seriesType: 'bars',
-            colors: ['7D086D', 'FF0000', '0000F5', '1B7C4C'],
+            colors: ['#e6194B', '#f58231', '#3cb44b', '#911eb4', '#f032e6'],
+
             bar: {groupWidth: "100%"},
 
             series: {5: {type: 'line'}},
@@ -403,7 +408,7 @@ function CallBackMonthlyDrugStats(resp)
 }
 function CallBackMonthlyIllnessStats(resp)
 {
-  //  console.log("lala")
+    //  console.log("lala")
     // Some raw data (not necessarily accurate)
     var data = new google.visualization.DataTable();
 
@@ -416,7 +421,7 @@ function CallBackMonthlyIllnessStats(resp)
 
     if (array !== undefined)
     {
-       // console.log(array[2])
+        // console.log(array[2])
         temp2 = resp.response;
         var values = resp.response;
         //   console.log(values)
@@ -442,7 +447,8 @@ function CallBackMonthlyIllnessStats(resp)
             vAxis: {title: ''},
             hAxis: {title: 'Month'},
             seriesType: 'bars',
-            colors: ['7D086D', 'FF0000', '0000F5', '1B7C4C'],
+            colors: ['#e6194B', '#f58231', '#3cb44b', '#911eb4', '#f032e6'],
+
             bar: {groupWidth: "100%"},
 
             series: {5: {type: 'line'}},

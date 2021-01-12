@@ -177,7 +177,7 @@
 
                         <div class="form-group col ">
                             <label for="date">Date</label>
-                            <input type="text" name="date" value="" class="form-control" id="date" placeholder="">
+                            <input type="date" name="date" value="" class="form-control" id="date" placeholder="">
                         </div>
                     </div>
                     <div>

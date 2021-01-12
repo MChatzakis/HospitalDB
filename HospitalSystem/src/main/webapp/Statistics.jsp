@@ -25,6 +25,20 @@
 
     </head>
 
+    <% //allow access only if session exists 
+        String user = null;
+        if ((request.getSession(false).getAttribute("type").equals("Doctor") || request.getSession(false).getAttribute("type").equals("Worker")))
+        {
+            user = (String) session.getAttribute("username");
+
+        }
+        else
+        {
+            response.sendRedirect("http://localhost:8080/HospitalSystem/");
+
+        }
+
+    %>
     <body>
         <!-- <div class="container-fluid">
                 <div class="row justify-content-center">
@@ -34,9 +48,15 @@
                     <div class="chart"id="piechart_3d"></div>
                 </div>
         </div>-->
+        <form method="post" action="http://localhost:8080/HospitalSystem/LogoutServlet">
+            <input type="submit" class="btn btn-primary btn-md float-right " style="background-color:red;" id="button-login" value="Logout">
+        </form>
+        <div class="container text-center">
 
-        <div class="container">
             <div class="row  w-100  justify-content-center">
+
+
+
                 <div class="date-chooser">
                     <input type="month" id="month" name="month" value="">
                     <button type="button" class="btn  btn-primary" onclick="GetMonthlyDutyStats()">Submit</button>
@@ -53,8 +73,7 @@
                     <div id="chart_diseases_div" class="chart"></div>
                 </div>
             </div>
-        </div>
-        <div class="row  w-100  justify-content-center">
+            <div class="row  w-100  justify-content-center">
                 <div class="day-chooser">
                     <input type="date" id="day" name="day" value="">
                     <button type="button" class="btn  btn-primary" onclick="GetDailyDutyStats()">Submit</button>
@@ -106,9 +125,10 @@
             </tbody>
 
         </table>
+    </div>
 
-        <div class="footer" Style="color:rgb(0, 0, 0)">All Rights Reserved &copy; George Kokolakis</div>
+    <div class="footer" Style="color:rgb(0, 0, 0)">All Rights Reserved &copy; George Kokolakis , Manos Chatzakes</div>
 
-    </body>
+</body>
 
 </html>

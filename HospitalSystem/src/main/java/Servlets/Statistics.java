@@ -143,23 +143,18 @@ public class Statistics extends HttpServlet
         ResultSet res = null;
         ResultSet res2 = null;
 
-        String covidPersonalInformationQuery = "SELECT visit.visit_id ,  patients.name , patients.surname ,patients.address , patients.phone, patients.birth_date \n"
+        String covidPersonalInformationQuery = "SELECT visit.visit_id ,  patients.name ,patients.patient_id, patients.surname ,patients.address , patients.phone, patients.birth_date \n"
                 + "FROM patients\n"
                 + "INNER JOIN examinations ON examinations.patient_id= patients.patient_id  AND examinations.illness_id=" + 1 + " \n"
                 + "INNER JOIN visit ON visit.visit_id = examinations.visit_id\n";
 
         //eisai malakas
-        String chronicDiseasesQuery = "SELECT visit.visit_id,patients_chronic_diseases.disease \n"
-                + "FROM patients\n"
-                + "INNER JOIN examinations ON examinations.patient_id= patients.patient_id  AND examinations.illness_id=" + 1 + " \n"
-                + "INNER JOIN visit ON visit.visit_id = examinations.visit_id\n"
-                + "INNER JOIN patients_chronic_diseases ON patients_chronic_diseases.patient_id= patients.patient_id";
-
         res = conn.executeQuery(covidPersonalInformationQuery);
         int counter = 0;
         while (res != null && res.next())
         {
             int vis_id = res.getInt("visit_id");
+            int patientID = res.getInt("patient_id");
             obj.put("visit" + counter, vis_id);
             obj.put("name" + counter, res.getString("name"));
             obj.put("surname" + counter, res.getString("surname"));
@@ -167,15 +162,15 @@ public class Statistics extends HttpServlet
             obj.put("phone" + counter, res.getString("phone"));
             obj.put("birth_date" + counter, res.getString("birth_date"));
 
+            String chronicDiseasesQuery = getChronicDisOfPatient(patientID);
+
             res2 = conn.executeQuery(chronicDiseasesQuery);
             String chronicDieseases = "";
             while (res2 != null && res2.next())
             {
-                if (vis_id == res2.getInt("visit_id"))
-                {
-                    chronicDieseases += res2.getString("disease");
-                    chronicDieseases += ",";
-                }
+
+                chronicDieseases += res2.getString("disease");
+                chronicDieseases += ",";
 
             }
             if (!chronicDieseases.equals(""))
@@ -198,8 +193,8 @@ public class Statistics extends HttpServlet
         DBConnection conn = new DBConnection();
         JSONArray dutyArrray = new JSONArray();
         ResultSet res = null;
-
-        dutyArrray.put(month);
+        String[] onlyMonth = month.split("-");
+        dutyArrray.put(onlyMonth[0] + "-" + onlyMonth[1]);
         for (int i = 0; i < 5; i++)
         {
 
@@ -228,8 +223,8 @@ public class Statistics extends HttpServlet
         DBConnection conn = new DBConnection();
         JSONArray dutyArrray = new JSONArray();
         ResultSet res = null;
-
-        dutyArrray.put(month);
+        String[] onlyMonth = month.split("-");
+        dutyArrray.put(onlyMonth[0] + "-" + onlyMonth[1]);
         for (int i = 0; i < 5; i++)
         {
 
@@ -259,7 +254,8 @@ public class Statistics extends HttpServlet
         JSONArray dutyArrray = new JSONArray();
         ResultSet res = null;
 
-        dutyArrray.put(month);
+        String[] onlyMonth = month.split("-");
+        dutyArrray.put(onlyMonth[0] + "-" + onlyMonth[1]);
 
         String incidentsQuery = "SELECT COUNT(examinations.visit_id) AS incidents_amount FROM examinations\n"
                 + "WHERE year(examinations.date) =year(" + "\'" + month + "\'" + ") \n"
