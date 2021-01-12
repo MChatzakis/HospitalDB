@@ -8,6 +8,12 @@
 var MONTHLY_DUTY_STATS = 1;
 var DAILY_DUTY_STATS = 2;
 var COVID_19_REPORT = 3;
+var DRUGS_MONTH = 4;
+var ILLNESS_MONTH = 5;
+
+var DRUGS_DAILY = 6;
+var ILLNESS_DAILY = 7;
+
 
 var url = "http://localhost:8080/HospitalSystem/Statistics";
 
@@ -15,7 +21,7 @@ var url = "http://localhost:8080/HospitalSystem/Statistics";
 
 $(document).ready(function () {
 
-    GetDailyDutyStats();
+    // GetDailyDutyStats();
     GetCovidReport();
 
 });
@@ -27,14 +33,27 @@ function GetCovidReport()
     console.log("get Covid Report");
     sendXmlForm(url, formData, COVID_19_REPORT)
 }
+/*
+ function GetDailyDutyStats()
+ {
+ formData = "requestID=" + DAILY_DUTY_STATS;
+ 
+ console.log("get MONTHLY_DUTY_STATS");
+ sendXmlForm(url, formData, DAILY_DUTY_STATS)
+ }*/
+
+
+
 function GetDailyDutyStats()
 {
     formData = "requestID=" + DAILY_DUTY_STATS;
+    var date = $('input[name=day]').val();
+    // month += "-01";
+    formData += "&date=" + date;
 
-    console.log("get MONTHLY_DUTY_STATS");
+    console.log("get Daily stats", DAILY_DUTY_STATS);
     sendXmlForm(url, formData, DAILY_DUTY_STATS)
 }
-
 function GetMonthlyDutyStats()
 {
     formData = "requestID=" + MONTHLY_DUTY_STATS;
@@ -43,8 +62,11 @@ function GetMonthlyDutyStats()
     formData += "&month=" + month;
 
     console.log("get MONTHLY_DUTY_STATS", MONTHLY_DUTY_STATS);
-    sendXmlForm(url, formData,MONTHLY_DUTY_STATS)
+    sendXmlForm(url, formData, MONTHLY_DUTY_STATS)
 }
+
+
+
 
 
 
@@ -63,11 +85,19 @@ function sendXmlForm(url, formData, reqID)
         {
             if (reqID === MONTHLY_DUTY_STATS)
             {
-                console.log("returned from month")
+              //  console.log("returned from month")
                 CallBackMonthlyDutyStats(request);
+                CallBackMonthlyDrugStats(request);
+                CallBackMonthlyIllnessStats(request);
+
+
             } else if (reqID === DAILY_DUTY_STATS)
             {
                 CallBackDailyyDutyStats(request);
+                CallBackDailyyDrugStats(request);
+                CallBackDailyyIllnessStats(request);
+
+
 
             } else if (reqID === COVID_19_REPORT)
             {
@@ -77,20 +107,12 @@ function sendXmlForm(url, formData, reqID)
 
         }
     };
-    // console.log("lalla3");
 
 
     request.send(formData);
 
 }
-function CallBackDailyyDutyStats(data)
-{
-    // console.log("DialyDUtyStats respone");
-    google.charts.load('current', {'packages': ['corechart']});
-    google.setOnLoadCallback(function () {
-        drawDutyDay(data);
-    });
-}
+
 
 function  CallBackCovidReport(request)
 {
@@ -135,83 +157,84 @@ google.charts.load('current', {'packages': ['corechart']});
  });
  }*/
 
-var temp2;
-
-function CallBackMonthlyDutyStats(resp)
+function CallBackDailyyDutyStats(resp)
 {
-    console.log("im drawing")
+    console.log("called Daily duty stats")
     // Some raw data (not necessarily accurate)
-       var data = new google.visualization.DataTable();
-     
-     if (resp !== undefined)
-     {
-     var values = resp.response;
-     if (values !== undefined)
-     var array = JSON.parse(values);     
-     }
-     
-     if (array !== undefined)
-     {
-     temp2 = resp.response;
-     var values = resp.response;
-     //   console.log(values)
-     data.addColumn('string', 'Month');
-     data.addColumn('number', 'drugs');
-     data.addColumn('number', 'incidents');
-     data.addColumn('number', 'diseases');
-     data.addColumn('number', 'examinations');
-     data.addRows([array
-     
-     
-     ]);
-     
-     var options = {
-     title: 'Monthly Statistics about duty',
-     backgroundColor: {fill: 'transparent'},
-     
-     vAxis: {title: ''},
-     hAxis: {title: 'Month'},
-     seriesType: 'bars',
-     colors: ['7D086D', 'FF0000', '0000F5', '1B7C4C'],
-     bar: {groupWidth: "100%"},
-     
-     series: {5: {type: 'line'}},
-     
-     };
-     
-     var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
-     chart.draw(data, options);
-     }
-}
-var temp;
-function drawDutyDay(info) {
     var data = new google.visualization.DataTable();
 
-    if (info !== undefined)
+    if (resp !== undefined)
     {
-        var values = info.response;
+        var values = resp.response;
         if (values !== undefined)
             var array = JSON.parse(values);
     }
 
     if (array !== undefined)
     {
-
-        temp = info;
-        //  console.log(values)
+        console.log("incidents and examinations "+array[0])
+        var values = resp.response;
+        //   console.log(values)
         data.addColumn('string', 'Month');
-        data.addColumn('number', 'drugs');
+        //  data.addColumn('number', 'drugs');
         data.addColumn('number', 'incidents');
-        data.addColumn('number', 'diseases');
+        // data.addColumn('number', 'diseases');
         data.addColumn('number', 'examinations');
-        var obj = ['2020/01', 165, 938, 522, 998];
-        data.addRows([array
+        data.addRows([array[0]
 
 
         ]);
 
         var options = {
             title: 'Daily Statistics about duty',
+            backgroundColor: {fill: 'transparent'},
+
+            vAxis: {title: ''},
+            hAxis: {title: 'Month'},
+            seriesType: 'bars',
+            colors: ['7D086D', 'FF0000', '0000F5', '1B7C4C'],
+            bar: {groupWidth: "100%"},
+
+            series: {5: {type: 'line'}},
+
+        };
+
+        var chart = new google.visualization.ComboChart(document.getElementById('chart_daily_div'));
+        chart.draw(data, options);
+    }
+}
+
+function   CallBackDailyyDrugStats(resp)
+{
+  //  console.log("lala")
+    // Some raw data (not necessarily accurate)
+    var data = new google.visualization.DataTable();
+
+    if (resp !== undefined)
+    {
+        var values = resp.response;
+        if (values !== undefined)
+            var array = JSON.parse(values);
+    }
+
+    if (array !== undefined)
+    {
+        console.log("drugs " +array[1])
+        var values = resp.response;
+        data.addColumn('string', 'day');
+        //  data.addColumn('number', 'disease1');
+        data.addColumn('number', 'Dexamethasone');
+        data.addColumn('number', 'Flecainide');
+        data.addColumn('number', 'Tamiflu');
+        data.addColumn('number', 'Splint');
+        data.addColumn('number', 'Amlodipine');
+        data.addRows([array[1]
+
+
+        ]);
+
+        var options = {
+            title: 'Daily Statistics about Drugs',
             backgroundColor: {fill: 'transparent'},
 
             vAxis: {title: ''},
@@ -224,13 +247,218 @@ function drawDutyDay(info) {
 
         };
 
-        var chart = new google.visualization.ComboChart(document.getElementById('chart2_div'));
+        var chart = new google.visualization.ComboChart(document.getElementById('chart_daily_drugs_div'));
+        chart.draw(data, options);
+    }
+}
+function CallBackDailyyIllnessStats(resp)
+{
+   // console.log("lala")
+    // Some raw data (not necessarily accurate)
+    var data = new google.visualization.DataTable();
+
+    if (resp !== undefined)
+    {
+        var values = resp.response;
+        if (values !== undefined)
+            var array = JSON.parse(values);
+    }
+
+    if (array !== undefined)
+    {
+        console.log("Diseases "+ array[2])
+        var values = resp.response;
+        //   console.log(values)
+        data.addColumn('string', 'day');
+        //  data.addColumn('number', 'drugs');
+        //  data.addColumn('number', 'incidents');
+        data.addColumn('number', 'Covid-19');
+        data.addColumn('number', 'Arrhythmia');
+        data.addColumn('number', 'Influenza');
+        data.addColumn('number', 'Bone_Break');
+        data.addColumn('number', 'Hypertension');
+        data.addRows([array[2]
+
+
+        ]);
+        var options = {
+            title: 'Daily Statistics about Diseases',
+            backgroundColor: {fill: 'transparent'},
+
+            vAxis: {title: ''},
+            hAxis: {title: 'Day'},
+            seriesType: 'bars',
+            colors: ['7D086D', 'FF0000', '0000F5', '1B7C4C'],
+            bar: {groupWidth: "100%"},
+
+            series: {5: {type: 'line'}},
+
+        };
+
+        var chart = new google.visualization.ComboChart(document.getElementById('chart_daily_diseases_div'));
         chart.draw(data, options);
     }
 }
 
+function CallBackMonthlyDutyStats(resp)
+{
+   
+    var data = new google.visualization.DataTable();
+
+    if (resp !== undefined)
+    {
+        var values = resp.response;
+        if (values !== undefined)
+            var array = JSON.parse(values);
+    }
+
+    if (array !== undefined)
+    {
+       // console.log(array[0])
+        var values = resp.response;
+        //   console.log(values)
+        data.addColumn('string', 'Month');
+        //  data.addColumn('number', 'drugs');
+        data.addColumn('number', 'incidents');
+        // data.addColumn('number', 'diseases');
+        data.addColumn('number', 'examinations');
+        data.addRows([array[0]
+
+
+        ]);
+
+        var options = {
+            title: 'Monthly Statistics about duty',
+            backgroundColor: {fill: 'transparent'},
+
+            vAxis: {title: ''},
+            hAxis: {title: 'Month'},
+            seriesType: 'bars',
+            colors: ['7D086D', 'FF0000', '0000F5', '1B7C4C'],
+            bar: {groupWidth: "100%"},
+
+            series: {5: {type: 'line'}},
+
+        };
+
+        var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+    }
+}
+
+
+function CallBackMonthlyDrugStats(resp)
+{
+   // console.log("lala")
+    // Some raw data (not necessarily accurate)
+    var data = new google.visualization.DataTable();
+
+    if (resp !== undefined)
+    {
+        var values = resp.response;
+        if (values !== undefined)
+            var array = JSON.parse(values);
+    }
+
+    if (array !== undefined)
+    {
+       // console.log(array[1])
+        temp2 = resp.response;
+        var values = resp.response;
+        //   console.log(values)
+        data.addColumn('string', 'Month');
+        //  data.addColumn('number', 'disease1');
+        data.addColumn('number', 'Dexamethasone');
+        data.addColumn('number', 'Flecainide');
+        data.addColumn('number', 'Tamiflu');
+        data.addColumn('number', 'Splint');
+        data.addColumn('number', 'Amlodipine');
+        // data.addColumn('number', 'drugs');
+        //
+//data.addColumn('number', 'incidents');
+        // data.addColumn('number', 'diseases');
+        //data.addColumn('number', 'examinations');
+        data.addRows([array[1]
+
+
+        ]);
+
+        var options = {
+            title: 'Monthly Statistics about Drugs',
+            backgroundColor: {fill: 'transparent'},
+
+            vAxis: {title: ''},
+            hAxis: {title: 'Month'},
+            seriesType: 'bars',
+            colors: ['7D086D', 'FF0000', '0000F5', '1B7C4C'],
+            bar: {groupWidth: "100%"},
+
+            series: {5: {type: 'line'}},
+
+        };
+
+        var chart = new google.visualization.ComboChart(document.getElementById('chart_drugs_div'));
+        chart.draw(data, options);
+    }
+}
+function CallBackMonthlyIllnessStats(resp)
+{
+  //  console.log("lala")
+    // Some raw data (not necessarily accurate)
+    var data = new google.visualization.DataTable();
+
+    if (resp !== undefined)
+    {
+        var values = resp.response;
+        if (values !== undefined)
+            var array = JSON.parse(values);
+    }
+
+    if (array !== undefined)
+    {
+       // console.log(array[2])
+        temp2 = resp.response;
+        var values = resp.response;
+        //   console.log(values)
+        data.addColumn('string', 'Month');
+        //  data.addColumn('number', 'drugs');
+        //  data.addColumn('number', 'incidents');
+        data.addColumn('number', 'Covid-19');
+        data.addColumn('number', 'Arrhythmia');
+        data.addColumn('number', 'Influenza');
+        data.addColumn('number', 'Bone_Break');
+        data.addColumn('number', 'Hypertension');
+
+// data.addColumn('number', 'examinations');
+        data.addRows([array[2]
+
+
+        ]);
+
+        var options = {
+            title: 'Monthly Statistics about Diseases',
+            backgroundColor: {fill: 'transparent'},
+
+            vAxis: {title: ''},
+            hAxis: {title: 'Month'},
+            seriesType: 'bars',
+            colors: ['7D086D', 'FF0000', '0000F5', '1B7C4C'],
+            bar: {groupWidth: "100%"},
+
+            series: {5: {type: 'line'}},
+
+        };
+
+        var chart = new google.visualization.ComboChart(document.getElementById('chart_diseases_div'));
+        chart.draw(data, options);
+    }
+}
+
+
+
+
 $(window).resize(function () {
-  //  CallBackMonthlyDutyStats(temp);
-    CallBackDailyyDutyStats(temp2)
+    //  CallBackMonthlyDutyStats(temp);
+    //CallBackDailyyDutyStats(temp2)
     //drawChart_3d();
 });

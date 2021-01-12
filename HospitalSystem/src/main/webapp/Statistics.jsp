@@ -45,10 +45,31 @@
                 <div class="col-md-12 col-lg-12">
                     <div id="chart_div" class="chart"></div>
                 </div>
+
                 <div class="col-md-12 col-lg-12">
-                    <div id="chart2_div" class="chart"></div>
+                    <div id="chart_drugs_div" class="chart"></div>
+                </div>
+                <div class="col-md-12 col-lg-12">
+                    <div id="chart_diseases_div" class="chart"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row  w-100  justify-content-center">
+                <div class="day-chooser">
+                    <input type="date" id="day" name="day" value="">
+                    <button type="button" class="btn  btn-primary" onclick="GetDailyDutyStats()">Submit</button>
+                </div>
+                <div class="clearfix"></div>
+                <div class="col-md-12 col-lg-12">
+                    <div id="chart_daily_div" class="chart"></div>
                 </div>
 
+                <div class="col-md-12 col-lg-12">
+                    <div id="chart_daily_drugs_div" class="chart"></div>
+                </div>
+                <div class="col-md-12 col-lg-12">
+                    <div id="chart_daily_diseases_div" class="chart"></div>
+                </div>
             </div>
         </div>
         <div class="row Covid-header justify-content-center"style="text-align: center;">
