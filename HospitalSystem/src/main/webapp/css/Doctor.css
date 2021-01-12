@@ -1,7 +1,10 @@
 html ,body {
-    background-image:  url("../img/backround_image2.jpg");
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+    background: url("../img/backround_image2.jpg") no-repeat fixed;
+
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
     height: 100%;
     width: 100%;
     margin: 0;

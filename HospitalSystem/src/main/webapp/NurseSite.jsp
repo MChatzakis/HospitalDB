@@ -186,13 +186,9 @@
                 </form>
             </div>
 
+        </div>
+        <div class="footer float-left" Style="color:rgb(0, 0, 0)">All Rights Reserved &copy; George Kokolakis , Manos Chatzakes</div>
 
-            <footer>
-                <div class="footer" style="background-color:rgb(20, 75, 165);opacity:0.7;  border-radius: 0px 0px 20px 20px;">
-                    <p>2021, Manos Chatzakis, George Kokolakis, All Rights Reserved</p>
-                    <p>Computer Science Department, University of Crete</p>
-                </div>
-            </footer>
     </body>
 
 

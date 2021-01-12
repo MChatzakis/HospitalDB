@@ -2,15 +2,30 @@
 body {
     font-family: sans-serif;
     font-size: 200%;
-    background-image: url("../img/backround_image2.jpg") !important ;
+    background-image: url("../img/backround_image2.jpg");
+
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 html
 {
-    background-image: url("../img/backround_image2.jpg") !important ;
+    background-image: url("../img/backround_image2.jpg");
+
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 
 }
 
 
+.footer
+{
+        font-size: 50%;
+
+}
 
 h1 {
     text-align: center;

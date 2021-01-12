@@ -165,7 +165,7 @@
                         </div>
                         <div class="form-group col-3 ">
                             <label for="p_bd">Birth Date</label>
-                            <input type="text" name="p_bd" value="yyyy-mm-dd" size="30" class="form-control" id="p_bd" placeholder="">
+                            <input type="date" name="p_bd" value="yyyy-mm-dd" size="30" class="form-control" id="p_bd" placeholder="">
                         </div>
                         <div class="form-group col-3 ">
                             <label for="p_phone">Phone</label>

@@ -19,9 +19,12 @@
 
         <% //allow access only if session exists 
             String user = null;
-            if (!(request.getSession(false).getAttribute("type").equals("Doctor"))) {
+            if (!(request.getSession(false).getAttribute("type").equals("Doctor")))
+            {
                 response.sendRedirect("http://localhost:8080/HospitalSystem/");
-            } else {
+            }
+            else
+            {
                 user = (String) session.getAttribute("username");
             }
 
@@ -247,6 +250,8 @@
 
             <!--<div class="footer mt-5">All Rights Reserved &copy; George Kokolakis , Manos Chatzakes</div>-->
         </div>
+        <div class="footer" Style="color:rgb(0, 0, 0)">All Rights Reserved &copy; George Kokolakis , Manos Chatzakes</div>
+
 
     </body>
 

@@ -49,6 +49,7 @@
 
     <body>
         <div class="container text-center ">
+            
             <div class="row justify-content-center ">
 
                 <div class="jumbotron col-8 "style="background-color:rgb(20, 75, 165);opacity:0.4;  border-radius: 0px 0px 20px 20px;">
@@ -164,7 +165,9 @@
             </div>
         </div>
 
-    </div>
+    <div class="footer" Style="color:rgb(0, 0, 0)">All Rights Reserved &copy; George Kokolakis , Manos Chatzakes</div>
+
+
 
 </body>
 </html>
