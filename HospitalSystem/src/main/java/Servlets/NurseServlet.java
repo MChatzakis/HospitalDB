@@ -81,8 +81,10 @@ public class NurseServlet extends HttpServlet {
             case 4:
                 String type = request.getParameter("type");
                 String examID = request.getParameter("examID");
-                String patientID = request.getParameter("patientID");
-                String doctorID = request.getParameter("doctorID");
+                //String patientID = request.getParameter("patientID");
+                //String doctorID = request.getParameter("doctorID");
+                String patientID = getPatientIDFromExam(examID);
+                String doctorID = getDoctorIDFromExam(examID);
                 String date = request.getParameter("date");
                 System.out.println("im adding a new medical");
                 addNewMedical(type, examID, patientID, doctorID, nurseID, date);
@@ -97,6 +99,38 @@ public class NurseServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getRequestDispatcher("NurseSite.jsp").forward(request, response);
+    }
+
+    public String getDoctorIDFromExam(String examID) throws SQLException, ClassNotFoundException {
+        String query = "SELECT examinations.doctor_id\n"
+                + "FROM examinations\n"
+                + "WHERE examinations.exam_id = " + examID + ";";
+        DBConnection conn = new DBConnection();
+        String patID = "";
+        ResultSet res = null;
+        res = conn.executeQuery(query);
+        while (res != null) {
+            patID = res.getString("doctor_id");
+        }
+
+        conn.closeDBConnection();
+        return patID;
+    }
+
+    public String getPatientIDFromExam(String examID) throws SQLException, ClassNotFoundException {
+        String query = "SELECT examinations.patient_id\n"
+                + "FROM examinations\n"
+                + "WHERE examinations.exam_id = " + examID + ";";
+        DBConnection conn = new DBConnection();
+        String docID = "";
+        ResultSet res = null;
+        res = conn.executeQuery(query);
+        while (res != null) {
+            docID = res.getString("patient_id");
+        }
+
+        conn.closeDBConnection();
+        return docID;
 
     }
 

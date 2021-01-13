@@ -88,20 +88,25 @@ public class DoctorServlet extends HttpServlet {
             case 4:
                 //String patientID = request.getParameter("patientID");
                 String visitID = request.getParameter("visitID");
-                
+
                 String patientID = getPatientIDFromVisitID(visitID);
-                
+
                 String drugID = request.getParameter("drugID");
+                if (drugID.equals("")) {
+                    drugID = "null";
+                }
                 String illnessID = request.getParameter("illnessID");
+                if (illnessID.equals("")) {
+                    illnessID = "null";
+                }
                 String date = request.getParameter("date");
                 addNewExamination(doctorID + "", patientID, visitID, drugID, illnessID, date);
                 break;
             case 5:
                 String r_doctorID = doctorID + "";
-                String r_visitID = request.getParameter("visitID");
-                String r_patientID = getPatientIDFromVisitID(r_visitID);//request.getParameter("patientID");
-                //String r_patientID = request.getParameter("patientID");
                 String r_medicalID = request.getParameter("medicalID");
+                String r_visitID = getVisitIDFromMedicalID(r_medicalID);
+                String r_patientID = getPatientIDFromMedicalID(r_medicalID);
                 String hosp = request.getParameter("hosp");
                 String r_date = request.getParameter("date");
                 addNewReExamination(r_patientID, r_doctorID, r_visitID, r_date, r_medicalID, hosp);
@@ -121,19 +126,57 @@ public class DoctorServlet extends HttpServlet {
     public String getPatientIDFromVisitID(String visitID) throws SQLException, ClassNotFoundException {
         String query = "SELECT visit.patient_id\n"
                 + "FROM visit\n"
-                + "WHERE visit.visit_id = " + visitID + ";";
+                + "WHERE visit.visit_id = "+visitID+";";
         DBConnection conn = new DBConnection();
         String patientID = "";
         ResultSet res = null;
-        
+
         res = conn.executeQuery(query);
-        
-        while(res!=null &&res.next()){
+
+        while (res != null && res.next()) {
             patientID = res.getString("patient_id");
         }
-        
+
         conn.closeDBConnection();
         return patientID;
+    }
+
+    public String getPatientIDFromMedicalID(String medicalID) throws SQLException, ClassNotFoundException {
+        String query = "SELECT examinations.patient_id\n"
+                + "FROM examinations\n"
+                + "INNER JOIN medicals ON medicals.exam_id = examinations.exam_id\n"
+                + "WHERE medicals.medical_id = " + medicalID + ";";
+        DBConnection conn = new DBConnection();
+        String patientID = "";
+        ResultSet res = null;
+
+        res = conn.executeQuery(query);
+
+        while (res != null && res.next()) {
+            patientID = res.getString("patient_id");
+        }
+
+        conn.closeDBConnection();
+        return patientID;
+    }
+
+    public String getVisitIDFromMedicalID(String medicalID) throws SQLException, ClassNotFoundException {
+        String query = "SELECT examinations.visit_id\n"
+                + "FROM examinations\n"
+                + "INNER JOIN medicals ON medicals.exam_id = examinations.exam_id\n"
+                + "WHERE medicals.medical_id =" + medicalID + ";";
+        DBConnection conn = new DBConnection();
+        String visitID = "";
+        ResultSet res = null;
+
+        res = conn.executeQuery(query);
+
+        while (res != null && res.next()) {
+            visitID = res.getString("visit_id");
+        }
+
+        conn.closeDBConnection();
+        return visitID;
     }
 
     public JSONObject getMedicalAndExaminationInfo(int user_id, int currentDutyTime) throws SQLException, ClassNotFoundException {
