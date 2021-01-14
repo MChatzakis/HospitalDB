@@ -8,11 +8,14 @@ import lombok.Data;
  * Class representation of "patient" entity.
  *
  * @author Manos Chatzakis (chatzakis@ics.forth.gr)
+ * @author George Kokolakis (gkokol@ics.forth.gr)
  */
 @Data
-public class Patient {
+public class Patient
+{
 
-    public int addPatient(String username, String password, String name, String surname, String address, String email, String phone, String birth_date, String amka, String at, String insurance) throws SQLException, ClassNotFoundException {
+    public int addPatient(String username, String password, String name, String surname, String address, String email, String phone, String birth_date, String amka, String at, String insurance) throws SQLException, ClassNotFoundException
+    {
         int id = 0;
         DBConnection conn = new DBConnection();
         User user = new User();
@@ -27,7 +30,8 @@ public class Patient {
         return id;
     }
 
-    public void createTable() throws SQLException, ClassNotFoundException {
+    public void createTable() throws SQLException, ClassNotFoundException
+    {
         DBConnection conn = new DBConnection();
         String createTable = "CREATE TABLE IF NOT EXISTS patients ("
                 + " patient_id int NOT NULL,"
@@ -48,14 +52,16 @@ public class Patient {
         conn.closeDBConnection();
     }
 
-    public void dropTable() throws SQLException, ClassNotFoundException {
+    public void dropTable() throws SQLException, ClassNotFoundException
+    {
         DBConnection conn = new DBConnection();
         String dropTable = "DROP TABLE IF EXISTS patients;";
         conn.updateQuery(dropTable);
         conn.closeDBConnection();
     }
 
-    public void addChronicDisease(String patient_id, String disease) throws SQLException, ClassNotFoundException {
+    public void addChronicDisease(String patient_id, String disease) throws SQLException, ClassNotFoundException
+    {
         DBConnection conn = new DBConnection();
         String insert = "INSERT INTO patients_chronic_diseases  VALUES( "
                 + patient_id + "," + "\'" + disease + "\'" + ");";
@@ -63,7 +69,8 @@ public class Patient {
         conn.closeDBConnection();
     }
 
-    public void createTableChronicDiseases() throws SQLException, ClassNotFoundException {
+    public void createTableChronicDiseases() throws SQLException, ClassNotFoundException
+    {
         DBConnection conn = new DBConnection();
         String createTable = "CREATE TABLE IF NOT EXISTS patients_chronic_diseases ("
                 + " patient_id int NOT NULL,"
@@ -74,7 +81,8 @@ public class Patient {
         conn.closeDBConnection();
     }
 
-    public void dropTableChronicDiseases() throws SQLException, ClassNotFoundException {
+    public void dropTableChronicDiseases() throws SQLException, ClassNotFoundException
+    {
         DBConnection conn = new DBConnection();
         String dropTable = "DROP TABLE IF EXISTS patients_chronic_diseases;";
         conn.updateQuery(dropTable);

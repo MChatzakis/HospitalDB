@@ -11,10 +11,13 @@ import org.json.JSONObject;
  * This class is used for executing random queries from the interface.
  *
  * @author Manos Chatzakis (chatzakis@ics.forth.gr)
+ * @author George Kokolakis (gkokol@ics.forth.gr)
  */
-public class QueryParser {
+public class QueryParser
+{
 
-    public static JSONObject parseQuery(String query) throws SQLException, ClassNotFoundException {
+    public static JSONObject parseQuery(String query) throws SQLException, ClassNotFoundException
+    {
         JSONObject data = new JSONObject();
         JSONArray colArray = new JSONArray();
 
@@ -31,13 +34,16 @@ public class QueryParser {
         totalColumns = metRes.getColumnCount();
         data.put("totalCols", totalColumns);
 
-        for (int i = 0; i < totalColumns; i++) {
+        for (int i = 0; i < totalColumns; i++)
+        {
             colArray.put(metRes.getColumnLabel(i + 1));
         }
         data.put("ColumnNames", colArray);
 
-        while (res != null && res.next()) {
-            for (int i = 0; i < totalColumns; i++) {
+        while (res != null && res.next())
+        {
+            for (int i = 0; i < totalColumns; i++)
+            {
                 String colName = metRes.getColumnLabel(i + 1);
                 data.put(colName + "" + rowCounter, res.getString(colName));
             }
@@ -50,7 +56,8 @@ public class QueryParser {
         return data;
     }
 
-    public static void executeRandomQuery(String query) throws SQLException, ClassNotFoundException {
+    public static void executeRandomQuery(String query) throws SQLException, ClassNotFoundException
+    {
         DBConnection conn = new DBConnection();
         conn.updateQuery(query);
     }

@@ -23,9 +23,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-/**
- *
- * @author George
+/*
+ * @author Manos Chatzakis (chatzakis@ics.forth.gr)
+ * @author George Kokolakis (gkokol@ics.forth.gr)
  */
 @WebServlet
 @MultipartConfig

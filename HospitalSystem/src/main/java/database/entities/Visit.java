@@ -12,12 +12,14 @@ import java.sql.SQLException;
 /**
  *
  * @author Manos Chatzakis (chatzakis@ics.forth.gr)
+ * @author George Kokolakis (gkokol@ics.forth.gr)
  */
-public class Visit {
+public class Visit
+{
 
     //public static int id_num = 1;
-
-    public int addVisit(String date, String duty_time_id, String patient_id) throws SQLException , ClassNotFoundException{
+    public int addVisit(String date, String duty_time_id, String patient_id) throws SQLException, ClassNotFoundException
+    {
         int id_num = 0;
         DBConnection conn = new DBConnection();
         id_num = Queries.getMaxTableKey("visit_id", "visit") + 1;
@@ -28,7 +30,8 @@ public class Visit {
         return id_num;
     }
 
-    public void createTable() throws SQLException, ClassNotFoundException {
+    public void createTable() throws SQLException, ClassNotFoundException
+    {
         DBConnection conn = new DBConnection();
         String createTable = "CREATE TABLE IF NOT EXISTS visit("
                 + " visit_id int NOT NULL,"
@@ -43,14 +46,16 @@ public class Visit {
         conn.closeDBConnection();
     }
 
-    public void dropTable() throws SQLException, ClassNotFoundException {
+    public void dropTable() throws SQLException, ClassNotFoundException
+    {
         DBConnection conn = new DBConnection();
         String dropTable = "DROP TABLE IF EXISTS visit";
         conn.updateQuery(dropTable);
         conn.closeDBConnection();
     }
 
-    public void addSymptom(String visit_id, String symptom) throws SQLException, ClassNotFoundException {
+    public void addSymptom(String visit_id, String symptom) throws SQLException, ClassNotFoundException
+    {
         DBConnection conn = new DBConnection();
         String insert = "INSERT INTO visit_symptoms VALUES( "
                 + visit_id + "," + "\'" + symptom + "\'" + " );";
@@ -58,7 +63,8 @@ public class Visit {
         conn.closeDBConnection();
     }
 
-    public void createTableSymptoms() throws SQLException , ClassNotFoundException{
+    public void createTableSymptoms() throws SQLException, ClassNotFoundException
+    {
         DBConnection conn = new DBConnection();
         String createTable = "CREATE TABLE IF NOT EXISTS visit_symptoms("
                 + " visit_id int NOT NULL,"
@@ -69,7 +75,8 @@ public class Visit {
         conn.closeDBConnection();
     }
 
-    public void dropTableSymptoms() throws SQLException, ClassNotFoundException {
+    public void dropTableSymptoms() throws SQLException, ClassNotFoundException
+    {
         DBConnection conn = new DBConnection();
         String dropTable = "DROP TABLE IF EXISTS visit_symptoms";
         conn.updateQuery(dropTable);

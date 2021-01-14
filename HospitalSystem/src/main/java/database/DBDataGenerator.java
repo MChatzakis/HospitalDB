@@ -22,10 +22,13 @@ import java.sql.SQLException;
 /**
  *
  * @author Manos Chatzakis (chatzakis@ics.forth.gr)
+ * @author George Kokolakis (gkokol@ics.forth.gr)
  */
-public class DBDataGenerator {
+public class DBDataGenerator
+{
 
-    public void insertData() throws SQLException, ClassNotFoundException {
+    public void insertData() throws SQLException, ClassNotFoundException
+    {
         insertDoctors();
         insertNurses();
         insertCoordinators();
@@ -37,7 +40,8 @@ public class DBDataGenerator {
         insertExams();
     }
 
-    public void insertDoctors() throws SQLException, ClassNotFoundException {
+    public void insertDoctors() throws SQLException, ClassNotFoundException
+    {
         insertCardiologists();
         insertPathologists();
         insertEndocrinologists();
@@ -45,7 +49,8 @@ public class DBDataGenerator {
         insertPulmonologists();
     }
 
-    public void insertNurses() throws SQLException, ClassNotFoundException {
+    public void insertNurses() throws SQLException, ClassNotFoundException
+    {
         Nurse nurse = new Nurse();
         nurse.addNurse("evach", "evach123", "Eva", "Chamilaki", "Hrakleio", "ch@tep.gr", "+30- 69-055-5170", "AT1010");
         nurse.addNurse("effieProb", "effie123", "Effie", "Probona", "Hrakleio", "eff@tep.gr", "+30- 69-155-5170", "KA9955");
@@ -55,7 +60,8 @@ public class DBDataGenerator {
         nurse.addNurse("mariass", "maris123", "Maria", "Papadak", "Hrakleio", "marpapadaki@tep.gr", "+30- 69-055-5174", "IO9921");
     }
 
-    public void insertCoordinators() throws SQLException, ClassNotFoundException {
+    public void insertCoordinators() throws SQLException, ClassNotFoundException
+    {
         Coordinator coord = new Coordinator();
         coord.addCoordinator("alvin", "alvin123", "Alvi", "Nikola", "Hrakleio", "alvi@tep.gr", "+30- 69-055-5175", "AN6768");
         coord.addCoordinator("billp", "billp123", "Vasilis", "Plevris", "Hrakleio", "billplevr@tep.gr", "+30- 69-055-5174", "SD5524");
@@ -64,7 +70,8 @@ public class DBDataGenerator {
         coord.addCoordinator("thanosStamp", "thanos123", "Thanos", "Staboulos", "Hrakleio", "stabthanos@tep.gr", "+30- 69-055-5178", "VB6243");
     }
 
-    public void insertDrugs() throws SQLException, ClassNotFoundException {
+    public void insertDrugs() throws SQLException, ClassNotFoundException
+    {
         Drug drug = new Drug();
         drug.addDrug("Dexamethasone", "Pill", "90mg", "1");
         drug.addDrug("Flecainide ", "Pill", "50mg", "2");
@@ -73,7 +80,8 @@ public class DBDataGenerator {
         drug.addDrug("Amlodipine ", "Pill", "10mg", "5");
     }
 
-    public void insertIllnesses() throws SQLException, ClassNotFoundException {
+    public void insertIllnesses() throws SQLException, ClassNotFoundException
+    {
         Illness ill = new Illness();
         ill.addIllness("Covid-19");
         /*Pneumologos*/
@@ -87,7 +95,8 @@ public class DBDataGenerator {
         /*Endokrinologos*/
     }
 
-    public void insertDuties() throws SQLException, ClassNotFoundException {
+    public void insertDuties() throws SQLException, ClassNotFoundException
+    {
         DutyTime duty = new DutyTime();
         OnDutyDoctors duty_doc = new OnDutyDoctors();
         OnDutyNurses duty_nur = new OnDutyNurses();
@@ -169,7 +178,8 @@ public class DBDataGenerator {
 
     }
 
-    public void insertCardiologists() throws SQLException, ClassNotFoundException {
+    public void insertCardiologists() throws SQLException, ClassNotFoundException
+    {
         Doctor doctor = new Doctor();
         doctor.addDoctor("chatz", "manos123", "Manos", "Chatzakis", "Hrakleio", "chatzakis@tep.gr", "+30- 69-055-5179", "cardiologist", "AT5555");
         doctor.addDoctor("gchatz", "gio123", "George", "Chatzakis", "Hrakleio", "chatzakis_george@tep.gr", "+30- 69-055-5180", "cardiologist", "AT1019");
@@ -178,35 +188,40 @@ public class DBDataGenerator {
         doctor.addDoctor("vasilBorb", "borbant3322", "Vasilis", "Borbantonakis", "Hrakleio", "billBorb@tep.gr", "+30- 69-055-5183", "cardiologist", "UT5612");
     }
 
-    public void insertOrthopedics() throws SQLException, ClassNotFoundException {
+    public void insertOrthopedics() throws SQLException, ClassNotFoundException
+    {
         Doctor doctor = new Doctor();
         doctor.addDoctor("georgegk", "george123", "George", "Kokolakis", "Hrakleio", "kokol@tep.gr", "+30- 69-055-5184", "orthopedic", "KL3409");
         doctor.addDoctor("nikoltab", "nikolas321", "Nikolas", "Taboukos", "Hrakleio", "tabouk@tep.gr", "+30- 69-055-5185", "orthopedic", "PI9987");
         doctor.addDoctor("leutSpinth", "leut123", "Leuteris", "Spinthakis", "Hrakleio", "efraim@tep.gr", "+30- 69-055-5186", "orthopedic", "K75367");
     }
 
-    public void insertPathologists() throws SQLException, ClassNotFoundException {
+    public void insertPathologists() throws SQLException, ClassNotFoundException
+    {
         Doctor doctor = new Doctor();
         doctor.addDoctor("drosos", "drosos123", "Drosos", "Drosakis", "Hrakleio", "drosos@tep.gr", "+30- 69-055-5187", "pathologist", "AE2359");
         doctor.addDoctor("houst", "hustu123", "Giorgos", "Houstoulakis", "Hrakleio", "just@tep.gr", "+30- 69-055-5188", "pathologist", "FL9012");
         doctor.addDoctor("dimitra", "dimitra123", "Dimitra", "Hristodoulou", "Hrakleio", "dimi@tep.gr", "+30- 69-055-5189", "pathologist", "GH7162");
     }
 
-    public void insertEndocrinologists() throws SQLException, ClassNotFoundException {
+    public void insertEndocrinologists() throws SQLException, ClassNotFoundException
+    {
         Doctor doctor = new Doctor();
         doctor.addDoctor("elvis", "elvis123", "Elvira", "Sakoudi", "Hrakleio", "sak@tep.gr", "+30- 69-055-5190", "endocrinologist", "MN8866");
         doctor.addDoctor("nikosFan", "nikfan123", "Nikos", "Fanourakis", "Hrakleio", "fanou@tep.gr", "+30- 69-055-5191", "endocrinologist", "PT9911");
         doctor.addDoctor("konto16", "konto@11", "Nikos", "Kontonasios", "Hrakleio", "konto@tep.gr", "+30- 69-055-5192", "endocrinologist", "MN6543");
     }
 
-    public void insertPulmonologists() throws SQLException, ClassNotFoundException {
+    public void insertPulmonologists() throws SQLException, ClassNotFoundException
+    {
         Doctor doctor = new Doctor();
         doctor.addDoctor("gfou", "gfou123", "Giorgos", "Fountakis", "Hrakleio", "fount@tep.gr", "+30- 69-055-5193", "pulmonologist", "UT4629");
         doctor.addDoctor("vasilias", "vasilik33", "Nikos", "Vasilikopoulos", "Hrakleio", "vasilik@tep.gr", "+30- 69-055-5194", "pulmonologist", "GF9078");
         doctor.addDoctor("gmallis", "mall123", "Giorgos", "Mallis", "Hrakleio", "mallis@tep.gr", "+30- 69-055-5195", "pulmonologist", "TR5423");
     }
 
-    public void insertPatients() throws SQLException, ClassNotFoundException {
+    public void insertPatients() throws SQLException, ClassNotFoundException
+    {
         Patient pat = new Patient();
         pat.addPatient("nickLen", "len123", "Nikos", "Lenakis", "Hrakleio", "len@gmail.com", "+30- 69-055-5196", "1990-11-16", "12066455", "IK8986", "IKA");
         pat.addChronicDisease("29", "Asthma");
@@ -230,7 +245,8 @@ public class DBDataGenerator {
 
     }
 
-    public void insertVisit() throws SQLException, ClassNotFoundException {
+    public void insertVisit() throws SQLException, ClassNotFoundException
+    {
 
         Visit vis = new Visit();
 
@@ -260,7 +276,8 @@ public class DBDataGenerator {
 
     }
 
-    public void insertExams() throws SQLException, ClassNotFoundException {
+    public void insertExams() throws SQLException, ClassNotFoundException
+    {
 
         Examination ex = new Examination();
         Medical med = new Medical();

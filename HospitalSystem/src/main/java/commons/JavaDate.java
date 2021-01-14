@@ -8,7 +8,8 @@ package commons;
 /**
  * Class to get the date for SQL table entries. 
  * @author Manos Chatzakis (chatzakis@ics.forth.gr)
- */
+ * @author George Kokolakis (gkokol@ics.forth.gr)
+*/
 public class JavaDate {
 
     public static String getDefaultDate(){

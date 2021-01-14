@@ -12,10 +12,13 @@ import java.sql.SQLException;
 /**
  *
  * @author Manos Chatzakis (chatzakis@ics.forth.gr)
+ * @author George Kokolakis (gkokol@ics.forth.gr)
  */
-public class Examination {
+public class Examination
+{
 
-    public int addExamination(String patient_id, String doctor_id, String drug_id, String illness_id, String visit_id, String date) throws SQLException, ClassNotFoundException {
+    public int addExamination(String patient_id, String doctor_id, String drug_id, String illness_id, String visit_id, String date) throws SQLException, ClassNotFoundException
+    {
         int id_num = 0;
         DBConnection conn = new DBConnection();
         id_num = Queries.getMaxTableKey("exam_id", "examinations") + 1;
@@ -26,15 +29,18 @@ public class Examination {
         return id_num;
     }
 
-    public void modifyExamination(String exam_id, String drug_id, String illness_id) throws SQLException, ClassNotFoundException {
+    public void modifyExamination(String exam_id, String drug_id, String illness_id) throws SQLException, ClassNotFoundException
+    {
         DBConnection conn = new DBConnection();
-        if(drug_id.equals("")){
+        if (drug_id.equals(""))
+        {
             drug_id = "null";
         }
-        if(illness_id.equals("")){
+        if (illness_id.equals(""))
+        {
             illness_id = "null";
         }
-        
+
         String query = "UPDATE examinations\n"
                 + "SET drug_id= " + drug_id + ", illness_id=" + illness_id + "\n"
                 + "WHERE exam_id = " + exam_id + ";";
@@ -42,7 +48,8 @@ public class Examination {
         conn.closeDBConnection();
     }
 
-    public void createTable() throws SQLException, ClassNotFoundException {
+    public void createTable() throws SQLException, ClassNotFoundException
+    {
         DBConnection conn = new DBConnection();
         String createTable = "CREATE TABLE IF NOT EXISTS examinations("
                 + " exam_id int NOT NULL,"
@@ -62,15 +69,16 @@ public class Examination {
         conn.closeDBConnection();
     }
 
-   
-    public void dropTable() throws SQLException, ClassNotFoundException {
+    public void dropTable() throws SQLException, ClassNotFoundException
+    {
         DBConnection conn = new DBConnection();
         String dropTable = "DROP TABLE IF EXISTS examinations;";
         conn.updateQuery(dropTable);
         conn.closeDBConnection();
     }
-    
-    public static void main(String [] args) throws ClassNotFoundException, SQLException{
-        new Examination().modifyExamination("4", "","");
+
+    public static void main(String[] args) throws ClassNotFoundException, SQLException
+    {
+        new Examination().modifyExamination("4", "", "");
     }
 }

@@ -14,12 +14,15 @@ import lombok.Data;
 
 /**
  *
- * @author Manos Chatzakis
+ * @author Manos Chatzakis (chatzakis@ics.forth.gr)
+ * @author George Kokolakis (gkokol@ics.forth.gr)
  */
 @Data
-public class DutyTime {
+public class DutyTime
+{
 
-    public int addDutyTime(String date, String coordinator_id) throws SQLException, ClassNotFoundException {
+    public int addDutyTime(String date, String coordinator_id) throws SQLException, ClassNotFoundException
+    {
         int id_num = 0;
         DBConnection conn = new DBConnection();
         id_num = Queries.getMaxTableKey("dutytime_id", "dutytime") + 1;
@@ -30,7 +33,8 @@ public class DutyTime {
         return id_num;
     }
 
-    public void createTable() throws SQLException, ClassNotFoundException {
+    public void createTable() throws SQLException, ClassNotFoundException
+    {
         DBConnection conn = new DBConnection();
         String createTable = "CREATE TABLE IF NOT EXISTS dutytime("
                 + " dutytime_id int NOT NULL,"
@@ -44,14 +48,16 @@ public class DutyTime {
         conn.closeDBConnection();
     }
 
-    public void dropTable() throws SQLException, ClassNotFoundException {
+    public void dropTable() throws SQLException, ClassNotFoundException
+    {
         DBConnection conn = new DBConnection();
         String dropTable = "DROP TABLE IF EXISTS dutytime;";
         conn.updateQuery(dropTable);
         conn.closeDBConnection();
     }
 
-    public int getDutyIDFromDate(String date) throws SQLException, ClassNotFoundException {
+    public int getDutyIDFromDate(String date) throws SQLException, ClassNotFoundException
+    {
         DBConnection conn = new DBConnection();
         int id = -1; //
         String query = "SELECT dutytime.dutytime_id\n"
@@ -61,15 +67,16 @@ public class DutyTime {
 
         res = conn.executeQuery(query);
 
-        while (res != null && res.next()) {
+        while (res != null && res.next())
+        {
             id = Integer.parseInt(res.getString("dutytime_id"));
         }
         conn.closeDBConnection();
         return id;
     }
 
-   
-    public static void main(String[] args) throws SQLException, ClassNotFoundException {
+    public static void main(String[] args) throws SQLException, ClassNotFoundException
+    {
         System.out.println(new DutyTime().getDutyIDFromDate(JavaDate.getDefaultDate()));
     }
 

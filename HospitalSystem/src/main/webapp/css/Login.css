@@ -1,3 +1,7 @@
+/*
+ * @author Manos Chatzakis (chatzakis@ics.forth.gr)
+ * @author George Kokolakis (gkokol@ics.forth.gr)
+ */
 
 body {
     font-family: sans-serif;
@@ -52,15 +56,4 @@ h1 {
     border: none;
     font-size: 2.1rem;
     width: 40%;
-}
-#button-signup
-{
-}
-#button-login
-{
-
-}
-.MainSignUpDiv
-{
-
 }

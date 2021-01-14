@@ -8,13 +8,15 @@ import lombok.Data;
 /**
  *
  * @author Manos Chatzakis (chatzakis@ics.forth.gr)
+ * @author George Kokolakis (gkokol@ics.forth.gr)
  */
 @Data
-public class Illness {
+public class Illness
+{
 
     //public static int id_num = 1;
-
-    public int addIllness(String name) throws SQLException , ClassNotFoundException{
+    public int addIllness(String name) throws SQLException, ClassNotFoundException
+    {
         int id_num = 0;
         DBConnection conn = new DBConnection();
         id_num = Queries.getMaxTableKey("illness_id", "illnesses") + 1;
@@ -25,7 +27,8 @@ public class Illness {
         return id_num;
     }
 
-    public void createTable() throws SQLException, ClassNotFoundException {
+    public void createTable() throws SQLException, ClassNotFoundException
+    {
         DBConnection conn = new DBConnection();
         String createTable = "CREATE TABLE IF NOT EXISTS illnesses("
                 + " illness_id int NOT NULL,"
@@ -35,7 +38,8 @@ public class Illness {
         conn.closeDBConnection();
     }
 
-    public void dropTable() throws SQLException , ClassNotFoundException{
+    public void dropTable() throws SQLException, ClassNotFoundException
+    {
         DBConnection conn = new DBConnection();
         String dropTable = "DROP TABLE IF EXISTS illnesses";
         conn.updateQuery(dropTable);
