@@ -1,3 +1,9 @@
+
+/*
+ * @author Manos Chatzakis (chatzakis@ics.forth.gr)
+ * @author George Kokolakis (gkokol@ics.forth.gr)
+ */
+
 body {
     background-color: rgb(91, 114, 122);
 }
@@ -9,7 +15,6 @@ html, body {
 }
 
 .container {
-    /* remember to set a width */
     margin-right: auto;
     margin-left: auto;
 }
