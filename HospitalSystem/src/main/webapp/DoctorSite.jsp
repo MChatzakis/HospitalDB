@@ -225,10 +225,10 @@
                             <label for="r_patientID">PatientID</label>
                             <input type="text" name="r_patientID" value="" class="form-control" id="r_patientID" placeholder="">
                         </div>-->
-                        <div class="form-group col ">
+                        <!--<div class="form-group col ">
                             <label for="r_visitID">VisitID</label>
                             <input type="text" name="r_visitID" value="" class="form-control" id="r_visitID" placeholder="">
-                        </div>
+                        </div>-->
                         <div class="form-group col ">
                             <label for="r_medicalID">MedicalID</label>
                             <input type="text" name="r_medicalID" value="" class="form-control" id="r_medicalID" placeholder="">
@@ -250,7 +250,7 @@
 
             <!--<div class="footer mt-5">All Rights Reserved &copy; George Kokolakis , Manos Chatzakes</div>-->
         </div>
-        <div class="footer" Style="color:rgb(0, 0, 0)">All Rights Reserved &copy; George Kokolakis , Manos Chatzakes</div>
+        <!--<div class="footer" Style="color:rgb(0, 0, 0)">All Rights Reserved &copy; George Kokolakis , Manos Chatzakes</div>-->
 
 
     </body>

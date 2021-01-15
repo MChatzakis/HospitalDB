@@ -324,10 +324,10 @@ function showQueryForm() {
     var e = document.getElementById('queryForm');
     if (e.style.display === 'none' || e.style.display === '') {
         e.style.display = 'block';
-        d.innerHTML = 'Hide Visits';
+        d.innerHTML = 'Hide Query Form';
     } else {
         e.style.display = 'none';
-        d.innerHTML = 'Show Visits';
+        d.innerHTML = 'Show Query Form';
     }
 }
 

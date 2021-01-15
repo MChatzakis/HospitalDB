@@ -279,7 +279,7 @@ public class DBDataGenerator {
         reEx.addReExamination("31", "2", "3", "2021-01-07", "3", false);
 
         ex.addExamination("32", "3", "3", "3", "4", "2021-01-08");
-        med.addMedical("Βlood-Test", "4", "32", "3", "18", "2021-01-08");
+        med.addMedical("Blood-Test", "4", "32", "3", "18", "2021-01-08");
         reEx.addReExamination("32", "3", "4", "2021-01-08", "4", false);
 
         ex.addExamination("33", "4", "1", "1", "5", "2021-01-09");

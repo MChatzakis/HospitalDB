@@ -109,7 +109,7 @@ public class NurseServlet extends HttpServlet {
         String patID = "";
         ResultSet res = null;
         res = conn.executeQuery(query);
-        while (res != null) {
+        while (res != null && res.next()) {
             patID = res.getString("doctor_id");
         }
 
@@ -125,7 +125,7 @@ public class NurseServlet extends HttpServlet {
         String docID = "";
         ResultSet res = null;
         res = conn.executeQuery(query);
-        while (res != null) {
+        while (res != null && res.next()) {
             docID = res.getString("patient_id");
         }
 

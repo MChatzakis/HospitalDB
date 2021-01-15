@@ -166,14 +166,14 @@
                             <label for="exam-id">ExamID</label>
                             <input type="text" name="exam-id" value="" class="form-control" id="exam-id" placeholder="">
                         </div>
-                        <div class="form-group col ">
+                        <!--<div class="form-group col ">
                             <label for="patient-id">PatientID</label>
                             <input type="text" name="patient-id" value="" class="form-control" id="patient-id" placeholder="">
                         </div>
                         <div class="form-group col ">
                             <label for="doctor-id">DoctorID</label>
                             <input type="text" name="doctor-id" value="" class="form-control" id="doctor-id" placeholder="">
-                        </div>
+                        </div>-->
 
                         <div class="form-group col ">
                             <label for="date">Date</label>
@@ -187,7 +187,7 @@
             </div>
 
         </div>
-        <div class="footer float-left" Style="color:rgb(0, 0, 0)">All Rights Reserved &copy; George Kokolakis , Manos Chatzakes</div>
+        <!--<div class="footer float-left" Style="color:rgb(0, 0, 0)">All Rights Reserved &copy; George Kokolakis , Manos Chatzakes</div>-->
 
     </body>
 
