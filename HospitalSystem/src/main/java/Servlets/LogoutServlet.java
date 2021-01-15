@@ -14,9 +14,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-/**
- *
- * @author George
+/*
+ * @author Manos Chatzakis (chatzakis@ics.forth.gr)
+ * @author George Kokolakis (gkokol@ics.forth.gr)
  */
 public class LogoutServlet extends HttpServlet
 {
@@ -40,7 +40,6 @@ public class LogoutServlet extends HttpServlet
             System.out.println("Logged out");
             response.sendRedirect("http://localhost:8080/HospitalSystem/" );
             return ;
-           // request.setAttribute("errMessage", "You have logged out successfully");
 
         }
 

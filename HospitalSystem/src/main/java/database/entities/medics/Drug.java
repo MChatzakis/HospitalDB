@@ -13,27 +13,31 @@ import lombok.Data;
 /**
  *
  * @author Manos Chatzakis (chatzakis@ics.forth.gr)
+ * @author George Kokolakis (gkokol@ics.forth.gr)
  */
 @Data
-public class Drug {
+public class Drug
+{
 
     //public static int id_num = 1;
-
-    public int addDrug(String name, String type, String dosage, String illness_id) throws SQLException, ClassNotFoundException {
+    public int addDrug(String name, String type, String dosage, String illness_id) throws SQLException, ClassNotFoundException
+    {
         int id_num = 0;
         DBConnection conn = new DBConnection();
-        if (!dosage.equals("NULL")) {
+        if (!dosage.equals("NULL"))
+        {
             dosage = "\'" + dosage + "\'";
         }
         id_num = Queries.getMaxTableKey("drug_id", "drugs") + 1;
         String insert = "INSERT INTO drugs VALUES( "
-                + (id_num) + "," + "\'" + name + "\'" + "," + "\'" + type + "\'" + ", " +  dosage  + "," + illness_id + ");";
+                + (id_num) + "," + "\'" + name + "\'" + "," + "\'" + type + "\'" + ", " + dosage + "," + illness_id + ");";
         conn.updateQuery(insert);
         conn.closeDBConnection();
         return id_num;
     }
 
-    public void createTable() throws SQLException, ClassNotFoundException {
+    public void createTable() throws SQLException, ClassNotFoundException
+    {
         DBConnection conn = new DBConnection();
         String createTable = "CREATE TABLE IF NOT EXISTS drugs("
                 + " drug_id int NOT NULL,"
@@ -48,7 +52,8 @@ public class Drug {
         conn.closeDBConnection();
     }
 
-    public void dropTable() throws SQLException, ClassNotFoundException {
+    public void dropTable() throws SQLException, ClassNotFoundException
+    {
         DBConnection conn = new DBConnection();
         String dropTable = "DROP TABLE IF EXISTS drugs";
         conn.updateQuery(dropTable);

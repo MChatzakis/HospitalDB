@@ -14,13 +14,16 @@ import lombok.Data;
 /**
  *
  * @author Manos Chatzakis (chatzakis@ics.forth.gr)
+ * @author George Kokolakis (gkokol@ics.forth.gr)
  */
 @Data
-public class Doctor {
+public class Doctor
+{
 
     private String table_name = "doctors";
 
-    public int addDoctor(String username, String password, String name, String surname, String address, String email, String phone, String type, String at) throws SQLException, ClassNotFoundException {
+    public int addDoctor(String username, String password, String name, String surname, String address, String email, String phone, String type, String at) throws SQLException, ClassNotFoundException
+    {
         int id = 0;
         DBConnection conn = new DBConnection();
         User user = new User();
@@ -32,11 +35,12 @@ public class Doctor {
 
         conn.updateQuery(insert);
         conn.closeDBConnection();
-        
+
         return id;
     }
 
-    public void createTable() throws SQLException, ClassNotFoundException {
+    public void createTable() throws SQLException, ClassNotFoundException
+    {
         DBConnection conn = new DBConnection();
         String createTable = "CREATE TABLE IF NOT EXISTS " + table_name + "("
                 + " doctor_id int NOT NULL,"
@@ -54,7 +58,8 @@ public class Doctor {
         conn.closeDBConnection();
     }
 
-    public void createTable(String type) throws SQLException, ClassNotFoundException {
+    public void createTable(String type) throws SQLException, ClassNotFoundException
+    {
         DBConnection conn = new DBConnection();
         String createTable = "CREATE TABLE IF NOT EXISTS " + type + "("
                 + " doctor_id int NOT NULL,"
@@ -64,14 +69,16 @@ public class Doctor {
         conn.closeDBConnection();
     }
 
-    public void dropTable() throws SQLException, ClassNotFoundException {
+    public void dropTable() throws SQLException, ClassNotFoundException
+    {
         DBConnection conn = new DBConnection();
         String dropTable = "DROP TABLE IF EXISTS " + table_name + ";";
         conn.updateQuery(dropTable);
         conn.closeDBConnection();
     }
 
-    public ArrayList<String> getIDsOfDoctors(String type) throws SQLException, ClassNotFoundException {
+    public ArrayList<String> getIDsOfDoctors(String type) throws SQLException, ClassNotFoundException
+    {
         ArrayList<String> IDs = new ArrayList<String>();
         String query = "SELECT doctors.doctor_id\n"
                 + "FROM doctors\n"
@@ -79,16 +86,18 @@ public class Doctor {
         DBConnection conn = new DBConnection();
         ResultSet res = null;
         res = conn.executeQuery(query);
-        while (res != null && res.next()) {
+        while (res != null && res.next())
+        {
             IDs.add(res.getString("doctor_id"));
         }
-        
+
         conn.closeDBConnection();
         return IDs;
     }
 
-    public static void main(String [] args) throws SQLException, ClassNotFoundException{
+    public static void main(String[] args) throws SQLException, ClassNotFoundException
+    {
         System.out.println((new Doctor().getIDsOfDoctors("cardiologist").toString()));
     }
-    
+
 }

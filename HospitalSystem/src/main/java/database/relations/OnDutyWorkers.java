@@ -7,10 +7,13 @@ import java.sql.SQLException;
  * Class representation of "onDutyWorkers" relationship.
  *
  * @author Manos Chatzakis (chatzakis@ics.forth.gr)
+ * @author George Kokolakis (gkokol@ics.forth.gr)
  */
-public class OnDutyWorkers {
+public class OnDutyWorkers
+{
 
-    public void addWorkerDutyTime(String coordinator_id, String dutytime_id) throws SQLException, ClassNotFoundException {
+    public void addWorkerDutyTime(String coordinator_id, String dutytime_id) throws SQLException, ClassNotFoundException
+    {
         DBConnection conn = new DBConnection();
         String insert = "INSERT INTO coordinator_duties VALUES( "
                 + dutytime_id + "," + coordinator_id + " );";
@@ -18,7 +21,8 @@ public class OnDutyWorkers {
         conn.closeDBConnection();
     }
 
-    public void createTable() throws SQLException, ClassNotFoundException {
+    public void createTable() throws SQLException, ClassNotFoundException
+    {
         DBConnection conn = new DBConnection();
         String createTable = "CREATE TABLE IF NOT EXISTS coordinator_duties ("
                 + " dutytime_id int NOT NULL,"
@@ -29,7 +33,8 @@ public class OnDutyWorkers {
         conn.closeDBConnection();
     }
 
-    public void dropTable() throws SQLException, ClassNotFoundException {
+    public void dropTable() throws SQLException, ClassNotFoundException
+    {
         DBConnection conn = new DBConnection();
         String dropTable = "DROP TABLE IF EXISTS coordinator_duties;";
         conn.updateQuery(dropTable);

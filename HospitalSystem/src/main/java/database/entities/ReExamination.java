@@ -12,27 +12,31 @@ import java.sql.SQLException;
 /**
  *
  * @author Manos Chatzakis (chatzakis@ics.forth.gr)
+ * @author George Kokolakis (gkokol@ics.forth.gr)
  */
-public class ReExamination {
+public class ReExamination
+{
 
     //public static int id_num = 1;
-
-    public int addReExamination(String patient_id, String doctor_id, String visit_id, String date, String medical_id, boolean hospi) throws SQLException, ClassNotFoundException {
+    public int addReExamination(String patient_id, String doctor_id, String visit_id, String date, String medical_id, boolean hospi) throws SQLException, ClassNotFoundException
+    {
         int id_num = 0;
         DBConnection conn = new DBConnection();
         id_num = Queries.getMaxTableKey("re_exam_id", "examinations_retaken") + 1;
         String hosp = "false";
-        if (hospi) {
+        if (hospi)
+        {
             hosp = "true";
         }
         String insert = "INSERT INTO examinations_retaken VALUES( "
-                + (id_num) + "," + patient_id + "," + doctor_id + "," + visit_id + "," + "\'" + date + "\'" +"," + hosp +"," + medical_id + ");";
+                + (id_num) + "," + patient_id + "," + doctor_id + "," + visit_id + "," + "\'" + date + "\'" + "," + hosp + "," + medical_id + ");";
         conn.updateQuery(insert);
         conn.closeDBConnection();
         return id_num;
     }
 
-    public void createTable() throws SQLException, ClassNotFoundException {
+    public void createTable() throws SQLException, ClassNotFoundException
+    {
         DBConnection conn = new DBConnection();
         String createTable = "CREATE TABLE IF NOT EXISTS examinations_retaken("
                 + " re_exam_id int NOT NULL,"

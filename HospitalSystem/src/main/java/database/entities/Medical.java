@@ -12,24 +12,27 @@ import java.sql.SQLException;
 /**
  *
  * @author Manos Chatzakis (chatzakis@ics.forth.gr)
+ * @author George Kokolakis (gkokol@ics.forth.gr)
  */
-public class Medical {
+public class Medical
+{
 
     //public static int id_num = 1;
-
-    public int addMedical(String type, String exam_id,String patient_id, String doctor_id, String nurse_id, String date) throws SQLException, ClassNotFoundException {
+    public int addMedical(String type, String exam_id, String patient_id, String doctor_id, String nurse_id, String date) throws SQLException, ClassNotFoundException
+    {
         int id_num = 0;
         DBConnection conn = new DBConnection();
         id_num = Queries.getMaxTableKey("medical_id", "medicals") + 1;
         String insert = "INSERT INTO medicals VALUES( "
-                + (id_num) + "," +  exam_id + "," +  patient_id + ", " +  doctor_id  + "," +  nurse_id  + "," + "\'" + date + "\'"+  ",\'" + type + "\'" + ");";
+                + (id_num) + "," + exam_id + "," + patient_id + ", " + doctor_id + "," + nurse_id + "," + "\'" + date + "\'" + ",\'" + type + "\'" + ");";
 
         conn.updateQuery(insert);
         conn.closeDBConnection();
         return id_num;
     }
 
-    public void createTable() throws SQLException , ClassNotFoundException{
+    public void createTable() throws SQLException, ClassNotFoundException
+    {
         DBConnection conn = new DBConnection();
         String createTable = "CREATE TABLE IF NOT EXISTS medicals("
                 + " medical_id int NOT NULL,"
@@ -49,7 +52,8 @@ public class Medical {
         conn.closeDBConnection();
     }
 
-    public void dropTable(String type) throws SQLException , ClassNotFoundException{
+    public void dropTable(String type) throws SQLException, ClassNotFoundException
+    {
         DBConnection conn = new DBConnection();
         String dropTable = "DROP TABLE IF EXISTS medicals;";
         conn.updateQuery(dropTable);

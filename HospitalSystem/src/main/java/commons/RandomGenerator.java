@@ -12,10 +12,13 @@ import java.util.concurrent.ThreadLocalRandom;
  * range.
  *
  * @author Manos Chatzakis (chatzakis@ics.forth.gr)
+ * @author George Kokolakis (gkokol@ics.forth.gr)
  */
-public class RandomGenerator {
+public class RandomGenerator
+{
 
-    public static int getRandomNumber(int min, int max) {
+    public static int getRandomNumber(int min, int max)
+    {
         int randomNum = ThreadLocalRandom.current().nextInt(min, max + 1);
         return randomNum;
     }

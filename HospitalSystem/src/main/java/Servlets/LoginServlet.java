@@ -22,9 +22,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpSession;
 
-/**
- *
- * @author George
+/*
+ * @author Manos Chatzakis (chatzakis@ics.forth.gr)
+ * @author George Kokolakis (gkokol@ics.forth.gr)
  */
 public class LoginServlet extends HttpServlet
 {
@@ -86,7 +86,7 @@ public class LoginServlet extends HttpServlet
         res = conn.executeQuery(query);
         if (res == null)
         {
-            System.err.println("wrong query idiot");
+            System.err.println("wrong query ");
             return null;
         }
 
@@ -107,7 +107,7 @@ public class LoginServlet extends HttpServlet
         }
         else
         {
-            System.err.println("idiot wrong credentials");
+            System.err.println(" wrong credentials");
         }
         conn.closeDBConnection();
         return null;
